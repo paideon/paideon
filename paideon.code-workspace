@@ -40,9 +40,5 @@
       "name": "ROOT",
       "path": "."
     }
-  ],
-  "settings": {
-    "typescript.tsdk": "${workspaceFolder:ROOT}/node_modules/typescript/lib",
-    "typescript.enablePromptUseWorkspaceTsdk": true
-  }
+  ]
 }
