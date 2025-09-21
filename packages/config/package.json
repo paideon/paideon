@@ -24,7 +24,13 @@
     "build": "tsc -p tsconfig.lib.json"
   },
   "dependencies": {
-    "@paideon/tokens": "workspace:*",
-    "tailwindcss": "3.4.3"
+    "@paideon/tokens": "workspace:*"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^3.4.3"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.3",
+    "typescript": "~6.0.3"
   }
 }

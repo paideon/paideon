@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "@paideon/config": "workspace:*",
     "@paideon/types": "workspace:*",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
@@ -21,6 +22,15 @@
     "three": "^0.183.2"
   },
   "devDependencies": {
-    "@types/three": "^0.183.1"
+    "@next/eslint-plugin-next": "^16.0.1",
+    "@testing-library/dom": "10.4.0",
+    "@testing-library/react": "16.3.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@types/three": "^0.183.1",
+    "autoprefixer": "^10.4.13",
+    "jest-environment-jsdom": "^30.0.2",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3"
   }
 }
