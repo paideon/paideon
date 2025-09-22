@@ -1,22 +1,20 @@
 // Unit tests for useCountUp hook (F-124)
 // Tests animation logic, start/end values, duration handling.
 
-import { renderHook, act } from "@testing-library/react";
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { renderHook, act } from '@testing-library/react';
+import { useCountUp } from '../hooks/useCountUp';
 
-import { useCountUp } from "../hooks/useCountUp";
-
-describe("useCountUp", () => {
+describe('useCountUp', () => {
   beforeEach(() => {
-    vi.clearAllMocks();
+    jest.clearAllMocks();
   });
 
-  it("should initialize with value 0", () => {
+  it('should initialize with value 0', () => {
     const { result } = renderHook(() => useCountUp(100));
     expect(result.current.value.get()).toBe(0);
   });
 
-  it("should start animation when start is called", () => {
+  it('should start animation when start is called', () => {
     const { result } = renderHook(() => useCountUp(100));
     act(() => {
       result.current.start();
@@ -24,7 +22,7 @@ describe("useCountUp", () => {
     expect(result.current.isAnimating).toBe(true);
   });
 
-  it("should complete animation", async () => {
+  it('should complete animation', async () => {
     const { result } = renderHook(() => useCountUp(100, { duration: 0.1 }));
     act(() => {
       result.current.start();
@@ -36,7 +34,7 @@ describe("useCountUp", () => {
     expect(result.current.isComplete).toBe(true);
   });
 
-  it("should reset animation state", () => {
+  it('should reset animation state', () => {
     const { result } = renderHook(() => useCountUp(100));
     act(() => {
       result.current.start();
@@ -49,7 +47,7 @@ describe("useCountUp", () => {
     expect(result.current.isComplete).toBe(false);
   });
 
-  it("should handle non-animated mode", () => {
+  it('should handle non-animated mode', () => {
     const { result } = renderHook(() => useCountUp(100, { animated: false }));
     act(() => {
       result.current.start();
@@ -58,8 +56,8 @@ describe("useCountUp", () => {
     expect(result.current.isComplete).toBe(true);
   });
 
-  it("should call onComplete callback", async () => {
-    const onComplete = vi.fn();
+  it('should call onComplete callback', async () => {
+    const onComplete = jest.fn();
     const { result } = renderHook(() =>
       useCountUp(100, { duration: 0.1, onComplete })
     );
@@ -72,7 +70,7 @@ describe("useCountUp", () => {
     expect(onComplete).toHaveBeenCalled();
   });
 
-  it("should respect delay option", () => {
+  it('should respect delay option', () => {
     const { result } = renderHook(() =>
       useCountUp(100, { delay: 0.5, duration: 0.1 })
     );

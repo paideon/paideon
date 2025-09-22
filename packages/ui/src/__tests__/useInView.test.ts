@@ -1,47 +1,45 @@
 // Unit tests for useInView hook (F-124)
 // Tests IntersectionObserver wiring with mock.
 
-import { renderHook } from "@testing-library/react";
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { renderHook } from '@testing-library/react';
+import { useInView } from '../hooks/useInView';
 
-import { useInView } from "../hooks/useInView";
-
-describe("useInView", () => {
+describe('useInView', () => {
   beforeEach(() => {
-    vi.clearAllMocks();
+    jest.clearAllMocks();
   });
 
-  it("should initialize with isInView false", () => {
+  it('should initialize with isInView false', () => {
     const { result } = renderHook(() => useInView());
     expect(result.current.isInView).toBe(false);
   });
 
-  it("should return a ref object", () => {
+  it('should return a ref object', () => {
     const { result } = renderHook(() => useInView());
     expect(result.current.ref).toBeDefined();
-    expect(typeof result.current.ref.current).toBe("object");
+    expect(typeof result.current.ref.current).toBe('object');
   });
 
-  it("should accept custom threshold option", () => {
+  it('should accept custom threshold option', () => {
     const { result } = renderHook(() => useInView({ threshold: 0.5 }));
     expect(result.current.isInView).toBe(false);
   });
 
-  it("should accept custom rootMargin option", () => {
-    const { result } = renderHook(() => useInView({ rootMargin: "10px" }));
+  it('should accept custom rootMargin option', () => {
+    const { result } = renderHook(() => useInView({ rootMargin: '10px' }));
     expect(result.current.isInView).toBe(false);
   });
 
-  it("should accept triggerOnce option", () => {
+  it('should accept triggerOnce option', () => {
     const { result } = renderHook(() => useInView({ triggerOnce: true }));
     expect(result.current.isInView).toBe(false);
   });
 
-  it("should handle all options together", () => {
+  it('should handle all options together', () => {
     const { result } = renderHook(() =>
       useInView({
         threshold: 0.3,
-        rootMargin: "20px",
+        rootMargin: '20px',
         triggerOnce: false,
       })
     );
