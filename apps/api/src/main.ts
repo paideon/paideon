@@ -5,11 +5,11 @@
 // Everything configured here applies GLOBALLY to every single
 // request that comes into the API — no exceptions.
 
-import { Logger, ValidationPipe } from "@nestjs/common";
-import { NestFactory } from "@nestjs/core";
-import { AppModule } from "./app/app.module";
-import helmet from "helmet";
-import cookieParser from "cookie-parser";
+import { Logger, ValidationPipe } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app/app.module';
+import helmet from 'helmet';
+import cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -32,10 +32,10 @@ async function bootstrap() {
   // credentials: true is required to allow cookies to be sent
   // (the refresh token is a cookie — it won't be sent without this).
   app.enableCors({
-    origin: process.env.PORTAL_URL || "http://localhost:3000",
+    origin: process.env.PORTAL_URL || 'http://localhost:3000',
     credentials: true, // CRITICAL — allows cookies to be sent cross-origin
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
   });
 
   // ── Global Prefix ─────────────────────────────────────────────
@@ -44,7 +44,7 @@ async function bootstrap() {
   // This makes it easy to route traffic in production:
   //   /api/* → NestJS API
   //   /*     → Next.js portal
-  app.setGlobalPrefix("api");
+  app.setGlobalPrefix('api');
 
   // ── Global Validation Pipe ────────────────────────────────────
   // Automatically validates every request body against its DTO.
@@ -77,7 +77,7 @@ async function bootstrap() {
   const port = process.env.PORT || 3001;
   await app.listen(port);
 
-  Logger.log(`🚀 API running on: http://localhost:${port}/api`, "Bootstrap");
+  Logger.log(`🚀 API running on: http://localhost:${port}/api`, 'Bootstrap');
 }
 
 bootstrap();

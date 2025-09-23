@@ -15,14 +15,14 @@
 // RolesGuard reads from request.user.
 // Wrong order → request.user is empty → guard crashes.
 
-import { Injectable, CanActivate, ExecutionContext } from "@nestjs/common";
-import { Reflector } from "@nestjs/core";
-import { Role } from "@prisma/client";
+import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
+import { Role } from '@prisma/client';
 
 // The same key used in roles.decorator.ts to store the metadata.
 // Both files must use the exact same string — ideally import this
 // from a shared constants file to avoid silent mismatches.
-const ROLES_KEY = "roles";
+const ROLES_KEY = 'roles';
 
 // @Injectable() means NestJS can create and manage this class automatically.
 // CanActivate is a NestJS interface — it forces you to implement canActivate(),

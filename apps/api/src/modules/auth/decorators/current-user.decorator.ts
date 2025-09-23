@@ -4,8 +4,8 @@ import {
   createParamDecorator,
   ExecutionContext,
   UnauthorizedException,
-} from "@nestjs/common";
-import { JwtPayload } from "../types/jwt-payload.type";
+} from '@nestjs/common';
+import { JwtPayload } from '../types/jwt-payload.type';
 
 export const CurrentUser = createParamDecorator(
   // The first argument (_data) is what people pass inside @CurrentUser(someValue)
@@ -17,7 +17,7 @@ export const CurrentUser = createParamDecorator(
 
     // If @CurrentUser() use on a route that has no auth guard, this throw a clear error immediately.
     if (!request.user) {
-      throw new UnauthorizedException("No authenticated user found");
+      throw new UnauthorizedException('No authenticated user found');
     }
 
     // Return whatever Passport put in req.user

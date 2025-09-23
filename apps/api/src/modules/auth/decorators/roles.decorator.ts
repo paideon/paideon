@@ -8,12 +8,12 @@
 //   @Roles(Role.ADMIN)              → only admins
 //   @Roles(Role.ADMIN, Role.LIBRARIAN) → admins OR librarians
 
-import { SetMetadata } from "@nestjs/common";
-import { Role } from "@prisma/client";
+import { SetMetadata } from '@nestjs/common';
+import { Role } from '@prisma/client';
 
 // "roles" is the key we use to store and later retrieve this metadata.
 // roles.guard.ts uses this exact same string "roles" to read it back.
-const ROLES_KEY = "roles";
+const ROLES_KEY = 'roles';
 
 // (...roles: Role[]) means accept one or more Role values as arguments.
 // SetMetadata attaches them invisibly to whatever route this decorator is placed on.

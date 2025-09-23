@@ -11,24 +11,24 @@
 //      → Hash it with SHA-256
 //      → Check it exists in the database (not revoked)
 
-import { Injectable, UnauthorizedException } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
-import { PassportStrategy } from "@nestjs/passport";
-import { Request } from "express";
-import { ExtractJwt, Strategy } from "passport-jwt";
-import { JwtPayload } from "../types/jwt-payload.type";
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { PassportStrategy } from '@nestjs/passport';
+import { Request } from 'express';
+import { ExtractJwt, Strategy } from 'passport-jwt';
+import { JwtPayload } from '../types/jwt-payload.type';
 
 @Injectable()
 export class JwtRefreshStrategy extends PassportStrategy(
   Strategy,
-  "jwt-refresh"
+  'jwt-refresh'
 ) {
   constructor(config: ConfigService) {
     super({
       // Extract the refresh token from the httpOnly cookie.
       jwtFromRequest: ExtractJwt.fromExtractors([
         (request: Request) => {
-          const token = request?.cookies?.["refresh_token"];
+          const token = request?.cookies?.['refresh_token'];
           if (!token) return null;
           return token;
         },
@@ -38,7 +38,7 @@ export class JwtRefreshStrategy extends PassportStrategy(
 
       // Different secret from access tokens.
       // If both used the same secret, a refresh token could be used as an access token and vice versa.
-      secretOrKey: config.getOrThrow<string>("JWT_REFRESH_SECRET"),
+      secretOrKey: config.getOrThrow<string>('JWT_REFRESH_SECRET'),
 
       // passReqToCallback: true means the raw Request object is passed as the first argument to validate().
       // We need this to extract the raw token string
@@ -53,10 +53,10 @@ export class JwtRefreshStrategy extends PassportStrategy(
 
   // We return both the payload AND the raw token.
   async validate(request: Request, payload: JwtPayload) {
-    const refreshToken = request?.cookies?.["refresh_token"];
+    const refreshToken = request?.cookies?.['refresh_token'];
 
     if (!refreshToken) {
-      throw new UnauthorizedException("Refresh token not found");
+      throw new UnauthorizedException('Refresh token not found');
     }
 
     if (
@@ -65,7 +65,7 @@ export class JwtRefreshStrategy extends PassportStrategy(
       !payload.libraryId ||
       !payload.role
     ) {
-      throw new UnauthorizedException("Invalid token payload");
+      throw new UnauthorizedException('Invalid token payload');
     }
 
     // This becomes req.user in the refresh route handler.

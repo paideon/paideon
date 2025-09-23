@@ -3,7 +3,7 @@
 // Validates the body of POST /api/auth/2fa/verify
 // The 6-digit code the user reads from their authenticator app.
 
-import { IsNotEmpty, IsString, Length, Matches } from "class-validator";
+import { IsNotEmpty, IsString, Length, Matches } from 'class-validator';
 
 export class TotpVerifyDto {
   // TOTP codes are always exactly 6 digits.
@@ -13,6 +13,6 @@ export class TotpVerifyDto {
   @IsString()
   @IsNotEmpty()
   @Length(6, 6)
-  @Matches(/^\d+$/, { message: "Code must contain digits only" })
+  @Matches(/^\d+$/, { message: 'Code must contain digits only' })
   code!: string;
 }

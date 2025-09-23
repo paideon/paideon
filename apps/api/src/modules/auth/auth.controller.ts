@@ -6,19 +6,19 @@ import {
   Post,
   Res,
   UseGuards,
-} from "@nestjs/common";
-import type { Response } from "express";
-import { AuthService } from "./auth.service";
-import { LoginDto } from "./dto/login.dto";
-import { ActivateDto } from "./dto/activate.dto";
-import { ForgotPasswordDto } from "./dto/forgot-password.dto";
-import { ResetPasswordDto } from "./dto/reset-password.dto";
-import { JwtRefreshGuard } from "./guards/jwt-refresh.guard";
-import { CurrentUser } from "./decorators/current-user.decorator";
-import { JwtPayload } from "./types/jwt-payload.type";
-import { ResponseEnvelopeData, ErrorCodeEnum } from "@paideon/contracts";
+} from '@nestjs/common';
+import type { Response } from 'express';
+import { AuthService } from './auth.service';
+import { LoginDto } from './dto/login.dto';
+import { ActivateDto } from './dto/activate.dto';
+import { ForgotPasswordDto } from './dto/forgot-password.dto';
+import { ResetPasswordDto } from './dto/reset-password.dto';
+import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
+import { CurrentUser } from './decorators/current-user.decorator';
+import { JwtPayload } from './types/jwt-payload.type';
+import { ResponseEnvelopeData, ErrorCodeEnum } from '@paideon/contracts';
 
-@Controller("auth")
+@Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
@@ -28,13 +28,13 @@ export class AuthController {
   // User enters their school email to request an activation link.
   // Always returns 200 regardless of whether email exists.
 
-  @Post("activate")
+  @Post('activate')
   @HttpCode(HttpStatus.OK)
-  async requestActivation(@Body("email") email: string) {
+  async requestActivation(@Body('email') email: string) {
     await this.authService.requestActivation(email);
     return {
       message:
-        "If this email is registered, you will receive an activation link.",
+        'If this email is registered, you will receive an activation link.',
     };
   }
 
@@ -44,7 +44,7 @@ export class AuthController {
   // User clicked activation link and submitted their password.
   // On success: auto-login — sets cookie and returns access token.
 
-  @Post("activate/confirm")
+  @Post('activate/confirm')
   async confirmActivation(
     @Body() dto: ActivateDto,
     @Res({ passthrough: true }) res: Response
@@ -58,7 +58,7 @@ export class AuthController {
   // POST /api/auth/login
   // ─────────────────────────────────────────────────────────────
 
-  @Post("login")
+  @Post('login')
   @HttpCode(HttpStatus.OK)
   async login(
     @Body() dto: LoginDto,
@@ -82,7 +82,7 @@ export class AuthController {
   // JwtRefreshGuard reads the httpOnly cookie and validates it.
   // Returns a new access token and rotates the refresh token.
 
-  @Post("refresh")
+  @Post('refresh')
   @HttpCode(HttpStatus.OK)
   @UseGuards(JwtRefreshGuard)
   async refresh(
@@ -101,7 +101,7 @@ export class AuthController {
   // POST /api/auth/logout
   // ─────────────────────────────────────────────────────────────
 
-  @Post("logout")
+  @Post('logout')
   @HttpCode(HttpStatus.OK)
   @UseGuards(JwtRefreshGuard)
   async logout(
@@ -110,19 +110,19 @@ export class AuthController {
   ) {
     await this.authService.logout(user.refreshToken);
     this.clearRefreshCookie(res);
-    return { message: "Logged out successfully." };
+    return { message: 'Logged out successfully.' };
   }
 
   // ─────────────────────────────────────────────────────────────
   // POST /api/auth/forgot-password
   // ─────────────────────────────────────────────────────────────
 
-  @Post("forgot-password")
+  @Post('forgot-password')
   @HttpCode(HttpStatus.OK)
   async forgotPassword(@Body() dto: ForgotPasswordDto) {
     await this.authService.forgotPassword(dto);
     return {
-      message: "If this email is registered, you will receive a reset link.",
+      message: 'If this email is registered, you will receive a reset link.',
     };
   }
 
@@ -130,12 +130,12 @@ export class AuthController {
   // POST /api/auth/reset-password
   // ─────────────────────────────────────────────────────────────
 
-  @Post("reset-password")
+  @Post('reset-password')
   @HttpCode(HttpStatus.OK)
   async resetPassword(@Body() dto: ResetPasswordDto) {
     await this.authService.resetPassword(dto);
     return {
-      message: "Password updated. Please log in with your new password.",
+      message: 'Password updated. Please log in with your new password.',
     };
   }
 
@@ -147,11 +147,11 @@ export class AuthController {
   // The cookie attributes match our security policy exactly.
 
   private setRefreshCookie(res: Response, token: string) {
-    res.cookie("refresh_token", token, {
+    res.cookie('refresh_token', token, {
       httpOnly: true,
       secure: true,
-      sameSite: "strict",
-      path: "/",
+      sameSite: 'strict',
+      path: '/',
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
   }
@@ -159,11 +159,11 @@ export class AuthController {
   // Clears the refresh token cookie on logout.
 
   private clearRefreshCookie(res: Response) {
-    res.cookie("refresh_token", "", {
+    res.cookie('refresh_token', '', {
       httpOnly: true,
       secure: true,
-      sameSite: "strict",
-      path: "/",
+      sameSite: 'strict',
+      path: '/',
       maxAge: 0,
     });
   }

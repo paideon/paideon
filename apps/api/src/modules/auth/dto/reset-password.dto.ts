@@ -9,7 +9,7 @@ import {
   Matches,
   MaxLength,
   MinLength,
-} from "class-validator";
+} from 'class-validator';
 
 export class ResetPasswordDto {
   // The raw reset token from the email link
@@ -23,7 +23,7 @@ export class ResetPasswordDto {
   @MaxLength(72)
   @Matches(/(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*_-])/, {
     message:
-      "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+      'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
   })
   newPassword!: string;
 

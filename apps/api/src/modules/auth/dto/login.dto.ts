@@ -4,7 +4,7 @@
 // The identifier can be either a paideonId (KCCM-STU-04198)
 // or a school email (john@cwwkcc.lk) — the service figures out which.
 
-import { IsNotEmpty, IsString, MinLength } from "class-validator";
+import { IsNotEmpty, IsString, MinLength } from 'class-validator';
 
 export class LoginDto {
   // Either paideonId or school email

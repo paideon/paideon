@@ -10,7 +10,7 @@ import {
   Matches,
   MaxLength,
   MinLength,
-} from "class-validator";
+} from 'class-validator';
 
 export class ActivateDto {
   // The raw activation token from the email link
@@ -31,7 +31,7 @@ export class ActivateDto {
   @MaxLength(72) // bcrypt silently truncates at 72 characters
   @Matches(/(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*_-])/, {
     message:
-      "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+      'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
   })
   password!: string;
 
