@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
-import { SpotlightPanel } from "@/components/ui/SpotlightPanel";
-import { Button } from "@/components/ui/Button";
+import { SpotlightPanel } from '@/components/ui/SpotlightPanel';
+import { Button } from '@/components/ui/Button';
 
 export function AccessSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-8% 0px" });
+  const isInView = useInView(sectionRef, { once: true, margin: '-8% 0px' });
 
   return (
     <section
@@ -23,7 +23,7 @@ export function AccessSection() {
     >
       {/* Left panel — Sign In */}
       <motion.div
-        initial={{ opacity: 0, x: "-6%" }}
+        initial={{ opacity: 0, x: '-6%' }}
         animate={isInView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         className="flex-1 flex flex-col"
@@ -52,8 +52,8 @@ export function AccessSection() {
             {/* Heading */}
             <div className="overflow-hidden">
               <motion.h2
-                initial={{ y: "110%" }}
-                animate={isInView ? { y: "0%" } : {}}
+                initial={{ y: '110%' }}
+                animate={isInView ? { y: '0%' } : {}}
                 transition={{
                   delay: 0.15,
                   duration: 1,
@@ -71,7 +71,7 @@ export function AccessSection() {
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
+              transition={{ delay: 0.3, duration: 0.8, ease: 'easeOut' }}
               className="text-[13px] font-light leading-[1.9] text-muted max-w-sm"
             >
               Search books, check availability, reserve titles, track your
@@ -83,14 +83,14 @@ export function AccessSection() {
             <motion.ul
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
+              transition={{ delay: 0.4, duration: 0.8, ease: 'easeOut' }}
               className="flex flex-col gap-2"
             >
               {[
-                "Real-time book availability",
-                "Reserve & renew remotely",
-                "Reading streak tracking",
-                "Overdue reminders",
+                'Real-time book availability',
+                'Reserve & renew remotely',
+                'Reading streak tracking',
+                'Overdue reminders',
               ].map((feature, i) => (
                 <li
                   key={i}
@@ -106,7 +106,7 @@ export function AccessSection() {
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
+              transition={{ delay: 0.5, duration: 0.8, ease: 'easeOut' }}
             >
               <Button href="/login">Sign In</Button>
             </motion.div>
@@ -126,7 +126,7 @@ export function AccessSection() {
 
       {/* Right panel — Digital Vault */}
       <motion.div
-        initial={{ opacity: 0, x: "6%" }}
+        initial={{ opacity: 0, x: '6%' }}
         animate={isInView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         className="flex-1 flex flex-col"
@@ -155,8 +155,8 @@ export function AccessSection() {
             {/* Heading */}
             <div className="overflow-hidden">
               <motion.h2
-                initial={{ y: "110%" }}
-                animate={isInView ? { y: "0%" } : {}}
+                initial={{ y: '110%' }}
+                animate={isInView ? { y: '0%' } : {}}
                 transition={{
                   delay: 0.2,
                   duration: 1,
@@ -174,7 +174,7 @@ export function AccessSection() {
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.35, duration: 0.8, ease: "easeOut" }}
+              transition={{ delay: 0.35, duration: 0.8, ease: 'easeOut' }}
               className="text-[13px] font-light leading-[1.9] text-muted max-w-sm"
             >
               Access Ministry of Education textbooks, O/L and A/L past papers,
@@ -186,14 +186,14 @@ export function AccessSection() {
             <motion.ul
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.45, duration: 0.8, ease: "easeOut" }}
+              transition={{ delay: 0.45, duration: 0.8, ease: 'easeOut' }}
               className="flex flex-col gap-2"
             >
               {[
-                "O/L & A/L past papers",
-                "Ministry of Education textbooks",
-                "Internal test papers",
-                "Searchable by grade & subject",
+                'O/L & A/L past papers',
+                'Ministry of Education textbooks',
+                'Internal test papers',
+                'Searchable by grade & subject',
               ].map((feature, i) => (
                 <li
                   key={i}
@@ -209,7 +209,7 @@ export function AccessSection() {
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.55, duration: 0.8, ease: "easeOut" }}
+              transition={{ delay: 0.55, duration: 0.8, ease: 'easeOut' }}
             >
               <Button href="/vault" variant="gold">
                 Open Vault
@@ -231,12 +231,12 @@ export function AccessSection() {
       >
         <motion.div
           className="absolute top-0 left-0 w-full bg-gradient-to-b from-transparent via-gold to-transparent"
-          style={{ height: "40%" }}
-          animate={{ y: ["0%", "250%"] }}
+          style={{ height: '40%' }}
+          animate={{ y: ['0%', '250%'] }}
           transition={{
             duration: 1.6,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: 'easeInOut',
             repeatDelay: 0.4,
           }}
         />

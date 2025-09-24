@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function LoadingScreen() {
   const [isVisible, setIsVisible] = useState(true);
@@ -50,12 +50,12 @@ export function LoadingScreen() {
               alt="paideon logo"
               width={500}
               height={500}
-              style={{ objectFit: "contain" }}
+              style={{ objectFit: 'contain' }}
             />
 
             {/* nexus letters staggered in */}
             <div className="flex gap-[0.06em]">
-              {"NEXUS".split("").map((char, i) => (
+              {'NEXUS'.split('').map((char, i) => (
                 <motion.span
                   key={i}
                   initial={{ opacity: 0, y: 12 }}
@@ -66,7 +66,7 @@ export function LoadingScreen() {
                     ease: [0.22, 1, 0.36, 1],
                   }}
                   className="font-display text-4xl font-light tracking-[0.15em] text-transparent"
-                  style={{ WebkitTextStroke: "1px #3d4659" }}
+                  style={{ WebkitTextStroke: '1px #3d4659' }}
                 >
                   {char}
                 </motion.span>

@@ -1,35 +1,35 @@
 // apps/portal/src/app/(student)/home/page.tsx
 // Server Component — no 'use client'
 
-import { PaideonBadge } from "@/components/ui/PaideonBadge";
+import { PaideonBadge } from '@/components/ui/PaideonBadge';
 
 // ─── Sample data ──────────────────────────────────────────────────────────────
 // For presentation: swap photoUrl for any portrait photo URL, or set to null
 // for the initials fallback.
 
 const SAMPLE_USER = {
-  firstName: "Roshana",
-  lastName: "Chamila",
-  paideonId: "KCCM-STU-04198",
+  firstName: 'Roshana',
+  lastName: 'Chamila',
+  paideonId: 'KCCM-STU-04198',
   currentGrade: 12 as const,
-  admissionNumber: "04198",
-  cardNumber: "KCCM-LIB-04198",
-  role: "STUDENT" as const,
-  photoUrl: "https://i.pravatar.cc/400?img=11",
+  admissionNumber: '04198',
+  cardNumber: 'KCCM-LIB-04198',
+  role: 'STUDENT' as const,
+  photoUrl: 'https://i.pravatar.cc/400?img=11',
   // ↑ Replace with a real photo URL, or set to null for the initials avatar
 };
 
 const STATS = [
-  { value: "12", label: "Books Borrowed" },
-  { value: "3", label: "Currently Reading" },
-  { value: "14", label: "Day Streak" },
+  { value: '12', label: 'Books Borrowed' },
+  { value: '3', label: 'Currently Reading' },
+  { value: '14', label: 'Day Streak' },
 ];
 
 function greeting(): string {
   const h = new Date().getHours();
-  if (h < 12) return "Good morning";
-  if (h < 17) return "Good afternoon";
-  return "Good evening";
+  if (h < 12) return 'Good morning';
+  if (h < 17) return 'Good afternoon';
+  return 'Good evening';
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
@@ -49,15 +49,15 @@ export default function StudentHomePage() {
 
       <main
         style={{
-          minHeight: "100vh",
-          background: "#0E1117",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "0 6vw",
+          minHeight: '100vh',
+          background: '#0E1117',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '0 6vw',
           gap: 32,
-          position: "relative",
-          overflow: "hidden",
+          position: 'relative',
+          overflow: 'hidden',
         }}
       >
         {/* ─── Background decoration ─── */}
@@ -65,78 +65,78 @@ export default function StudentHomePage() {
         {/* Faint grid */}
         <div
           style={{
-            position: "absolute",
+            position: 'absolute',
             inset: 0,
-            pointerEvents: "none",
+            pointerEvents: 'none',
             backgroundImage: `
             linear-gradient(rgba(78,124,111,0.04) 1px, transparent 1px),
             linear-gradient(90deg, rgba(78,124,111,0.04) 1px, transparent 1px)
           `,
-            backgroundSize: "48px 48px",
+            backgroundSize: '48px 48px',
           }}
         />
 
         {/* Sage glow behind badge */}
         <div
           style={{
-            position: "absolute",
-            right: "18%",
-            top: "50%",
-            transform: "translate(50%,-50%)",
+            position: 'absolute',
+            right: '18%',
+            top: '50%',
+            transform: 'translate(50%,-50%)',
             width: 640,
             height: 640,
-            borderRadius: "50%",
+            borderRadius: '50%',
             background:
-              "radial-gradient(circle, rgba(78,124,111,0.10) 0%, transparent 68%)",
-            pointerEvents: "none",
+              'radial-gradient(circle, rgba(78,124,111,0.10) 0%, transparent 68%)',
+            pointerEvents: 'none',
           }}
         />
 
         {/* Gold warmth — upper right */}
         <div
           style={{
-            position: "absolute",
-            right: "22%",
-            top: "15%",
+            position: 'absolute',
+            right: '22%',
+            top: '15%',
             width: 380,
             height: 380,
-            borderRadius: "50%",
+            borderRadius: '50%',
             background:
-              "radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%)",
-            pointerEvents: "none",
+              'radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%)',
+            pointerEvents: 'none',
           }}
         />
 
         {/* ─── Left column ─── */}
         <div
-          style={{ flex: 1, maxWidth: 500, position: "relative", zIndex: 1 }}
+          style={{ flex: 1, maxWidth: 500, position: 'relative', zIndex: 1 }}
         >
           {/* Label */}
           <div
             style={{
-              display: "inline-flex",
-              alignItems: "center",
+              display: 'inline-flex',
+              alignItems: 'center',
               gap: 8,
               marginBottom: 28,
             }}
           >
             <span
               style={{
-                display: "inline-block",
+                display: 'inline-block',
                 width: 6,
                 height: 6,
-                borderRadius: "50%",
-                background: "#4E7C6F",
+                borderRadius: '50%',
+                background: '#4E7C6F',
               }}
             />
             <span
               style={{
-                color: "#4E7C6F",
+                color: '#4E7C6F',
                 fontSize: 10,
-                fontFamily: "var(--font-body)",
+                fontFamily: 'var(--font-body)',
                 fontWeight: 600,
-                letterSpacing: "0.22em",
-                textTransform: "uppercase",
+                letterSpacing: '0.22em',
+                textTransform: 'uppercase',
               }}
             >
               Student Portal
@@ -146,25 +146,25 @@ export default function StudentHomePage() {
           {/* Greeting */}
           <h1
             style={{
-              color: "rgba(250,248,244,0.55)",
-              fontSize: "clamp(36px,4.5vw,56px)",
-              fontFamily: "var(--font-display)",
+              color: 'rgba(250,248,244,0.55)',
+              fontSize: 'clamp(36px,4.5vw,56px)',
+              fontFamily: 'var(--font-display)',
               fontWeight: 300,
-              fontStyle: "italic",
+              fontStyle: 'italic',
               lineHeight: 1.08,
-              margin: "0 0 2px",
+              margin: '0 0 2px',
             }}
           >
             {greeting()},
           </h1>
           <h1
             style={{
-              color: "#FAF8F4",
-              fontSize: "clamp(36px,4.5vw,56px)",
-              fontFamily: "var(--font-display)",
+              color: '#FAF8F4',
+              fontSize: 'clamp(36px,4.5vw,56px)',
+              fontFamily: 'var(--font-display)',
               fontWeight: 600,
               lineHeight: 1.08,
-              margin: "0 0 20px",
+              margin: '0 0 20px',
             }}
           >
             {SAMPLE_USER.firstName}.
@@ -173,11 +173,11 @@ export default function StudentHomePage() {
           {/* Paideon ID — monospace, subtle */}
           <p
             style={{
-              color: "rgba(255,255,255,0.18)",
-              fontFamily: "var(--font-mono)",
+              color: 'rgba(255,255,255,0.18)',
+              fontFamily: 'var(--font-mono)',
               fontSize: 11,
-              letterSpacing: "0.12em",
-              margin: "0 0 28px",
+              letterSpacing: '0.12em',
+              margin: '0 0 28px',
             }}
           >
             {SAMPLE_USER.paideonId}
@@ -188,21 +188,21 @@ export default function StudentHomePage() {
             style={{
               width: 36,
               height: 1,
-              background: "linear-gradient(90deg,#4E7C6F,transparent)",
+              background: 'linear-gradient(90deg,#4E7C6F,transparent)',
               marginBottom: 36,
             }}
           />
 
           {/* Stats */}
-          <div style={{ display: "flex", gap: 36, marginBottom: 44 }}>
+          <div style={{ display: 'flex', gap: 36, marginBottom: 44 }}>
             {STATS.map((s, i) => (
               <div key={i}>
                 <div
                   className="hero-stat-num"
                   style={{
-                    color: "#FAF8F4",
-                    fontSize: "clamp(24px,3vw,34px)",
-                    fontFamily: "var(--font-display)",
+                    color: '#FAF8F4',
+                    fontSize: 'clamp(24px,3vw,34px)',
+                    fontFamily: 'var(--font-display)',
                     fontWeight: 600,
                     lineHeight: 1,
                     marginBottom: 6,
@@ -212,10 +212,10 @@ export default function StudentHomePage() {
                 </div>
                 <div
                   style={{
-                    color: "rgba(255,255,255,0.3)",
+                    color: 'rgba(255,255,255,0.3)',
                     fontSize: 11,
-                    fontFamily: "var(--font-body)",
-                    letterSpacing: "0.05em",
+                    fontFamily: 'var(--font-body)',
+                    letterSpacing: '0.05em',
                   }}
                 >
                   {s.label}
@@ -225,25 +225,25 @@ export default function StudentHomePage() {
           </div>
 
           {/* CTAs */}
-          <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
             <a
               href="/vault"
               className="hero-vault-btn"
               style={{
-                display: "inline-flex",
-                alignItems: "center",
+                display: 'inline-flex',
+                alignItems: 'center',
                 gap: 8,
-                background: "#4E7C6F",
-                color: "#FAF8F4",
-                fontFamily: "var(--font-body)",
+                background: '#4E7C6F',
+                color: '#FAF8F4',
+                fontFamily: 'var(--font-body)',
                 fontSize: 13,
                 fontWeight: 500,
-                letterSpacing: "0.03em",
-                padding: "11px 22px",
+                letterSpacing: '0.03em',
+                padding: '11px 22px',
                 borderRadius: 8,
-                textDecoration: "none",
-                border: "1px solid transparent",
-                transition: "background 0.2s",
+                textDecoration: 'none',
+                border: '1px solid transparent',
+                transition: 'background 0.2s',
               }}
             >
               Explore the Vault <span style={{ opacity: 0.7 }}>→</span>
@@ -252,20 +252,20 @@ export default function StudentHomePage() {
               href="/loans"
               className="hero-loans-btn"
               style={{
-                display: "inline-flex",
-                alignItems: "center",
+                display: 'inline-flex',
+                alignItems: 'center',
                 gap: 8,
-                background: "transparent",
-                color: "rgba(255,255,255,0.4)",
-                fontFamily: "var(--font-body)",
+                background: 'transparent',
+                color: 'rgba(255,255,255,0.4)',
+                fontFamily: 'var(--font-body)',
                 fontSize: 13,
                 fontWeight: 500,
-                letterSpacing: "0.03em",
-                padding: "11px 22px",
+                letterSpacing: '0.03em',
+                padding: '11px 22px',
                 borderRadius: 8,
-                textDecoration: "none",
-                border: "1px solid rgba(255,255,255,0.1)",
-                transition: "border-color 0.2s, color 0.2s",
+                textDecoration: 'none',
+                border: '1px solid rgba(255,255,255,0.1)',
+                transition: 'border-color 0.2s, color 0.2s',
               }}
             >
               My Loans <span style={{ opacity: 0.6 }}>→</span>
@@ -276,9 +276,9 @@ export default function StudentHomePage() {
         {/* ─── Right column — badge ─── */}
         <div
           style={{
-            width: "clamp(320px,38vw,460px)",
+            width: 'clamp(320px,38vw,460px)',
             flexShrink: 0,
-            position: "relative",
+            position: 'relative',
             zIndex: 1,
           }}
         >

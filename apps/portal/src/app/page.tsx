@@ -1,11 +1,11 @@
-import { CardSection } from "@/components/ui/CardSection";
-import { HeroSection } from "@/components/sections/HeroSection";
-import { AboutSection } from "@/components/sections/AboutSection";
-import { AccessSection } from "@/components/sections/AccessSection";
-import { ExploreSection } from "@/components/sections/ExploreSection";
-import { WhyNexusSection } from "@/components/sections/WhyNexusSection";
-import { CtaSection } from "@/components/sections/CtaSection";
-import { LIBRARY_STATS_FALLBACK, type LibraryStats } from "@paideon/types";
+import { CardSection } from '@/components/ui/CardSection';
+import { HeroSection } from '@/components/sections/HeroSection';
+import { AboutSection } from '@/components/sections/AboutSection';
+import { AccessSection } from '@/components/sections/AccessSection';
+import { ExploreSection } from '@/components/sections/ExploreSection';
+import { WhyNexusSection } from '@/components/sections/WhyNexusSection';
+import { CtaSection } from '@/components/sections/CtaSection';
+import { LIBRARY_STATS_FALLBACK, type LibraryStats } from '@paideon/types';
 
 async function getLibraryStats(): Promise<LibraryStats> {
   return LIBRARY_STATS_FALLBACK;
