@@ -1,9 +1,9 @@
 // packages/ui/src/components/visualization/ComparisonBar.tsx
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
 export interface ComparisonBarProps {
   label: string;
@@ -11,14 +11,14 @@ export interface ComparisonBarProps {
   targetValue?: number;
   showPercentage?: boolean;
   animate?: boolean;
-  size?: "sm" | "md" | "lg";
+  size?: 'sm' | 'md' | 'lg';
   className?: string;
 }
 
 const heightMap = {
-  sm: "h-1",
-  md: "h-2",
-  lg: "h-3",
+  sm: 'h-1',
+  md: 'h-2',
+  lg: 'h-3',
 };
 
 export function ComparisonBar({
@@ -27,7 +27,7 @@ export function ComparisonBar({
   targetValue,
   showPercentage = true,
   animate = true,
-  size = "md",
+  size = 'md',
   className,
 }: ComparisonBarProps) {
   const [width, setWidth] = useState(
@@ -76,7 +76,7 @@ export function ComparisonBar({
       : undefined;
 
   return (
-    <div ref={ref} className={cn("w-full", className)}>
+    <div ref={ref} className={cn('w-full', className)}>
       <div className="flex justify-between items-center mb-space-2">
         <span className="font-body text-label uppercase tracking-label text-text-primary">
           {label}
@@ -89,7 +89,7 @@ export function ComparisonBar({
       </div>
       <div
         className={cn(
-          "relative w-full bg-surface-deep rounded-full overflow-hidden",
+          'relative w-full bg-surface-deep rounded-full overflow-hidden',
           heightMap[size]
         )}
       >

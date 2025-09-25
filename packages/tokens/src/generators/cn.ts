@@ -6,24 +6,24 @@
 // and writes the result to packages/ui; all the actual class-flattening
 // logic lives here so it can be unit tested and reused without touching disk.
 
-import { colors } from "./tailwind.ts";
-import { scale, blur, opacity, zIndex } from "../primitives/effects.ts";
-import { borderRadius } from "../primitives/radius.ts";
-import { boxShadow } from "../primitives/shadows.ts";
-import { sizing, borderWidth, maxWidth } from "../primitives/sizing.ts";
-import { spacing } from "../primitives/spacing.ts";
+import { colors } from './tailwind.ts';
+import { scale, blur, opacity, zIndex } from '../primitives/effects.ts';
+import { borderRadius } from '../primitives/radius.ts';
+import { boxShadow } from '../primitives/shadows.ts';
+import { sizing, borderWidth, maxWidth } from '../primitives/sizing.ts';
+import { spacing } from '../primitives/spacing.ts';
 import {
   fontFamily,
   fontSize,
   letterSpacing,
   lineHeight,
-} from "../primitives/typography.ts";
+} from '../primitives/typography.ts';
 
-function flattenKeys(obj: Record<string, unknown>, prefix = ""): string[] {
+function flattenKeys(obj: Record<string, unknown>, prefix = ''): string[] {
   const keys: string[] = [];
   for (const [key, value] of Object.entries(obj)) {
     const full = prefix ? `${prefix}-${key}` : key;
-    if (value && typeof value === "object" && !Array.isArray(value)) {
+    if (value && typeof value === 'object' && !Array.isArray(value)) {
       keys.push(...flattenKeys(value as Record<string, unknown>, full));
     } else {
       keys.push(full);
@@ -37,80 +37,80 @@ function flattenKeys(obj: Record<string, unknown>, prefix = ""): string[] {
 // Tailwind itself generates it, so tailwind-merge needs the same string.
 function toClassList(keys: string[], utilityPrefix: string): string[] {
   return keys.map((k) =>
-    k === "DEFAULT" ? utilityPrefix : `${utilityPrefix}-${k}`
+    k === 'DEFAULT' ? utilityPrefix : `${utilityPrefix}-${k}`
   );
 }
 
 function renderList(name: string, items: string[]): string {
-  const lines = items.map((c) => `  '${c}',`).join("\n");
+  const lines = items.map((c) => `  '${c}',`).join('\n');
   return `const ${name} = [\n${lines}\n];\n`;
 }
 
 export function generateCnUtility(): string {
-  const fontSizeClasses = toClassList(Object.keys(fontSize), "text");
-  const fontFamilyClasses = toClassList(Object.keys(fontFamily), "font");
-  const trackingClasses = toClassList(Object.keys(letterSpacing), "tracking");
-  const leadingClasses = toClassList(Object.keys(lineHeight), "leading");
-  const scaleClasses = toClassList(Object.keys(scale), "scale");
+  const fontSizeClasses = toClassList(Object.keys(fontSize), 'text');
+  const fontFamilyClasses = toClassList(Object.keys(fontFamily), 'font');
+  const trackingClasses = toClassList(Object.keys(letterSpacing), 'tracking');
+  const leadingClasses = toClassList(Object.keys(lineHeight), 'leading');
+  const scaleClasses = toClassList(Object.keys(scale), 'scale');
 
   const sizingKeys = Object.keys(sizing);
-  const wClasses = toClassList(sizingKeys, "w");
-  const hClasses = toClassList(sizingKeys, "h");
-  const minWClasses = toClassList(sizingKeys, "min-w");
+  const wClasses = toClassList(sizingKeys, 'w');
+  const hClasses = toClassList(sizingKeys, 'h');
+  const minWClasses = toClassList(sizingKeys, 'min-w');
   const maxWClasses = toClassList(
     [...Object.keys(maxWidth), ...sizingKeys],
-    "max-w"
+    'max-w'
   );
-  const minHClasses = toClassList(sizingKeys, "min-h");
-  const maxHClasses = toClassList(sizingKeys, "max-h");
+  const minHClasses = toClassList(sizingKeys, 'min-h');
+  const maxHClasses = toClassList(sizingKeys, 'max-h');
 
   const spaceKeys = Object.keys(spacing);
   const spaceGroups = {
-    p: toClassList(spaceKeys, "p"),
-    px: toClassList(spaceKeys, "px"),
-    py: toClassList(spaceKeys, "py"),
-    pt: toClassList(spaceKeys, "pt"),
-    pr: toClassList(spaceKeys, "pr"),
-    pb: toClassList(spaceKeys, "pb"),
-    pl: toClassList(spaceKeys, "pl"),
-    m: toClassList(spaceKeys, "m"),
-    mx: toClassList(spaceKeys, "mx"),
-    my: toClassList(spaceKeys, "my"),
-    mt: toClassList(spaceKeys, "mt"),
-    mr: toClassList(spaceKeys, "mr"),
-    mb: toClassList(spaceKeys, "mb"),
-    ml: toClassList(spaceKeys, "ml"),
-    gap: toClassList(spaceKeys, "gap"),
-    "gap-x": toClassList(spaceKeys, "gap-x"),
-    "gap-y": toClassList(spaceKeys, "gap-y"),
-    top: toClassList(spaceKeys, "top"),
-    right: toClassList(spaceKeys, "right"),
-    bottom: toClassList(spaceKeys, "bottom"),
-    left: toClassList(spaceKeys, "left"),
+    p: toClassList(spaceKeys, 'p'),
+    px: toClassList(spaceKeys, 'px'),
+    py: toClassList(spaceKeys, 'py'),
+    pt: toClassList(spaceKeys, 'pt'),
+    pr: toClassList(spaceKeys, 'pr'),
+    pb: toClassList(spaceKeys, 'pb'),
+    pl: toClassList(spaceKeys, 'pl'),
+    m: toClassList(spaceKeys, 'm'),
+    mx: toClassList(spaceKeys, 'mx'),
+    my: toClassList(spaceKeys, 'my'),
+    mt: toClassList(spaceKeys, 'mt'),
+    mr: toClassList(spaceKeys, 'mr'),
+    mb: toClassList(spaceKeys, 'mb'),
+    ml: toClassList(spaceKeys, 'ml'),
+    gap: toClassList(spaceKeys, 'gap'),
+    'gap-x': toClassList(spaceKeys, 'gap-x'),
+    'gap-y': toClassList(spaceKeys, 'gap-y'),
+    top: toClassList(spaceKeys, 'top'),
+    right: toClassList(spaceKeys, 'right'),
+    bottom: toClassList(spaceKeys, 'bottom'),
+    left: toClassList(spaceKeys, 'left'),
   };
 
   const borderWidthKeys = Object.keys(borderWidth);
-  const borderWClasses = toClassList(borderWidthKeys, "border");
+  const borderWClasses = toClassList(borderWidthKeys, 'border');
 
   const colorKeys = flattenKeys(colors);
-  const borderColorClasses = toClassList(colorKeys, "border");
-  const bgColorClasses = toClassList(colorKeys, "bg");
-  const textColorClasses = toClassList(colorKeys, "text");
+  const borderColorClasses = toClassList(colorKeys, 'border');
+  const bgColorClasses = toClassList(colorKeys, 'bg');
+  const textColorClasses = toClassList(colorKeys, 'text');
 
   const radiusKeys = Object.keys(borderRadius);
-  const roundedClasses = toClassList(radiusKeys, "rounded");
+  const roundedClasses = toClassList(radiusKeys, 'rounded');
 
   const shadowKeys = Object.keys(boxShadow);
-  const shadowClasses = toClassList(shadowKeys, "shadow");
+  const shadowClasses = toClassList(shadowKeys, 'shadow');
 
   const zKeys = Object.keys(zIndex);
-  const zClasses = toClassList(zKeys, "z");
+  const zClasses = toClassList(zKeys, 'z');
 
   const opacityKeys = Object.keys(opacity);
-  const opacityClasses = toClassList(opacityKeys, "opacity");
+  const opacityClasses = toClassList(opacityKeys, 'opacity');
 
   const blurKeys = Object.keys(blur);
-  const blurClasses = toClassList(blurKeys, "blur");
+  const blurClasses = toClassList(blurKeys, 'blur');
 
   return `/* AUTOGENERATED – DO NOT EDIT MANUALLY */
 /* Source: packages/tokens/src/generators/cn.ts */
@@ -120,68 +120,68 @@ import { clsx, type ClassValue } from 'clsx';
 import { extendTailwindMerge } from 'tailwind-merge';
 
 // ─── Font Size ────────────────────────────────────────────────────────────────
-${renderList("fontSizeClasses", fontSizeClasses)}
+${renderList('fontSizeClasses', fontSizeClasses)}
 // ─── Font Family ──────────────────────────────────────────────────────────────
-${renderList("fontFamilyClasses", fontFamilyClasses)}
+${renderList('fontFamilyClasses', fontFamilyClasses)}
 // ─── Text Color ───────────────────────────────────────────────────────────────
-${renderList("textColorClasses", textColorClasses)}
+${renderList('textColorClasses', textColorClasses)}
 // ─── Letter Spacing ───────────────────────────────────────────────────────────
-${renderList("trackingClasses", trackingClasses)}
+${renderList('trackingClasses', trackingClasses)}
 // ─── Line Height ──────────────────────────────────────────────────────────────
-${renderList("leadingClasses", leadingClasses)}
+${renderList('leadingClasses', leadingClasses)}
 // ─── Transform Scale ──────────────────────────────────────────────────────────
-${renderList("scaleClasses", scaleClasses)}
+${renderList('scaleClasses', scaleClasses)}
 // ─── Sizing: Width ────────────────────────────────────────────────────────────
-${renderList("wClasses", wClasses)}
+${renderList('wClasses', wClasses)}
 // ─── Sizing: Height ───────────────────────────────────────────────────────────
-${renderList("hClasses", hClasses)}
+${renderList('hClasses', hClasses)}
 // ─── Sizing: Min/Max Width ────────────────────────────────────────────────────
-${renderList("minWClasses", minWClasses)}
-${renderList("maxWClasses", maxWClasses)}
+${renderList('minWClasses', minWClasses)}
+${renderList('maxWClasses', maxWClasses)}
 // ─── Sizing: Min/Max Height ───────────────────────────────────────────────────
-${renderList("minHClasses", minHClasses)}
-${renderList("maxHClasses", maxHClasses)}
+${renderList('minHClasses', minHClasses)}
+${renderList('maxHClasses', maxHClasses)}
 // ─── Spacing: Padding ─────────────────────────────────────────────────────────
-${renderList("pClasses", spaceGroups.p)}
-${renderList("pxClasses", spaceGroups.px)}
-${renderList("pyClasses", spaceGroups.py)}
-${renderList("ptClasses", spaceGroups.pt)}
-${renderList("prClasses", spaceGroups.pr)}
-${renderList("pbClasses", spaceGroups.pb)}
-${renderList("plClasses", spaceGroups.pl)}
+${renderList('pClasses', spaceGroups.p)}
+${renderList('pxClasses', spaceGroups.px)}
+${renderList('pyClasses', spaceGroups.py)}
+${renderList('ptClasses', spaceGroups.pt)}
+${renderList('prClasses', spaceGroups.pr)}
+${renderList('pbClasses', spaceGroups.pb)}
+${renderList('plClasses', spaceGroups.pl)}
 // ─── Spacing: Margin ──────────────────────────────────────────────────────────
-${renderList("mClasses", spaceGroups.m)}
-${renderList("mxClasses", spaceGroups.mx)}
-${renderList("myClasses", spaceGroups.my)}
-${renderList("mtClasses", spaceGroups.mt)}
-${renderList("mrClasses", spaceGroups.mr)}
-${renderList("mbClasses", spaceGroups.mb)}
-${renderList("mlClasses", spaceGroups.ml)}
+${renderList('mClasses', spaceGroups.m)}
+${renderList('mxClasses', spaceGroups.mx)}
+${renderList('myClasses', spaceGroups.my)}
+${renderList('mtClasses', spaceGroups.mt)}
+${renderList('mrClasses', spaceGroups.mr)}
+${renderList('mbClasses', spaceGroups.mb)}
+${renderList('mlClasses', spaceGroups.ml)}
 // ─── Spacing: Gap ─────────────────────────────────────────────────────────────
-${renderList("gapClasses", spaceGroups.gap)}
-${renderList("gapXClasses", spaceGroups["gap-x"])}
-${renderList("gapYClasses", spaceGroups["gap-y"])}
+${renderList('gapClasses', spaceGroups.gap)}
+${renderList('gapXClasses', spaceGroups['gap-x'])}
+${renderList('gapYClasses', spaceGroups['gap-y'])}
 // ─── Spacing: Inset (top/right/bottom/left) ───────────────────────────────────
-${renderList("topClasses", spaceGroups.top)}
-${renderList("rightClasses", spaceGroups.right)}
-${renderList("bottomClasses", spaceGroups.bottom)}
-${renderList("leftClasses", spaceGroups.left)}
+${renderList('topClasses', spaceGroups.top)}
+${renderList('rightClasses', spaceGroups.right)}
+${renderList('bottomClasses', spaceGroups.bottom)}
+${renderList('leftClasses', spaceGroups.left)}
 // ─── Border Width ─────────────────────────────────────────────────────────────
-${renderList("borderWClasses", borderWClasses)}
+${renderList('borderWClasses', borderWClasses)}
 // ─── Border Color ─────────────────────────────────────────────────────────────
-${renderList("borderColorClasses", borderColorClasses)}
+${renderList('borderColorClasses', borderColorClasses)}
 // ─── Background Color ─────────────────────────────────────────────────────────
-${renderList("bgColorClasses", bgColorClasses)}
+${renderList('bgColorClasses', bgColorClasses)}
 // ─── Border Radius ────────────────────────────────────────────────────────────
-${renderList("roundedClasses", roundedClasses)}
+${renderList('roundedClasses', roundedClasses)}
 // ─── Box Shadow ───────────────────────────────────────────────────────────────
-${renderList("shadowClasses", shadowClasses)}
+${renderList('shadowClasses', shadowClasses)}
 // ─── Z-Index ──────────────────────────────────────────────────────────────────
-${renderList("zClasses", zClasses)}
+${renderList('zClasses', zClasses)}
 // ─── Opacity ──────────────────────────────────────────────────────────────────
-${renderList("opacityClasses", opacityClasses)}
+${renderList('opacityClasses', opacityClasses)}
 // ─── Blur ─────────────────────────────────────────────────────────────────────
-${renderList("blurClasses", blurClasses)}
+${renderList('blurClasses', blurClasses)}
 // ─── Merge config ─────────────────────────────────────────────────────────────
 
 const customTwMerge = extendTailwindMerge({

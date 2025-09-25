@@ -23,16 +23,16 @@ export function isServerError(status: number): boolean {
 
 export function isJsonResponse(response: Response): boolean {
   return (
-    response.headers.get("content-type")?.includes("application/json") ?? false
+    response.headers.get('content-type')?.includes('application/json') ?? false
   );
 }
 
 export function isTextResponse(response: Response): boolean {
-  return response.headers.get("content-type")?.includes("text/") ?? false;
+  return response.headers.get('content-type')?.includes('text/') ?? false;
 }
 
 export function isBlobResponse(response: Response): boolean {
-  const contentType = response.headers.get("content-type");
+  const contentType = response.headers.get('content-type');
   return (
     Boolean(contentType) &&
     !isJsonResponse(response) &&

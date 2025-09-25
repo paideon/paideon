@@ -1,10 +1,10 @@
 // packages/contracts/src/features/results/al.ts
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { ALStreamEnum } from "../academics/al-stream.ts";
+import { ALStreamEnum } from '../academics/al-stream.ts';
 
-export const ALGradeEnum = z.enum(["A", "B", "C", "S", "F", "AB"]);
+export const ALGradeEnum = z.enum(['A', 'B', 'C', 'S', 'F', 'AB']);
 
 export const ALStreamResultSchema = z.object({
   stream: ALStreamEnum,

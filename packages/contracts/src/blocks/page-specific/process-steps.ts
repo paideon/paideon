@@ -1,9 +1,9 @@
 // packages/contracts/src/blocks/page-specific/process-steps.ts
 // Defines the schema for process-step blocks.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { PROCESS_STEPS_BLOCK } from "../block-type.js";
+import { PROCESS_STEPS_BLOCK } from '../block-type.js';
 
 export const ProcessStepSchema = z.object({
   id: z.string(),

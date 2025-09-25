@@ -1,8 +1,8 @@
-import { type Ref } from "react";
+import { type Ref } from 'react';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
-type QuoteBlockVariant = "pull-quote" | "ceremonial";
+type QuoteBlockVariant = 'pull-quote' | 'ceremonial';
 
 interface QuoteBlockProps {
   variant?: QuoteBlockVariant;
@@ -15,19 +15,19 @@ interface QuoteBlockProps {
 }
 
 export const QuoteBlock = ({
-  variant = "pull-quote",
+  variant = 'pull-quote',
   quote,
   attribution,
   className,
   cite,
   ref,
 }: QuoteBlockProps) => {
-  if (variant === "ceremonial") {
+  if (variant === 'ceremonial') {
     return (
       <figure
         ref={ref as React.LegacyRef<HTMLQuoteElement>}
         className={cn(
-          "text-center py-space-6 px-space-10 mx-auto max-w-prose",
+          'text-center py-space-6 px-space-10 mx-auto max-w-prose',
           className
         )}
       >
@@ -54,7 +54,7 @@ export const QuoteBlock = ({
       ref={ref as React.LegacyRef<HTMLQuoteElement>}
       cite={cite}
       className={cn(
-        "m-0 py-space-1 pl-space-6 border-l-2 border-gold-base",
+        'm-0 py-space-1 pl-space-6 border-l-2 border-gold-base',
         className
       )}
     >
@@ -70,4 +70,4 @@ export const QuoteBlock = ({
   );
 };
 
-QuoteBlock.displayName = "QuoteBlock";
+QuoteBlock.displayName = 'QuoteBlock';

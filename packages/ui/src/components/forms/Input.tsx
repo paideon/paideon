@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useFormField } from "../../hooks/useFormField";
-import { cn } from "../../utilities/cn";
+import { useFormField } from '../../hooks/useFormField';
+import { cn } from '../../utilities/cn';
 
 type Props = {
   label: string;
@@ -11,23 +11,23 @@ type Props = {
   required?: boolean;
   placeholder?: string;
   type?:
-    | "text"
-    | "email"
-    | "tel"
-    | "password"
-    | "number"
-    | "search"
-    | "url"
-    | "date"
-    | "time"
-    | "datetime-local";
+    | 'text'
+    | 'email'
+    | 'tel'
+    | 'password'
+    | 'number'
+    | 'search'
+    | 'url'
+    | 'date'
+    | 'time'
+    | 'datetime-local';
   value?: string;
   defaultValue?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   name?: string;
   autoComplete?: string;
-  inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
+  inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode'];
   className?: string;
   ref?: React.Ref<HTMLInputElement>;
 };
@@ -46,7 +46,7 @@ export function Input({
   disabled = false,
   required = false,
   placeholder,
-  type = "text",
+  type = 'text',
   value,
   defaultValue,
   onChange,
@@ -63,7 +63,7 @@ export function Input({
   });
 
   return (
-    <div className={cn("flex flex-col gap-space-2", className)}>
+    <div className={cn('flex flex-col gap-space-2', className)}>
       <label
         htmlFor={id}
         className="font-body text-label text-text-primary uppercase tracking-label"
@@ -97,8 +97,8 @@ export function Input({
         className={cn(
           inputBase,
           hasError
-            ? "border-semantic-error-base focus-visible:border-semantic-error-base focus-visible:outline-semantic-error-base"
-            : "border-border-default hover:border-border-default focus-visible:border-gold-base"
+            ? 'border-semantic-error-base focus-visible:border-semantic-error-base focus-visible:outline-semantic-error-base'
+            : 'border-border-default hover:border-border-default focus-visible:border-gold-base'
         )}
       />
       {hasError && (

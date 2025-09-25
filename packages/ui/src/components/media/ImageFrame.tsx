@@ -1,31 +1,31 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { useState } from "react";
+import Image from 'next/image';
+import { useState } from 'react';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
-type ImageFrameAspectRatio = "hero" | "portrait" | "square" | "news" | "event";
-type ImageFrameVariant = "standard" | "featured" | "full-bleed";
+type ImageFrameAspectRatio = 'hero' | 'portrait' | 'square' | 'news' | 'event';
+type ImageFrameVariant = 'standard' | 'featured' | 'full-bleed';
 
 type ImageFrameColor =
-  | "gold"
-  | "gold-pale"
-  | "green"
-  | "border-default"
-  | "border-light"
-  | "surface-inverse"
-  | "white";
+  | 'gold'
+  | 'gold-pale'
+  | 'green'
+  | 'border-default'
+  | 'border-light'
+  | 'surface-inverse'
+  | 'white';
 
-type ImageOverlay = "light" | "medium" | "heavy" | false;
+type ImageOverlay = 'light' | 'medium' | 'heavy' | false;
 type FrameWidth =
-  | "border-sm"
-  | "border-md"
-  | "border-lg"
-  | "border-xl"
-  | "border-2xl";
+  | 'border-sm'
+  | 'border-md'
+  | 'border-lg'
+  | 'border-xl'
+  | 'border-2xl';
 
-type ImageFrameSize = "xs" | "sm" | "md" | "lg" | "xl" | "full";
+type ImageFrameSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
 interface ImageFrameProps {
   src: string;
@@ -46,74 +46,74 @@ interface ImageFrameProps {
 // ─── Maps ─────────────────────────────────────────────────────────────────────
 
 const sizeWidthMap: Record<ImageFrameSize, string> = {
-  xs: "w-size-32",
-  sm: "w-size-48",
-  md: "w-size-64",
-  lg: "w-size-96",
-  xl: "w-size-128",
-  full: "w-full",
+  xs: 'w-size-32',
+  sm: 'w-size-48',
+  md: 'w-size-64',
+  lg: 'w-size-96',
+  xl: 'w-size-128',
+  full: 'w-full',
 };
 const aspectRatioMap: Record<ImageFrameAspectRatio, string> = {
-  hero: "aspect-hero",
-  portrait: "aspect-portrait",
-  square: "aspect-square",
-  news: "aspect-news",
-  event: "aspect-event",
+  hero: 'aspect-hero',
+  portrait: 'aspect-portrait',
+  square: 'aspect-square',
+  news: 'aspect-news',
+  event: 'aspect-event',
 };
 
-const overlayMap: Record<"light" | "medium" | "heavy", string> = {
-  light: "bg-overlay-light",
-  medium: "bg-overlay-medium",
-  heavy: "bg-overlay-heavy",
+const overlayMap: Record<'light' | 'medium' | 'heavy', string> = {
+  light: 'bg-overlay-light',
+  medium: 'bg-overlay-medium',
+  heavy: 'bg-overlay-heavy',
 };
 
 const variantClasses: Record<ImageFrameVariant, string> = {
-  standard: "rounded-md",
-  featured: "rounded-md",
-  "full-bleed": "rounded-none",
+  standard: 'rounded-md',
+  featured: 'rounded-md',
+  'full-bleed': 'rounded-none',
 };
 
 const variantShadow: Record<ImageFrameVariant, string> = {
-  standard: "shadow-elevation-1",
-  featured: "shadow-elevation-2",
-  "full-bleed": "shadow-none",
+  standard: 'shadow-elevation-1',
+  featured: 'shadow-elevation-2',
+  'full-bleed': 'shadow-none',
 };
 
 const frameColorMap: Record<ImageFrameColor, string> = {
-  gold: "border-gold-base",
-  "gold-pale": "border-gold-pale",
-  green: "border-green-base",
-  "border-default": "border-border-default",
-  "border-light": "border-border-light",
-  "surface-inverse": "border-surface-inverse",
-  white: "border-white",
+  gold: 'border-gold-base',
+  'gold-pale': 'border-gold-pale',
+  green: 'border-green-base',
+  'border-default': 'border-border-default',
+  'border-light': 'border-border-light',
+  'surface-inverse': 'border-surface-inverse',
+  white: 'border-white',
 };
 
 const frameWidthMap: Record<
-  NonNullable<ImageFrameProps["frameWidth"]>,
+  NonNullable<ImageFrameProps['frameWidth']>,
   string
 > = {
-  "border-sm": "border-border-sm",
-  "border-md": "border-border-md",
-  "border-lg": "border-border-lg",
-  "border-xl": "border-border-xl",
-  "border-2xl": "border-border-2xl",
+  'border-sm': 'border-border-sm',
+  'border-md': 'border-border-md',
+  'border-lg': 'border-border-lg',
+  'border-xl': 'border-border-xl',
+  'border-2xl': 'border-border-2xl',
 };
 
 export function ImageFrame({
   src,
   alt,
-  aspectRatio = "hero",
-  variant = "standard",
+  aspectRatio = 'hero',
+  variant = 'standard',
   caption,
   overlay = false,
   cornerBadge,
   className,
   priority = false,
-  size = "full",
-  frameWidth = "border-sm",
+  size = 'full',
+  frameWidth = 'border-sm',
   frameColor,
-  unavailableLabel = "Image unavailable",
+  unavailableLabel = 'Image unavailable',
 }: ImageFrameProps) {
   const [error, setError] = useState(false);
   const hasFrame = Boolean(frameWidth);
@@ -121,12 +121,12 @@ export function ImageFrame({
   return (
     <figure
       className={cn(
-        "w-full overflow-hidden",
+        'w-full overflow-hidden',
         sizeWidthMap[size],
         variantClasses[variant],
         variantShadow[variant],
         hasFrame && [
-          "border-solid",
+          'border-solid',
           frameWidthMap[frameWidth],
           frameColor && frameColorMap[frameColor],
         ],
@@ -136,7 +136,7 @@ export function ImageFrame({
       {/* Image container — relative positioning context for all absolute children */}
       <div
         className={cn(
-          "relative w-full overflow-hidden bg-surface-deep",
+          'relative w-full overflow-hidden bg-surface-deep',
           aspectRatioMap[aspectRatio]
         )}
       >
@@ -147,8 +147,8 @@ export function ImageFrame({
             alt={alt}
             fill
             className={cn(
-              "object-cover z-base",
-              "transition-transform duration-gentle group-hover:scale-[1.04]"
+              'object-cover z-base',
+              'transition-transform duration-gentle group-hover:scale-[1.04]'
             )}
             sizes={size}
             priority={priority}
@@ -158,11 +158,11 @@ export function ImageFrame({
           // Error state — sits at z-raised so it covers the broken img slot
           <div
             className={cn(
-              "absolute z-raised",
+              'absolute z-raised',
               // inset via explicit top/right/bottom/left using space tokens
               // (inset-0 broken because spacing is fully overridden — see preset.ts)
-              "top-space-0 right-space-0 bottom-space-0 left-space-0",
-              "flex items-center justify-center bg-surface-deep"
+              'top-space-0 right-space-0 bottom-space-0 left-space-0',
+              'flex items-center justify-center bg-surface-deep'
             )}
           >
             <span className="font-body text-caption text-text-muted">
@@ -175,8 +175,8 @@ export function ImageFrame({
         {overlay && (
           <div
             className={cn(
-              "absolute z-raised pointer-events-none",
-              "top-space-0 right-space-0 bottom-space-0 left-space-0",
+              'absolute z-raised pointer-events-none',
+              'top-space-0 right-space-0 bottom-space-0 left-space-0',
               overlayMap[overlay]
             )}
           />

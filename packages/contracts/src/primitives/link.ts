@@ -14,24 +14,24 @@
 //   blocks/downloads.ts        — downloadable document hrefs
 //   registry/globals/navigation.ts — nav link hrefs
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { LinkTargetEnum } from "./enums/link-target.js";
+import { LinkTargetEnum } from './enums/link-target.js';
 
 export const InternalLinkSchema = z.object({
-  type: z.literal("internal"),
+  type: z.literal('internal'),
   href: z.string().min(1),
   label: z.string().min(1),
 });
 
 export const ExternalLinkSchema = z.object({
-  type: z.literal("external"),
+  type: z.literal('external'),
   href: z.string().url(),
   label: z.string().min(1),
-  openIn: LinkTargetEnum.default("self"),
+  openIn: LinkTargetEnum.default('self'),
 });
 
-export const LinkSchema = z.discriminatedUnion("type", [
+export const LinkSchema = z.discriminatedUnion('type', [
   InternalLinkSchema,
   ExternalLinkSchema,
 ]);

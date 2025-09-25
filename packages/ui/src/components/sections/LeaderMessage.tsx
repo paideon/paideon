@@ -1,8 +1,8 @@
-import clsx from "clsx";
+import clsx from 'clsx';
 
-import { ButtonLink } from "../atoms/ButtonLink";
-import { ImageFrame } from "../media/ImageFrame";
-import { QuoteBlock } from "../typography/QuoteBlock";
+import { ButtonLink } from '../atoms/ButtonLink';
+import { ImageFrame } from '../media/ImageFrame';
+import { QuoteBlock } from '../typography/QuoteBlock';
 
 export interface LeaderMessageProps {
   name: string;
@@ -26,11 +26,11 @@ export function LeaderMessage({
   message,
   quote,
   fullMessageHref,
-  fullMessageLabel = "Read Full Message →",
+  fullMessageLabel = 'Read Full Message →',
   className,
 }: LeaderMessageProps) {
   return (
-    <div className={clsx("grid md:grid-cols-2 gap-12 items-center", className)}>
+    <div className={clsx('grid md:grid-cols-2 gap-12 items-center', className)}>
       {/* Portrait */}
       <div className="relative">
         <ImageFrame

@@ -24,23 +24,23 @@
 // here either, since it's one calendar entry at a time, not a page
 // composed of interchangeable ContentEntry sections.
 
-import { HeroSchema } from "../../blocks/index.ts";
-import type { PageRegistry } from "../types.ts";
+import { HeroSchema } from '../../blocks/index.ts';
+import type { PageRegistry } from '../types.ts';
 
 export const EventsHeroSchema = HeroSchema;
 
 export const eventsRegistry: PageRegistry = {
-  page: "events",
-  scope: "page:events",
-  label: "Events",
+  page: 'events',
+  scope: 'page:events',
+  label: 'Events',
   description:
-    "Manage the Events page hero. The calendar grid and event list are populated automatically from the school calendar — manage those under the Events module, not here.",
+    'Manage the Events page hero. The calendar grid and event list are populated automatically from the school calendar — manage those under the Events module, not here.',
   sections: [
     {
-      key: "events.hero",
-      blockKey: "hero",
-      label: "Hero Banner",
-      description: "Top-of-page headline and eyebrow text.",
+      key: 'events.hero',
+      blockKey: 'hero',
+      label: 'Hero Banner',
+      description: 'Top-of-page headline and eyebrow text.',
       schema: EventsHeroSchema,
     },
   ],

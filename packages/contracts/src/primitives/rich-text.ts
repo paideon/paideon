@@ -10,7 +10,7 @@
 //   RichTextRenderer.tsx — if the editor's extensions change (new node types,
 //   renamed attrs), update both together.
 
-import { z } from "zod";
+import { z } from 'zod';
 
 const TiptapMarkSchema = z.object({
   type: z.string(),

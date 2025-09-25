@@ -14,21 +14,21 @@
 //   Used on the home page achievement section and a dedicated achievements list.
 //   No locale field — achievements are facts, not per-locale prose.
 
-import { z } from "zod";
+import { z } from 'zod';
 
 import {
   MAX_TITLE_LENGTH,
   MAX_DESCRIPTION_LENGTH,
-} from "../../constants/index.ts";
-import { ImageSchema } from "../../primitives/index.ts";
+} from '../../constants/index.ts';
+import { ImageSchema } from '../../primitives/index.ts';
 
-export const ACHIEVEMENT_CONTENT_TYPE = "achievement";
+export const ACHIEVEMENT_CONTENT_TYPE = 'achievement';
 
 export const AchievementLevel = z.enum([
-  "national",
-  "provincial",
-  "district",
-  "school",
+  'national',
+  'provincial',
+  'district',
+  'school',
 ]);
 
 // F-181 specifies academic/sports/arts/competition — was academic/sports/
@@ -36,10 +36,10 @@ export const AchievementLevel = z.enum([
 // (unlike News's category taxonomy, which has one). Feature Registry is the
 // scope source of truth, so this fixes the drift rather than the doc.
 export const AchievementCategory = z.enum([
-  "academic",
-  "sports",
-  "arts",
-  "competition",
+  'academic',
+  'sports',
+  'arts',
+  'competition',
 ]);
 
 // Display labels — shared so admin and public consumers show the same
@@ -51,20 +51,20 @@ export const ACHIEVEMENT_CATEGORY_LABELS: Record<
   z.infer<typeof AchievementCategory>,
   string
 > = {
-  academic: "Academic",
-  sports: "Sports",
-  arts: "Arts",
-  competition: "Competition",
+  academic: 'Academic',
+  sports: 'Sports',
+  arts: 'Arts',
+  competition: 'Competition',
 };
 
 export const ACHIEVEMENT_LEVEL_LABELS: Record<
   z.infer<typeof AchievementLevel>,
   string
 > = {
-  national: "National",
-  provincial: "Provincial",
-  district: "District",
-  school: "School",
+  national: 'National',
+  provincial: 'Provincial',
+  district: 'District',
+  school: 'School',
 };
 
 // The full entity — CMS/admin CRUD and database storage.

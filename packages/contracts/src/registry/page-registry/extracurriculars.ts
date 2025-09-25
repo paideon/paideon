@@ -21,23 +21,23 @@
 // just sharing a category — the public page groups by category, not by
 // this four-way split, the same way F-161 describes it.
 
-import { HeroSchema } from "../../blocks/index.ts";
-import type { PageRegistry } from "../types.ts";
+import { HeroSchema } from '../../blocks/index.ts';
+import type { PageRegistry } from '../types.ts';
 
 export const ExtracurricularsHeroSchema = HeroSchema;
 
 export const extracurricularsRegistry: PageRegistry = {
-  page: "extracurriculars",
-  scope: "page:extracurriculars",
-  label: "Extracurriculars",
+  page: 'extracurriculars',
+  scope: 'page:extracurriculars',
+  label: 'Extracurriculars',
   description:
-    "Manage the Extracurriculars page\u2019s hero banner. Activities themselves are managed under Extracurriculars in the admin sidebar, not here.",
+    'Manage the Extracurriculars page\u2019s hero banner. Activities themselves are managed under Extracurriculars in the admin sidebar, not here.',
   sections: [
     {
-      key: "extracurriculars.hero",
-      blockKey: "hero",
-      label: "Hero Banner",
-      description: "Top-of-page headline and eyebrow text.",
+      key: 'extracurriculars.hero',
+      blockKey: 'hero',
+      label: 'Hero Banner',
+      description: 'Top-of-page headline and eyebrow text.',
       schema: ExtracurricularsHeroSchema,
     },
   ],

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   motion,
@@ -6,18 +6,18 @@ import {
   useScroll,
   useTransform,
   type Variants,
-} from "framer-motion";
-import Image from "next/image";
-import { useEffect, useState, useRef } from "react";
+} from 'framer-motion';
+import Image from 'next/image';
+import { useEffect, useState, useRef } from 'react';
 
-import { cn } from "../../utilities/cn";
-import { NavLink } from "../navigation/NavLink";
-import { Heading } from "../typography/Heading";
-import { Text } from "../typography/Text";
+import { cn } from '../../utilities/cn';
+import { NavLink } from '../navigation/NavLink';
+import { Heading } from '../typography/Heading';
+import { Text } from '../typography/Text';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-export type HeroVariant = "homepage" | "subpage" | "minimal";
+export type HeroVariant = 'homepage' | 'subpage' | 'minimal';
 
 export interface HeroProps {
   variant?: HeroVariant;
@@ -56,7 +56,7 @@ const ScrollIndicator = () => {
       <div className="w-px h-8 bg-gold-base/40" />
       <motion.div
         animate={prefersReduced ? {} : { y: [0, 8, 0], opacity: [0.5, 1, 0.5] }}
-        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+        transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
       >
         <svg
           width="14"
@@ -84,14 +84,14 @@ const HeroBreadcrumb = ({
   items,
   breadcrumbAriaLabel,
 }: {
-  items: HeroProps["breadcrumb"];
+  items: HeroProps['breadcrumb'];
   breadcrumbAriaLabel?: string;
 }) => {
   if (!items?.length) return null;
 
   return (
     <nav
-      aria-label={breadcrumbAriaLabel || "Breadcrumb"}
+      aria-label={breadcrumbAriaLabel || 'Breadcrumb'}
       className="mb-space-5"
     >
       <ol className="flex flex-wrap items-center gap-space-2 list-none p-0 m-0">
@@ -108,10 +108,10 @@ const HeroBreadcrumb = ({
                 </NavLink>
               ) : (
                 <span
-                  aria-current={isLast ? "page" : undefined}
+                  aria-current={isLast ? 'page' : undefined}
                   className={cn(
-                    "font-body text-caption uppercase tracking-caption",
-                    isLast ? "text-gold-base" : "text-text-inverse/60"
+                    'font-body text-caption uppercase tracking-caption',
+                    isLast ? 'text-gold-base' : 'text-text-inverse/60'
                   )}
                 >
                   {item.label}
@@ -136,12 +136,12 @@ const HeroBreadcrumb = ({
 // ─── Main Hero Component ──────────────────────────────────────────────────────
 
 export function Hero({
-  variant = "homepage",
+  variant = 'homepage',
   heading,
   subheading,
   eyebrow,
   imageSrc,
-  imageAlt = "",
+  imageAlt = '',
   videoSrc,
   videoPosterSrc,
   breadcrumb,
@@ -151,7 +151,7 @@ export function Hero({
   overlayOpacity,
   className,
   onLoad,
-  breadcrumbAriaLabel = "Breadcrumb",
+  breadcrumbAriaLabel = 'Breadcrumb',
 }: HeroProps) {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
@@ -166,24 +166,24 @@ export function Hero({
 
   // Variant-specific styles (using design tokens via Tailwind)
   const heightClass = {
-    homepage: "h-screen min-h-[640px]",
-    subpage: "h-[65vh] min-h-[380px]",
-    minimal: "h-[36vh] min-h-[220px]",
+    homepage: 'h-screen min-h-[640px]',
+    subpage: 'h-[65vh] min-h-[380px]',
+    minimal: 'h-[36vh] min-h-[220px]',
   }[variant];
 
-  const contentPadding = variant === "homepage" ? "text-center" : "text-left";
+  const contentPadding = variant === 'homepage' ? 'text-center' : 'text-left';
   const maxWidthClass =
-    variant === "homepage" ? "max-w-prose" : "max-w-content";
+    variant === 'homepage' ? 'max-w-prose' : 'max-w-content';
 
   // Overlay gradient – tied directly to the design tokens (text-primary /
   // forest.900 "ink" and green-base / green.100) via color-mix, instead of
   // duplicating their RGB values by hand.
   const OVERLAY_GRADIENT_CLASSES: Record<HeroVariant, string> = {
     homepage:
-      "bg-gradient-to-b from-[color-mix(in_srgb,var(--color-text-primary)_55%,transparent)] via-[color-mix(in_srgb,var(--color-green-base)_72%,transparent)] to-[color-mix(in_srgb,var(--color-text-primary)_82%,transparent)]",
+      'bg-gradient-to-b from-[color-mix(in_srgb,var(--color-text-primary)_55%,transparent)] via-[color-mix(in_srgb,var(--color-green-base)_72%,transparent)] to-[color-mix(in_srgb,var(--color-text-primary)_82%,transparent)]',
     subpage:
-      "bg-gradient-to-b from-[color-mix(in_srgb,var(--color-text-primary)_50%,transparent)] to-[color-mix(in_srgb,var(--color-green-base)_78%,transparent)]",
-    minimal: "bg-[color-mix(in_srgb,var(--color-green-base)_88%,transparent)]",
+      'bg-gradient-to-b from-[color-mix(in_srgb,var(--color-text-primary)_50%,transparent)] to-[color-mix(in_srgb,var(--color-green-base)_78%,transparent)]',
+    minimal: 'bg-[color-mix(in_srgb,var(--color-green-base)_88%,transparent)]',
   };
 
   // Framer Motion variants for staggered children
@@ -215,11 +215,11 @@ export function Hero({
     <section
       ref={heroRef}
       className={cn(
-        "relative flex items-center overflow-hidden bg-green-base",
+        'relative flex items-center overflow-hidden bg-green-base',
         heightClass,
         className
       )}
-      aria-label={eyebrow || "Hero section"}
+      aria-label={eyebrow || 'Hero section'}
     >
       {/* Background media */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
@@ -253,15 +253,15 @@ export function Hero({
         ) : null}
 
         {/* Ken Burns animation for homepage images (only if not video) */}
-        {!videoSrc && variant === "homepage" && !prefersReduced && (
+        {!videoSrc && variant === 'homepage' && !prefersReduced && (
           <motion.div
             className="absolute inset-0"
             animate={{ scale: [1, 1.06] }}
             transition={{
               duration: 20,
               repeat: Infinity,
-              repeatType: "reverse",
-              ease: "linear",
+              repeatType: 'reverse',
+              ease: 'linear',
             }}
           />
         )}
@@ -281,7 +281,7 @@ export function Hero({
         ) : (
           <div
             className={cn(
-              "absolute inset-0",
+              'absolute inset-0',
               OVERLAY_GRADIENT_CLASSES[variant]
             )}
           />
@@ -291,7 +291,7 @@ export function Hero({
       {/* Content */}
       <div className="relative z-10 w-full max-w-wide mx-auto px-space-6 md:px-space-8 lg:px-space-10">
         <motion.div
-          className={cn("mx-auto", contentPadding, maxWidthClass)}
+          className={cn('mx-auto', contentPadding, maxWidthClass)}
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -319,10 +319,10 @@ export function Hero({
               level="h1"
               color="inverse"
               className={cn(
-                "font-display font-medium leading-[1.05] tracking-[-0.01em]",
-                variant === "homepage" && "text-[clamp(2.8rem,6vw,5.5rem)]",
-                variant === "subpage" && "text-[clamp(2rem,4vw,3.5rem)]",
-                variant === "minimal" && "text-[clamp(1.6rem,3vw,2.5rem)]"
+                'font-display font-medium leading-[1.05] tracking-[-0.01em]',
+                variant === 'homepage' && 'text-[clamp(2.8rem,6vw,5.5rem)]',
+                variant === 'subpage' && 'text-[clamp(2rem,4vw,3.5rem)]',
+                variant === 'minimal' && 'text-[clamp(1.6rem,3vw,2.5rem)]'
               )}
             >
               {heading}
@@ -336,8 +336,8 @@ export function Hero({
                 variant="body"
                 color="inverse"
                 className={cn(
-                  "mt-space-5 text-[clamp(1rem,1.5vw,1.2rem)] text-text-inverse/75",
-                  variant === "homepage" && "mx-auto max-w-prose"
+                  'mt-space-5 text-[clamp(1rem,1.5vw,1.2rem)] text-text-inverse/75',
+                  variant === 'homepage' && 'mx-auto max-w-prose'
                 )}
               >
                 {subheading}
@@ -351,7 +351,7 @@ export function Hero({
       </div>
 
       {/* Scroll indicator */}
-      {variant === "homepage" && showScrollIndicator && <ScrollIndicator />}
+      {variant === 'homepage' && showScrollIndicator && <ScrollIndicator />}
     </section>
   );
 }

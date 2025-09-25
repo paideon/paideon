@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Component, type ReactNode, useCallback, useState } from "react";
+import { Component, type ReactNode, useCallback, useState } from 'react';
 
 interface SectionErrorBoundaryProps {
   children: ReactNode;
@@ -54,7 +54,7 @@ export function SectionErrorBoundary({
   sectionName,
   fallback,
   message,
-  retryLabel = "Try Again",
+  retryLabel = 'Try Again',
 }: SectionErrorBoundaryProps) {
   const [hasError, setHasError] = useState(false);
   const [resetKey, setResetKey] = useState(0);

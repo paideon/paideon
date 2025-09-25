@@ -2,9 +2,9 @@
 //
 // The closed set of built-in roles and the role assignment shape.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-export const ROLE_VALUES = ["admin", "editor", "viewer"] as const;
+export const ROLE_VALUES = ['admin', 'editor', 'viewer'] as const;
 
 export const RoleEnum = z.enum(ROLE_VALUES);
 

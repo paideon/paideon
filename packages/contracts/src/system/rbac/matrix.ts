@@ -7,8 +7,8 @@
 // (`role === 'admin'`) scattered across the codebase, so there is exactly
 // one place to update when a permission changes.
 
-import type { PermissionData } from "./permission.ts";
-import type { RoleEnumData } from "./role.ts";
+import type { PermissionData } from './permission.ts';
+import type { RoleEnumData } from './role.ts';
 
 /**
  * Every resource string in use today. Kept as a plain const array — not
@@ -17,24 +17,24 @@ import type { RoleEnumData } from "./role.ts";
  * ever require touching this matrix, not the shared schema.
  */
 export const RESOURCES = [
-  "content",
-  "media",
-  "staff",
-  "events",
-  "societies",
-  "gallery",
-  "announcements",
-  "extracurriculars",
-  "alumni",
-  "achievements",
-  "archive",
-  "users",
-  "settings",
-  "audit-log",
+  'content',
+  'media',
+  'staff',
+  'events',
+  'societies',
+  'gallery',
+  'announcements',
+  'extracurriculars',
+  'alumni',
+  'achievements',
+  'archive',
+  'users',
+  'settings',
+  'audit-log',
 ] as const;
 export type Resource = (typeof RESOURCES)[number];
 
-type Action = PermissionData["action"];
+type Action = PermissionData['action'];
 
 /**
  * role -> resource -> the actions that role holds on that resource. A
@@ -129,46 +129,46 @@ const ROLE_PERMISSIONS: Record<
   Partial<Record<Resource, readonly Action[]>>
 > = {
   admin: {
-    content: ["read", "write", "publish", "admin"],
-    media: ["read", "write", "publish", "admin"],
-    staff: ["read", "write", "publish", "admin"],
-    events: ["read", "write", "publish", "admin"],
-    societies: ["read", "write", "publish", "admin"],
-    gallery: ["read", "write", "publish", "admin"],
-    announcements: ["read", "write", "publish", "admin"],
-    extracurriculars: ["read", "write", "publish", "admin"],
-    alumni: ["read", "write", "publish", "admin"],
-    achievements: ["read", "write", "publish", "admin"],
-    archive: ["read", "write", "publish", "admin"],
-    users: ["read", "write", "publish", "admin"],
-    settings: ["read", "write", "publish", "admin"],
-    "audit-log": ["read"],
+    content: ['read', 'write', 'publish', 'admin'],
+    media: ['read', 'write', 'publish', 'admin'],
+    staff: ['read', 'write', 'publish', 'admin'],
+    events: ['read', 'write', 'publish', 'admin'],
+    societies: ['read', 'write', 'publish', 'admin'],
+    gallery: ['read', 'write', 'publish', 'admin'],
+    announcements: ['read', 'write', 'publish', 'admin'],
+    extracurriculars: ['read', 'write', 'publish', 'admin'],
+    alumni: ['read', 'write', 'publish', 'admin'],
+    achievements: ['read', 'write', 'publish', 'admin'],
+    archive: ['read', 'write', 'publish', 'admin'],
+    users: ['read', 'write', 'publish', 'admin'],
+    settings: ['read', 'write', 'publish', 'admin'],
+    'audit-log': ['read'],
   },
   editor: {
-    content: ["read", "write", "publish"],
-    media: ["read", "write"],
-    staff: ["read", "write"],
-    events: ["read", "write", "publish"],
-    societies: ["read", "write"],
-    gallery: ["read", "write"],
-    announcements: ["read", "write"],
-    extracurriculars: ["read", "write"],
-    alumni: ["read", "write", "publish"],
-    achievements: ["read", "write"],
-    archive: ["read", "write"],
+    content: ['read', 'write', 'publish'],
+    media: ['read', 'write'],
+    staff: ['read', 'write'],
+    events: ['read', 'write', 'publish'],
+    societies: ['read', 'write'],
+    gallery: ['read', 'write'],
+    announcements: ['read', 'write'],
+    extracurriculars: ['read', 'write'],
+    alumni: ['read', 'write', 'publish'],
+    achievements: ['read', 'write'],
+    archive: ['read', 'write'],
   },
   viewer: {
-    content: ["read"],
-    media: ["read"],
-    staff: ["read"],
-    events: ["read"],
-    societies: ["read"],
-    gallery: ["read"],
-    announcements: ["read"],
-    extracurriculars: ["read"],
-    alumni: ["read"],
-    achievements: ["read"],
-    archive: ["read"],
+    content: ['read'],
+    media: ['read'],
+    staff: ['read'],
+    events: ['read'],
+    societies: ['read'],
+    gallery: ['read'],
+    announcements: ['read'],
+    extracurriculars: ['read'],
+    alumni: ['read'],
+    achievements: ['read'],
+    archive: ['read'],
   },
 };
 

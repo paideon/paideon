@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 // Module-level counter so multiple simultaneously-open overlays (e.g. a
 // Modal opened from within the mobile nav drawer) don't stomp on each
 // other's cleanup. Each hook instance increments on lock and decrements on
 // unlock/unmount; the body scroll is only restored once the count reaches 0.
 let lockCount = 0;
-let previousOverflow = "";
+let previousOverflow = '';
 
 function lock() {
   if (lockCount === 0) {
     previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = 'hidden';
   }
   lockCount += 1;
 }

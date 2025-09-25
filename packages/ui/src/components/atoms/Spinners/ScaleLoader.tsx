@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import clsx from "clsx";
-import { motion, useReducedMotion } from "framer-motion";
+import clsx from 'clsx';
+import { motion, useReducedMotion } from 'framer-motion';
 
-type ScaleLoaderSize = "sm" | "md" | "lg";
-type ScaleLoaderVariant = "green" | "gold" | "muted";
-type ScaleLoaderSpeed = "fast" | "normal" | "slow";
+type ScaleLoaderSize = 'sm' | 'md' | 'lg';
+type ScaleLoaderVariant = 'green' | 'gold' | 'muted';
+type ScaleLoaderSpeed = 'fast' | 'normal' | 'slow';
 
 interface ScaleLoaderProps {
   size?: ScaleLoaderSize;
@@ -16,15 +16,15 @@ interface ScaleLoaderProps {
 }
 
 const sizeConfig: Record<ScaleLoaderSize, { bar: string; gap: string }> = {
-  sm: { bar: "w-size-0p5 h-size-3", gap: "gap-space-1" },
-  md: { bar: "w-size-1 h-size-5", gap: "gap-space-1" },
-  lg: { bar: "w-size-1p5 h-size-6", gap: "gap-space-2" },
+  sm: { bar: 'w-size-0p5 h-size-3', gap: 'gap-space-1' },
+  md: { bar: 'w-size-1 h-size-5', gap: 'gap-space-1' },
+  lg: { bar: 'w-size-1p5 h-size-6', gap: 'gap-space-2' },
 };
 
 const variantConfig: Record<ScaleLoaderVariant, string> = {
-  green: "text-green-base",
-  gold: "text-gold-base",
-  muted: "text-text-muted",
+  green: 'text-green-base',
+  gold: 'text-gold-base',
+  muted: 'text-text-muted',
 };
 
 const speedConfig: Record<ScaleLoaderSpeed, number> = {
@@ -37,10 +37,10 @@ const speedConfig: Record<ScaleLoaderSpeed, number> = {
 const DELAYS = [0, 0.15, 0.3, 0.15, 0];
 
 export function ScaleLoader({
-  size = "md",
-  variant = "green",
-  speed = "normal",
-  label = "Loading",
+  size = 'md',
+  variant = 'green',
+  speed = 'normal',
+  label = 'Loading',
   className,
 }: ScaleLoaderProps) {
   const reduced = useReducedMotion();
@@ -52,7 +52,7 @@ export function ScaleLoader({
       role="status"
       aria-label={label}
       className={clsx(
-        "inline-flex items-center",
+        'inline-flex items-center',
         gap,
         variantConfig[variant],
         className
@@ -61,7 +61,7 @@ export function ScaleLoader({
       {[0, 1, 2, 3, 4].map((i) => (
         <motion.span
           key={i}
-          className={clsx("rounded-sm bg-current shrink-0", bar)}
+          className={clsx('rounded-sm bg-current shrink-0', bar)}
           animate={
             reduced
               ? { opacity: [1, 0.3, 1] }
@@ -74,7 +74,7 @@ export function ScaleLoader({
           transition={{
             duration,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: 'easeInOut',
             delay: DELAYS[i] * duration,
           }}
         />
@@ -83,4 +83,4 @@ export function ScaleLoader({
   );
 }
 
-ScaleLoader.displayName = "ScaleLoader";
+ScaleLoader.displayName = 'ScaleLoader';

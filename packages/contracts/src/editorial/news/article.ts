@@ -12,21 +12,21 @@
 //   Category reuses NewsCategorySchema from category.ts rather than a
 //   separate ArticleCategory enum.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { NewsCategorySchema } from "./category.ts";
+import { NewsCategorySchema } from './category.ts';
 import {
   MAX_TITLE_LENGTH,
   MAX_DESCRIPTION_LENGTH,
-} from "../../constants/index.ts";
+} from '../../constants/index.ts';
 import {
   ImageSchema,
   LocaleEnum,
   RichTextSchema,
   SeoSchema,
-} from "../../primitives/index.ts";
+} from '../../primitives/index.ts';
 
-export const NEWS_ARTICLE_CONTENT_TYPE = "news-article";
+export const NEWS_ARTICLE_CONTENT_TYPE = 'news-article';
 
 /**
  * @deprecated Superseded as of M3 by the real `NewsArticle` Prisma model
@@ -54,7 +54,7 @@ export const NewsArticleSchema = z.object({
 
 export type NewsArticleData = z.infer<typeof NewsArticleSchema>;
 
-export const NewsCardVariant = z.enum(["featured", "standard", "compact"]);
+export const NewsCardVariant = z.enum(['featured', 'standard', 'compact']);
 
 // Card projection — matches @paideon/ui's NewsCardProps exactly.
 export const ArticleCardSchema = z.object({

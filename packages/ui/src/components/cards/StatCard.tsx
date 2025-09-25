@@ -1,20 +1,20 @@
-"use client";
+'use client';
 import type {
   StatData,
   TrendDirectionType,
   StatCardVariantType,
-} from "@paideon/contracts";
+} from '@paideon/contracts';
 
-import { useCountUp } from "../../hooks/useCountUp";
-import { cn } from "../../utilities/cn";
+import { useCountUp } from '../../hooks/useCountUp';
+import { cn } from '../../utilities/cn';
 
-export interface StatCardProps extends Omit<StatData, "variant"> {
+export interface StatCardProps extends Omit<StatData, 'variant'> {
   variant?: StatCardVariantType;
   className?: string;
 }
 
 function TrendIndicator({
-  direction = "neutral",
+  direction = 'neutral',
   value,
   label,
 }: {
@@ -23,17 +23,17 @@ function TrendIndicator({
   label?: string;
 }) {
   const config = {
-    up: { symbol: "↑", color: "text-semantic-success-base" },
-    down: { symbol: "↓", color: "text-semantic-error-base" },
-    neutral: { symbol: "—", color: "text-text-muted" },
+    up: { symbol: '↑', color: 'text-semantic-success-base' },
+    down: { symbol: '↓', color: 'text-semantic-error-base' },
+    neutral: { symbol: '—', color: 'text-text-muted' },
   };
   const { symbol, color } = config[direction] ?? config.neutral;
 
   return (
     <div className="inline-flex items-center gap-space-1 px-space-2 py-space-0.5 bg-surface-deep border border-border-light rounded-full">
-      <span className={cn("text-sm leading-none", color)}>{symbol}</span>
+      <span className={cn('text-sm leading-none', color)}>{symbol}</span>
       {value && (
-        <span className={cn("font-body text-caption font-semibold", color)}>
+        <span className={cn('font-body text-caption font-semibold', color)}>
           {value}
         </span>
       )}
@@ -47,10 +47,10 @@ function TrendIndicator({
 }
 
 export function StatCard({
-  variant = "single",
+  variant = 'single',
   target,
   value,
-  suffix = "",
+  suffix = '',
   label,
   trend,
   trendValue,
@@ -65,9 +65,9 @@ export function StatCard({
   const { ref } = useCountUp(numericTarget);
 
   const trendObj =
-    typeof trend === "object" && trend !== null
+    typeof trend === 'object' && trend !== null
       ? trend
-      : typeof trend === "string"
+      : typeof trend === 'string'
       ? {
           direction: trend as TrendDirectionType,
           value: trendValue,
@@ -79,8 +79,8 @@ export function StatCard({
     <div
       ref={ref as React.RefObject<HTMLDivElement>}
       className={cn(
-        "p-space-7 bg-surface-elevated border border-border-light",
-        "shadow-elevation-1",
+        'p-space-7 bg-surface-elevated border border-border-light',
+        'shadow-elevation-1',
         className
       )}
     >
@@ -89,8 +89,8 @@ export function StatCard({
       </p>
       <div
         className={cn(
-          "flex items-baseline gap-space-1",
-          variant === "with-trend" && trendObj && "mb-space-3"
+          'flex items-baseline gap-space-1',
+          variant === 'with-trend' && trendObj && 'mb-space-3'
         )}
       >
         <span className="font-display text-[clamp(2rem,4vw,2.8rem)] font-medium text-gold-base leading-none">
@@ -102,7 +102,7 @@ export function StatCard({
           </span>
         )}
       </div>
-      {variant === "with-trend" && trendObj && (
+      {variant === 'with-trend' && trendObj && (
         <TrendIndicator
           direction={trendObj.direction}
           value={trendObj.value}

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { clsx } from "clsx";
+import { clsx } from 'clsx';
 
 export interface MapEmbedProps {
   src: string;
@@ -13,7 +13,7 @@ export function MapEmbed({ src, title, className, nearbyNote }: MapEmbedProps) {
   return (
     <div
       className={clsx(
-        "bg-surface-elevated border border-border-light rounded-lg overflow-hidden",
+        'bg-surface-elevated border border-border-light rounded-lg overflow-hidden',
         className
       )}
     >

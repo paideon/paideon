@@ -4,9 +4,9 @@
 //   LightboxImageSchema — src, alt, caption?
 //   LightboxImageData   — z.infer type
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { ImageSchema } from "../primitives/index.ts";
+import { ImageSchema } from '../primitives/index.ts';
 
 export const LightboxImageSchema = ImageSchema.pick({
   src: true,

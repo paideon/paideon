@@ -1,11 +1,11 @@
-import type { ArticleCardData, NewsCardVariantType } from "@paideon/contracts";
-import Image from "next/image";
-import Link from "next/link";
+import type { ArticleCardData, NewsCardVariantType } from '@paideon/contracts';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { cn } from "../../utilities/cn";
-import { Badge } from "../atoms/Badge";
+import { cn } from '../../utilities/cn';
+import { Badge } from '../atoms/Badge';
 
-export interface NewsCardProps extends Omit<ArticleCardData, "variant"> {
+export interface NewsCardProps extends Omit<ArticleCardData, 'variant'> {
   variant?: NewsCardVariantType;
   className?: string;
   readMoreLabel?: string;
@@ -20,15 +20,15 @@ function NewsCardFeatured({
   href,
   imageSrc,
   imageAlt,
-  readMoreLabel = "Read more →",
+  readMoreLabel = 'Read more →',
 }: NewsCardProps) {
   return (
     <Link href={href} className="group block no-underline">
       <div
         className={cn(
-          "bg-surface-elevated border border-border-light overflow-hidden",
-          "shadow-elevation-1 transition-all duration-gentle",
-          "group-hover:shadow-elevation-3 group-hover:-translate-y-0.5"
+          'bg-surface-elevated border border-border-light overflow-hidden',
+          'shadow-elevation-1 transition-all duration-gentle',
+          'group-hover:shadow-elevation-3 group-hover:-translate-y-0.5'
         )}
       >
         <div className="relative aspect-[16/7] overflow-hidden bg-green-base">
@@ -53,8 +53,8 @@ function NewsCardFeatured({
           </div>
           <h3
             className={cn(
-              "font-display text-[clamp(1.5rem,2.5vw,2rem)] font-medium text-text-primary mb-space-3",
-              "transition-colors duration-fast group-hover:text-gold-active"
+              'font-display text-[clamp(1.5rem,2.5vw,2rem)] font-medium text-text-primary mb-space-3',
+              'transition-colors duration-fast group-hover:text-gold-active'
             )}
           >
             {title}
@@ -82,15 +82,15 @@ function NewsCardStandard({
   href,
   imageSrc,
   imageAlt,
-  readMoreLabel = "Read more →",
+  readMoreLabel = 'Read more →',
 }: NewsCardProps) {
   return (
     <Link href={href} className="group block no-underline h-full">
       <div
         className={cn(
-          "flex flex-col h-full bg-surface-elevated border border-border-light overflow-hidden",
-          "shadow-elevation-1 transition-all duration-gentle",
-          "group-hover:shadow-elevation-3 group-hover:-translate-y-0.5"
+          'flex flex-col h-full bg-surface-elevated border border-border-light overflow-hidden',
+          'shadow-elevation-1 transition-all duration-gentle',
+          'group-hover:shadow-elevation-3 group-hover:-translate-y-0.5'
         )}
       >
         <div className="relative aspect-[16/9] overflow-hidden bg-green-base flex-shrink-0">
@@ -114,8 +114,8 @@ function NewsCardStandard({
           </p>
           <h3
             className={cn(
-              "font-display text-h3 font-medium text-text-primary mb-space-2.5",
-              "transition-colors duration-fast group-hover:text-gold-active"
+              'font-display text-h3 font-medium text-text-primary mb-space-2.5',
+              'transition-colors duration-fast group-hover:text-gold-active'
             )}
           >
             {title}
@@ -166,8 +166,8 @@ function NewsCardCompact({
           </div>
           <h4
             className={cn(
-              "font-body text-body-sm font-medium text-text-primary line-clamp-2",
-              "transition-colors duration-fast group-hover:text-gold-active"
+              'font-body text-body-sm font-medium text-text-primary line-clamp-2',
+              'transition-colors duration-fast group-hover:text-gold-active'
             )}
           >
             {title}
@@ -178,8 +178,8 @@ function NewsCardCompact({
   );
 }
 
-export function NewsCard({ variant = "standard", ...props }: NewsCardProps) {
-  if (variant === "featured") return <NewsCardFeatured {...props} />;
-  if (variant === "compact") return <NewsCardCompact {...props} />;
+export function NewsCard({ variant = 'standard', ...props }: NewsCardProps) {
+  if (variant === 'featured') return <NewsCardFeatured {...props} />;
+  if (variant === 'compact') return <NewsCardCompact {...props} />;
   return <NewsCardStandard {...props} />;
 }

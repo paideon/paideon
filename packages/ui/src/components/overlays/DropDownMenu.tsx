@@ -1,12 +1,12 @@
 // packages/ui/src/components/overlays/DropDownMenu.tsx
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState, useId, useCallback } from "react";
+import { useRouter } from 'next/navigation';
+import { useEffect, useRef, useState, useId, useCallback } from 'react';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
-export type DropdownMenuVariant = "navigation" | "filter";
+export type DropdownMenuVariant = 'navigation' | 'filter';
 
 export interface DropdownMenuItem {
   id: string;
@@ -19,15 +19,15 @@ export interface DropdownMenuProps {
   variant?: DropdownMenuVariant;
   trigger: React.ReactNode;
   items: DropdownMenuItem[];
-  align?: "left" | "right";
+  align?: 'left' | 'right';
   className?: string;
 }
 
 export function DropdownMenu({
-  variant = "navigation",
+  variant = 'navigation',
   trigger,
   items,
-  align = "left",
+  align = 'left',
   className,
 }: DropdownMenuProps) {
   const [open, setOpen] = useState(false);
@@ -54,20 +54,20 @@ export function DropdownMenu({
     if (!open) return;
 
     switch (e.key) {
-      case "Escape":
+      case 'Escape':
         e.preventDefault();
         closeMenu();
         break;
-      case "ArrowDown":
+      case 'ArrowDown':
         e.preventDefault();
         setActiveIndex((prev) => (prev + 1) % items.length);
         break;
-      case "ArrowUp":
+      case 'ArrowUp':
         e.preventDefault();
         setActiveIndex((prev) => (prev - 1 + items.length) % items.length);
         break;
-      case "Enter":
-      case " ":
+      case 'Enter':
+      case ' ':
         e.preventDefault();
         if (activeIndex >= 0 && items[activeIndex]) {
           const item = items[activeIndex];
@@ -79,7 +79,7 @@ export function DropdownMenu({
           closeMenu();
         }
         break;
-      case "Tab":
+      case 'Tab':
         closeMenu();
         break;
     }
@@ -96,8 +96,8 @@ export function DropdownMenu({
         closeMenu();
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [open, closeMenu]);
 
   // Reset active index when menu opens
@@ -106,38 +106,38 @@ export function DropdownMenu({
   }, [open]);
 
   const triggerClasses = cn(
-    "inline-flex items-center gap-space-1p5",
-    "bg-transparent border-none cursor-pointer",
-    "transition-all duration-fast ease-snap",
-    "focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-[3px]",
-    variant === "filter" && [
-      "px-space-3 py-space-2",
-      "font-body text-label uppercase tracking-label",
-      "text-text-primary",
-      "border border-border-default",
-      "bg-surface-elevated",
-      "rounded-sm",
-      "hover:border-gold-base hover:text-gold-base",
+    'inline-flex items-center gap-space-1p5',
+    'bg-transparent border-none cursor-pointer',
+    'transition-all duration-fast ease-snap',
+    'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-[3px]',
+    variant === 'filter' && [
+      'px-space-3 py-space-2',
+      'font-body text-label uppercase tracking-label',
+      'text-text-primary',
+      'border border-border-default',
+      'bg-surface-elevated',
+      'rounded-sm',
+      'hover:border-gold-base hover:text-gold-base',
     ],
-    variant === "navigation" && [
-      "font-body text-label uppercase tracking-label",
-      "text-text-muted",
-      "hover:text-text-primary",
+    variant === 'navigation' && [
+      'font-body text-label uppercase tracking-label',
+      'text-text-muted',
+      'hover:text-text-primary',
     ]
   );
 
   const menuClasses = cn(
-    "absolute z-dropdown min-w-[160px] py-space-1",
-    "bg-surface-elevated border border-border-light",
-    "shadow-elevation-2",
-    align === "right" ? "right-0" : "left-0",
-    "top-full mt-space-1"
+    'absolute z-dropdown min-w-[160px] py-space-1',
+    'bg-surface-elevated border border-border-light',
+    'shadow-elevation-2',
+    align === 'right' ? 'right-0' : 'left-0',
+    'top-full mt-space-1'
   );
 
   return (
     <div
       ref={containerRef}
-      className={cn("relative inline-block", className)}
+      className={cn('relative inline-block', className)}
       onKeyDown={handleKeyDown}
     >
       <button
@@ -154,8 +154,8 @@ export function DropdownMenu({
         <span
           aria-hidden="true"
           className={cn(
-            "transition-transform duration-fast",
-            open ? "rotate-180" : "rotate-0"
+            'transition-transform duration-fast',
+            open ? 'rotate-180' : 'rotate-0'
           )}
         >
           ∨
@@ -178,13 +178,13 @@ export function DropdownMenu({
                   tabIndex={-1}
                   onClick={() => handleItemClick(item)}
                   className={cn(
-                    "w-full text-left px-space-4 py-space-2p5",
-                    "font-body text-label uppercase tracking-label",
-                    "transition-colors duration-fast",
-                    "focus:outline-none",
+                    'w-full text-left px-space-4 py-space-2p5',
+                    'font-body text-label uppercase tracking-label',
+                    'transition-colors duration-fast',
+                    'focus:outline-none',
                     isActive
-                      ? "bg-surface-deep text-gold-base"
-                      : "text-text-primary hover:bg-surface-default hover:text-gold-base"
+                      ? 'bg-surface-deep text-gold-base'
+                      : 'text-text-primary hover:bg-surface-default hover:text-gold-base'
                   )}
                 >
                   {item.label}

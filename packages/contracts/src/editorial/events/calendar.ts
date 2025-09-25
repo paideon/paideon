@@ -20,10 +20,10 @@
 // imported it. Same removal, same reasoning as `NewsFeaturedSchema`/
 // `NewsFeedSchema` in registry/page-registry/news.ts's M3 note.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { EventCategorySchema } from "./category.ts";
-import { LocaleEnum } from "../../primitives/index.ts";
+import { EventCategorySchema } from './category.ts';
+import { LocaleEnum } from '../../primitives/index.ts';
 
 export const CalendarEntrySchema = z.object({
   id: z.string().min(1),

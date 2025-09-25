@@ -12,13 +12,13 @@
 // force a choice — admins can populate four cards (merging the two Science
 // variants into one) or five. Worth a decision before content goes in.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { CtaSchema, HeroSchema, StatsSchema } from "../../blocks/index.ts";
-import { ALStreamSchema } from "../../domains/academics/al-stream.ts";
-import { DepartmentKeyEnum } from "../../domains/academics/department.ts";
-import { StreamComparisonSchema } from "../../domains/academics/stream-comparison.ts";
-import type { PageRegistry } from "../types.ts";
+import { CtaSchema, HeroSchema, StatsSchema } from '../../blocks/index.ts';
+import { ALStreamSchema } from '../../domains/academics/al-stream.ts';
+import { DepartmentKeyEnum } from '../../domains/academics/department.ts';
+import { StreamComparisonSchema } from '../../domains/academics/stream-comparison.ts';
+import type { PageRegistry } from '../types.ts';
 
 export const AcademicsHeroSchema = HeroSchema;
 
@@ -65,60 +65,60 @@ export const AcademicsStatsSchema = StatsSchema;
 export const AcademicsCtaSchema = CtaSchema;
 
 export const academicsRegistry: PageRegistry = {
-  page: "academics",
-  scope: "page:academics",
-  label: "Academics",
+  page: 'academics',
+  scope: 'page:academics',
+  label: 'Academics',
   description:
-    "Manage the Academic streams, comparisons, and department contacts.",
+    'Manage the Academic streams, comparisons, and department contacts.',
   sections: [
     {
-      key: "academics.hero",
-      blockKey: "hero",
-      label: "Hero Banner",
-      description: "Top-of-page headline and eyebrow text.",
+      key: 'academics.hero',
+      blockKey: 'hero',
+      label: 'Hero Banner',
+      description: 'Top-of-page headline and eyebrow text.',
       schema: AcademicsHeroSchema,
     },
     {
-      key: "academics.intro",
-      blockKey: "rich-text-block",
-      label: "Academic Culture Intro",
-      description: "Brief statement on holistic education (Head, Heart, Hand).",
+      key: 'academics.intro',
+      blockKey: 'rich-text-block',
+      label: 'Academic Culture Intro',
+      description: 'Brief statement on holistic education (Head, Heart, Hand).',
       schema: AcademicsIntroSchema,
     },
     {
-      key: "academics.streams",
-      blockKey: "rich-text-block",
-      label: "Stream Cards",
-      description: "Grid of academic stream cards.",
+      key: 'academics.streams',
+      blockKey: 'rich-text-block',
+      label: 'Stream Cards',
+      description: 'Grid of academic stream cards.',
       schema: AcademicsStreamCardsSchema,
     },
     {
-      key: "academics.comparison",
-      blockKey: "rich-text-block",
-      label: "Stream Comparison",
-      description: "Table comparing academic streams.",
+      key: 'academics.comparison',
+      blockKey: 'rich-text-block',
+      label: 'Stream Comparison',
+      description: 'Table comparing academic streams.',
       schema: AcademicsStreamComparisonSchema,
     },
     {
-      key: "academics.stats",
-      blockKey: "stats",
-      label: "Performance Statistics",
+      key: 'academics.stats',
+      blockKey: 'stats',
+      label: 'Performance Statistics',
       description:
-        "Manually-entered stats strip (pass rates, university entrances, district ranking) — not backed by a live results feed.",
+        'Manually-entered stats strip (pass rates, university entrances, district ranking) — not backed by a live results feed.',
       schema: AcademicsStatsSchema,
     },
     {
-      key: "academics.contacts",
-      blockKey: "rich-text-block",
-      label: "Department Contacts",
-      description: "List of departmental contact information.",
+      key: 'academics.contacts',
+      blockKey: 'rich-text-block',
+      label: 'Department Contacts',
+      description: 'List of departmental contact information.',
       schema: AcademicsContactsSchema,
     },
     {
-      key: "academics.cta",
-      blockKey: "cta",
-      label: "Call to Action",
-      description: "Call to action section at the bottom of the page.",
+      key: 'academics.cta',
+      blockKey: 'cta',
+      label: 'Call to Action',
+      description: 'Call to action section at the bottom of the page.',
       schema: AcademicsCtaSchema,
     },
   ],

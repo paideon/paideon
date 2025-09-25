@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import type { VideoSourceType } from "@paideon/contracts";
-import { useState, useRef } from "react";
+import type { VideoSourceType } from '@paideon/contracts';
+import { useState, useRef } from 'react';
 
-import { cn } from "../../utilities/cn";
-import { Button } from "../atoms/Button";
+import { cn } from '../../utilities/cn';
+import { Button } from '../atoms/Button';
 
-export type VideoFrameAspectRatio = "16/9" | "21/9" | "4/3";
+export type VideoFrameAspectRatio = '16/9' | '21/9' | '4/3';
 
 export interface VideoFrameProps {
   src: string;
@@ -22,9 +22,9 @@ export interface VideoFrameProps {
 }
 
 const aspectRatioMap: Record<VideoFrameAspectRatio, string> = {
-  "16/9": "aspect-[16/9]",
-  "21/9": "aspect-[21/9]",
-  "4/3": "aspect-[4/3]",
+  '16/9': 'aspect-[16/9]',
+  '21/9': 'aspect-[21/9]',
+  '4/3': 'aspect-[4/3]',
 };
 
 function getYouTubeEmbedUrl(url: string): string {
@@ -41,8 +41,8 @@ function getVimeoEmbedUrl(url: string): string {
 
 export function VideoFrame({
   src,
-  source = "direct",
-  aspectRatio = "16/9",
+  source = 'direct',
+  aspectRatio = '16/9',
   posterSrc,
   title,
   className,
@@ -54,10 +54,10 @@ export function VideoFrame({
   const videoRef = useRef<HTMLVideoElement>(null);
 
   let embedUrl = src;
-  if (source === "youtube") embedUrl = getYouTubeEmbedUrl(src);
-  if (source === "vimeo") embedUrl = getVimeoEmbedUrl(src);
+  if (source === 'youtube') embedUrl = getYouTubeEmbedUrl(src);
+  if (source === 'vimeo') embedUrl = getVimeoEmbedUrl(src);
 
-  const isEmbed = source !== "direct";
+  const isEmbed = source !== 'direct';
 
   const handlePlay = () => {
     if (videoRef.current && !isPlaying) {
@@ -70,7 +70,7 @@ export function VideoFrame({
     return (
       <div
         className={cn(
-          "relative w-full overflow-hidden rounded-md",
+          'relative w-full overflow-hidden rounded-md',
           aspectRatioMap[aspectRatio],
           className
         )}
@@ -89,7 +89,7 @@ export function VideoFrame({
   return (
     <div
       className={cn(
-        "relative w-full overflow-hidden rounded-md bg-surface-deep",
+        'relative w-full overflow-hidden rounded-md bg-surface-deep',
         aspectRatioMap[aspectRatio],
         className
       )}

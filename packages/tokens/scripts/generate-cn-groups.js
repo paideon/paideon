@@ -6,17 +6,17 @@
 // in generators/cn.ts (generateCnUtility()), so it's unit-testable; this
 // script only resolves the output path and writes the file.
 
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-import { generateCnUtility } from "../src/generators/cn.ts";
+import { generateCnUtility } from '../src/generators/cn.ts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const outPath = path.resolve(
   __dirname,
-  "../../../packages/ui/src/utilities/cn.ts"
+  '../../../packages/ui/src/utilities/cn.ts'
 );
 
-fs.writeFileSync(outPath, generateCnUtility(), "utf8");
+fs.writeFileSync(outPath, generateCnUtility(), 'utf8');
 console.log(`✅ Generated ${outPath}`);

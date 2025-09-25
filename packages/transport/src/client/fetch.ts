@@ -5,11 +5,11 @@
 // serialization) is a supporting utility; this file is the surface most
 // call sites actually touch.
 
-import { buildInit, buildUrl, type RequestConfig } from "./request.js";
-import { parseResponse, isSuccess } from "./response.js";
-import { retry, type RetryOptions } from "./retry.js";
-import { timeout, type Fetcher } from "./timeout.js";
-import { normalizeError } from "../errors/normalize.js";
+import { buildInit, buildUrl, type RequestConfig } from './request.js';
+import { parseResponse, isSuccess } from './response.js';
+import { retry, type RetryOptions } from './retry.js';
+import { timeout, type Fetcher } from './timeout.js';
+import { normalizeError } from '../errors/normalize.js';
 
 export interface ApiHooks {
   /** Called once per attempt, right before the request goes out. Never throws for you — logging only. */
@@ -72,22 +72,22 @@ async function send<T>(
 
 export const api = {
   get: <T = unknown>(path: string, config?: ApiClientConfig): Promise<T> =>
-    send<T>("GET", path, undefined, config),
+    send<T>('GET', path, undefined, config),
   post: <T = unknown>(
     path: string,
     body?: unknown,
     config?: ApiClientConfig
-  ): Promise<T> => send<T>("POST", path, body, config),
+  ): Promise<T> => send<T>('POST', path, body, config),
   put: <T = unknown>(
     path: string,
     body?: unknown,
     config?: ApiClientConfig
-  ): Promise<T> => send<T>("PUT", path, body, config),
+  ): Promise<T> => send<T>('PUT', path, body, config),
   patch: <T = unknown>(
     path: string,
     body?: unknown,
     config?: ApiClientConfig
-  ): Promise<T> => send<T>("PATCH", path, body, config),
+  ): Promise<T> => send<T>('PATCH', path, body, config),
   delete: <T = unknown>(path: string, config?: ApiClientConfig): Promise<T> =>
-    send<T>("DELETE", path, undefined, config),
+    send<T>('DELETE', path, undefined, config),
 };

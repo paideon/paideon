@@ -22,11 +22,11 @@
 // guaranteed for a live query against a database that may not have a
 // principal entered yet (see PrincipalSection.tsx's guard).
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { CtaSchema, HeroSchema } from "../../blocks/index.ts";
-import { StaffSchema } from "../../domains/people/staff-member.ts";
-import type { PageRegistry } from "../types.ts";
+import { CtaSchema, HeroSchema } from '../../blocks/index.ts';
+import { StaffSchema } from '../../domains/people/staff-member.ts';
+import type { PageRegistry } from '../types.ts';
 
 export const AdministrationHeroSchema = HeroSchema;
 
@@ -64,70 +64,70 @@ export const AdministrationSdsSchema = z.object({
 export type AdministrationSdsData = z.infer<typeof AdministrationSdsSchema>;
 
 export const administrationRegistry: PageRegistry = {
-  page: "administration",
-  scope: "page:administration",
-  label: "Administration",
+  page: 'administration',
+  scope: 'page:administration',
+  label: 'Administration',
   description:
-    "Manage the Administration page — principal, deputy and assistant principals, head prefects, and the School Development Society. All content is drawn from the Staff Module.",
+    'Manage the Administration page — principal, deputy and assistant principals, head prefects, and the School Development Society. All content is drawn from the Staff Module.',
   sections: [
     {
-      key: "administration.hero",
-      blockKey: "hero",
-      label: "Hero Banner",
-      description: "Top-of-page headline and eyebrow text.",
+      key: 'administration.hero',
+      blockKey: 'hero',
+      label: 'Hero Banner',
+      description: 'Top-of-page headline and eyebrow text.',
       schema: AdministrationHeroSchema,
     },
     {
-      key: "administration.institutional",
-      blockKey: "rich-text-block",
-      label: "Institutional Statement",
-      description: "One-sentence philosophy of administration.",
+      key: 'administration.institutional',
+      blockKey: 'rich-text-block',
+      label: 'Institutional Statement',
+      description: 'One-sentence philosophy of administration.',
       schema: AdministrationStatementSchema,
     },
     {
-      key: "administration.principal",
-      blockKey: "rich-text-block",
-      label: "Principal",
+      key: 'administration.principal',
+      blockKey: 'rich-text-block',
+      label: 'Principal',
       description:
-        "Portrait, name, title, tenure, quote, and link to the full message. StaffSchema entry with role = principal.",
+        'Portrait, name, title, tenure, quote, and link to the full message. StaffSchema entry with role = principal.',
       schema: AdministrationPrincipalSchema,
     },
     {
-      key: "administration.deputyPrincipals",
-      blockKey: "staff-grid",
-      label: "Deputy Principals",
+      key: 'administration.deputyPrincipals',
+      blockKey: 'staff-grid',
+      label: 'Deputy Principals',
       description:
-        "Portrait, name, title, portfolio, tenure. StaffSchema entries with role = deputy-principal.",
+        'Portrait, name, title, portfolio, tenure. StaffSchema entries with role = deputy-principal.',
       schema: AdministrationStaffGridSchema,
     },
     {
-      key: "administration.assistantPrincipals",
-      blockKey: "staff-grid",
-      label: "Assistant Principals",
+      key: 'administration.assistantPrincipals',
+      blockKey: 'staff-grid',
+      label: 'Assistant Principals',
       description:
-        "Portrait, name, title, portfolio. StaffSchema entries with role = assistant-principal.",
+        'Portrait, name, title, portfolio. StaffSchema entries with role = assistant-principal.',
       schema: AdministrationStaffGridSchema,
     },
     {
-      key: "administration.headPrefects",
-      blockKey: "staff-grid",
-      label: "Head Prefects (Current Year)",
+      key: 'administration.headPrefects',
+      blockKey: 'staff-grid',
+      label: 'Head Prefects (Current Year)',
       description:
-        "Name, title, optional portrait. StaffSchema entries with role = head-prefect.",
+        'Name, title, optional portrait. StaffSchema entries with role = head-prefect.',
       schema: AdministrationStaffGridSchema,
     },
     {
-      key: "administration.sds",
-      blockKey: "rich-text-block",
-      label: "School Development Society",
-      description: "Description, contact, and link to the SDS page.",
+      key: 'administration.sds',
+      blockKey: 'rich-text-block',
+      label: 'School Development Society',
+      description: 'Description, contact, and link to the SDS page.',
       schema: AdministrationSdsSchema,
     },
     {
-      key: "administration.contact",
-      blockKey: "cta",
-      label: "Contact Section",
-      description: "Call to action for administration contact.",
+      key: 'administration.contact',
+      blockKey: 'cta',
+      label: 'Contact Section',
+      description: 'Call to action for administration contact.',
       schema: CtaSchema,
     },
   ],

@@ -2,16 +2,16 @@
 
 // High-level curriculum overview contracts.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { ALStreamSchema } from "./al-stream.ts";
+import { ALStreamSchema } from './al-stream.ts';
 
-export const CurriculumLevelEnum = z.enum(["OL", "AL"]);
+export const CurriculumLevelEnum = z.enum(['OL', 'AL']);
 
 export const SyllabusSchema = z.object({
   level: CurriculumLevelEnum,
   subject: z.string().min(1),
-  board: z.string().default("NIE"),
+  board: z.string().default('NIE'),
   year: z.string().min(1),
 });
 

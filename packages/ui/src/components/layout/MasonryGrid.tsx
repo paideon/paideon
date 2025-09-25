@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { clsx } from "clsx";
-import { useEffect, useRef, useState } from "react";
+import { clsx } from 'clsx';
+import { useEffect, useRef, useState } from 'react';
 
 export interface MasonryGridProps {
   children: React.ReactNode[];
@@ -28,8 +28,8 @@ export function MasonryGrid({
     };
 
     handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [columnCount]);
 
   // Distribute children into columns
@@ -44,7 +44,7 @@ export function MasonryGrid({
   return (
     <div
       ref={containerRef}
-      className={clsx("flex", className)}
+      className={clsx('flex', className)}
       style={{ gap: `${gap}px` }}
     >
       {columnArrays.map((column, idx) => (

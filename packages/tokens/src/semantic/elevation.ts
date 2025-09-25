@@ -13,7 +13,7 @@
 // Do not skip a level. Each step up = one lighter Ink tone + one lighter
 // border, never a shadow.
 
-import { primitives } from "../primitives/colors.ts";
+import { primitives } from '../primitives/colors.ts';
 
 export const elevationDark = {
   0: { bg: primitives.forest[900], border: null },

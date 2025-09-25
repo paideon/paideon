@@ -3,7 +3,7 @@
 // Generic, concept-agnostic helpers for building a discriminated-union schema
 // and a keyed lookup record from a single ordered tuple of schemas.
 
-import { z } from "zod";
+import { z } from 'zod';
 
 export type SchemaEntry<T extends z.ZodTypeAny, K extends string> = {
   schema: T;

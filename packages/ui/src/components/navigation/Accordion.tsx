@@ -1,9 +1,9 @@
 // packages/ui/src/components/navigation/Accordion.tsx
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
 export interface AccordionItem {
   id: string;
@@ -40,25 +40,25 @@ function AccordionSingle({
         aria-expanded={isOpen}
         aria-controls={panelId}
         className={cn(
-          "w-full flex items-center justify-between gap-space-4 py-space-5",
-          "bg-transparent border-none cursor-pointer text-left",
-          "transition-colors duration-fast ease-snap",
-          "hover:text-gold-base",
-          "focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-[3px]"
+          'w-full flex items-center justify-between gap-space-4 py-space-5',
+          'bg-transparent border-none cursor-pointer text-left',
+          'transition-colors duration-fast ease-snap',
+          'hover:text-gold-base',
+          'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-[3px]'
         )}
       >
         <span
-          className={cn("font-body text-body font-medium", "text-text-primary")}
+          className={cn('font-body text-body font-medium', 'text-text-primary')}
         >
           {item.question}
         </span>
         <span
           aria-hidden="true"
           className={cn(
-            "text-gold-base text-body flex-shrink-0",
-            "transition-transform duration-standard ease-out",
-            isOpen ? "rotate-180" : "rotate-0",
-            "motion-reduce:transition-none motion-reduce:rotate-0"
+            'text-gold-base text-body flex-shrink-0',
+            'transition-transform duration-standard ease-out',
+            isOpen ? 'rotate-180' : 'rotate-0',
+            'motion-reduce:transition-none motion-reduce:rotate-0'
           )}
         >
           ∨
@@ -75,17 +75,17 @@ function AccordionSingle({
         role="region"
         aria-labelledby={buttonId}
         className={cn(
-          "grid transition-[grid-template-rows] duration-standard ease-out motion-reduce:transition-none",
-          isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+          'grid transition-[grid-template-rows] duration-standard ease-out motion-reduce:transition-none',
+          isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
         )}
       >
         <div className="overflow-hidden">
           <div className="pb-space-5">
             <p
               className={cn(
-                "font-body text-body-sm",
-                "text-text-muted",
-                "leading-relaxed"
+                'font-body text-body-sm',
+                'text-text-muted',
+                'leading-relaxed'
               )}
             >
               {item.answer}
@@ -120,7 +120,7 @@ export function Accordion({
   if (items.length === 0) return null;
 
   return (
-    <div className={cn("border-t border-border-default", className)}>
+    <div className={cn('border-t border-border-default', className)}>
       {items.map((item) => (
         <AccordionSingle
           key={item.id}

@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import type { ReactNode } from "react";
+import type { ReactNode } from 'react';
 
-import { InlineLink } from "./InlineLink";
-import { QuoteBlock } from "./QuoteBlock";
-import { cn } from "../../utilities/cn";
-import { ImageFrame } from "../media/ImageFrame";
+import { InlineLink } from './InlineLink';
+import { QuoteBlock } from './QuoteBlock';
+import { cn } from '../../utilities/cn';
+import { ImageFrame } from '../media/ImageFrame';
 
 /**
  * Minimal shape of a Tiptap/ProseMirror JSON document.
@@ -36,12 +36,12 @@ export interface RichTextRendererProps {
 }
 
 function extractPlainText(node: TiptapNode | undefined): string {
-  if (!node?.content) return "";
+  if (!node?.content) return '';
   return node.content
     .map((child) =>
-      child.type === "text" ? child.text ?? "" : extractPlainText(child)
+      child.type === 'text' ? child.text ?? '' : extractPlainText(child)
     )
-    .join("");
+    .join('');
 }
 
 function renderMarks(text: string, marks: TiptapMark[] | undefined): ReactNode {
@@ -49,15 +49,15 @@ function renderMarks(text: string, marks: TiptapMark[] | undefined): ReactNode {
 
   return marks.reduce<ReactNode>((acc, mark) => {
     switch (mark.type) {
-      case "bold":
+      case 'bold':
         return <strong className="font-semibold">{acc}</strong>;
-      case "italic":
+      case 'italic':
         return <em className="italic font-quote">{acc}</em>;
-      case "link": {
+      case 'link': {
         const href =
-          typeof mark.attrs?.href === "string" ? mark.attrs.href : "#";
+          typeof mark.attrs?.href === 'string' ? mark.attrs.href : '#';
         return (
-          <InlineLink href={href} external={href.startsWith("http")}>
+          <InlineLink href={href} external={href.startsWith('http')}>
             {acc}
           </InlineLink>
         );
@@ -72,7 +72,7 @@ function renderNode(node: TiptapNode, key: number): ReactNode {
   const children = () => node.content?.map((child, i) => renderNode(child, i));
 
   switch (node.type) {
-    case "paragraph":
+    case 'paragraph':
       return (
         <p
           key={key}
@@ -82,7 +82,7 @@ function renderNode(node: TiptapNode, key: number): ReactNode {
         </p>
       );
 
-    case "heading": {
+    case 'heading': {
       const level = (node.attrs?.level as number) ?? 2;
       if (level <= 2) {
         return (
@@ -115,7 +115,7 @@ function renderNode(node: TiptapNode, key: number): ReactNode {
       );
     }
 
-    case "bulletList":
+    case 'bulletList':
       return (
         <ul
           key={key}
@@ -125,7 +125,7 @@ function renderNode(node: TiptapNode, key: number): ReactNode {
         </ul>
       );
 
-    case "orderedList":
+    case 'orderedList':
       return (
         <ol
           key={key}
@@ -135,14 +135,14 @@ function renderNode(node: TiptapNode, key: number): ReactNode {
         </ol>
       );
 
-    case "listItem":
+    case 'listItem':
       return (
         <li key={key} className="font-body text-body text-text-primary">
           {children()}
         </li>
       );
 
-    case "blockquote":
+    case 'blockquote':
       return (
         <QuoteBlock
           key={key}
@@ -151,12 +151,12 @@ function renderNode(node: TiptapNode, key: number): ReactNode {
         />
       );
 
-    case "image":
+    case 'image':
       return (
         <figure key={key} className="my-space-6">
           <ImageFrame
-            src={(node.attrs?.src as string) ?? ""}
-            alt={(node.attrs?.alt as string) ?? ""}
+            src={(node.attrs?.src as string) ?? ''}
+            alt={(node.attrs?.alt as string) ?? ''}
             aspectRatio="hero"
             variant="standard"
           />
@@ -168,11 +168,11 @@ function renderNode(node: TiptapNode, key: number): ReactNode {
         </figure>
       );
 
-    case "hardBreak":
+    case 'hardBreak':
       return <br key={key} />;
 
-    case "text":
-      return <span key={key}>{renderMarks(node.text ?? "", node.marks)}</span>;
+    case 'text':
+      return <span key={key}>{renderMarks(node.text ?? '', node.marks)}</span>;
 
     default:
       return null;
@@ -180,13 +180,13 @@ function renderNode(node: TiptapNode, key: number): ReactNode {
 }
 
 export function RichTextRenderer({ value, className }: RichTextRendererProps) {
-  if (!value || typeof value !== "object") return null;
+  if (!value || typeof value !== 'object') return null;
 
   const doc = value as TiptapNode;
-  if (doc.type !== "doc" || !Array.isArray(doc.content)) return null;
+  if (doc.type !== 'doc' || !Array.isArray(doc.content)) return null;
 
   return (
-    <div className={cn("max-w-none", className)}>
+    <div className={cn('max-w-none', className)}>
       {doc.content.map((node, i) => renderNode(node, i))}
     </div>
   );

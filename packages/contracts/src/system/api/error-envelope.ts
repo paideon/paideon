@@ -2,15 +2,15 @@
 //
 // The standard API error shape (code, message, optional field errors).
 
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ERROR_CODE_VALUES = [
-  "NOT_FOUND",
-  "VALIDATION_ERROR",
-  "UNAUTHORIZED",
-  "FORBIDDEN",
-  "CONFLICT",
-  "INTERNAL_ERROR",
+  'NOT_FOUND',
+  'VALIDATION_ERROR',
+  'UNAUTHORIZED',
+  'FORBIDDEN',
+  'CONFLICT',
+  'INTERNAL_ERROR',
 ] as const;
 
 export const ErrorCodeEnum = z.enum(ERROR_CODE_VALUES);

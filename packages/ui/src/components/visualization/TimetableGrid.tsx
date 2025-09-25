@@ -1,6 +1,6 @@
 // packages/ui/src/components/visualization/TimetableGrid.tsx
-"use client";
-import { cn } from "../../utilities/cn";
+'use client';
+import { cn } from '../../utilities/cn';
 export interface TimetableEntryData {
   period: string;
   time: string;
@@ -21,22 +21,22 @@ export interface TimetableGridProps {
 }
 
 const DEFAULT_DAYS = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
 ];
 
 export function TimetableGrid({
   entries,
   className,
-  periodTimeLabel = "Period / Time",
+  periodTimeLabel = 'Period / Time',
   days = DEFAULT_DAYS,
 }: TimetableGridProps) {
   return (
-    <div className={cn("overflow-x-auto", className)}>
+    <div className={cn('overflow-x-auto', className)}>
       <table className="min-w-full border-collapse">
         <thead>
           <tr className="bg-surface-deep border-b border-border-default">
@@ -58,8 +58,8 @@ export function TimetableGrid({
             <tr
               key={entry.period}
               className={cn(
-                "border-b border-border-light",
-                idx % 2 === 0 && "bg-surface-default/50"
+                'border-b border-border-light',
+                idx % 2 === 0 && 'bg-surface-default/50'
               )}
             >
               <td className="p-space-3 font-body text-body-sm text-text-primary whitespace-nowrap">
@@ -69,22 +69,22 @@ export function TimetableGrid({
                 </div>
               </td>
               <td className="p-space-3 font-body text-body-sm text-text-primary">
-                {entry.monday || "—"}
+                {entry.monday || '—'}
               </td>
               <td className="p-space-3 font-body text-body-sm text-text-primary">
-                {entry.tuesday || "—"}
+                {entry.tuesday || '—'}
               </td>
               <td className="p-space-3 font-body text-body-sm text-text-primary">
-                {entry.wednesday || "—"}
+                {entry.wednesday || '—'}
               </td>
               <td className="p-space-3 font-body text-body-sm text-text-primary">
-                {entry.thursday || "—"}
+                {entry.thursday || '—'}
               </td>
               <td className="p-space-3 font-body text-body-sm text-text-primary">
-                {entry.friday || "—"}
+                {entry.friday || '—'}
               </td>
               <td className="p-space-3 font-body text-body-sm text-text-primary">
-                {entry.saturday || "—"}
+                {entry.saturday || '—'}
               </td>
             </tr>
           ))}

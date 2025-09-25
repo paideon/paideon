@@ -2,7 +2,7 @@
 
 // Pure predicates/transforms over primitive shapes.
 
-import { LocalizedTextSchema } from "../primitives/localized-text.ts";
+import { LocalizedTextSchema } from '../primitives/localized-text.ts';
 
 export function isLocalized(
   value: unknown
@@ -11,8 +11,8 @@ export function isLocalized(
 }
 
 export function normalizeRichText(text: unknown): string {
-  if (typeof text === "string") {
+  if (typeof text === 'string') {
     return text.trim();
   }
-  return "";
+  return '';
 }

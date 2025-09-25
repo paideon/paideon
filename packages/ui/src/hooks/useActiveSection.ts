@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export function useActiveSection(
   sectionIds: string[],
@@ -28,10 +28,10 @@ export function useActiveSection(
       setActiveId(null);
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [sectionIds, offset]);
 
   return activeId;

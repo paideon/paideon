@@ -2,14 +2,14 @@
 
 // Society membership contracts.
 
-import { z } from "zod";
+import { z } from 'zod';
 
 export const SocietyMemberRoleEnum = z.enum([
-  "president",
-  "secretary",
-  "treasurer",
-  "member",
-  "alumni",
+  'president',
+  'secretary',
+  'treasurer',
+  'member',
+  'alumni',
 ]);
 
 export const SocietyMemberSchema = z.object({

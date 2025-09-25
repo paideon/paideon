@@ -1,6 +1,6 @@
-import clsx from "clsx";
+import clsx from 'clsx';
 
-import { NavLink } from "../navigation/NavLink";
+import { NavLink } from '../navigation/NavLink';
 
 interface BreadcrumbItem {
   label: string;
@@ -17,7 +17,7 @@ interface BreadcrumbProps {
 export function Breadcrumb({
   items,
   onDark = false,
-  ariaLabel = "Breadcrumb",
+  ariaLabel = 'Breadcrumb',
 }: BreadcrumbProps) {
   return (
     <nav aria-label={ariaLabel}>
@@ -30,8 +30,8 @@ export function Breadcrumb({
                 <span
                   aria-hidden="true"
                   className={clsx(
-                    "font-body text-xs",
-                    onDark ? "text-text-inverse/30" : "text-text-muted"
+                    'font-body text-xs',
+                    onDark ? 'text-text-inverse/30' : 'text-text-muted'
                   )}
                 >
                   ›
@@ -39,16 +39,16 @@ export function Breadcrumb({
               )}
               {isLast || !item.href ? (
                 <span
-                  aria-current={isLast ? "page" : undefined}
+                  aria-current={isLast ? 'page' : undefined}
                   className={clsx(
-                    "font-body text-caption uppercase tracking-caption",
+                    'font-body text-caption uppercase tracking-caption',
                     isLast
                       ? onDark
-                        ? "text-text-inverse/85"
-                        : "text-text-primary"
+                        ? 'text-text-inverse/85'
+                        : 'text-text-primary'
                       : onDark
-                      ? "text-text-inverse/45"
-                      : "text-text-muted"
+                      ? 'text-text-inverse/45'
+                      : 'text-text-muted'
                   )}
                 >
                   {item.label}

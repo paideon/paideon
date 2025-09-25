@@ -6,9 +6,9 @@
 //   Items are manually curated — not auto-generated from all achievements.
 //   Stored in ContentEntry: sectionKey 'home.ticker', scope 'page:home'.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-export const ACHIEVEMENT_TICKER_CONTENT_TYPE = "achievement-ticker";
+export const ACHIEVEMENT_TICKER_CONTENT_TYPE = 'achievement-ticker';
 
 export const TickerItemSchema = z.object({
   id: z.string().min(1),

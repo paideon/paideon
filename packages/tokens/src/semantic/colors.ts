@@ -1,6 +1,6 @@
 // packages/tokens/src/semantic/colors.ts
 
-import { primitives } from "../primitives/colors.ts";
+import { primitives } from '../primitives/colors.ts';
 
 export const brandColors = {
   green: {

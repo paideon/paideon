@@ -1,7 +1,7 @@
-"use client";
-import { useState, useRef, useCallback } from "react";
+'use client';
+import { useState, useRef, useCallback } from 'react';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
 export interface FileUploadZoneProps {
   accept?: string;
@@ -32,12 +32,12 @@ export function FileUploadZone({
   multiple = false,
   maxSizeMb,
   onChange,
-  label = "Upload file",
+  label = 'Upload file',
   hint,
   error: externalError,
   disabled = false,
   dragDropText,
-  browseLabel = "browse",
+  browseLabel = 'browse',
   getMaxSizeLabel = (mb) => `Max ${mb} MB`,
   getRemoveLabel = (filename) => `Remove ${filename}`,
 }: FileUploadZoneProps) {
@@ -103,23 +103,23 @@ export function FileUploadZone({
         aria-label={`${label}. Click or drag files here.`}
         onClick={() => !disabled && inputRef.current?.click()}
         onKeyDown={(e) => {
-          if ((e.key === "Enter" || e.key === " ") && !disabled)
+          if ((e.key === 'Enter' || e.key === ' ') && !disabled)
             inputRef.current?.click();
         }}
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
         onDrop={onDrop}
         className={cn(
-          "flex flex-col items-center justify-center gap-space-2 p-space-9",
-          "border-2 border-dashed transition-all duration-fast",
+          'flex flex-col items-center justify-center gap-space-2 p-space-9',
+          'border-2 border-dashed transition-all duration-fast',
           error
-            ? "border-semantic-error-base bg-semantic-error-surface"
+            ? 'border-semantic-error-base bg-semantic-error-surface'
             : isDragging
-            ? "border-gold-base bg-gold-pale"
-            : "border-border-default bg-surface-elevated",
-          disabled && "opacity-50 cursor-not-allowed",
-          !disabled && "cursor-pointer",
-          "focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2"
+            ? 'border-gold-base bg-gold-pale'
+            : 'border-border-default bg-surface-elevated',
+          disabled && 'opacity-50 cursor-not-allowed',
+          !disabled && 'cursor-pointer',
+          'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2'
         )}
       >
         <span
@@ -130,7 +130,7 @@ export function FileUploadZone({
         </span>
         <span className="font-body text-body-sm text-text-primary text-center">
           {dragDropText ??
-            `Drag & drop${multiple ? " files" : " a file"} here, or `}
+            `Drag & drop${multiple ? ' files' : ' a file'} here, or `}
           <span className="text-gold-base underline">{browseLabel}</span>
         </span>
         {hint && (

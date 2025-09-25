@@ -1,6 +1,6 @@
 // packages/transport/src/errors/api-error.ts
 
-import type { ApiErrorCode } from "./error-codes.js";
+import type { ApiErrorCode } from './error-codes.js';
 
 export interface ApiErrorDetails {
   [key: string]: unknown;
@@ -29,7 +29,7 @@ export class ApiError extends Error {
       params.message,
       params.cause !== undefined ? { cause: params.cause } : undefined
     );
-    this.name = "ApiError";
+    this.name = 'ApiError';
     this.status = params.status;
     this.code = params.code;
     this.details = params.details;

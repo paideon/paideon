@@ -1,7 +1,7 @@
-import Link from "next/link";
-import { type Ref, type ComponentPropsWithoutRef } from "react";
+import Link from 'next/link';
+import { type Ref, type ComponentPropsWithoutRef } from 'react';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
 type InlineLinkProps = {
   href: string;
@@ -12,7 +12,7 @@ type InlineLinkProps = {
   prefetch?: boolean;
   className?: string;
   ref?: Ref<HTMLElement>;
-} & Omit<ComponentPropsWithoutRef<"a">, "href" | "children" | "target" | "rel">;
+} & Omit<ComponentPropsWithoutRef<'a'>, 'href' | 'children' | 'target' | 'rel'>;
 
 const inlineLinkStyles = `font-body text-gold-base underline underline-offset-2 
 transition-colors duration-fast ease-snap 
@@ -57,4 +57,4 @@ export const InlineLink = ({
   );
 };
 
-InlineLink.displayName = "InlineLink";
+InlineLink.displayName = 'InlineLink';

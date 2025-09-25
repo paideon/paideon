@@ -1,21 +1,21 @@
 // Auto-generated – do not edit manually.
 // Source: packages/ui/scripts/generate-icons.js
 
-import { cn } from "../../../../utilities/cn";
-import { type SocialIconProps, sizeMap } from "../types";
+import { cn } from '../../../../utilities/cn';
+import { type SocialIconProps, sizeMap } from '../types';
 
 export type { SocialIconProps };
 
 export function WhatsAppGlyphGreen({
-  size = "md",
+  size = 'md',
   color: _color,
   className,
   style,
   ref,
   ...props
 }: SocialIconProps) {
-  const isToken = typeof size === "string" && size in sizeMap;
-  const sizeClass = isToken ? sizeMap[size] : "";
+  const isToken = typeof size === 'string' && size in sizeMap;
+  const sizeClass = isToken ? sizeMap[size] : '';
   const customStyle =
     !isToken && size ? { width: size, height: size, ...style } : style;
 

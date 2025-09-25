@@ -23,23 +23,23 @@
 // (no Society↔Event relation exists in the Events schema, and the Gallery
 // module (Task 7.7) doesn't exist yet at all).
 
-import { HeroSchema } from "../../blocks/index.ts";
-import type { PageRegistry } from "../types.ts";
+import { HeroSchema } from '../../blocks/index.ts';
+import type { PageRegistry } from '../types.ts';
 
 export const SocietiesHeroSchema = HeroSchema;
 
 export const societiesRegistry: PageRegistry = {
-  page: "societies",
-  scope: "page:societies",
-  label: "Societies Hub",
+  page: 'societies',
+  scope: 'page:societies',
+  label: 'Societies Hub',
   description:
-    "Manage the Societies Hub page hero. The society grid is populated automatically from the Societies module — manage those under Societies, not here.",
+    'Manage the Societies Hub page hero. The society grid is populated automatically from the Societies module — manage those under Societies, not here.',
   sections: [
     {
-      key: "societies.hero",
-      blockKey: "hero",
-      label: "Hero Banner",
-      description: "Top-of-page headline and eyebrow text.",
+      key: 'societies.hero',
+      blockKey: 'hero',
+      label: 'Hero Banner',
+      description: 'Top-of-page headline and eyebrow text.',
       schema: SocietiesHeroSchema,
     },
   ],

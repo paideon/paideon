@@ -1,23 +1,23 @@
-import { type ReactNode } from "react";
+import { type ReactNode } from 'react';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
 type Props = {
   children: ReactNode;
-  as?: "div" | "fieldset";
+  as?: 'div' | 'fieldset';
   legend?: ReactNode;
   className?: string;
 };
 
 export function FormFieldGroup({
   children,
-  as: Tag = "div",
+  as: Tag = 'div',
   legend,
   className,
 }: Props) {
   return (
-    <Tag className={cn("flex flex-col gap-space-6", className)}>
-      {Tag === "fieldset" && legend && (
+    <Tag className={cn('flex flex-col gap-space-6', className)}>
+      {Tag === 'fieldset' && legend && (
         <legend className="font-body text-eyebrow uppercase tracking-eyebrow text-gold-base select-none">
           {legend}
         </legend>
@@ -27,4 +27,4 @@ export function FormFieldGroup({
   );
 }
 
-FormFieldGroup.displayName = "FormFieldGroup";
+FormFieldGroup.displayName = 'FormFieldGroup';

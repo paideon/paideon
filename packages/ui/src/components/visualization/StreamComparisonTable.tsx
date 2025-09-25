@@ -1,9 +1,9 @@
 // packages/ui/src/components/visualization/StreamComparisonTable.tsx
-"use client";
+'use client';
 
-import type { StreamComparisonData } from "@paideon/contracts";
+import type { StreamComparisonData } from '@paideon/contracts';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
 export interface StreamComparisonTableLabels {
   stream1?: string;
@@ -22,13 +22,13 @@ export interface StreamComparisonTableProps {
 }
 
 const DEFAULT_LABELS: Required<StreamComparisonTableLabels> = {
-  stream1: "Stream 1",
-  stream2: "Stream 2",
-  sharedSubjects: "Shared Subjects",
-  differences: "Subject Differences",
-  recommendedFor: "Recommended For",
-  inStream: "✓",
-  notInStream: "–",
+  stream1: 'Stream 1',
+  stream2: 'Stream 2',
+  sharedSubjects: 'Shared Subjects',
+  differences: 'Subject Differences',
+  recommendedFor: 'Recommended For',
+  inStream: '✓',
+  notInStream: '–',
 };
 
 export function StreamComparisonTable({
@@ -39,7 +39,7 @@ export function StreamComparisonTable({
   const l = { ...DEFAULT_LABELS, ...labels };
 
   return (
-    <div className={cn("flex flex-col gap-space-8", className)}>
+    <div className={cn('flex flex-col gap-space-8', className)}>
       {streams.map((comparison, idx) => (
         <div
           key={idx}
@@ -107,8 +107,8 @@ export function StreamComparisonTable({
                     <span
                       className={
                         diff.inStream1
-                          ? "text-green-base font-semibold"
-                          : "text-text-muted"
+                          ? 'text-green-base font-semibold'
+                          : 'text-text-muted'
                       }
                     >
                       {diff.inStream1 ? l.inStream : l.notInStream}
@@ -118,8 +118,8 @@ export function StreamComparisonTable({
                     <span
                       className={
                         diff.inStream2
-                          ? "text-green-base font-semibold"
-                          : "text-text-muted"
+                          ? 'text-green-base font-semibold'
+                          : 'text-text-muted'
                       }
                     >
                       {diff.inStream2 ? l.inStream : l.notInStream}

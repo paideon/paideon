@@ -1,4 +1,4 @@
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
 export interface FormValidationSummaryProps {
   errors?: string[] | null;
@@ -11,7 +11,7 @@ export function FormValidationSummary({
   errors,
   successMessage,
   getSummaryLabel = (count) =>
-    `Please fix ${count} ${count === 1 ? "error" : "errors"} before continuing`,
+    `Please fix ${count} ${count === 1 ? 'error' : 'errors'} before continuing`,
 }: FormValidationSummaryProps) {
   if (successMessage) {
     return (
@@ -19,9 +19,9 @@ export function FormValidationSummary({
         role="status"
         aria-live="polite"
         className={cn(
-          "flex items-start gap-space-3 p-space-5",
-          "bg-semantic-success-surface border border-semantic-success-base",
-          "border-l-[3px] border-l-semantic-success-base"
+          'flex items-start gap-space-3 p-space-5',
+          'bg-semantic-success-surface border border-semantic-success-base',
+          'border-l-[3px] border-l-semantic-success-base'
         )}
       >
         <span
@@ -44,9 +44,9 @@ export function FormValidationSummary({
       role="alert"
       aria-live="assertive"
       className={cn(
-        "p-space-5",
-        "bg-semantic-error-surface border border-semantic-error-base",
-        "border-l-[3px] border-l-semantic-error-base"
+        'p-space-5',
+        'bg-semantic-error-surface border border-semantic-error-base',
+        'border-l-[3px] border-l-semantic-error-base'
       )}
     >
       <p className="font-body text-caption uppercase tracking-caption text-semantic-error-base mb-space-2.5">

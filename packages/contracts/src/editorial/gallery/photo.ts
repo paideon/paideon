@@ -7,4 +7,4 @@
 // (shared/lightbox-image.ts) is the separate, unrelated projection
 // @paideon/ui's Lightbox actually renders from — untouched by this move.
 
-export const GALLERY_PHOTO_CONTENT_TYPE = "gallery-photo";
+export const GALLERY_PHOTO_CONTENT_TYPE = 'gallery-photo';

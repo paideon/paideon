@@ -7,7 +7,7 @@ export function toFormData(params: Record<string, unknown>): FormData {
   for (const [key, value] of Object.entries(params)) {
     if (value === undefined || value === null) continue;
 
-    if (value instanceof Blob || typeof value === "string") {
+    if (value instanceof Blob || typeof value === 'string') {
       formData.append(key, value);
       continue;
     }

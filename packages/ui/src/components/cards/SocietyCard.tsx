@@ -1,14 +1,14 @@
 import type {
   SocietyCardData,
   SocietyCardVariantType,
-} from "@paideon/contracts";
-import Image from "next/image";
-import Link from "next/link";
+} from '@paideon/contracts';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { cn } from "../../utilities/cn";
-import { Badge } from "../atoms/Badge";
+import { cn } from '../../utilities/cn';
+import { Badge } from '../atoms/Badge';
 
-export interface SocietyCardProps extends Omit<SocietyCardData, "variant"> {
+export interface SocietyCardProps extends Omit<SocietyCardData, 'variant'> {
   variant?: SocietyCardVariantType;
   className?: string;
   membersLabel?: string;
@@ -27,16 +27,16 @@ function SocietyCardHub({
   imageAlt,
   memberCount,
   founded,
-  membersLabel = "members",
-  foundedLabel = "Est.",
+  membersLabel = 'members',
+  foundedLabel = 'Est.',
 }: SocietyCardProps) {
   return (
     <Link href={href} className="group block no-underline h-full">
       <div
         className={cn(
-          "h-full flex flex-col bg-surface-elevated border border-border-light overflow-hidden",
-          "shadow-elevation-1 transition-all duration-gentle",
-          "group-hover:shadow-elevation-3 group-hover:-translate-y-0.5"
+          'h-full flex flex-col bg-surface-elevated border border-border-light overflow-hidden',
+          'shadow-elevation-1 transition-all duration-gentle',
+          'group-hover:shadow-elevation-3 group-hover:-translate-y-0.5'
         )}
       >
         <div className="relative aspect-[4/3] bg-green-base overflow-hidden flex-shrink-0">
@@ -62,8 +62,8 @@ function SocietyCardHub({
           </div>
           <h3
             className={cn(
-              "font-display text-h3 font-medium text-text-primary mb-space-2",
-              "transition-colors duration-fast group-hover:text-gold-active"
+              'font-display text-h3 font-medium text-text-primary mb-space-2',
+              'transition-colors duration-fast group-hover:text-gold-active'
             )}
           >
             {name}
@@ -101,18 +101,18 @@ function SocietyCardFeatured({
   imageAlt,
   memberCount,
   founded,
-  membersLabel = "Members",
-  foundedLabel = "Founded",
-  learnMoreLabel = "Learn more →",
-  featuredLabel = "Featured",
+  membersLabel = 'Members',
+  foundedLabel = 'Founded',
+  learnMoreLabel = 'Learn more →',
+  featuredLabel = 'Featured',
 }: SocietyCardProps) {
   return (
     <Link href={href} className="group block no-underline">
       <div
         className={cn(
-          "grid grid-cols-1 md:grid-cols-2 bg-surface-elevated border-2 border-gold-base overflow-hidden",
-          "shadow-[0_4px_20px_rgba(201,151,58,0.12)] transition-shadow duration-gentle",
-          "group-hover:shadow-[0_8px_40px_rgba(201,151,58,0.2)]"
+          'grid grid-cols-1 md:grid-cols-2 bg-surface-elevated border-2 border-gold-base overflow-hidden',
+          'shadow-[0_4px_20px_rgba(201,151,58,0.12)] transition-shadow duration-gentle',
+          'group-hover:shadow-[0_8px_40px_rgba(201,151,58,0.2)]'
         )}
       >
         <div className="relative min-h-[280px] bg-green-base overflow-hidden">
@@ -176,9 +176,9 @@ function SocietyCardFeatured({
 }
 
 export function SocietyCard({
-  variant = "hub-grid",
+  variant = 'hub-grid',
   ...props
 }: SocietyCardProps) {
-  if (variant === "featured") return <SocietyCardFeatured {...props} />;
+  if (variant === 'featured') return <SocietyCardFeatured {...props} />;
   return <SocietyCardHub {...props} />;
 }

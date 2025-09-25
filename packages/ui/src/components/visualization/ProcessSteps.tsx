@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import type { ProcessStepsData } from "@paideon/contracts";
-import { clsx } from "clsx";
+import type { ProcessStepsData } from '@paideon/contracts';
+import { clsx } from 'clsx';
 
 export interface ProcessStepsProps {
-  steps: ProcessStepsData["steps"];
+  steps: ProcessStepsData['steps'];
   className?: string;
 }
 
 export function ProcessSteps({ steps, className }: ProcessStepsProps) {
   return (
-    <div className={clsx("relative", className)}>
+    <div className={clsx('relative', className)}>
       {/* Vertical connector line */}
       <div className="absolute left-6 top-8 bottom-8 w-px bg-border-light md:left-1/2 md:-translate-x-1/2" />
 
@@ -19,8 +19,8 @@ export function ProcessSteps({ steps, className }: ProcessStepsProps) {
           <div
             key={step.id}
             className={clsx(
-              "relative flex flex-col md:flex-row gap-6",
-              idx % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+              'relative flex flex-col md:flex-row gap-6',
+              idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
             )}
           >
             {/* Step number circle */}

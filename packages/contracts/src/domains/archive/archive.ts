@@ -8,19 +8,19 @@
 // Categories: photograph, magazine, prize-giving record, prefect list
 // Files uploaded through Media Library pipeline (R2 CDN URLs)
 
-import { z } from "zod";
+import { z } from 'zod';
 
 import {
   MAX_TITLE_LENGTH,
   MAX_DESCRIPTION_LENGTH,
-} from "../../constants/index.ts";
-import { ImageSchema } from "../../primitives/index.ts";
+} from '../../constants/index.ts';
+import { ImageSchema } from '../../primitives/index.ts';
 
 export const ArchiveCategory = z.enum([
-  "photograph",
-  "magazine",
-  "prize_giving_record",
-  "prefect_list",
+  'photograph',
+  'magazine',
+  'prize_giving_record',
+  'prefect_list',
 ]);
 
 // Display labels for UI components
@@ -28,10 +28,10 @@ export const ARCHIVE_CATEGORY_LABELS: Record<
   z.infer<typeof ArchiveCategory>,
   string
 > = {
-  photograph: "Photograph",
-  magazine: "Magazine",
-  prize_giving_record: "Prize Giving Record",
-  prefect_list: "Prefect List",
+  photograph: 'Photograph',
+  magazine: 'Magazine',
+  prize_giving_record: 'Prize Giving Record',
+  prefect_list: 'Prefect List',
 };
 
 // The full entity — admin CRUD and database storage.

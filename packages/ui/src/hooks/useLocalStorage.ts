@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
 function readValue<T>(key: string, initialValue: T): T {
-  if (typeof window === "undefined") return initialValue;
+  if (typeof window === 'undefined') return initialValue;
   try {
     const item = window.localStorage.getItem(key);
     return item ? (JSON.parse(item) as T) : initialValue;

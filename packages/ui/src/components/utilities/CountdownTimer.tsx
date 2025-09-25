@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from 'react';
 
-import { cn } from "../../utilities/cn";
-import { Container } from "../layout/Container";
+import { cn } from '../../utilities/cn';
+import { Container } from '../layout/Container';
 
 interface TimeLeftProps {
   days: number;
@@ -32,12 +32,12 @@ function calculateTimeLeft(target: Date): TimeLeftProps {
   };
 }
 
-type CountdownTimerSize = "small" | "medium" | "large";
+type CountdownTimerSize = 'small' | 'medium' | 'large';
 
 const sizeMap: Record<CountdownTimerSize, string> = {
-  small: "text-h3",
-  medium: "text-h2",
-  large: "text-h1",
+  small: 'text-h3',
+  medium: 'text-h2',
+  large: 'text-h1',
 };
 
 interface CountdownTimerLabels {
@@ -57,23 +57,23 @@ interface CountdownTimerProps {
 }
 
 const DEFAULT_LABELS: Required<CountdownTimerLabels> = {
-  days: "Days",
-  hours: "Hours",
-  minutes: "Minutes",
-  seconds: "Seconds",
+  days: 'Days',
+  hours: 'Hours',
+  minutes: 'Minutes',
+  seconds: 'Seconds',
 };
 
 export function CountdownTimer({
   targetDate,
-  size = "medium",
+  size = 'medium',
   onComplete,
   className,
   labels,
-  ariaLabel = "Countdown timer",
+  ariaLabel = 'Countdown timer',
 }: CountdownTimerProps) {
   const resolvedLabels = { ...DEFAULT_LABELS, ...labels };
   const target =
-    typeof targetDate === "string" ? new Date(targetDate) : targetDate;
+    typeof targetDate === 'string' ? new Date(targetDate) : targetDate;
 
   const [timeLeft, setTimeLeft] = useState<TimeLeftProps>(() =>
     calculateTimeLeft(target)
@@ -123,7 +123,7 @@ export function CountdownTimer({
     <Container
       size="full"
       padding="none"
-      className={cn("flex flex-wrap justify-center gap-space-4", className)}
+      className={cn('flex flex-wrap justify-center gap-space-4', className)}
       aria-live="polite"
       aria-label={ariaLabel}
     >
@@ -132,11 +132,11 @@ export function CountdownTimer({
           <div className="flex h-size-24 w-size-24 items-center justify-center rounded-lg border border-border-light bg-surface-elevated">
             <span
               className={cn(
-                "tabular-nums font-body text-gold-base",
+                'tabular-nums font-body text-gold-base',
                 sizeMap[size]
               )}
             >
-              {unit.value.toString().padStart(2, "0")}
+              {unit.value.toString().padStart(2, '0')}
             </span>
           </div>
 
@@ -149,4 +149,4 @@ export function CountdownTimer({
   );
 }
 
-CountdownTimer.displayName = "CountdownTimer";
+CountdownTimer.displayName = 'CountdownTimer';

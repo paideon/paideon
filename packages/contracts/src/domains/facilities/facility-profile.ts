@@ -1,19 +1,19 @@
 // packages/contracts/src/domains/facilities/facility-profile.ts
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { ImageSchema } from "../../primitives/media/index.ts";
+import { ImageSchema } from '../../primitives/media/index.ts';
 
 export const FacilityTypeEnum = z.enum([
-  "building",
-  "laboratory",
-  "auditorium",
-  "sports",
-  "pool",
-  "library",
+  'building',
+  'laboratory',
+  'auditorium',
+  'sports',
+  'pool',
+  'library',
 ]);
 
-export const FacilityCardVariantEnum = z.enum(["standard", "schedule"]);
+export const FacilityCardVariantEnum = z.enum(['standard', 'schedule']);
 
 export const FacilityScheduleSlotSchema = z.object({
   day: z.string().min(1),

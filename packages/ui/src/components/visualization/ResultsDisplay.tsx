@@ -1,8 +1,8 @@
 // packages/ui/src/components/visualization/ResultsDisplay.tsx
-"use client";
-import { cn } from "../../utilities/cn";
-import { ButtonLink } from "../atoms/ButtonLink";
-import { ResultsGradeBadge } from "../atoms/ResultsGradeBadge";
+'use client';
+import { cn } from '../../utilities/cn';
+import { ButtonLink } from '../atoms/ButtonLink';
+import { ResultsGradeBadge } from '../atoms/ResultsGradeBadge';
 
 export interface SubjectResultData {
   name: string;
@@ -12,7 +12,7 @@ export interface SubjectResultData {
 export interface ResultsDisplayProps {
   studentName: string;
   indexNumber: string;
-  examType: "OL" | "AL" | "SCHOLARSHIP";
+  examType: 'OL' | 'AL' | 'SCHOLARSHIP';
   year: number;
   subjects: SubjectResultData[];
   pdfUrl?: string;
@@ -31,15 +31,15 @@ export function ResultsDisplay({
   subjects,
   pdfUrl,
   className,
-  indexNumberLabel = "Index No:",
-  subjectLabel = "Subject",
-  gradeLabel = "Grade",
-  downloadLabel = "Download Official Result Sheet (PDF)",
+  indexNumberLabel = 'Index No:',
+  subjectLabel = 'Subject',
+  gradeLabel = 'Grade',
+  downloadLabel = 'Download Official Result Sheet (PDF)',
 }: ResultsDisplayProps) {
   return (
     <div
       className={cn(
-        "bg-surface-elevated border border-border-light rounded-lg p-space-6 shadow-elevation-0",
+        'bg-surface-elevated border border-border-light rounded-lg p-space-6 shadow-elevation-0',
         className
       )}
     >

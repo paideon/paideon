@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { useInView } from "../../hooks/useInView";
-import { cn } from "../../utilities/cn";
-import { ImageFrame } from "../media/ImageFrame";
-import { EyebrowLabel } from "../typography/EyebrowLabel";
-import { Heading } from "../typography/Heading";
-import { Text } from "../typography/Text";
+import { useInView } from '../../hooks/useInView';
+import { cn } from '../../utilities/cn';
+import { ImageFrame } from '../media/ImageFrame';
+import { EyebrowLabel } from '../typography/EyebrowLabel';
+import { Heading } from '../typography/Heading';
+import { Text } from '../typography/Text';
 
 interface TimelineEvent {
   id: string;
@@ -16,7 +16,7 @@ interface TimelineEvent {
   description: string;
   imageSrc?: string;
   imageAlt?: string;
-  era?: "early" | "mid" | "modern";
+  era?: 'early' | 'mid' | 'modern';
 }
 
 interface TimelineProps {
@@ -31,10 +31,10 @@ interface TimelineProps {
   getEventTabLabel?: (event: TimelineEvent) => string;
 }
 
-const eraImageClasses: Record<"early" | "mid" | "modern", string> = {
-  early: "sepia-[0.7] contrast-[1.1] brightness-[0.95]",
-  mid: "sepia-[0.3] contrast-[1.05]",
-  modern: "sepia-0 contrast-100",
+const eraImageClasses: Record<'early' | 'mid' | 'modern', string> = {
+  early: 'sepia-[0.7] contrast-[1.1] brightness-[0.95]',
+  mid: 'sepia-[0.3] contrast-[1.05]',
+  modern: 'sepia-0 contrast-100',
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -42,9 +42,9 @@ const eraImageClasses: Record<"early" | "mid" | "modern", string> = {
 export function Timeline({
   events,
   className,
-  prevLabel = "Previous event",
-  nextLabel = "Next event",
-  eventsLabel = "Timeline events",
+  prevLabel = 'Previous event',
+  nextLabel = 'Next event',
+  eventsLabel = 'Timeline events',
   getProgressLabel = (current, total) => `Event ${current} of ${total}`,
   getEventTabLabel = (event) => `Go to ${event.year}: ${event.title}`,
 }: TimelineProps) {
@@ -70,8 +70,8 @@ export function Timeline({
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
-    container.addEventListener("scroll", handleScroll, { passive: true });
-    return () => container.removeEventListener("scroll", handleScroll);
+    container.addEventListener('scroll', handleScroll, { passive: true });
+    return () => container.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
 
   // ── Nav buttons ──────────────────────────────────────────────────────────
@@ -81,7 +81,7 @@ export function Timeline({
     if (!container) return;
     const itemWidth =
       (container.firstElementChild as HTMLElement)?.offsetWidth ?? 0;
-    container.scrollTo({ left: index * itemWidth, behavior: "smooth" });
+    container.scrollTo({ left: index * itemWidth, behavior: 'smooth' });
   }, []);
 
   const canPrev = activeIndex > 0;
@@ -97,7 +97,7 @@ export function Timeline({
   // ─── Render ───────────────────────────────────────────────────────────────
 
   return (
-    <div ref={inViewRef} className={cn("relative", className)}>
+    <div ref={inViewRef} className={cn('relative', className)}>
       {/* Progress bar */}
       <div
         className="absolute top-space-0 left-space-0 right-space-0 h-size-px bg-border-light z-raised"
@@ -120,17 +120,17 @@ export function Timeline({
       >
         {events.map((event, idx) => {
           const isActive = idx === activeIndex;
-          const era = event.era ?? "modern";
+          const era = event.era ?? 'modern';
 
           return (
             <div
               key={event.id}
               aria-hidden={!isActive}
               className={cn(
-                "snap-start shrink-0 w-full md:w-[85%] lg:w-[70%] px-space-6 transition-all duration-slow ease-out",
+                'snap-start shrink-0 w-full md:w-[85%] lg:w-[70%] px-space-6 transition-all duration-slow ease-out',
                 isInView
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-6"
+                  ? 'opacity-100 translate-y-0'
+                  : 'opacity-0 translate-y-6'
               )}
               style={{ transitionDelay: `${idx * 0.08}s` }}
             >
@@ -138,7 +138,7 @@ export function Timeline({
                 {/* Image */}
                 <div
                   className={cn(
-                    "transition-all duration-slow",
+                    'transition-all duration-slow',
                     eraImageClasses[era]
                   )}
                 >
@@ -182,13 +182,13 @@ export function Timeline({
             disabled={!canPrev}
             aria-label={prevLabel}
             className={cn(
-              "w-size-10 h-size-10 rounded-full border-solid flex items-center justify-center",
-              "border-border-md border-border-default",
-              "font-body text-body-sm text-text-primary",
-              "transition-all duration-fast",
+              'w-size-10 h-size-10 rounded-full border-solid flex items-center justify-center',
+              'border-border-md border-border-default',
+              'font-body text-body-sm text-text-primary',
+              'transition-all duration-fast',
               canPrev
-                ? "hover:border-gold-base hover:text-gold-base cursor-pointer"
-                : "opacity-30 cursor-not-allowed"
+                ? 'hover:border-gold-base hover:text-gold-base cursor-pointer'
+                : 'opacity-30 cursor-not-allowed'
             )}
           >
             ←
@@ -198,13 +198,13 @@ export function Timeline({
             disabled={!canNext}
             aria-label={nextLabel}
             className={cn(
-              "w-size-10 h-size-10 rounded-full border-solid flex items-center justify-center",
-              "border-border-md border-border-default",
-              "font-body text-body-sm text-text-primary",
-              "transition-all duration-fast",
+              'w-size-10 h-size-10 rounded-full border-solid flex items-center justify-center',
+              'border-border-md border-border-default',
+              'font-body text-body-sm text-text-primary',
+              'transition-all duration-fast',
               canNext
-                ? "hover:border-gold-base hover:text-gold-base cursor-pointer"
-                : "opacity-30 cursor-not-allowed"
+                ? 'hover:border-gold-base hover:text-gold-base cursor-pointer'
+                : 'opacity-30 cursor-not-allowed'
             )}
           >
             →
@@ -225,10 +225,10 @@ export function Timeline({
               aria-label={getEventTabLabel(event)}
               onClick={() => scrollTo(idx)}
               className={cn(
-                "rounded-full transition-all duration-fast cursor-pointer",
+                'rounded-full transition-all duration-fast cursor-pointer',
                 idx === activeIndex
-                  ? "w-size-4 h-size-2 bg-gold-base"
-                  : "w-size-2 h-size-2 bg-border-default hover:bg-gold-base/50"
+                  ? 'w-size-4 h-size-2 bg-gold-base'
+                  : 'w-size-2 h-size-2 bg-border-default hover:bg-gold-base/50'
               )}
             />
           ))}
@@ -236,8 +236,8 @@ export function Timeline({
 
         {/* Counter */}
         <Text variant="caption" color="muted">
-          {String(activeIndex + 1).padStart(2, "0")} /{" "}
-          {String(events.length).padStart(2, "0")}
+          {String(activeIndex + 1).padStart(2, '0')} /{' '}
+          {String(events.length).padStart(2, '0')}
         </Text>
       </div>
 

@@ -13,9 +13,9 @@
 // — that one is school-wide (home page + a dedicated achievements list,
 // Task 7.19), this one is scoped to a single extracurricular activity.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { AchievementLevel } from "../../editorial/achievements/achievement.ts";
+import { AchievementLevel } from '../../editorial/achievements/achievement.ts';
 
 export const ExtracurricularAchievementSchema = z.object({
   id: z.string().min(1),

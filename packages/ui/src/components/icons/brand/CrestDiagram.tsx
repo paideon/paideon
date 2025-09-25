@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import type { CrestSymbol } from "@paideon/contracts";
-import { motion } from "framer-motion";
-import { useState, useRef, useEffect, useCallback } from "react";
+import type { CrestSymbol } from '@paideon/contracts';
+import { motion } from 'framer-motion';
+import { useState, useRef, useEffect, useCallback } from 'react';
 
-import { SchoolLogo } from "./SchoolLogo";
-import { cn } from "../../../utilities/cn";
-import { SvgDebugGrid } from "../../dev/SvgDebugGrid";
-import { Container } from "../../layout/Container";
-import { EyebrowLabel } from "../../typography/EyebrowLabel";
-import { Text } from "../../typography/Text";
+import { SchoolLogo } from './SchoolLogo';
+import { cn } from '../../../utilities/cn';
+import { SvgDebugGrid } from '../../dev/SvgDebugGrid';
+import { Container } from '../../layout/Container';
+import { EyebrowLabel } from '../../typography/EyebrowLabel';
+import { Text } from '../../typography/Text';
 
 type HotspotPosition =
-  | "top-right"
-  | "bottom-right"
-  | "top-left"
-  | "bottom-left";
+  | 'top-right'
+  | 'bottom-right'
+  | 'top-left'
+  | 'bottom-left';
 
-type DiagramVariant = "ambient" | "hold" | "click";
+type DiagramVariant = 'ambient' | 'hold' | 'click';
 
 export interface CrestDiagramProps {
   symbols?: CrestSymbol[];
@@ -27,53 +27,53 @@ export interface CrestDiagramProps {
 }
 
 const DOT_POSITIONS: Record<HotspotPosition, string> = {
-  "top-right": "top-[20%] -right-[11px]",
-  "bottom-right": "bottom-[20%] -right-[11px]",
-  "top-left": "top-[20%] -left-[11px]",
-  "bottom-left": "bottom-[20%] -left-[11px]",
+  'top-right': 'top-[20%] -right-[11px]',
+  'bottom-right': 'bottom-[20%] -right-[11px]',
+  'top-left': 'top-[20%] -left-[11px]',
+  'bottom-left': 'bottom-[20%] -left-[11px]',
 };
 
 const LABEL_POSITIONS: Record<HotspotPosition, string> = {
-  "top-right": "top-[8%] right-[6%]",
-  "bottom-right": "bottom-[8%] right-[6%]",
-  "top-left": "top-[8%] left-[6%]",
-  "bottom-left": "bottom-[8%] left-[6%]",
+  'top-right': 'top-[8%] right-[6%]',
+  'bottom-right': 'bottom-[8%] right-[6%]',
+  'top-left': 'top-[8%] left-[6%]',
+  'bottom-left': 'bottom-[8%] left-[6%]',
 };
 
 const DEFAULT_SYMBOLS: CrestSymbol[] = [
   {
-    id: "lamp",
-    name: "The Lamp of Knowledge",
+    id: 'lamp',
+    name: 'The Lamp of Knowledge',
     meaning:
-      "The oil lamp — Pahana — represents the light of education driving away the darkness of ignorance.",
-    position: "top-right",
+      'The oil lamp — Pahana — represents the light of education driving away the darkness of ignorance.',
+    position: 'top-right',
   },
   {
-    id: "lotus",
-    name: "The Lotus",
+    id: 'lotus',
+    name: 'The Lotus',
     meaning:
-      "Rising from murky water to bloom in perfect form, the lotus symbolises the potential within every student — regardless of circumstance — to achieve purity and excellence.",
-    position: "top-left",
+      'Rising from murky water to bloom in perfect form, the lotus symbolises the potential within every student — regardless of circumstance — to achieve purity and excellence.',
+    position: 'top-left',
   },
   {
-    id: "dharmachakra",
-    name: "The Dharmachakra",
+    id: 'dharmachakra',
+    name: 'The Dharmachakra',
     meaning:
-      "The wheel of the dharma represents truth, righteousness, and the cyclical pursuit of wisdom. It reminds us that learning is never finished.",
-    position: "bottom-left",
+      'The wheel of the dharma represents truth, righteousness, and the cyclical pursuit of wisdom. It reminds us that learning is never finished.',
+    position: 'bottom-left',
   },
   {
-    id: "laurel",
-    name: "The Laurel",
+    id: 'laurel',
+    name: 'The Laurel',
     meaning:
-      "The laurel wreath encircling the crest signifies achievement, honour, and the recognition of excellence in academic, sporting, and cultural endeavour.",
-    position: "bottom-right",
+      'The laurel wreath encircling the crest signifies achievement, honour, and the recognition of excellence in academic, sporting, and cultural endeavour.',
+    position: 'bottom-right',
   },
 ];
 
 export function CrestDiagram({
   symbols = DEFAULT_SYMBOLS,
-  variant = "ambient",
+  variant = 'ambient',
   className,
   debug,
 }: CrestDiagramProps) {
@@ -89,7 +89,7 @@ export function CrestDiagram({
 
   // ── Unified Interaction Handlers ──
   const handlePointerEnter = (id: string) => {
-    if (variant === "ambient") {
+    if (variant === 'ambient') {
       setActiveId(id);
     } else {
       setHoveredId(id);
@@ -97,9 +97,9 @@ export function CrestDiagram({
   };
 
   const handlePointerLeave = () => {
-    if (variant === "ambient") {
+    if (variant === 'ambient') {
       setActiveId(null);
-    } else if (variant === "hold") {
+    } else if (variant === 'hold') {
       setHoveredId(null);
       setActiveId(null);
     } else {
@@ -108,15 +108,15 @@ export function CrestDiagram({
   };
 
   const handlePointerDown = (id: string) => {
-    if (variant === "hold") setActiveId(id);
+    if (variant === 'hold') setActiveId(id);
   };
 
   const handlePointerUp = () => {
-    if (variant === "hold") setActiveId(null);
+    if (variant === 'hold') setActiveId(null);
   };
 
   const handleClick = (id: string) => {
-    if (variant === "click") {
+    if (variant === 'click') {
       setActiveId((prev) => (prev === id ? null : id));
     }
   };
@@ -145,7 +145,7 @@ export function CrestDiagram({
 
       const dotX = dotRect.left - container.left + dotRect.width / 2;
       const dotY = dotRect.top - container.top + dotRect.height / 2;
-      const isLeft = symbol.position?.includes("left") ?? false;
+      const isLeft = symbol.position?.includes('left') ?? false;
 
       const labelX = isLeft
         ? labelRect.right - container.left
@@ -169,13 +169,13 @@ export function CrestDiagram({
     const observer = new ResizeObserver(() => calculateLines());
     observer.observe(container);
 
-    window.addEventListener("resize", calculateLines);
+    window.addEventListener('resize', calculateLines);
     document.fonts?.ready.then(() => calculateLines());
 
     return () => {
       cancelAnimationFrame(timer);
       observer.disconnect();
-      window.removeEventListener("resize", calculateLines);
+      window.removeEventListener('resize', calculateLines);
     };
   }, [calculateLines]);
 
@@ -183,8 +183,8 @@ export function CrestDiagram({
     <div
       ref={containerRef}
       className={cn(
-        "relative select-none w-size-screen-w-80 aspect-[190/100]",
-        "my-space-2 bg-surface-active rounded-md overflow-hidden",
+        'relative select-none w-size-screen-w-80 aspect-[190/100]',
+        'my-space-2 bg-surface-active rounded-md overflow-hidden',
         className
       )}
     >
@@ -212,22 +212,22 @@ export function CrestDiagram({
           if (!points) return null;
 
           const shouldAnimate =
-            variant === "ambient" || (isHovered && !isActive);
+            variant === 'ambient' || (isHovered && !isActive);
 
           return (
             <motion.polyline
               key={symbol.id}
               points={points}
               className={cn(
-                "fill-none transition-colors duration-300 ease-out",
+                'fill-none transition-colors duration-300 ease-out',
                 isActive
-                  ? "stroke-gold-base"
-                  : isHovered && variant !== "ambient"
-                  ? "stroke-gold-base/60"
-                  : "stroke-border-strong/70"
+                  ? 'stroke-gold-base'
+                  : isHovered && variant !== 'ambient'
+                  ? 'stroke-gold-base/60'
+                  : 'stroke-border-strong/70'
               )}
               strokeWidth={isActive ? 2.5 : 2}
-              strokeDasharray={isActive && variant !== "ambient" ? "0" : "4 4"}
+              strokeDasharray={isActive && variant !== 'ambient' ? '0' : '4 4'}
               strokeLinejoin="round"
               animate={
                 shouldAnimate
@@ -236,8 +236,8 @@ export function CrestDiagram({
               }
               transition={{
                 repeat: Infinity,
-                duration: variant === "ambient" ? 1.2 : 1,
-                ease: "linear",
+                duration: variant === 'ambient' ? 1.2 : 1,
+                ease: 'linear',
               }}
             />
           );
@@ -248,10 +248,10 @@ export function CrestDiagram({
       <Container
         padding="none"
         className={cn(
-          "w-size-screen-w-20 aspect-[1/1.2]",
-          "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-raised",
-          "rounded-md bg-surface-elevated border-border-sm border-solid border-border-light shadow-elevation-3",
-          "flex items-center justify-center"
+          'w-size-screen-w-20 aspect-[1/1.2]',
+          'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-raised',
+          'rounded-md bg-surface-elevated border-border-sm border-solid border-border-light shadow-elevation-3',
+          'flex items-center justify-center'
         )}
       >
         <SchoolLogo />
@@ -269,17 +269,17 @@ export function CrestDiagram({
               onPointerEnter={() => handlePointerEnter(symbol.id)}
               onPointerLeave={handlePointerLeave}
               className={cn(
-                "absolute z-overlay cursor-pointer w-size-5 h-size-5 rounded-full border-border-sm border-solid transition-all duration-300",
+                'absolute z-overlay cursor-pointer w-size-5 h-size-5 rounded-full border-border-sm border-solid transition-all duration-300',
                 DOT_POSITIONS[
-                  (symbol.position as HotspotPosition) || "top-right"
+                  (symbol.position as HotspotPosition) || 'top-right'
                 ],
                 isActive
-                  ? variant === "ambient"
-                    ? "bg-gold-base border-gold-base ring-4 ring-gold-base/30 scale-125 shadow-md"
-                    : "bg-gold-base border-gold-base ring-4 ring-gold-base/30 scale-110"
-                  : isHovered && variant !== "ambient"
-                  ? "bg-surface-elevated border-gold-base scale-125 shadow-md"
-                  : "bg-surface-base border-border-default hover:border-gold-base"
+                  ? variant === 'ambient'
+                    ? 'bg-gold-base border-gold-base ring-4 ring-gold-base/30 scale-125 shadow-md'
+                    : 'bg-gold-base border-gold-base ring-4 ring-gold-base/30 scale-110'
+                  : isHovered && variant !== 'ambient'
+                  ? 'bg-surface-elevated border-gold-base scale-125 shadow-md'
+                  : 'bg-surface-base border-border-default hover:border-gold-base'
               )}
             />
           );
@@ -292,8 +292,8 @@ export function CrestDiagram({
         const isHovered = hoveredId === symbol.id;
 
         const isDimmed =
-          activeId !== null && !isActive && (variant !== "click" || !isHovered);
-        const isHighlighted = isActive || (variant !== "ambient" && isHovered);
+          activeId !== null && !isActive && (variant !== 'click' || !isHovered);
+        const isHighlighted = isActive || (variant !== 'ambient' && isHovered);
 
         return (
           <button
@@ -305,29 +305,29 @@ export function CrestDiagram({
             onPointerEnter={() => handlePointerEnter(symbol.id)}
             onPointerLeave={handlePointerLeave}
             className={cn(
-              "absolute w-size-screen-w-20 text-center cursor-pointer bg-surface-elevated border-border-sm border-solid transition-all duration-300 z-dropdown rounded-md p-space-1p5",
+              'absolute w-size-screen-w-20 text-center cursor-pointer bg-surface-elevated border-border-sm border-solid transition-all duration-300 z-dropdown rounded-md p-space-1p5',
               isDimmed
-                ? "opacity-20 scale-95 grayscale"
-                : "opacity-100 scale-100",
+                ? 'opacity-20 scale-95 grayscale'
+                : 'opacity-100 scale-100',
               isHighlighted
-                ? "border-gold-base shadow-lg -translate-y-1"
-                : "border-border-light shadow-sm",
+                ? 'border-gold-base shadow-lg -translate-y-1'
+                : 'border-border-light shadow-sm',
               LABEL_POSITIONS[
-                (symbol.position as HotspotPosition) || "top-right"
+                (symbol.position as HotspotPosition) || 'top-right'
               ]
             )}
           >
             <EyebrowLabel
               className={cn(
-                "transition-colors duration-fast block",
-                isHighlighted ? "text-gold-base" : "text-text-muted"
+                'transition-colors duration-fast block',
+                isHighlighted ? 'text-gold-base' : 'text-text-muted'
               )}
             >
               {symbol.name}
             </EyebrowLabel>
             <Text
               variant="body-sm"
-              color={isHighlighted ? "gold" : "muted"}
+              color={isHighlighted ? 'gold' : 'muted'}
               className="mt-space-1 normal-case tracking-normal transition-colors duration-fast"
             >
               {symbol.meaning}

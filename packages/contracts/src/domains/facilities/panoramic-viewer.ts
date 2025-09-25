@@ -2,7 +2,7 @@
 
 // Panoramic facility viewer — 360° photo with interactive hotspots.
 
-import { z } from "zod";
+import { z } from 'zod';
 
 export const HotspotSchema = z.object({
   id: z.string().min(1),

@@ -1,9 +1,9 @@
 // packages/contracts/src/blocks/page-specific/values-grid.ts
 // Defines the schema for values-grid blocks and their value items.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { VALUES_GRID_BLOCK } from "../block-type.js";
+import { VALUES_GRID_BLOCK } from '../block-type.js';
 
 export const ValueItemSchema = z.object({
   id: z.string(),

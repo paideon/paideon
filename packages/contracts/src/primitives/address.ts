@@ -5,7 +5,7 @@
 // than either domain because tier-4 siblings can't import each other.
 //
 
-import { z } from "zod";
+import { z } from 'zod';
 
 export const AddressSchema = z.object({
   street: z.string().min(1),

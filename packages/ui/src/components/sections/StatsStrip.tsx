@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { motion, useReducedMotion, useTransform } from "framer-motion";
-import { ReactNode } from "react";
+import { motion, useReducedMotion, useTransform } from 'framer-motion';
+import { ReactNode } from 'react';
 
-import { useCountUp } from "../../hooks/useCountUp";
-import { cn } from "../../utilities/cn";
-import { Icon } from "../icons";
-import { Container } from "../layout/Container";
-import { Grid } from "../layout/Grid";
-import { Text } from "../typography/Text";
+import { useCountUp } from '../../hooks/useCountUp';
+import { cn } from '../../utilities/cn';
+import { Icon } from '../icons';
+import { Container } from '../layout/Container';
+import { Grid } from '../layout/Grid';
+import { Text } from '../typography/Text';
 
-export type StatTrendDirection = "up" | "down" | "neutral";
-export type StatVariant = "default" | "compact";
+export type StatTrendDirection = 'up' | 'down' | 'neutral';
+export type StatVariant = 'default' | 'compact';
 
 type TrendProps = {
   direction: StatTrendDirection;
@@ -32,7 +32,7 @@ export interface StatItem {
   trend?: TrendProps;
   tooltip?: {
     content: string;
-    position?: "top" | "bottom" | "left" | "right";
+    position?: 'top' | 'bottom' | 'left' | 'right';
   };
   ariaLabel?: string;
   duration?: number; // seconds (will be auto‑scaled by useCountUp)
@@ -41,26 +41,26 @@ export interface StatItem {
 
 const TrendIndicator = ({ direction, value, label }: TrendProps) => {
   const iconConfig = {
-    up: { icon: <Icon name="arrow-up" />, color: "text-semantic-success-base" },
+    up: { icon: <Icon name="arrow-up" />, color: 'text-semantic-success-base' },
     down: {
       icon: <Icon name="arrow-down" />,
-      color: "text-semantic-error-base",
+      color: 'text-semantic-error-base',
     },
-    neutral: { icon: <Icon name="minus" />, color: "text-semantic-info-base" },
+    neutral: { icon: <Icon name="minus" />, color: 'text-semantic-info-base' },
   };
   const { icon, color } = iconConfig[direction];
 
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-space-1 px-space-2 py-space-0p5 rounded-full",
-        "bg-surface-deep border border-border-light text-caption"
+        'inline-flex items-center gap-space-1 px-space-2 py-space-0p5 rounded-full',
+        'bg-surface-deep border border-border-light text-caption'
       )}
     >
       <span className={color} aria-hidden="true">
         {icon}
       </span>
-      <span className={cn("font-semibold", color)}>{value}</span>
+      <span className={cn('font-semibold', color)}>{value}</span>
       {label && <span className="text-text-muted font-label">{label}</span>}
     </span>
   );
@@ -90,31 +90,31 @@ const StatCard = ({
   // Reactive formatting – animated value drives the displayed string
   const formatted = useTransform(value, (v) => {
     const num = Math.floor(v);
-    const parts = num.toString().split(".");
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, stat.separator ?? ",");
-    const intPart = parts.join(".");
-    return `${stat.prefix ?? ""}${intPart}${stat.suffix ?? ""}`;
+    const parts = num.toString().split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, stat.separator ?? ',');
+    const intPart = parts.join('.');
+    return `${stat.prefix ?? ''}${intPart}${stat.suffix ?? ''}`;
   });
 
-  const isCompact = variant === "compact";
+  const isCompact = variant === 'compact';
 
   return (
     <motion.div
       // Cast ref to satisfy motion.div (HTMLDivElement vs HTMLElement)
       ref={countUpRef as React.RefObject<HTMLDivElement>}
       className={cn(
-        "group relative flex flex-col items-center text-center",
-        "bg-surface-elevated border border-border-light rounded-lg",
-        "transition-all duration-gentle ease-out",
-        "hover:shadow-elevation-3 hover:-translate-y-1",
-        isCompact ? "p-space-5" : "p-space-7"
+        'group relative flex flex-col items-center text-center',
+        'bg-surface-elevated border border-border-light rounded-lg',
+        'transition-all duration-gentle ease-out',
+        'hover:shadow-elevation-3 hover:-translate-y-1',
+        isCompact ? 'p-space-5' : 'p-space-7'
       )}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
+      viewport={{ once: true, margin: '-40px' }}
       transition={{
         duration: prefersReduced ? 0 : 0.4,
-        ease: "easeOut",
+        ease: 'easeOut',
         delay: prefersReduced ? 0 : index * 0.05,
       }}
     >
@@ -127,9 +127,9 @@ const StatCard = ({
       {/* MotionValue drives the number – smooth, no React state per frame */}
       <motion.span
         className={cn(
-          "font-display font-medium text-gold-base",
-          isCompact ? "text-h3" : "text-h2",
-          "whitespace-nowrap"
+          'font-display font-medium text-gold-base',
+          isCompact ? 'text-h3' : 'text-h2',
+          'whitespace-nowrap'
         )}
       >
         {formatted}
@@ -137,7 +137,7 @@ const StatCard = ({
 
       <Text
         variant="label"
-        className={cn("mt-space-3", isCompact && "text-label-sm")}
+        className={cn('mt-space-3', isCompact && 'text-label-sm')}
       >
         {stat.label}
       </Text>
@@ -146,7 +146,7 @@ const StatCard = ({
         <Text
           variant="caption"
           color="muted"
-          className={cn("mt-space-1", isCompact && "hidden md:block")}
+          className={cn('mt-space-1', isCompact && 'hidden md:block')}
         >
           {stat.description}
         </Text>
@@ -171,7 +171,7 @@ export interface StatsStripProps {
 
 export function StatsStrip({
   stats = [],
-  variant = "default",
+  variant = 'default',
   duration,
   className,
 }: StatsStripProps) {

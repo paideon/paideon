@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 import {
   motion,
   useInView,
   useMotionValue,
   useSpring,
   useTransform,
-} from "framer-motion";
+} from 'framer-motion';
 
 export interface CountUpProps {
   to: number;
@@ -25,13 +25,13 @@ export function CountUp({
   from = 0,
   duration = 2,
   decimals = 0,
-  prefix = "",
-  suffix = "",
+  prefix = '',
+  suffix = '',
   separator = false,
   className,
 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement | null>(null);
-  const isInView = useInView(ref, { once: true, margin: "-20%" });
+  const isInView = useInView(ref, { once: true, margin: '-20%' });
   const value = useMotionValue(from);
   const spring = useSpring(value, { damping: 18, stiffness: 80 });
   const display = useTransform(spring, (current) => {

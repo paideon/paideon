@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { z, type ZodType } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z, type ZodType } from 'zod';
 
-import { Checkbox } from "./Checkbox";
-import { FormFieldGroup } from "./FormFieldGroup";
-import { FormValidationSummary } from "./FormValidationSummary";
-import { Input } from "./Input";
-import { Select } from "./Select";
-import { Textarea } from "./Textarea";
-import { Button } from "../atoms/Button";
+import { Checkbox } from './Checkbox';
+import { FormFieldGroup } from './FormFieldGroup';
+import { FormValidationSummary } from './FormValidationSummary';
+import { Input } from './Input';
+import { Select } from './Select';
+import { Textarea } from './Textarea';
+import { Button } from '../atoms/Button';
 
 const CATEGORY_VALUES = [
-  "ACADEMIC",
-  "FACILITIES",
-  "ADMINISTRATION",
-  "GENERAL",
+  'ACADEMIC',
+  'FACILITIES',
+  'ADMINISTRATION',
+  'GENERAL',
 ] as const;
 export type FeedbackCategory = (typeof CATEGORY_VALUES)[number];
 
@@ -29,7 +29,7 @@ export function buildFeedbackSchema(messages?: { message?: string }) {
     category: z.enum(CATEGORY_VALUES),
     message: z
       .string()
-      .min(10, messages?.message ?? "Message must be at least 10 characters"),
+      .min(10, messages?.message ?? 'Message must be at least 10 characters'),
     anonymous: z.boolean().optional(),
   });
 }
@@ -67,23 +67,23 @@ export interface FeedbackFormProps {
 }
 
 const DEFAULT_LABELS: Required<FeedbackFormLabels> = {
-  name: "Your Name (optional)",
-  namePlaceholder: "You can remain anonymous",
+  name: 'Your Name (optional)',
+  namePlaceholder: 'You can remain anonymous',
   nameHelperText:
     "If you choose to remain anonymous, we won't contact you directly.",
-  category: "Category",
+  category: 'Category',
   categoryOptions: {
-    ACADEMIC: "Academics",
-    FACILITIES: "Facilities",
-    ADMINISTRATION: "Administration",
-    GENERAL: "General",
+    ACADEMIC: 'Academics',
+    FACILITIES: 'Facilities',
+    ADMINISTRATION: 'Administration',
+    GENERAL: 'General',
   },
-  message: "Your Feedback",
-  messagePlaceholder: "Please share your thoughts, suggestions, or concerns...",
-  anonymous: "Submit anonymously (do not store my name)",
-  submit: "Submit Feedback",
-  successMessage: "Thank you for your feedback!",
-  errorMessage: "Submission failed. Please try again.",
+  message: 'Your Feedback',
+  messagePlaceholder: 'Please share your thoughts, suggestions, or concerns...',
+  anonymous: 'Submit anonymously (do not store my name)',
+  submit: 'Submit Feedback',
+  successMessage: 'Thank you for your feedback!',
+  errorMessage: 'Submission failed. Please try again.',
 };
 
 export function FeedbackForm({
@@ -102,8 +102,8 @@ export function FeedbackForm({
   };
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
-    "idle" | "success" | "error"
-  >("idle");
+    'idle' | 'success' | 'error'
+  >('idle');
 
   const {
     register,
@@ -112,7 +112,7 @@ export function FeedbackForm({
     reset,
   } = useForm<FeedbackFormValues>({
     resolver: zodResolver(schema ?? buildFeedbackSchema()),
-    defaultValues: { anonymous: false, category: "GENERAL" },
+    defaultValues: { anonymous: false, category: 'GENERAL' },
   });
 
   const categoryOptions = CATEGORY_VALUES.map((value) => ({
@@ -122,14 +122,14 @@ export function FeedbackForm({
 
   const handleFormSubmit = async (data: FeedbackFormValues) => {
     setIsSubmitting(true);
-    setSubmitStatus("idle");
+    setSubmitStatus('idle');
     try {
       await onSubmit(data);
-      setSubmitStatus("success");
+      setSubmitStatus('success');
       reset();
-      setTimeout(() => setSubmitStatus("idle"), 3000);
+      setTimeout(() => setSubmitStatus('idle'), 3000);
     } catch {
-      setSubmitStatus("error");
+      setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
     }
@@ -138,17 +138,17 @@ export function FeedbackForm({
   return (
     <form
       onSubmit={handleSubmit(handleFormSubmit)}
-      className={className ?? "flex flex-col gap-space-6"}
+      className={className ?? 'flex flex-col gap-space-6'}
     >
       <FormValidationSummary
-        errors={submitStatus === "error" ? [resolvedLabels.errorMessage] : null}
+        errors={submitStatus === 'error' ? [resolvedLabels.errorMessage] : null}
       />
 
       <FormFieldGroup>
         <Input
           label={resolvedLabels.name}
           placeholder={resolvedLabels.namePlaceholder}
-          {...register("name")}
+          {...register('name')}
           error={errors.name?.message}
           helperText={resolvedLabels.nameHelperText}
         />
@@ -156,7 +156,7 @@ export function FeedbackForm({
         <Select
           label={resolvedLabels.category}
           options={categoryOptions}
-          {...register("category")}
+          {...register('category')}
           error={errors.category?.message}
         />
 
@@ -164,18 +164,18 @@ export function FeedbackForm({
           label={resolvedLabels.message}
           placeholder={resolvedLabels.messagePlaceholder}
           rows={5}
-          {...register("message")}
+          {...register('message')}
           error={errors.message?.message}
         />
 
-        <Checkbox label={resolvedLabels.anonymous} {...register("anonymous")} />
+        <Checkbox label={resolvedLabels.anonymous} {...register('anonymous')} />
       </FormFieldGroup>
 
       <Button type="submit" loading={isSubmitting} fullWidth>
         {resolvedLabels.submit}
       </Button>
 
-      {submitStatus === "success" && (
+      {submitStatus === 'success' && (
         <p className="text-center text-semantic-success-base font-body text-body-sm">
           {resolvedLabels.successMessage}
         </p>

@@ -1,7 +1,7 @@
-import type { AlumniCardData } from "@paideon/contracts";
-import Image from "next/image";
+import type { AlumniCardData } from '@paideon/contracts';
+import Image from 'next/image';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
 export interface AlumniCardProps extends AlumniCardData {
   className?: string;
@@ -16,15 +16,15 @@ export function AlumniCard({
   currentRole,
   portrait,
   className,
-  graduationYearLabel = "Class of",
-  currentRoleLabel = "",
+  graduationYearLabel = 'Class of',
+  currentRoleLabel = '',
 }: AlumniCardProps) {
   return (
     <div
       className={cn(
-        "bg-surface-elevated border border-border-light overflow-hidden",
-        "shadow-elevation-1 transition-all duration-gentle",
-        "hover:shadow-elevation-2 hover:-translate-y-0.5",
+        'bg-surface-elevated border border-border-light overflow-hidden',
+        'shadow-elevation-1 transition-all duration-gentle',
+        'hover:shadow-elevation-2 hover:-translate-y-0.5',
         className
       )}
     >

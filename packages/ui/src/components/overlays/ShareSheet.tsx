@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { createPortal } from "react-dom";
+import { useState } from 'react';
+import { createPortal } from 'react-dom';
 
-import { Button } from "../atoms/Button";
+import { Button } from '../atoms/Button';
 
-export type SharePlatform = "whatsapp" | "facebook" | "copy";
+export type SharePlatform = 'whatsapp' | 'facebook' | 'copy';
 
 export interface ShareSheetLabels {
   title?: string;
@@ -29,12 +29,12 @@ export interface ShareSheetProps {
 }
 
 const DEFAULT_LABELS: Required<ShareSheetLabels> = {
-  title: "Share this",
-  whatsapp: "WhatsApp",
-  facebook: "Facebook",
-  copyLink: "Copy Link",
-  copied: "Copied!",
-  cancel: "Cancel",
+  title: 'Share this',
+  whatsapp: 'WhatsApp',
+  facebook: 'Facebook',
+  copyLink: 'Copy Link',
+  copied: 'Copied!',
+  cancel: 'Cancel',
 };
 
 export function ShareSheet({
@@ -43,7 +43,7 @@ export function ShareSheet({
   title,
   url,
   text,
-  platforms = ["whatsapp", "facebook", "copy"],
+  platforms = ['whatsapp', 'facebook', 'copy'],
   labels,
 }: ShareSheetProps) {
   const resolvedLabels = { ...DEFAULT_LABELS, ...labels };
@@ -53,14 +53,14 @@ export function ShareSheet({
   const shareViaWhatsApp = () => {
     window.open(
       `https://wa.me/?text=${encodeURIComponent(`${shareBody}\n${url}`)}`,
-      "_blank"
+      '_blank'
     );
   };
 
   const shareViaFacebook = () => {
     window.open(
       `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
-      "_blank"
+      '_blank'
     );
   };
 
@@ -86,7 +86,7 @@ export function ShareSheet({
         <div className="p-6">
           <h3 className="font-display text-h3 mb-4">{resolvedLabels.title}</h3>
           <div className="flex gap-4 justify-around mb-6">
-            {platforms.includes("whatsapp") && (
+            {platforms.includes('whatsapp') && (
               <button
                 onClick={shareViaWhatsApp}
                 className="flex flex-col items-center gap-2 text-green-base hover:text-gold-base transition-colors"
@@ -104,7 +104,7 @@ export function ShareSheet({
                 </span>
               </button>
             )}
-            {platforms.includes("facebook") && (
+            {platforms.includes('facebook') && (
               <button
                 onClick={shareViaFacebook}
                 className="flex flex-col items-center gap-2 text-blue-700 hover:text-gold-base transition-colors"
@@ -122,7 +122,7 @@ export function ShareSheet({
                 </span>
               </button>
             )}
-            {platforms.includes("copy") && (
+            {platforms.includes('copy') && (
               <button
                 onClick={copyLink}
                 className="flex flex-col items-center gap-2 text-gold-base hover:text-gold-hover transition-colors"

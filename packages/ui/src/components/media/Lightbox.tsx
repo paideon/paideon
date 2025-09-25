@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import type { LightboxImageData } from "@paideon/contracts";
-import { useEffect, useState, useCallback } from "react";
-import { createPortal } from "react-dom";
+import type { LightboxImageData } from '@paideon/contracts';
+import { useEffect, useState, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 
-import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
+import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 
 export type LightboxImage = LightboxImageData;
 
@@ -23,9 +23,9 @@ export function Lightbox({
   initialIndex = 0,
   isOpen,
   onClose,
-  closeLabel = "Close lightbox",
-  prevLabel = "Previous image",
-  nextLabel = "Next image",
+  closeLabel = 'Close lightbox',
+  prevLabel = 'Previous image',
+  nextLabel = 'Next image',
 }: LightboxProps) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [mounted, setMounted] = useState(false);
@@ -44,12 +44,12 @@ export function Lightbox({
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!isOpen) return;
-      if (e.key === "Escape") onClose();
-      if (e.key === "ArrowLeft") goPrev();
-      if (e.key === "ArrowRight") goNext();
+      if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowLeft') goPrev();
+      if (e.key === 'ArrowRight') goNext();
     };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, currentIndex]);
 
   const goPrev = useCallback(() => {

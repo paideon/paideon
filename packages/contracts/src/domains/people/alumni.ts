@@ -1,11 +1,11 @@
 // packages/contracts/src/domains/people/alumni.ts
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { AvatarSchema } from "../../primitives/media/index.ts";
-import { ALStreamEnum } from "../academics/al-stream.ts";
+import { AvatarSchema } from '../../primitives/media/index.ts';
+import { ALStreamEnum } from '../academics/al-stream.ts';
 
-export const AlumniStatusEnum = z.enum(["PENDING", "APPROVED", "REJECTED"]);
+export const AlumniStatusEnum = z.enum(['PENDING', 'APPROVED', 'REJECTED']);
 
 export const AlumniSchema = z.object({
   id: z.string().min(1),
@@ -38,7 +38,7 @@ export const AlumniInputSchema = z.object({
   portrait: AvatarSchema.optional(),
   quote: z.string().optional(),
   isFeatureworthy: z.boolean().optional(),
-  status: AlumniStatusEnum.default("PENDING"),
+  status: AlumniStatusEnum.default('PENDING'),
   rejectionReason: z.string().optional(),
 });
 

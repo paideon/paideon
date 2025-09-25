@@ -1,11 +1,11 @@
 // packages/ui/src/components/visualization/DataTable.tsx
-"use client";
+'use client';
 
-import { useState, useCallback } from "react";
+import { useState, useCallback } from 'react';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
-export type SortDirection = "asc" | "desc" | null;
+export type SortDirection = 'asc' | 'desc' | null;
 
 export interface Column<T> {
   key: keyof T;
@@ -37,7 +37,7 @@ export function DataTable<T extends Record<string, unknown>>({
   data,
   onSort,
   onRowClick,
-  emptyMessage = "No data found",
+  emptyMessage = 'No data found',
   isLoading = false,
   getRowKey = (_row, index) => index,
 }: DataTableProps<T>) {
@@ -47,10 +47,10 @@ export function DataTable<T extends Record<string, unknown>>({
   const handleSort = useCallback(
     (key: keyof T) => {
       if (!onSort) return;
-      let newDirection: SortDirection = "asc";
+      let newDirection: SortDirection = 'asc';
       if (sortKey === key) {
-        if (sortDirection === "asc") newDirection = "desc";
-        else if (sortDirection === "desc") newDirection = null;
+        if (sortDirection === 'asc') newDirection = 'desc';
+        else if (sortDirection === 'desc') newDirection = null;
       }
       setSortKey(newDirection ? key : null);
       setSortDirection(newDirection);
@@ -76,9 +76,9 @@ export function DataTable<T extends Record<string, unknown>>({
               <th
                 key={String(col.key)}
                 className={cn(
-                  "px-space-4 py-space-3 text-left font-body text-label uppercase tracking-wider text-text-muted",
+                  'px-space-4 py-space-3 text-left font-body text-label uppercase tracking-wider text-text-muted',
                   col.sortable &&
-                    "cursor-pointer hover:text-gold-base transition-colors",
+                    'cursor-pointer hover:text-gold-base transition-colors',
                   col.className
                 )}
                 onClick={() => col.sortable && handleSort(col.key)}
@@ -87,7 +87,7 @@ export function DataTable<T extends Record<string, unknown>>({
                   {col.header}
                   {col.sortable && sortKey === col.key && (
                     <span className="text-gold-base">
-                      {sortDirection === "asc" ? "↑" : "↓"}
+                      {sortDirection === 'asc' ? '↑' : '↓'}
                     </span>
                   )}
                 </div>
@@ -111,15 +111,15 @@ export function DataTable<T extends Record<string, unknown>>({
                 key={getRowKey(row, idx)}
                 onClick={() => onRowClick?.(row)}
                 className={cn(
-                  "border-b border-border-light transition-colors",
-                  onRowClick && "cursor-pointer hover:bg-surface-deep/50"
+                  'border-b border-border-light transition-colors',
+                  onRowClick && 'cursor-pointer hover:bg-surface-deep/50'
                 )}
               >
                 {columns.map((col) => (
                   <td
                     key={String(col.key)}
                     className={cn(
-                      "px-space-4 py-space-3 font-body text-body-sm text-text-primary",
+                      'px-space-4 py-space-3 font-body text-body-sm text-text-primary',
                       col.className
                     )}
                   >

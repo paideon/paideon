@@ -1,1 +1,1 @@
-export * from "./archive.ts";
+export * from './archive.ts';

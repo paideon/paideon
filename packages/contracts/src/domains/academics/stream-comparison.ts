@@ -2,7 +2,7 @@
 
 // Comparison data between AL streams for academic guidance.
 
-import { z } from "zod";
+import { z } from 'zod';
 
 export const StreamComparisonSchema = z.object({
   stream1: z.string(),

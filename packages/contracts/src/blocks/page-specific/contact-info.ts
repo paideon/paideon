@@ -1,9 +1,9 @@
 // packages/contracts/src/blocks/page-specific/contact-info.ts
 // Defines the data shape for contact information blocks.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { CONTACT_INFO_BLOCK } from "../block-type.js";
+import { CONTACT_INFO_BLOCK } from '../block-type.js';
 
 export const ContactInfoSchema = z.object({
   blockType: z.literal(CONTACT_INFO_BLOCK),

@@ -2,9 +2,9 @@
 //
 // An authenticated user account.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { RoleEnum } from "../rbac/role.ts";
+import { RoleEnum } from '../rbac/role.ts';
 
 export const UserSchema = z.object({
   id: z.string(),

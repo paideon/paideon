@@ -1,7 +1,7 @@
 // packages/transport/src/errors/normalize.ts
 
-import { ApiError } from "./api-error.js";
-import { codeFromStatus } from "./error-codes.js";
+import { ApiError } from './api-error.js';
+import { codeFromStatus } from './error-codes.js';
 
 /**
  * Turns a failed Response, an AbortError, a network TypeError, or any other
@@ -18,10 +18,10 @@ export async function normalizeError(source: unknown): Promise<ApiError> {
 
     try {
       const body = await source.clone().json();
-      if (body && typeof body === "object") {
+      if (body && typeof body === 'object') {
         details = body as ApiErrorDetailsFromBody;
         const maybeMessage = (body as { message?: unknown }).message;
-        if (typeof maybeMessage === "string") message = maybeMessage;
+        if (typeof maybeMessage === 'string') message = maybeMessage;
       }
     } catch {
       // Body wasn't JSON (or there was no body) — keep the generic message.
@@ -35,11 +35,11 @@ export async function normalizeError(source: unknown): Promise<ApiError> {
     });
   }
 
-  if (source instanceof DOMException && source.name === "AbortError") {
+  if (source instanceof DOMException && source.name === 'AbortError') {
     return new ApiError({
       status: 0,
-      code: "TIMEOUT",
-      message: "Request timed out",
+      code: 'TIMEOUT',
+      message: 'Request timed out',
       cause: source,
     });
   }
@@ -47,8 +47,8 @@ export async function normalizeError(source: unknown): Promise<ApiError> {
   if (source instanceof TypeError) {
     return new ApiError({
       status: 0,
-      code: "NETWORK_ERROR",
-      message: source.message || "Network request failed",
+      code: 'NETWORK_ERROR',
+      message: source.message || 'Network request failed',
       cause: source,
     });
   }
@@ -56,7 +56,7 @@ export async function normalizeError(source: unknown): Promise<ApiError> {
   if (source instanceof Error) {
     return new ApiError({
       status: 0,
-      code: "UNKNOWN",
+      code: 'UNKNOWN',
       message: source.message,
       cause: source,
     });
@@ -64,8 +64,8 @@ export async function normalizeError(source: unknown): Promise<ApiError> {
 
   return new ApiError({
     status: 0,
-    code: "UNKNOWN",
-    message: "Unknown error",
+    code: 'UNKNOWN',
+    message: 'Unknown error',
     cause: source,
   });
 }

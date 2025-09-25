@@ -8,5 +8,5 @@
 // synced tokens, or Nexus grows a formal design-review step in Figma).
 
 export function generateFigmaTokens(): never {
-  throw new Error("generateFigmaTokens() is not implemented");
+  throw new Error('generateFigmaTokens() is not implemented');
 }

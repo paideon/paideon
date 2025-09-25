@@ -1,55 +1,55 @@
 // packages/ui/src/components/icons/brand/SchoolLogo.tsx
-import { cn } from "../../../utilities/cn";
+import { cn } from '../../../utilities/cn';
 
 type SchoolLogoVariant =
-  | "crest-only"
-  | "lockup"
-  | "wordmark-only"
-  | "horizontal"
-  | "stacked";
-type Locale = "en" | "si";
-type SchoolLogoColor = "white" | "black" | "gold";
+  | 'crest-only'
+  | 'lockup'
+  | 'wordmark-only'
+  | 'horizontal'
+  | 'stacked';
+type Locale = 'en' | 'si';
+type SchoolLogoColor = 'white' | 'black' | 'gold';
 
 interface SchoolLogoProps {
   variant?: SchoolLogoVariant;
   locale?: Locale;
   color?: SchoolLogoColor;
   className?: string;
-  size?: "sm" | "md" | "lg" | "xl";
+  size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
 const colorMap: Record<SchoolLogoColor, string> = {
-  gold: "fill-gold-base",
-  black: "fill-text-inverse",
-  white: "fill-text-primary",
+  gold: 'fill-gold-base',
+  black: 'fill-text-inverse',
+  white: 'fill-text-primary',
 };
 
 const schoolName: Record<Locale, { name: string; location: string }> = {
   en: {
-    name: "C.W.W. Kannangara Central College",
-    location: "Mathugama, Sri Lanka",
+    name: 'C.W.W. Kannangara Central College',
+    location: 'Mathugama, Sri Lanka',
   },
   si: {
-    name: "කන්නන්ගර මැදි විදුහල",
-    location: "මතුගම",
+    name: 'කන්නන්ගර මැදි විදුහල',
+    location: 'මතුගම',
   },
 };
 
 export function SchoolLogo({
-  variant = "crest-only",
-  locale = "en",
-  color = "gold",
+  variant = 'crest-only',
+  locale = 'en',
+  color = 'gold',
   className,
 }: SchoolLogoProps) {
   const { name, location } = schoolName[locale];
-  const isSinhala = locale === "si";
+  const isSinhala = locale === 'si';
   const crestSvg = (
     <svg
       width="100%"
       height="100%"
       viewBox="0 0 180.81596 238.82889"
       aria-hidden="true"
-      className={cn("shrink-0", colorMap[color])}
+      className={cn('shrink-0', colorMap[color])}
       xmlns="http://www.w3.org/2000/svg"
     >
       <g transform="translate(-8.4153016,-19.870294)">
@@ -66,20 +66,20 @@ export function SchoolLogo({
     <div className="flex flex-col items-center text-center">
       <span
         className={cn(
-          "text-text-primary my-space-4",
+          'text-text-primary my-space-4',
           isSinhala
-            ? "font-sinhala-display text-sinhala-h2"
-            : "font-display text-h3"
+            ? 'font-sinhala-display text-sinhala-h2'
+            : 'font-display text-h3'
         )}
       >
         {name}
       </span>
       <span
         className={cn(
-          " uppercase tracking-caption text-text-muted mb-space-4",
+          ' uppercase tracking-caption text-text-muted mb-space-4',
           isSinhala
-            ? "font-sinhala-body text-sinhala-body"
-            : "font-body text-caption "
+            ? 'font-sinhala-body text-sinhala-body'
+            : 'font-body text-caption '
         )}
       >
         {location}
@@ -88,21 +88,21 @@ export function SchoolLogo({
   );
 
   // Crest only
-  if (variant === "crest-only") {
+  if (variant === 'crest-only') {
     return (
-      <div className={cn("w-size-pct-50 m-auto", className)}>{crestSvg}</div>
+      <div className={cn('w-size-pct-50 m-auto', className)}>{crestSvg}</div>
     );
   }
 
   // Wordmark only (no crest)
-  if (variant === "wordmark-only") {
-    return <div className={cn("w-full", className)}>{wordmark}</div>;
+  if (variant === 'wordmark-only') {
+    return <div className={cn('w-full', className)}>{wordmark}</div>;
   }
 
   // Lockup: crest stacked above wordmark
-  if (variant === "lockup") {
+  if (variant === 'lockup') {
     return (
-      <div className={cn("flex flex-col items-center gap-space-3", className)}>
+      <div className={cn('flex flex-col items-center gap-space-3', className)}>
         <div>{crestSvg}</div>
         {wordmark}
       </div>
@@ -110,9 +110,9 @@ export function SchoolLogo({
   }
 
   // Horizontal: crest beside wordmark
-  if (variant === "horizontal") {
+  if (variant === 'horizontal') {
     return (
-      <div className={cn("flex items-center gap-space-4", className)}>
+      <div className={cn('flex items-center gap-space-4', className)}>
         <div>{crestSvg}</div>
         {wordmark}
       </div>
@@ -120,9 +120,9 @@ export function SchoolLogo({
   }
 
   // Stacked: wordmark above crest
-  if (variant === "stacked") {
+  if (variant === 'stacked') {
     return (
-      <div className={cn("flex flex-col items-center gap-space-3", className)}>
+      <div className={cn('flex flex-col items-center gap-space-3', className)}>
         {wordmark}
         <div>{crestSvg}</div>
       </div>
@@ -130,5 +130,5 @@ export function SchoolLogo({
   }
 
   // Default fallback
-  return <div className={cn("w-full", className)}>{wordmark}</div>;
+  return <div className={cn('w-full', className)}>{wordmark}</div>;
 }

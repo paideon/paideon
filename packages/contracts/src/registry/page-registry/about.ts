@@ -1,6 +1,6 @@
 // packages/contracts/src/registry/pages/about.ts
 
-import { z } from "zod";
+import { z } from 'zod';
 
 import {
   HeroSchema,
@@ -12,9 +12,9 @@ import {
   CrestSchema,
   type CrestData,
   TimelineItemSchema,
-} from "../../blocks/index.ts";
-import { AlumniSchema } from "../../domains/people/alumni.ts";
-import type { PageRegistry } from "../types.ts";
+} from '../../blocks/index.ts';
+import { AlumniSchema } from '../../domains/people/alumni.ts';
+import type { PageRegistry } from '../types.ts';
 
 // ── Section schemas ─────────────────────────────────────────────────────
 
@@ -126,106 +126,106 @@ export type AboutClosingData = z.infer<typeof AboutClosingSchema>;
 // ── Page registry ───────────────────────────────────────────────────────
 
 export const aboutRegistry: PageRegistry = {
-  page: "about",
-  scope: "page:about",
-  label: "About KCC",
+  page: 'about',
+  scope: 'page:about',
+  label: 'About KCC',
   description:
     "The About page introduces KCC — its history, the legacy of Dr. Kannangara, the school's ethos, and more.",
   sections: [
     {
-      key: "about.hero",
-      blockKey: "hero",
-      label: "Hero Banner",
+      key: 'about.hero',
+      blockKey: 'hero',
+      label: 'Hero Banner',
       description:
         'Eyebrow text (e.g. "Est. 1873 · Mathugama"), page headline, optional emphasised word, and subtitle shown at the top of the page.',
       schema: AboutHeroSchema,
     },
     {
-      key: "about.stats",
-      blockKey: "stats",
-      label: "Stats Strip",
+      key: 'about.stats',
+      blockKey: 'stats',
+      label: 'Stats Strip',
       description:
-        "The counter strip below the hero (student count, staff count, etc). Each stat has a target number, label, and optional prefix/suffix.",
+        'The counter strip below the hero (student count, staff count, etc). Each stat has a target number, label, and optional prefix/suffix.',
       schema: AboutStatsSchema,
     },
     {
-      key: "about.story",
-      blockKey: "rich-text-block",
-      label: "Our Story",
+      key: 'about.story',
+      blockKey: 'rich-text-block',
+      label: 'Our Story',
       description:
-        "The founding narrative of KCC — eyebrow, heading, body paragraph, and optional pull-quote with attribution.",
+        'The founding narrative of KCC — eyebrow, heading, body paragraph, and optional pull-quote with attribution.',
       schema: AboutStorySchema,
     },
     {
-      key: "about.aboutKannangara",
-      blockKey: "rich-text-block",
-      label: "Our Namesake",
+      key: 'about.aboutKannangara',
+      blockKey: 'rich-text-block',
+      label: 'Our Namesake',
       description:
-        "Profile of Dr. C.W.W. Kannangara — name, title, portrait image, biography paragraph, and optional quote.",
+        'Profile of Dr. C.W.W. Kannangara — name, title, portrait image, biography paragraph, and optional quote.',
       schema: AboutKannangaraSchema,
     },
     {
-      key: "about.timeline",
-      blockKey: "timeline",
-      label: "Historical Timeline",
+      key: 'about.timeline',
+      blockKey: 'timeline',
+      label: 'Historical Timeline',
       description:
         "Key milestones in KCC's history. Each milestone has a year, title, description, and era (early / mid / modern).",
       schema: AboutTimelineSchema,
     },
     {
-      key: "about.ethos",
-      blockKey: "quote",
-      label: "Ethos — Vision, Mission & Motto",
+      key: 'about.ethos',
+      blockKey: 'quote',
+      label: 'Ethos — Vision, Mission & Motto',
       description:
         "The school's eyebrow labels, vision statement, mission statement, and motto. Each has its own eyebrow.",
       schema: AboutEthosSchema,
     },
     {
-      key: "about.values",
-      blockKey: "values-grid",
-      label: "Core Values",
+      key: 'about.values',
+      blockKey: 'values-grid',
+      label: 'Core Values',
       description:
-        "The four school values. Each has an English name, a Latin name, and a description.",
+        'The four school values. Each has an English name, a Latin name, and a description.',
       schema: AboutValuesSchema,
     },
     {
-      key: "about.crest",
-      blockKey: "crest-symbols",
-      label: "Crest Explained",
+      key: 'about.crest',
+      blockKey: 'crest-symbols',
+      label: 'Crest Explained',
       description:
-        "Eyebrow, heading, intro paragraph, and list of crest symbols. Each symbol has a name, meaning, and position label.",
+        'Eyebrow, heading, intro paragraph, and list of crest symbols. Each symbol has a name, meaning, and position label.',
       schema: AboutCrestSchema,
     },
     {
-      key: "about.alumni",
-      blockKey: "rich-text-block",
-      label: "Alumni Legacy",
+      key: 'about.alumni',
+      blockKey: 'rich-text-block',
+      label: 'Alumni Legacy',
       description:
-        "Notable alumni carousel — section eyebrow and heading, plus a list of alumni profiles (name, graduation year, current role/org, quote, optional portrait). Only entries marked isFeatureworthy show here.",
+        'Notable alumni carousel — section eyebrow and heading, plus a list of alumni profiles (name, graduation year, current role/org, quote, optional portrait). Only entries marked isFeatureworthy show here.',
       schema: AboutAlumniSchema,
     },
     {
-      key: "about.legacy",
-      blockKey: "rich-text-block",
-      label: "Legacy",
+      key: 'about.legacy',
+      blockKey: 'rich-text-block',
+      label: 'Legacy',
       description:
         'Two sub-sections: "Spirit of Kannangara" (eyebrow, heading, paragraph, pull-quote) and "Physical Heritage" (eyebrow, heading, caption, optional photo grid).',
       schema: AboutLegacySchema,
     },
     {
-      key: "about.anthem",
-      blockKey: "anthem",
-      label: "School Anthem",
+      key: 'about.anthem',
+      blockKey: 'anthem',
+      label: 'School Anthem',
       description:
-        "Anthem section heading, description paragraph, audio player labels, and Sinhala lyrics text.",
+        'Anthem section heading, description paragraph, audio player labels, and Sinhala lyrics text.',
       schema: AboutAnthemSchema,
     },
     {
-      key: "about.closing",
-      blockKey: "rich-text-block",
-      label: "Closing Statement",
+      key: 'about.closing',
+      blockKey: 'rich-text-block',
+      label: 'Closing Statement',
       description:
-        "Eyebrow, final heading, body paragraph, and footnote rule shown at the very bottom of the page.",
+        'Eyebrow, final heading, body paragraph, and footnote rule shown at the very bottom of the page.',
       schema: AboutClosingSchema,
     },
   ],

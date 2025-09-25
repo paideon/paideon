@@ -2,7 +2,7 @@
 //
 // A single version-history row for a content entry.
 
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ContentEntryVersionSchema = z.object({
   id: z.string(),

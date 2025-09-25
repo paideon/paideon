@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useId, type ChangeEventHandler } from "react";
+import { useId, type ChangeEventHandler } from 'react';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
 type Props = {
   label: string;
@@ -38,10 +38,10 @@ export function Checkbox({
   return (
     <label
       htmlFor={id}
-      data-disabled={disabled ? "" : undefined}
+      data-disabled={disabled ? '' : undefined}
       className={cn(
-        "group inline-flex items-start gap-space-3 cursor-pointer select-none",
-        disabled && "opacity-40 cursor-not-allowed",
+        'group inline-flex items-start gap-space-3 cursor-pointer select-none',
+        disabled && 'opacity-40 cursor-not-allowed',
         className
       )}
     >
@@ -60,20 +60,20 @@ export function Checkbox({
       <span
         aria-hidden="true"
         className={cn(
-          "relative mt-0.5 flex shrink-0 items-center justify-center",
-          "w-4 h-4 rounded-sm border border-border-default bg-surface-elevated",
-          "transition-all duration-fast ease-snap",
-          "peer-checked:bg-green-base peer-checked:border-green-base",
-          "peer-focus-visible:outline-2 peer-focus-visible:outline-gold-base peer-focus-visible:outline-offset-[3px]"
+          'relative mt-0.5 flex shrink-0 items-center justify-center',
+          'w-4 h-4 rounded-sm border border-border-default bg-surface-elevated',
+          'transition-all duration-fast ease-snap',
+          'peer-checked:bg-green-base peer-checked:border-green-base',
+          'peer-focus-visible:outline-2 peer-focus-visible:outline-gold-base peer-focus-visible:outline-offset-[3px]'
         )}
       >
         <svg
           viewBox="0 0 10 8"
           fill="none"
           className={cn(
-            "w-2.5 h-2 text-white",
-            "scale-0 opacity-0 transition-all duration-fast ease-snap",
-            "peer-checked:scale-100 peer-checked:opacity-100"
+            'w-2.5 h-2 text-white',
+            'scale-0 opacity-0 transition-all duration-fast ease-snap',
+            'peer-checked:scale-100 peer-checked:opacity-100'
           )}
           aria-hidden="true"
         >

@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { useRef, useState, useEffect } from "react";
+import Image from 'next/image';
+import { useRef, useState, useEffect } from 'react';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
 export interface PanoramicFacilityViewerProps {
   images: { src: string; alt: string; label?: string }[];
@@ -18,9 +18,9 @@ export function PanoramicFacilityViewer({
   images,
   defaultIndex = 0,
   className,
-  dragHintLabel = "Drag to explore",
-  prevLabel = "Previous",
-  nextLabel = "Next",
+  dragHintLabel = 'Drag to explore',
+  prevLabel = 'Previous',
+  nextLabel = 'Next',
 }: PanoramicFacilityViewerProps) {
   const [currentIndex, setCurrentIndex] = useState(defaultIndex);
   const [isDragging, setIsDragging] = useState(false);
@@ -65,15 +65,15 @@ export function PanoramicFacilityViewer({
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") prev();
-      if (e.key === "ArrowRight") next();
+      if (e.key === 'ArrowLeft') prev();
+      if (e.key === 'ArrowRight') next();
     };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   return (
-    <div className={cn("relative overflow-hidden rounded-lg", className)}>
+    <div className={cn('relative overflow-hidden rounded-lg', className)}>
       <div
         ref={containerRef}
         className="relative aspect-[16/9] bg-surface-deep cursor-grab active:cursor-grabbing overflow-hidden"
@@ -115,8 +115,8 @@ export function PanoramicFacilityViewer({
               key={idx}
               onClick={() => setCurrentIndex(idx)}
               className={cn(
-                "relative w-20 h-12 flex-shrink-0 rounded-md overflow-hidden transition-all",
-                idx === currentIndex && "ring-2 ring-gold-base"
+                'relative w-20 h-12 flex-shrink-0 rounded-md overflow-hidden transition-all',
+                idx === currentIndex && 'ring-2 ring-gold-base'
               )}
             >
               <Image

@@ -94,7 +94,7 @@ TypeScript configuration supports rewriting those imports for emitted output.
 ## Usage
 
 ```ts
-import { fontSize, spacing, lightTheme } from "@paideon/tokens";
+import { fontSize, spacing, lightTheme } from '@paideon/tokens';
 ```
 
 ### Generate CSS variables

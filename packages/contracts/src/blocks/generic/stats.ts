@@ -1,13 +1,13 @@
 // packages/contracts/src/blocks/generic/stats.ts
 // Defines the schema for statistics blocks and their metric items.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { STATS_BLOCK } from "../block-type.js";
+import { STATS_BLOCK } from '../block-type.js';
 
-export const TrendDirectionEnum = z.enum(["up", "down", "neutral"]);
+export const TrendDirectionEnum = z.enum(['up', 'down', 'neutral']);
 
-export const StatCardVariantEnum = z.enum(["single", "with-trend"]);
+export const StatCardVariantEnum = z.enum(['single', 'with-trend']);
 
 export const TrendPropsSchema = z.object({
   direction: TrendDirectionEnum,
@@ -25,7 +25,7 @@ export const StatItemSchema = z.object({
   tooltip: z
     .object({
       content: z.string(),
-      position: z.enum(["top", "bottom", "left", "right"]).optional(),
+      position: z.enum(['top', 'bottom', 'left', 'right']).optional(),
     })
     .optional(),
   disableCountUp: z.boolean().optional(),

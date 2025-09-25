@@ -24,20 +24,20 @@
 // EventCard/Calendar components already consume directly, independent of
 // which module produced the data.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-export const EVENT_CONTENT_TYPE = "event";
+export const EVENT_CONTENT_TYPE = 'event';
 
 export const EventStatus = z.enum([
-  "upcoming",
-  "today",
-  "ongoing",
-  "past",
-  "registration-open",
-  "registration-closed",
+  'upcoming',
+  'today',
+  'ongoing',
+  'past',
+  'registration-open',
+  'registration-closed',
 ]);
 
-export const EventCardVariant = z.enum(["standard", "compact", "featured"]);
+export const EventCardVariant = z.enum(['standard', 'compact', 'featured']);
 
 // Card projection — matches @paideon/ui's EventCardProps / Calendar.tsx exactly.
 export const EventCardSchema = z.object({

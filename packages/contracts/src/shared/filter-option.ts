@@ -3,7 +3,7 @@
 //   FilterOptionSchema    — value, label, count?
 //   FilterOptionData      — z.infer type
 
-import { z } from "zod";
+import { z } from 'zod';
 
 export const FilterOptionSchema = z.object({
   value: z.string(),

@@ -10,14 +10,14 @@
 // ExtracurricularCard actually renders directly: ActivitySchema and the
 // category taxonomy.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { ImageSchema } from "../../primitives/media/index.ts";
+import { ImageSchema } from '../../primitives/media/index.ts';
 
 export const ExtracurricularCategoryEnum = z.enum([
-  "sports",
-  "performing-arts",
-  "leadership",
+  'sports',
+  'performing-arts',
+  'leadership',
 ]);
 
 /** Label map for the admin category `<Select>` and the public F-161
@@ -26,9 +26,9 @@ export const ExtracurricularCategoryEnum = z.enum([
  * SOCIETY_CATEGORY_META precedent exactly (this file previously had only
  * the bare enum, with no display-label source anywhere). */
 export const EXTRACURRICULAR_CATEGORIES = {
-  sports: "Sports",
-  "performing-arts": "Performing Arts",
-  leadership: "Leadership",
+  sports: 'Sports',
+  'performing-arts': 'Performing Arts',
+  leadership: 'Leadership',
 } as const;
 
 export type ExtracurricularCategoryMeta = {
@@ -52,9 +52,9 @@ export const EXTRACURRICULAR_CATEGORY_META: ExtracurricularCategoryMeta[] =
  * apps/web/src/lib/extracurricular-card.ts for the mapping between them.
  */
 export const ExtracurricularVariantEnum = z.enum([
-  "sport",
-  "performing-arts",
-  "leadership",
+  'sport',
+  'performing-arts',
+  'leadership',
 ]);
 
 export const ActivitySchema = z.object({

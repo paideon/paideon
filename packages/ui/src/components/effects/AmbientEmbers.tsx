@@ -1,10 +1,10 @@
 // packages/ui/src/components/effects/AmbientEmbers.tsx
-"use client";
+'use client';
 
-import { useReducedMotion } from "framer-motion";
-import { useEffect, useState, useId } from "react";
+import { useReducedMotion } from 'framer-motion';
+import { useEffect, useState, useId } from 'react';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
 export interface AmbientEmbersProps {
   count?: number;
@@ -23,8 +23,8 @@ interface Ember {
 // Global styles for keyframes – injected once
 let stylesInjected = false;
 const injectStyles = () => {
-  if (typeof document === "undefined" || stylesInjected) return;
-  const style = document.createElement("style");
+  if (typeof document === 'undefined' || stylesInjected) return;
+  const style = document.createElement('style');
   style.textContent = `
     @keyframes kcc-ember-rise {
       0% {
@@ -78,8 +78,8 @@ export function AmbientEmbers({ count = 20, className }: AmbientEmbersProps) {
       <div
         aria-hidden="true"
         className={cn(
-          "absolute inset-0 pointer-events-none",
-          "bg-gradient-radial-gold opacity-15",
+          'absolute inset-0 pointer-events-none',
+          'bg-gradient-radial-gold opacity-15',
           className
         )}
       />
@@ -90,7 +90,7 @@ export function AmbientEmbers({ count = 20, className }: AmbientEmbersProps) {
     <div
       aria-hidden="true"
       className={cn(
-        "absolute inset-0 pointer-events-none overflow-hidden",
+        'absolute inset-0 pointer-events-none overflow-hidden',
         className
       )}
     >

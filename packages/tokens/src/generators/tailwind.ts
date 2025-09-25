@@ -7,36 +7,36 @@ import {
   zIndex,
   opacity as opacityScale,
   scale,
-} from "../primitives/effects.ts";
+} from '../primitives/effects.ts';
 import {
   transitionDuration,
   transitionTimingFunction,
-} from "../primitives/motion.ts";
-import { borderRadius } from "../primitives/radius.ts";
-import { boxShadow } from "../primitives/shadows.ts";
-import { sizing, borderWidth, maxWidth } from "../primitives/sizing.ts";
-import { spacing } from "../primitives/spacing.ts";
+} from '../primitives/motion.ts';
+import { borderRadius } from '../primitives/radius.ts';
+import { boxShadow } from '../primitives/shadows.ts';
+import { sizing, borderWidth, maxWidth } from '../primitives/sizing.ts';
+import { spacing } from '../primitives/spacing.ts';
 import {
   fontFamily,
   fontSize,
   lineHeight,
   letterSpacing,
-} from "../primitives/typography.ts";
-import { semantic } from "../semantic/index.ts";
+} from '../primitives/typography.ts';
+import { semantic } from '../semantic/index.ts';
 
 export const colors = {
-  transparent: "transparent",
-  current: "currentColor",
+  transparent: 'transparent',
+  current: 'currentColor',
   ...semantic,
 };
 
 export const screens = {
-  xs: "480px",
-  sm: "640px",
-  md: "768px",
-  lg: "1024px",
-  xl: "1280px",
-  "2xl": "1536px",
+  xs: '480px',
+  sm: '640px',
+  md: '768px',
+  lg: '1024px',
+  xl: '1280px',
+  '2xl': '1536px',
 } satisfies Record<string, string>;
 
 export const paideonTheme = {

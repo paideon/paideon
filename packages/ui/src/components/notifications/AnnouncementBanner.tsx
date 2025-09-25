@@ -1,32 +1,32 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
-export type AnnouncementVariant = "warning" | "error" | "info";
+export type AnnouncementVariant = 'warning' | 'error' | 'info';
 
 const variantStyles: Record<
   AnnouncementVariant,
   { bg: string; border: string; text: string; icon: string }
 > = {
   warning: {
-    bg: "bg-semantic-warning-surface",
-    border: "border-semantic-warning-base",
-    text: "text-semantic-warning-base",
-    icon: "⚠",
+    bg: 'bg-semantic-warning-surface',
+    border: 'border-semantic-warning-base',
+    text: 'text-semantic-warning-base',
+    icon: '⚠',
   },
   error: {
-    bg: "bg-semantic-error-surface",
-    border: "border-semantic-error-base",
-    text: "text-semantic-error-base",
-    icon: "✕",
+    bg: 'bg-semantic-error-surface',
+    border: 'border-semantic-error-base',
+    text: 'text-semantic-error-base',
+    icon: '✕',
   },
   info: {
-    bg: "bg-semantic-info-surface",
-    border: "border-semantic-info-base",
-    text: "text-semantic-info-base",
-    icon: "ℹ",
+    bg: 'bg-semantic-info-surface',
+    border: 'border-semantic-info-base',
+    text: 'text-semantic-info-base',
+    icon: 'ℹ',
   },
 };
 
@@ -39,11 +39,11 @@ export interface AnnouncementBannerProps {
 }
 
 export function AnnouncementBanner({
-  variant = "info",
+  variant = 'info',
   children,
   dismissible = false,
   className,
-  dismissLabel = "Dismiss announcement",
+  dismissLabel = 'Dismiss announcement',
 }: AnnouncementBannerProps) {
   const [dismissed, setDismissed] = useState(false);
 
@@ -53,11 +53,11 @@ export function AnnouncementBanner({
 
   return (
     <div
-      role={variant === "error" ? "alert" : "status"}
-      aria-live={variant === "error" ? "assertive" : "polite"}
+      role={variant === 'error' ? 'alert' : 'status'}
+      aria-live={variant === 'error' ? 'assertive' : 'polite'}
       className={cn(
-        "flex items-center justify-between w-full",
-        "px-space-6 py-space-3",
+        'flex items-center justify-between w-full',
+        'px-space-6 py-space-3',
         styles.bg,
         `border-b ${styles.border}`,
         className
@@ -66,13 +66,13 @@ export function AnnouncementBanner({
       <div className="flex items-center gap-space-3">
         <span
           aria-hidden="true"
-          className={cn("flex-shrink-0 font-body text-[0.9rem]", styles.text)}
+          className={cn('flex-shrink-0 font-body text-[0.9rem]', styles.text)}
         >
           {styles.icon}
         </span>
         <p
           className={cn(
-            "font-body text-[0.85rem] leading-relaxed m-0",
+            'font-body text-[0.85rem] leading-relaxed m-0',
             styles.text
           )}
         >
@@ -85,12 +85,12 @@ export function AnnouncementBanner({
           onClick={() => setDismissed(true)}
           aria-label={dismissLabel}
           className={cn(
-            "flex-shrink-0 p-space-1",
-            "bg-transparent border-none cursor-pointer",
+            'flex-shrink-0 p-space-1',
+            'bg-transparent border-none cursor-pointer',
             styles.text,
-            "opacity-60 hover:opacity-100",
-            "transition-opacity duration-fast",
-            "focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2"
+            'opacity-60 hover:opacity-100',
+            'transition-opacity duration-fast',
+            'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2'
           )}
         >
           ✕

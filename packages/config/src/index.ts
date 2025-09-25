@@ -1,1 +1,1 @@
-export { paideonPreset } from "./tailwind/preset.js";
+export { paideonPreset } from './tailwind/preset.js';

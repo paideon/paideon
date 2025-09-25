@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { Button } from "../atoms/Button";
-import { Icon } from "../icons";
+import { Button } from '../atoms/Button';
+import { Icon } from '../icons';
 
 export function BackToTopButton({
-  ariaLabel = "Back to top",
+  ariaLabel = 'Back to top',
 }: { ariaLabel?: string } = {}) {
   const [visible, setVisible] = useState(false);
 
@@ -17,12 +17,12 @@ export function BackToTopButton({
       setVisible(window.scrollY > threshold);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   if (!visible) return null;

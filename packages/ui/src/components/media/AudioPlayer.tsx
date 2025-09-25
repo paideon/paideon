@@ -1,13 +1,13 @@
-"use client";
-import { motion, useAnimationFrame, AnimatePresence } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+'use client';
+import { motion, useAnimationFrame, AnimatePresence } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 
-import { cn } from "../../utilities/cn";
-import { Button } from "../atoms/Button";
-import { Icon } from "../icons/Icon";
-import { Container } from "../layout/Container";
-import { Heading } from "../typography/Heading";
-import { Text } from "../typography/Text";
+import { cn } from '../../utilities/cn';
+import { Button } from '../atoms/Button';
+import { Icon } from '../icons/Icon';
+import { Container } from '../layout/Container';
+import { Heading } from '../typography/Heading';
+import { Text } from '../typography/Text';
 
 interface AudioPlayerProps {
   src: string;
@@ -36,17 +36,17 @@ export function AudioPlayer({
   lyrics,
   lyricsSinhala,
   className,
-  downloadLabel = "Download Track",
-  rewindLabel = "Rewind 10 Seconds",
-  forwardLabel = "Forward 10 Seconds",
-  seekLabel = "Seek progress bar",
-  volumeLabel = "Volume",
-  muteLabel = "Mute",
-  unmuteLabel = "Unmute",
-  playLabel = "Play",
-  pauseLabel = "Pause",
-  showLyricsLabel = "View Lyrics",
-  hideLyricsLabel = "Hide Lyrics",
+  downloadLabel = 'Download Track',
+  rewindLabel = 'Rewind 10 Seconds',
+  forwardLabel = 'Forward 10 Seconds',
+  seekLabel = 'Seek progress bar',
+  volumeLabel = 'Volume',
+  muteLabel = 'Mute',
+  unmuteLabel = 'Unmute',
+  playLabel = 'Play',
+  pauseLabel = 'Pause',
+  showLyricsLabel = 'View Lyrics',
+  hideLyricsLabel = 'Hide Lyrics',
 }: AudioPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -86,20 +86,20 @@ export function AudioPlayer({
       setCurrentTime(0);
     };
 
-    audio.addEventListener("timeupdate", handleTimeUpdate);
-    audio.addEventListener("loadedmetadata", updateDuration);
-    audio.addEventListener("durationchange", updateDuration);
-    audio.addEventListener("play", handlePlay);
-    audio.addEventListener("pause", handlePause);
-    audio.addEventListener("ended", handleEnded);
+    audio.addEventListener('timeupdate', handleTimeUpdate);
+    audio.addEventListener('loadedmetadata', updateDuration);
+    audio.addEventListener('durationchange', updateDuration);
+    audio.addEventListener('play', handlePlay);
+    audio.addEventListener('pause', handlePause);
+    audio.addEventListener('ended', handleEnded);
 
     return () => {
-      audio.removeEventListener("timeupdate", handleTimeUpdate);
-      audio.removeEventListener("loadedmetadata", updateDuration);
-      audio.removeEventListener("durationchange", updateDuration);
-      audio.removeEventListener("play", handlePlay);
-      audio.removeEventListener("pause", handlePause);
-      audio.removeEventListener("ended", handleEnded);
+      audio.removeEventListener('timeupdate', handleTimeUpdate);
+      audio.removeEventListener('loadedmetadata', updateDuration);
+      audio.removeEventListener('durationchange', updateDuration);
+      audio.removeEventListener('play', handlePlay);
+      audio.removeEventListener('pause', handlePause);
+      audio.removeEventListener('ended', handleEnded);
     };
   }, []);
 
@@ -108,7 +108,7 @@ export function AudioPlayer({
     return () => {
       if (
         audioContextRef.current &&
-        audioContextRef.current.state !== "closed"
+        audioContextRef.current.state !== 'closed'
       ) {
         audioContextRef.current.close();
       }
@@ -149,7 +149,7 @@ export function AudioPlayer({
   const togglePlay = () => {
     if (audioRef.current) {
       if (!audioContextRef.current) initAudioVisualizer();
-      if (audioContextRef.current?.state === "suspended")
+      if (audioContextRef.current?.state === 'suspended')
         audioContextRef.current.resume();
 
       if (isPlaying) {
@@ -221,18 +221,18 @@ export function AudioPlayer({
     } else if (!isPlaying) {
       bars.forEach((bar) => {
         if (bar) {
-          bar.style.height = "20px";
-          bar.style.opacity = "0.3";
+          bar.style.height = '20px';
+          bar.style.opacity = '0.3';
         }
       });
     }
   });
 
   const formatTime = (secs: number) => {
-    if (isNaN(secs)) return "0:00";
+    if (isNaN(secs)) return '0:00';
     const minutes = Math.floor(secs / 60);
     const seconds = Math.floor(secs % 60);
-    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
   // Clamp so float drift at track-end can't push the dot/fill past 100%
@@ -245,7 +245,7 @@ export function AudioPlayer({
   return (
     <Container
       className={cn(
-        "bg-surface-base border border-border-light rounded-md overflow-hidden shadow-elevation-2",
+        'bg-surface-base border border-border-light rounded-md overflow-hidden shadow-elevation-2',
         className
       )}
     >
@@ -308,7 +308,7 @@ export function AudioPlayer({
               className="rounded-full shadow-elevation-1 transition-transform hover:scale-105 active:scale-95 !w-14 !h-14"
               aria-label={isPlaying ? pauseLabel : playLabel}
             >
-              <Icon name={isPlaying ? "pause" : "play"} size="md" />
+              <Icon name={isPlaying ? 'pause' : 'play'} size="md" />
             </Button>
 
             <button
@@ -325,7 +325,7 @@ export function AudioPlayer({
               aria-label={isMuted ? unmuteLabel : muteLabel}
             >
               <Icon
-                name={isMuted || volume === 0 ? "volume-x" : "volume-2"}
+                name={isMuted || volume === 0 ? 'volume-x' : 'volume-2'}
                 size="sm"
               />
             </button>
@@ -414,9 +414,9 @@ export function AudioPlayer({
               {showLyrics && (
                 <motion.div
                   initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
+                  animate={{ height: 'auto', opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
                   className="overflow-hidden w-full"
                 >
                   <Container className="border-t border-border-light mt-space-4 ">

@@ -1,5 +1,5 @@
 // hooks/useFormField.ts
-import { useId } from "react";
+import { useId } from 'react';
 
 type Options = {
   error?: string;
@@ -15,7 +15,7 @@ export function useFormField({ error, helperText }: Options) {
   const describedBy =
     [hasError && errorId, !hasError && helperText && helperId]
       .filter(Boolean)
-      .join(" ") || undefined;
+      .join(' ') || undefined;
 
   return { id, errorId, helperId, hasError, describedBy };
 }

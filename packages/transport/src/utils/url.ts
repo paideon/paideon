@@ -12,12 +12,12 @@ export function joinUrl(...parts: Array<string | undefined | null>): string {
 
   return segments
     .map((part, index) => {
-      const stripLeading = index > 0 ? part.replace(/^\/+/, "") : part;
+      const stripLeading = index > 0 ? part.replace(/^\/+/, '') : part;
       const stripTrailing =
         index < segments.length - 1
-          ? stripLeading.replace(/\/+$/, "")
+          ? stripLeading.replace(/\/+$/, '')
           : stripLeading;
       return stripTrailing;
     })
-    .join("/");
+    .join('/');
 }

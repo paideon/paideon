@@ -1,8 +1,8 @@
 // packages/contracts/src/features/societies/achievement.ts
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { AchievementLevel } from "../../editorial/achievements/achievement.ts";
+import { AchievementLevel } from '../../editorial/achievements/achievement.ts';
 
 export const SocietyAchievementSchema = z.object({
   id: z.string().min(1),

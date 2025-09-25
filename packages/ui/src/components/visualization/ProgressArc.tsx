@@ -1,9 +1,9 @@
 // packages/ui/src/components/visualization/ProgressArc.tsx
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
 export interface ProgressArcProps {
   value: number;
@@ -12,13 +12,13 @@ export interface ProgressArcProps {
   showPercentage?: boolean;
   label?: string;
   animate?: boolean;
-  variant?: "green" | "gold";
+  variant?: 'green' | 'gold';
   className?: string;
 }
 
 const variantColors = {
-  green: { stroke: "var(--color-green-base)", track: "var(--border-light)" },
-  gold: { stroke: "var(--color-gold-base)", track: "var(--border-light)" },
+  green: { stroke: 'var(--color-green-base)', track: 'var(--border-light)' },
+  gold: { stroke: 'var(--color-gold-base)', track: 'var(--border-light)' },
 };
 
 export function ProgressArc({
@@ -28,7 +28,7 @@ export function ProgressArc({
   showPercentage = true,
   label,
   animate = true,
-  variant = "green",
+  variant = 'green',
   className,
 }: ProgressArcProps) {
   const [progress, setProgress] = useState(animate ? 0 : value);
@@ -77,7 +77,7 @@ export function ProgressArc({
   return (
     <div
       ref={ref}
-      className={cn("flex flex-col items-center justify-center", className)}
+      className={cn('flex flex-col items-center justify-center', className)}
     >
       <div className="relative" style={{ width: size, height: size }}>
         <svg

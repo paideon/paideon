@@ -13,7 +13,7 @@
 //   The web app resolves keys via apps/web/src/lib/cdn.ts at render time.
 //   Never store full CDN URLs — keys are portable if the CDN domain changes.
 
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ImageSchema = z.object({
   src: z.string().min(1),

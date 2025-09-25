@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
 import type {
   EventCardData,
   EventStatusType,
   EventCardVariantType,
-} from "@paideon/contracts";
-import Image from "next/image";
-import Link from "next/link";
+} from '@paideon/contracts';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { cn } from "../../utilities/cn";
-import { Badge } from "../atoms/Badge";
+import { cn } from '../../utilities/cn';
+import { Badge } from '../atoms/Badge';
 
-export interface EventCardProps extends Omit<EventCardData, "id" | "variant"> {
+export interface EventCardProps extends Omit<EventCardData, 'id' | 'variant'> {
   variant?: EventCardVariantType;
   className?: string;
   /** Only used by the featured variant */
@@ -22,12 +22,12 @@ export interface EventCardProps extends Omit<EventCardData, "id" | "variant"> {
 }
 
 const DEFAULT_STATUS_LABELS: Record<EventStatusType, string> = {
-  upcoming: "Upcoming",
-  today: "Today",
-  ongoing: "Happening Now",
-  past: "Past",
-  "registration-open": "Registration Open",
-  "registration-closed": "Registration Closed",
+  upcoming: 'Upcoming',
+  today: 'Today',
+  ongoing: 'Happening Now',
+  past: 'Past',
+  'registration-open': 'Registration Open',
+  'registration-closed': 'Registration Closed',
 };
 
 const STATUS_CONFIG: Record<
@@ -35,29 +35,29 @@ const STATUS_CONFIG: Record<
   { bg: string; text: string; dot?: string }
 > = {
   upcoming: {
-    bg: "bg-semantic-info-surface",
-    text: "text-semantic-info-base",
+    bg: 'bg-semantic-info-surface',
+    text: 'text-semantic-info-base',
   },
   today: {
-    bg: "bg-gold-pale",
-    text: "text-gold-active",
+    bg: 'bg-gold-pale',
+    text: 'text-gold-active',
   },
   ongoing: {
-    bg: "bg-semantic-success-surface",
-    text: "text-semantic-success-base",
-    dot: "bg-semantic-success-base",
+    bg: 'bg-semantic-success-surface',
+    text: 'text-semantic-success-base',
+    dot: 'bg-semantic-success-base',
   },
   past: {
-    bg: "bg-surface-deep",
-    text: "text-text-muted",
+    bg: 'bg-surface-deep',
+    text: 'text-text-muted',
   },
-  "registration-open": {
-    bg: "bg-semantic-success-surface",
-    text: "text-semantic-success-base",
+  'registration-open': {
+    bg: 'bg-semantic-success-surface',
+    text: 'text-semantic-success-base',
   },
-  "registration-closed": {
-    bg: "bg-surface-deep",
-    text: "text-text-muted",
+  'registration-closed': {
+    bg: 'bg-surface-deep',
+    text: 'text-text-muted',
   },
 };
 
@@ -73,15 +73,15 @@ function EventStatusBadge({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-space-1 px-space-2.5 py-space-1 rounded-full",
-        "font-body text-caption uppercase tracking-caption",
+        'inline-flex items-center gap-space-1 px-space-2.5 py-space-1 rounded-full',
+        'font-body text-caption uppercase tracking-caption',
         config.bg,
         config.text
       )}
     >
       {config.dot && (
         <span
-          className={cn("w-1.5 h-1.5 rounded-full", config.dot)}
+          className={cn('w-1.5 h-1.5 rounded-full', config.dot)}
           aria-hidden="true"
         />
       )}
@@ -92,12 +92,12 @@ function EventStatusBadge({
 
 function DateBlock({ date, isPast }: { date: string; isPast?: boolean }) {
   let day = date;
-  let month = "";
+  let month = '';
   try {
     const d = new Date(date);
     if (!isNaN(d.getTime())) {
       day = d.getDate().toString();
-      month = d.toLocaleString("default", { month: "short" }).toUpperCase();
+      month = d.toLocaleString('default', { month: 'short' }).toUpperCase();
     }
   } catch {
     // keep as is
@@ -105,14 +105,14 @@ function DateBlock({ date, isPast }: { date: string; isPast?: boolean }) {
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center min-w-[56px] px-space-3 py-space-2.5",
-        isPast ? "bg-surface-deep" : "bg-green-base"
+        'flex flex-col items-center justify-center min-w-[56px] px-space-3 py-space-2.5',
+        isPast ? 'bg-surface-deep' : 'bg-green-base'
       )}
     >
       <span
         className={cn(
-          "font-display text-[1.75rem] font-medium leading-none",
-          isPast ? "text-text-muted" : "text-gold-base"
+          'font-display text-[1.75rem] font-medium leading-none',
+          isPast ? 'text-text-muted' : 'text-gold-base'
         )}
       >
         {day}
@@ -120,8 +120,8 @@ function DateBlock({ date, isPast }: { date: string; isPast?: boolean }) {
       {month && (
         <span
           className={cn(
-            "font-body text-[0.55rem] uppercase tracking-[0.15em] mt-space-0.5",
-            isPast ? "text-text-muted" : "text-text-inverse/60"
+            'font-body text-[0.55rem] uppercase tracking-[0.15em] mt-space-0.5',
+            isPast ? 'text-text-muted' : 'text-text-inverse/60'
           )}
         >
           {month}
@@ -139,22 +139,22 @@ function EventCardStandard({
   time,
   venue,
   category,
-  status = "upcoming",
+  status = 'upcoming',
   href,
   imageSrc,
   imageAlt,
   relativeTime,
   statusLabels,
 }: EventCardProps) {
-  const isPast = status === "past";
+  const isPast = status === 'past';
   return (
     <Link href={href} className="group block no-underline">
       <div
         className={cn(
-          "bg-surface-elevated border border-border-light overflow-hidden",
-          "shadow-elevation-1 transition-all duration-gentle",
-          "group-hover:shadow-elevation-3 group-hover:-translate-y-0.5",
-          isPast && "opacity-70"
+          'bg-surface-elevated border border-border-light overflow-hidden',
+          'shadow-elevation-1 transition-all duration-gentle',
+          'group-hover:shadow-elevation-3 group-hover:-translate-y-0.5',
+          isPast && 'opacity-70'
         )}
       >
         {imageSrc && (
@@ -164,8 +164,8 @@ function EventCardStandard({
               alt={imageAlt ?? title}
               fill
               className={cn(
-                "object-cover transition-transform duration-gentle group-hover:scale-[1.03]",
-                isPast && "grayscale-[0.4] saturate-[0.7]"
+                'object-cover transition-transform duration-gentle group-hover:scale-[1.03]',
+                isPast && 'grayscale-[0.4] saturate-[0.7]'
               )}
             />
           </div>
@@ -179,8 +179,8 @@ function EventCardStandard({
             </div>
             <h3
               className={cn(
-                "font-display text-h3 font-medium text-text-primary mb-space-2",
-                "transition-colors duration-fast group-hover:text-gold-active"
+                'font-display text-h3 font-medium text-text-primary mb-space-2',
+                'transition-colors duration-fast group-hover:text-gold-active'
               )}
             >
               {title}
@@ -210,12 +210,12 @@ function EventCardCompact({
   date,
   time,
   venue,
-  status = "upcoming",
+  status = 'upcoming',
   href,
   relativeTime,
   statusLabels,
 }: EventCardProps) {
-  const isPast = status === "past";
+  const isPast = status === 'past';
   return (
     <Link
       href={href}
@@ -223,15 +223,15 @@ function EventCardCompact({
     >
       <DateBlock date={date} isPast={isPast} />
       <div className="flex-1 pb-space-3.5 border-b border-border-light">
-        {status !== "past" && (
+        {status !== 'past' && (
           <div className="mb-space-2">
             <EventStatusBadge status={status} statusLabels={statusLabels} />
           </div>
         )}
         <p
           className={cn(
-            "font-body font-medium text-text-primary mb-space-1.5",
-            "transition-colors duration-fast group-hover:text-gold-active"
+            'font-body font-medium text-text-primary mb-space-1.5',
+            'transition-colors duration-fast group-hover:text-gold-active'
           )}
         >
           {title}
@@ -256,17 +256,17 @@ function EventCardFeatured({
   time,
   venue,
   category,
-  status = "upcoming",
+  status = 'upcoming',
   href,
   imageSrc,
   imageAlt,
   relativeTime,
   registrationHref,
-  viewDetailsLabel = "View Details",
-  registerLabel = "Register",
+  viewDetailsLabel = 'View Details',
+  registerLabel = 'Register',
   statusLabels,
 }: EventCardProps) {
-  const isPast = status === "past";
+  const isPast = status === 'past';
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 bg-surface-elevated border border-border-light overflow-hidden">
       <div className="relative min-h-[360px] bg-green-base">
@@ -276,14 +276,14 @@ function EventCardFeatured({
             alt={imageAlt ?? title}
             fill
             className={cn(
-              "object-cover",
-              isPast && "grayscale-[0.4] saturate-[0.7]"
+              'object-cover',
+              isPast && 'grayscale-[0.4] saturate-[0.7]'
             )}
           />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-green-base to-green-hover flex items-center justify-center">
             <span className="font-display text-6xl text-gold-base/40">
-              {date.split("-")[2] ?? date}
+              {date.split('-')[2] ?? date}
             </span>
           </div>
         )}
@@ -321,7 +321,7 @@ function EventCardFeatured({
         </div>
         {venue && (
           <p className="font-body text-caption uppercase tracking-caption text-text-muted">
-            {" "}
+            {' '}
             {venue}
           </p>
         )}
@@ -332,7 +332,7 @@ function EventCardFeatured({
           >
             {viewDetailsLabel}
           </Link>
-          {registrationHref && status === "registration-open" && (
+          {registrationHref && status === 'registration-open' && (
             <Link
               href={registrationHref}
               className="inline-block px-space-6 py-space-2.5 border border-gold-base text-gold-base font-body text-caption uppercase tracking-caption hover:bg-gold-base hover:text-green-base transition-colors"
@@ -346,8 +346,8 @@ function EventCardFeatured({
   );
 }
 
-export function EventCard({ variant = "standard", ...props }: EventCardProps) {
-  if (variant === "featured") return <EventCardFeatured {...props} />;
-  if (variant === "compact") return <EventCardCompact {...props} />;
+export function EventCard({ variant = 'standard', ...props }: EventCardProps) {
+  if (variant === 'featured') return <EventCardFeatured {...props} />;
+  if (variant === 'compact') return <EventCardCompact {...props} />;
   return <EventCardStandard {...props} />;
 }

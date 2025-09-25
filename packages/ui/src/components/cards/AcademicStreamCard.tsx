@@ -1,14 +1,14 @@
-import type { ALStreamData } from "@paideon/contracts";
+import type { ALStreamData } from '@paideon/contracts';
 
-import { cn } from "../../utilities/cn";
-import { Tag } from "../atoms/Tag";
-import { Icon } from "../icons/Icon";
-import { NavLink } from "../navigation/NavLink";
-import { EyebrowLabel } from "../typography/EyebrowLabel";
-import { Heading } from "../typography/Heading";
-import { Text } from "../typography/Text";
+import { cn } from '../../utilities/cn';
+import { Tag } from '../atoms/Tag';
+import { Icon } from '../icons/Icon';
+import { NavLink } from '../navigation/NavLink';
+import { EyebrowLabel } from '../typography/EyebrowLabel';
+import { Heading } from '../typography/Heading';
+import { Text } from '../typography/Text';
 
-interface AcademicStreamCardProps extends Omit<ALStreamData, "key"> {
+interface AcademicStreamCardProps extends Omit<ALStreamData, 'key'> {
   href: string;
   className?: string;
   streamEyebrowLabel?: string;
@@ -24,22 +24,22 @@ export function AcademicStreamCard({
   subjects,
   href,
   className,
-  streamEyebrowLabel = "A/L Stream",
+  streamEyebrowLabel = 'A/L Stream',
   getSubjectCountLabel = (count) => ` · ${count} subjects`,
-  exploreLabel = "Explore stream",
+  exploreLabel = 'Explore stream',
 }: AcademicStreamCardProps) {
   return (
     <NavLink href={href} className="group block no-underline h-full">
       <div
         className={cn(
-          "relative h-full overflow-hidden",
-          "bg-surface-elevated border border-border-light",
+          'relative h-full overflow-hidden',
+          'bg-surface-elevated border border-border-light',
           // Spacing — pt-space-7 (28px) top, px/pb-space-6 (24px) sides/bottom
-          "pt-space-7 px-space-6 pb-space-6",
+          'pt-space-7 px-space-6 pb-space-6',
           // Elevation & motion
-          "shadow-elevation-1",
-          "transition-[box-shadow,transform] duration-standard ease-out",
-          "group-hover:shadow-elevation-3 group-hover:-translate-y-[2px]",
+          'shadow-elevation-1',
+          'transition-[box-shadow,transform] duration-standard ease-out',
+          'group-hover:shadow-elevation-3 group-hover:-translate-y-[2px]',
           className
         )}
       >
@@ -52,7 +52,7 @@ export function AcademicStreamCard({
         {/* "A/L Stream · N subjects" eyebrow */}
         <EyebrowLabel as="p" className="mb-space-1p5">
           {streamEyebrowLabel}
-          {subjects.length > 0 ? getSubjectCountLabel(subjects.length) : ""}
+          {subjects.length > 0 ? getSubjectCountLabel(subjects.length) : ''}
         </EyebrowLabel>
 
         {/* Stream name */}

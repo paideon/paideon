@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { cn } from "../../utilities/cn";
-import { ImageFrame } from "../media/ImageFrame";
+import { cn } from '../../utilities/cn';
+import { ImageFrame } from '../media/ImageFrame';
 
 export interface SocietyBannerProps {
   name: string;
@@ -21,7 +21,7 @@ export function SocietyBanner({
   return (
     <div
       className={cn(
-        "relative h-48 md:h-64 lg:h-80 overflow-hidden rounded-lg",
+        'relative h-48 md:h-64 lg:h-80 overflow-hidden rounded-lg',
         className
       )}
     >

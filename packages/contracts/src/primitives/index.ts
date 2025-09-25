@@ -1,14 +1,14 @@
 // packages/contracts/src/primitives/index.ts
 
-export * from "./locale.ts";
-export * from "./localized-text.ts";
-export * from "./link.ts";
-export * from "./address.ts";
-export * from "./seo.ts";
-export * from "./pagination.ts";
-export * from "./rich-text.ts";
-export * from "./media/index.ts";
-export * from "./enums/index.ts";
+export * from './locale.ts';
+export * from './localized-text.ts';
+export * from './link.ts';
+export * from './address.ts';
+export * from './seo.ts';
+export * from './pagination.ts';
+export * from './rich-text.ts';
+export * from './media/index.ts';
+export * from './enums/index.ts';
 
 // Primitives — the foundation layer of @paideon/contracts.
 //

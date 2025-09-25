@@ -1,9 +1,9 @@
-import type { GalleryAlbumCardData } from "@paideon/contracts";
-import Image from "next/image";
-import Link from "next/link";
+import type { GalleryAlbumCardData } from '@paideon/contracts';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { cn } from "../../utilities/cn";
-import { Badge } from "../atoms/Badge";
+import { cn } from '../../utilities/cn';
+import { Badge } from '../atoms/Badge';
 
 export interface GalleryAlbumCardProps extends GalleryAlbumCardData {
   className?: string;
@@ -21,16 +21,16 @@ export function GalleryAlbumCard({
   coverSrc,
   coverAlt,
   className,
-  viewAlbumLabel = "View Album",
+  viewAlbumLabel = 'View Album',
   getPhotoCountLabel = (count) => `${count} photos`,
 }: GalleryAlbumCardProps) {
   return (
     <Link href={href} className="group block no-underline">
       <div
         className={cn(
-          "relative overflow-hidden",
-          "shadow-elevation-1 transition-all duration-gentle",
-          "group-hover:shadow-elevation-3 group-hover:-translate-y-0.5",
+          'relative overflow-hidden',
+          'shadow-elevation-1 transition-all duration-gentle',
+          'group-hover:shadow-elevation-3 group-hover:-translate-y-0.5',
           className
         )}
       >
@@ -49,8 +49,8 @@ export function GalleryAlbumCard({
           {/* Hover overlay */}
           <div
             className={cn(
-              "absolute inset-0 bg-overlay-medium flex items-center justify-center",
-              "opacity-0 transition-opacity duration-gentle group-hover:opacity-100"
+              'absolute inset-0 bg-overlay-medium flex items-center justify-center',
+              'opacity-0 transition-opacity duration-gentle group-hover:opacity-100'
             )}
           >
             <span className="font-body text-caption uppercase tracking-caption text-text-inverse border border-text-inverse/60 px-space-5 py-space-2">
@@ -73,14 +73,14 @@ export function GalleryAlbumCard({
         {/* Info bar */}
         <div
           className={cn(
-            "p-space-3.5 bg-surface-elevated border border-border-light border-t-0",
-            "flex items-center justify-between gap-space-3"
+            'p-space-3.5 bg-surface-elevated border border-border-light border-t-0',
+            'flex items-center justify-between gap-space-3'
           )}
         >
           <h3
             className={cn(
-              "font-display text-body font-medium text-text-primary truncate",
-              "transition-colors duration-fast group-hover:text-gold-active"
+              'font-display text-body font-medium text-text-primary truncate',
+              'transition-colors duration-fast group-hover:text-gold-active'
             )}
           >
             {title}

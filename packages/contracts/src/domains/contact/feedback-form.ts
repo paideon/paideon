@@ -2,14 +2,14 @@
 
 // Feedback form input contract.
 
-import { z } from "zod";
+import { z } from 'zod';
 
 export const FeedbackCategoryEnum = z.enum([
-  "website",
-  "academic",
-  "facilities",
-  "staff",
-  "other",
+  'website',
+  'academic',
+  'facilities',
+  'staff',
+  'other',
 ]);
 
 export const FeedbackFormSchema = z.object({

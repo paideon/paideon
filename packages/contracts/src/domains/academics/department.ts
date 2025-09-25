@@ -2,17 +2,17 @@
 
 // Academic department contracts.
 
-import { z } from "zod";
+import { z } from 'zod';
 
 export const DepartmentKeyEnum = z.enum([
-  "mathematics",
-  "science",
-  "languages",
-  "commerce",
-  "arts",
-  "technology",
-  "physical-education",
-  "religion",
+  'mathematics',
+  'science',
+  'languages',
+  'commerce',
+  'arts',
+  'technology',
+  'physical-education',
+  'religion',
 ]);
 
 export const DepartmentSchema = z.object({

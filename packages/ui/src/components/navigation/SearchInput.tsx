@@ -1,8 +1,8 @@
-"use client";
-import type { SearchResultData } from "@paideon/contracts";
-import { useEffect, useId, useReducer, useRef } from "react";
+'use client';
+import type { SearchResultData } from '@paideon/contracts';
+import { useEffect, useId, useReducer, useRef } from 'react';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
 export interface SearchInputProps {
   /** Clarifies scope, e.g. "Search news and announcements" */
@@ -29,17 +29,17 @@ interface SearchState {
 }
 
 type SearchAction =
-  | { type: "QUERY_CHANGED"; query: string }
-  | { type: "SEARCH_START" }
-  | { type: "SEARCH_SUCCESS"; results: SearchResultData[] }
-  | { type: "OPEN_IF_RESULTS" }
-  | { type: "CLOSE" }
-  | { type: "CLEAR" }
-  | { type: "MOVE_ACTIVE"; delta: number }
-  | { type: "SELECT_ACTIVE"; idx: number };
+  | { type: 'QUERY_CHANGED'; query: string }
+  | { type: 'SEARCH_START' }
+  | { type: 'SEARCH_SUCCESS'; results: SearchResultData[] }
+  | { type: 'OPEN_IF_RESULTS' }
+  | { type: 'CLOSE' }
+  | { type: 'CLEAR' }
+  | { type: 'MOVE_ACTIVE'; delta: number }
+  | { type: 'SELECT_ACTIVE'; idx: number };
 
 const initialState: SearchState = {
-  query: "",
+  query: '',
   results: [],
   open: false,
   loading: false,
@@ -48,7 +48,7 @@ const initialState: SearchState = {
 
 function searchReducer(state: SearchState, action: SearchAction): SearchState {
   switch (action.type) {
-    case "QUERY_CHANGED":
+    case 'QUERY_CHANGED':
       if (!action.query.trim()) {
         return {
           ...state,
@@ -60,9 +60,9 @@ function searchReducer(state: SearchState, action: SearchAction): SearchState {
         };
       }
       return { ...state, query: action.query };
-    case "SEARCH_START":
+    case 'SEARCH_START':
       return { ...state, loading: true };
-    case "SEARCH_SUCCESS":
+    case 'SEARCH_SUCCESS':
       return {
         ...state,
         results: action.results,
@@ -70,20 +70,20 @@ function searchReducer(state: SearchState, action: SearchAction): SearchState {
         loading: false,
         activeIdx: -1,
       };
-    case "OPEN_IF_RESULTS":
+    case 'OPEN_IF_RESULTS':
       return state.results.length > 0 ? { ...state, open: true } : state;
-    case "CLOSE":
+    case 'CLOSE':
       return { ...state, open: false };
-    case "CLEAR":
+    case 'CLEAR':
       return initialState;
-    case "MOVE_ACTIVE": {
+    case 'MOVE_ACTIVE': {
       const next = Math.max(
         -1,
         Math.min(state.activeIdx + action.delta, state.results.length - 1)
       );
       return { ...state, activeIdx: next };
     }
-    case "SELECT_ACTIVE":
+    case 'SELECT_ACTIVE':
       return { ...state, activeIdx: action.idx };
     default:
       return state;
@@ -95,7 +95,7 @@ export function SearchInput({
   placeholder,
   onSearch,
   onResultClick,
-  clearLabel = "Clear search",
+  clearLabel = 'Clear search',
   className,
 }: SearchInputProps) {
   const id = useId();
@@ -117,16 +117,16 @@ export function SearchInput({
 
     const currentRequestId = ++requestIdRef.current;
     const timer = setTimeout(async () => {
-      dispatch({ type: "SEARCH_START" });
+      dispatch({ type: 'SEARCH_START' });
       try {
         const res = await onSearch(query);
         if (requestIdRef.current === currentRequestId) {
-          dispatch({ type: "SEARCH_SUCCESS", results: res });
+          dispatch({ type: 'SEARCH_SUCCESS', results: res });
         }
         // else: a newer request has since started — this response is stale, drop it.
       } catch {
         if (requestIdRef.current === currentRequestId) {
-          dispatch({ type: "SEARCH_SUCCESS", results: [] });
+          dispatch({ type: 'SEARCH_SUCCESS', results: [] });
         }
       }
     }, 250);
@@ -137,31 +137,31 @@ export function SearchInput({
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (!containerRef.current?.contains(e.target as Node))
-        dispatch({ type: "CLOSE" });
+        dispatch({ type: 'CLOSE' });
     };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
   }, []);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (!open) return;
-    if (e.key === "ArrowDown") {
+    if (e.key === 'ArrowDown') {
       e.preventDefault();
-      dispatch({ type: "MOVE_ACTIVE", delta: 1 });
-    } else if (e.key === "ArrowUp") {
+      dispatch({ type: 'MOVE_ACTIVE', delta: 1 });
+    } else if (e.key === 'ArrowUp') {
       e.preventDefault();
-      dispatch({ type: "MOVE_ACTIVE", delta: -1 });
-    } else if (e.key === "Escape") {
-      dispatch({ type: "CLOSE" });
+      dispatch({ type: 'MOVE_ACTIVE', delta: -1 });
+    } else if (e.key === 'Escape') {
+      dispatch({ type: 'CLOSE' });
       inputRef.current?.blur();
-    } else if (e.key === "Enter" && activeIdx >= 0) {
+    } else if (e.key === 'Enter' && activeIdx >= 0) {
       onResultClick?.(results[activeIdx]);
-      dispatch({ type: "CLOSE" });
+      dispatch({ type: 'CLOSE' });
     }
   };
 
   return (
-    <div ref={containerRef} className={cn("relative", className)}>
+    <div ref={containerRef} className={cn('relative', className)}>
       <label
         htmlFor={id}
         className="block mb-1.5 font-body text-[0.68rem] uppercase tracking-[0.12em] text-text-muted"
@@ -174,7 +174,7 @@ export function SearchInput({
         <span
           aria-hidden="true"
           className={`absolute left-3.5 top-1/2 -translate-y-1/2 text-sm pointer-events-none transition-colors duration-fast leading-none ${
-            open ? "text-gold-base" : "text-text-muted"
+            open ? 'text-gold-base' : 'text-text-muted'
           }`}
         >
           ⌕
@@ -186,18 +186,18 @@ export function SearchInput({
           type="search"
           value={query}
           onChange={(e) =>
-            dispatch({ type: "QUERY_CHANGED", query: e.target.value })
+            dispatch({ type: 'QUERY_CHANGED', query: e.target.value })
           }
           onKeyDown={handleKeyDown}
-          onFocus={() => dispatch({ type: "OPEN_IF_RESULTS" })}
-          placeholder={placeholder ?? "Search…"}
+          onFocus={() => dispatch({ type: 'OPEN_IF_RESULTS' })}
+          placeholder={placeholder ?? 'Search…'}
           role="combobox"
           aria-expanded={open}
           aria-controls={listId}
           aria-autocomplete="list"
           autoComplete="off"
           className={`w-full font-body text-[0.9rem] text-text-primary bg-surface-elevated rounded-sm py-2.5 pr-10 pl-[38px] outline-none border transition-colors duration-fast ${
-            open ? "border-gold-base" : "border-border-default"
+            open ? 'border-gold-base' : 'border-border-default'
           }`}
         />
 
@@ -205,13 +205,13 @@ export function SearchInput({
         {(loading || query) && (
           <button
             onClick={() => {
-              dispatch({ type: "CLEAR" });
+              dispatch({ type: 'CLEAR' });
               inputRef.current?.focus();
             }}
             aria-label={clearLabel}
             className="absolute right-3 top-1/2 -translate-y-1/2 bg-none border-none cursor-pointer text-text-muted text-base leading-none p-0.5"
           >
-            {loading ? "…" : "×"}
+            {loading ? '…' : '×'}
           </button>
         )}
       </div>
@@ -230,12 +230,12 @@ export function SearchInput({
                 onClick={(e) => {
                   e.preventDefault();
                   onResultClick?.(result);
-                  dispatch({ type: "CLOSE" });
+                  dispatch({ type: 'CLOSE' });
                 }}
                 className={`block px-4 py-2.5 no-underline transition-colors duration-fast ${
-                  activeIdx === idx ? "bg-surface-default" : "bg-transparent"
+                  activeIdx === idx ? 'bg-surface-default' : 'bg-transparent'
                 }`}
-                onMouseEnter={() => dispatch({ type: "SELECT_ACTIVE", idx })}
+                onMouseEnter={() => dispatch({ type: 'SELECT_ACTIVE', idx })}
               >
                 <span className="block font-body text-[0.875rem] text-text-primary">
                   {result.label}

@@ -1,27 +1,27 @@
 import type {
   ActivityData,
   ExtracurricularVariantType,
-} from "@paideon/contracts";
-import Image from "next/image";
-import Link from "next/link";
+} from '@paideon/contracts';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { cn } from "../../utilities/cn";
-import { Badge } from "../atoms/Badge";
+import { cn } from '../../utilities/cn';
+import { Badge } from '../atoms/Badge';
 
 export interface ExtracurricularCardProps
-  extends Omit<ActivityData, "variant"> {
+  extends Omit<ActivityData, 'variant'> {
   variant?: ExtracurricularVariantType;
   className?: string;
 }
 
 const ACCENT_COLORS: Record<ExtracurricularVariantType, string> = {
-  sport: "bg-green-base",
-  "performing-arts": "bg-gold-base",
-  leadership: "bg-green-base",
+  sport: 'bg-green-base',
+  'performing-arts': 'bg-gold-base',
+  leadership: 'bg-green-base',
 };
 
 export function ExtracurricularCard({
-  variant = "sport",
+  variant = 'sport',
   name,
   description,
   recentAchievements,
@@ -35,20 +35,20 @@ export function ExtracurricularCard({
 }: ExtracurricularCardProps) {
   const accent = ACCENT_COLORS[variant];
   const imageAspect =
-    variant === "performing-arts" ? "aspect-[4/3]" : "aspect-[16/9]";
+    variant === 'performing-arts' ? 'aspect-[4/3]' : 'aspect-[16/9]';
 
   const content = (
     <div
       className={cn(
-        "bg-surface-elevated border border-border-light overflow-hidden",
-        "shadow-elevation-1 transition-all duration-gentle",
-        "group-hover:shadow-elevation-3 group-hover:-translate-y-0.5",
+        'bg-surface-elevated border border-border-light overflow-hidden',
+        'shadow-elevation-1 transition-all duration-gentle',
+        'group-hover:shadow-elevation-3 group-hover:-translate-y-0.5',
         className
       )}
     >
       {imageSrc && (
         <div
-          className={cn("relative overflow-hidden bg-green-base", imageAspect)}
+          className={cn('relative overflow-hidden bg-green-base', imageAspect)}
         >
           <Image
             src={imageSrc}
@@ -63,17 +63,17 @@ export function ExtracurricularCard({
           )}
         </div>
       )}
-      <div className={cn("h-1", accent)} />
+      <div className={cn('h-1', accent)} />
       <div
         className={cn(
-          "p-space-5",
-          variant === "performing-arts" && "p-space-7"
+          'p-space-5',
+          variant === 'performing-arts' && 'p-space-7'
         )}
       >
         <h3
           className={cn(
-            "font-display text-h3 font-medium text-text-primary mb-space-2",
-            "transition-colors duration-fast group-hover:text-gold-active"
+            'font-display text-h3 font-medium text-text-primary mb-space-2',
+            'transition-colors duration-fast group-hover:text-gold-active'
           )}
         >
           {name}
@@ -88,8 +88,8 @@ export function ExtracurricularCard({
               <li key={ach} className="flex gap-space-2 items-baseline">
                 <span
                   className={cn(
-                    "text-xs flex-shrink-0",
-                    accent.replace("bg-", "text-")
+                    'text-xs flex-shrink-0',
+                    accent.replace('bg-', 'text-')
                   )}
                 >
                   ●
@@ -102,7 +102,7 @@ export function ExtracurricularCard({
           </ul>
         )}
 
-        {variant === "performing-arts" && studentQuote && (
+        {variant === 'performing-arts' && studentQuote && (
           <blockquote className="m-0 pl-space-3.5 border-l-2 border-gold-base mb-space-4">
             <p className="font-display italic text-body-sm text-text-muted">
               &ldquo;{studentQuote}&rdquo;

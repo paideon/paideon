@@ -2,9 +2,9 @@
 
 // General contact form input contract.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { LocaleEnum } from "../../primitives/locale.ts";
+import { LocaleEnum } from '../../primitives/locale.ts';
 
 export const ContactFormSchema = z.object({
   name: z.string().min(2),

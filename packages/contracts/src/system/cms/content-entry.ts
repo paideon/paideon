@@ -13,9 +13,9 @@
 //   Keep this in sync with packages/database/prisma/schema.prisma.
 //   When the Prisma schema changes, update this file too.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { PublishStatusEnum } from "../../primitives/enums/publish-status.ts";
+import { PublishStatusEnum } from '../../primitives/enums/publish-status.ts';
 
 export const ContentEntrySchema = z.object({
   id: z.string(),

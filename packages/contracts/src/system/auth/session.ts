@@ -2,7 +2,7 @@
 
 // An active login session.
 
-import { z } from "zod";
+import { z } from 'zod';
 
 export const SessionSchema = z.object({
   id: z.string(),

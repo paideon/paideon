@@ -2,22 +2,22 @@
 //
 // The metadata shape describing one editable field for the admin dynamic form builder.
 
-import { z } from "zod";
+import { z } from 'zod';
 
 export const FIELD_TYPE_VALUES = [
-  "text",
-  "textarea",
-  "richtext",
-  "number",
-  "boolean",
-  "select",
-  "multiselect",
-  "image",
-  "date",
-  "url",
-  "email",
-  "array",
-  "object",
+  'text',
+  'textarea',
+  'richtext',
+  'number',
+  'boolean',
+  'select',
+  'multiselect',
+  'image',
+  'date',
+  'url',
+  'email',
+  'array',
+  'object',
 ] as const;
 
 export const FieldTypeEnum = z.enum(FIELD_TYPE_VALUES);

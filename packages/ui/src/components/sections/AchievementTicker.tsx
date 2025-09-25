@@ -1,7 +1,7 @@
-"use client";
-import { useRef, useState } from "react";
+'use client';
+import { useRef, useState } from 'react';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
 export interface Achievement {
   id: string;
@@ -20,7 +20,7 @@ export interface AchievementTickerProps {
 export function AchievementTicker({
   achievements,
   archiveHref,
-  archiveLabel = "All →",
+  archiveLabel = 'All →',
 }: AchievementTickerProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [paused, setPaused] = useState(false);
@@ -56,15 +56,15 @@ export function AchievementTicker({
       <div
         ref={trackRef}
         className={cn(
-          "kcc-ticker-track flex items-center gap-0 w-max transition-opacity duration-200",
-          paused ? "opacity-75" : "opacity-100"
+          'kcc-ticker-track flex items-center gap-0 w-max transition-opacity duration-200',
+          paused ? 'opacity-75' : 'opacity-100'
         )}
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
         style={{
           // Genuinely dynamic — duration depends on item count, play state depends on hover.
           animation: `kcc-ticker ${duration}s linear infinite`,
-          animationPlayState: paused ? "paused" : "running",
+          animationPlayState: paused ? 'paused' : 'running',
         }}
       >
         {doubled.map((item, i) => (

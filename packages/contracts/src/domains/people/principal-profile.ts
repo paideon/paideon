@@ -2,7 +2,7 @@
 
 // Principal profile and message contracts.
 
-import { z } from "zod";
+import { z } from 'zod';
 
 export const PrincipalSchema = z.object({
   name: z.string().min(1),

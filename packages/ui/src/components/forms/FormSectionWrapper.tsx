@@ -1,4 +1,4 @@
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
 export interface FormSectionWrapperProps {
   title: string;
@@ -14,12 +14,12 @@ export function FormSectionWrapper({
   className,
 }: FormSectionWrapperProps) {
   return (
-    <div className={cn("mb-space-10", className)}>
+    <div className={cn('mb-space-10', className)}>
       <div className="mb-space-6">
         <h3
           className={cn(
-            "font-display text-h3 font-medium text-text-primary",
-            description ? "mb-space-1.5" : "mb-0"
+            'font-display text-h3 font-medium text-text-primary',
+            description ? 'mb-space-1.5' : 'mb-0'
           )}
         >
           {title}

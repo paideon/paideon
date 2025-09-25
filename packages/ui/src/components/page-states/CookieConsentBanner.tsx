@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-import { cn } from "../../utilities/cn";
-import { Button } from "../atoms/Button";
+import { cn } from '../../utilities/cn';
+import { Button } from '../atoms/Button';
 
-const STORAGE_KEY = "kcc-cookie-consent";
+const STORAGE_KEY = 'kcc-cookie-consent';
 
 export interface CookieConsentBannerProps {
   message?: string;
@@ -14,9 +14,9 @@ export interface CookieConsentBannerProps {
 }
 
 export function CookieConsentBanner({
-  message = "This website uses cookies to improve your experience. By continuing to use this site, you consent to our use of cookies.",
-  acceptLabel = "Accept",
-  declineLabel = "Decline",
+  message = 'This website uses cookies to improve your experience. By continuing to use this site, you consent to our use of cookies.',
+  acceptLabel = 'Accept',
+  declineLabel = 'Decline',
 }: CookieConsentBannerProps) {
   const [visible, setVisible] = useState(false);
 
@@ -31,7 +31,7 @@ export function CookieConsentBanner({
 
   const accept = () => {
     try {
-      localStorage.setItem(STORAGE_KEY, "accepted");
+      localStorage.setItem(STORAGE_KEY, 'accepted');
     } catch {
       // Best-effort — if storage is blocked, the banner still dismisses for this session.
     }
@@ -40,7 +40,7 @@ export function CookieConsentBanner({
 
   const decline = () => {
     try {
-      localStorage.setItem(STORAGE_KEY, "declined");
+      localStorage.setItem(STORAGE_KEY, 'declined');
     } catch {
       // Best-effort — see accept() above.
     }
@@ -52,22 +52,22 @@ export function CookieConsentBanner({
   return (
     <div
       className={cn(
-        "fixed bottom-0 left-0 right-0 z-toast",
-        "bg-surface-inverse border-t border-gold-base/20",
-        "shadow-elevation-3"
+        'fixed bottom-0 left-0 right-0 z-toast',
+        'bg-surface-inverse border-t border-gold-base/20',
+        'shadow-elevation-3'
       )}
     >
       <div
         className={cn(
-          "max-w-content mx-auto",
-          "px-space-6 py-space-5 md:py-space-4",
-          "flex flex-col md:flex-row items-center justify-between gap-space-4"
+          'max-w-content mx-auto',
+          'px-space-6 py-space-5 md:py-space-4',
+          'flex flex-col md:flex-row items-center justify-between gap-space-4'
         )}
       >
         <p
           className={cn(
-            "font-body text-body-sm text-text-inverse leading-relaxed",
-            "text-center md:text-left"
+            'font-body text-body-sm text-text-inverse leading-relaxed',
+            'text-center md:text-left'
           )}
         >
           {message}

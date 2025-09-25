@@ -1,6 +1,6 @@
 // packages/contracts/src/primitives/media/video.ts
 
-import { z } from "zod";
+import { z } from 'zod';
 
 export const VideoSchema = z.object({
   src: z.string(), // R2 key

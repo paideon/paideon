@@ -1,15 +1,15 @@
 // packages/ui/src/components/sections/ProfileCarousel.tsx
-"use client";
+'use client';
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useId, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { useId, useState } from 'react';
 
-import { cn } from "../../utilities/cn";
-import { Button } from "../atoms/Button";
-import { Icon } from "../icons";
-import { Container } from "../layout/Container";
-import { ImageFrame } from "../media/ImageFrame";
-import { QuoteBlock } from "../typography/QuoteBlock";
+import { cn } from '../../utilities/cn';
+import { Button } from '../atoms/Button';
+import { Icon } from '../icons';
+import { Container } from '../layout/Container';
+import { ImageFrame } from '../media/ImageFrame';
+import { QuoteBlock } from '../typography/QuoteBlock';
 
 interface AlumniProfile {
   id: string;
@@ -62,14 +62,14 @@ const slideVariantsReduced = {
 export function ProfileCarousel({
   profiles,
   className,
-  allYearsLabel = "All Years",
-  prevLabel = "Previous profile",
-  nextLabel = "Next profile",
+  allYearsLabel = 'All Years',
+  prevLabel = 'Previous profile',
+  nextLabel = 'Next profile',
   getSlideLabel = (n) => `Go to slide ${n}`,
   getClassOfLabel = (year) => `Class of ${year}`,
   getSlideStatusLabel = (current, total) => `Profile ${current} of ${total}`,
 }: ProfileCarouselProps) {
-  const [selectedYear, setSelectedYear] = useState<string | "all">("all");
+  const [selectedYear, setSelectedYear] = useState<string | 'all'>('all');
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
   const reduced = useReducedMotion();
@@ -81,7 +81,7 @@ export function ProfileCarousel({
   );
 
   const filteredProfiles =
-    selectedYear === "all"
+    selectedYear === 'all'
       ? profiles
       : profiles.filter((a) => a.graduationYear === selectedYear);
 
@@ -89,7 +89,7 @@ export function ProfileCarousel({
   const hasMultiple = filteredProfiles.length > 1;
 
   // Resets index when the filter changes so activeIndex can't point past the end of the new, shorter list
-  const handleYearChange = (year: string | "all") => {
+  const handleYearChange = (year: string | 'all') => {
     setSelectedYear(year);
     setActiveIndex(0);
     setDirection(1);
@@ -114,11 +114,11 @@ export function ProfileCarousel({
 
   function handleKeyDown(e: React.KeyboardEvent) {
     if (!hasMultiple) return;
-    if (e.key === "ArrowLeft") {
+    if (e.key === 'ArrowLeft') {
       e.preventDefault();
       prev();
     }
-    if (e.key === "ArrowRight") {
+    if (e.key === 'ArrowRight') {
       e.preventDefault();
       next();
     }
@@ -134,14 +134,14 @@ export function ProfileCarousel({
       {/* Year filter */}
       <div className="flex justify-center gap-space-2 mb-space-10 flex-wrap">
         <button
-          onClick={() => handleYearChange("all")}
-          aria-pressed={selectedYear === "all"}
+          onClick={() => handleYearChange('all')}
+          aria-pressed={selectedYear === 'all'}
           className={cn(
-            "px-space-3 py-space-1 font-body text-body-sm rounded-full border transition-colors",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-base focus-visible:ring-offset-2",
-            selectedYear === "all"
-              ? "bg-green-base border-transparent text-text-inverse"
-              : "bg-transparent border-border-default text-text-muted hover:border-gold-hover hover:text-gold-hover"
+            'px-space-3 py-space-1 font-body text-body-sm rounded-full border transition-colors',
+            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-base focus-visible:ring-offset-2',
+            selectedYear === 'all'
+              ? 'bg-green-base border-transparent text-text-inverse'
+              : 'bg-transparent border-border-default text-text-muted hover:border-gold-hover hover:text-gold-hover'
           )}
         >
           {allYearsLabel}
@@ -152,11 +152,11 @@ export function ProfileCarousel({
             onClick={() => handleYearChange(year)}
             aria-pressed={selectedYear === year}
             className={cn(
-              "px-space-3 py-space-1 font-body text-body-sm rounded-full border transition-colors",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-base focus-visible:ring-offset-2",
+              'px-space-3 py-space-1 font-body text-body-sm rounded-full border transition-colors',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-base focus-visible:ring-offset-2',
               selectedYear === year
-                ? "bg-green-base border-transparent text-text-inverse"
-                : "bg-transparent border-border-default text-text-muted hover:border-gold-hover hover:text-gold-hover"
+                ? 'bg-green-base border-transparent text-text-inverse'
+                : 'bg-transparent border-border-default text-text-muted hover:border-gold-hover hover:text-gold-hover'
             )}
           >
             {year}
@@ -200,18 +200,18 @@ export function ProfileCarousel({
 
             <div
               className={cn(
-                "text-center",
+                'text-center',
                 currentProfile.portrait
-                  ? "md:col-span-3 md:text-left"
-                  : "md:col-span-5"
+                  ? 'md:col-span-3 md:text-left'
+                  : 'md:col-span-5'
               )}
             >
               {currentProfile.quote && (
                 <QuoteBlock
                   quote={currentProfile.quote}
                   className={cn(
-                    "mx-auto mb-space-6",
-                    currentProfile.portrait && "md:mx-0"
+                    'mx-auto mb-space-6',
+                    currentProfile.portrait && 'md:mx-0'
                   )}
                 />
               )}
@@ -267,10 +267,10 @@ export function ProfileCarousel({
                 aria-selected={idx === activeIndex}
                 onClick={() => goTo(idx)}
                 className={cn(
-                  "h-size-2 rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-base focus-visible:ring-offset-2",
+                  'h-size-2 rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-base focus-visible:ring-offset-2',
                   idx === activeIndex
-                    ? "w-size-6 bg-gold-base"
-                    : "w-size-2 bg-border-default hover:bg-gold-pale"
+                    ? 'w-size-6 bg-gold-base'
+                    : 'w-size-2 bg-border-default hover:bg-gold-pale'
                 )}
                 aria-label={getSlideLabel(idx + 1)}
               />

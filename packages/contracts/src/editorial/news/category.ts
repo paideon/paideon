@@ -2,16 +2,16 @@
 //
 // News category definitions.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-export const NEWS_CATEGORY_CONTENT_TYPE = "news-category";
+export const NEWS_CATEGORY_CONTENT_TYPE = 'news-category';
 
 export const NEWS_CATEGORIES = {
-  academic: "Academic",
-  sports: "Sports",
-  cultural: "Cultural",
-  community: "Community",
-  general: "General",
+  academic: 'Academic',
+  sports: 'Sports',
+  cultural: 'Cultural',
+  community: 'Community',
+  general: 'General',
 } as const;
 
 export type NewsCategoryKey = keyof typeof NEWS_CATEGORIES;

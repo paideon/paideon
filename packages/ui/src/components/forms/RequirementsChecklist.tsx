@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-import { Checkbox } from "./Checkbox";
-import { cn } from "../../utilities/cn";
+import { Checkbox } from './Checkbox';
+import { cn } from '../../utilities/cn';
 
 export interface ChecklistItem {
   id: string;
@@ -26,8 +26,8 @@ export function RequirementsChecklist({
   items,
   onComplete,
   className,
-  printLabel = "Print Checklist",
-  requiredLabel = "*Required",
+  printLabel = 'Print Checklist',
+  requiredLabel = '*Required',
 }: RequirementsChecklistProps) {
   const [completed, setCompleted] = useState<Set<string>>(new Set());
 
@@ -49,7 +49,7 @@ export function RequirementsChecklist({
   return (
     <div
       className={cn(
-        "bg-surface-elevated border border-border-light rounded-lg p-space-6",
+        'bg-surface-elevated border border-border-light rounded-lg p-space-6',
         className
       )}
     >
@@ -57,7 +57,7 @@ export function RequirementsChecklist({
         <h3 className="font-display text-h3 mb-space-2">{title}</h3>
         <p className="font-body text-body-sm text-text-muted">
           {allRequiredComplete
-            ? "✓ All required items completed"
+            ? '✓ All required items completed'
             : `${
                 items
                   .filter((i) => i.required)

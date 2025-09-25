@@ -1,1 +1,1 @@
-export * from "./school-identity.ts";
+export * from './school-identity.ts';

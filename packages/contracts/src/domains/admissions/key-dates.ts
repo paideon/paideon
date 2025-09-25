@@ -1,13 +1,13 @@
 // packages/contracts/src/features/admissions/key-dates.ts
 
-import { z } from "zod";
+import { z } from 'zod';
 
 export const AdmissionsDateCategoryEnum = z.enum([
-  "application",
-  "exam",
-  "results",
-  "enrollment",
-  "other",
+  'application',
+  'exam',
+  'results',
+  'enrollment',
+  'other',
 ]);
 
 export const AdmissionsDateSchema = z.object({

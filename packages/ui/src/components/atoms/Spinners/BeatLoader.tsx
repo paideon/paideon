@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import clsx from "clsx";
-import { motion, useReducedMotion } from "framer-motion";
+import clsx from 'clsx';
+import { motion, useReducedMotion } from 'framer-motion';
 
-type BeatLoaderSize = "sm" | "md" | "lg";
-type BeatLoaderVariant = "green" | "gold" | "muted";
-type BeatLoaderSpeed = "fast" | "normal" | "slow";
+type BeatLoaderSize = 'sm' | 'md' | 'lg';
+type BeatLoaderVariant = 'green' | 'gold' | 'muted';
+type BeatLoaderSpeed = 'fast' | 'normal' | 'slow';
 
 type BeatLoaderProps = {
   size?: BeatLoaderSize;
@@ -19,15 +19,15 @@ const sizeConfig: Record<
   BeatLoaderSize,
   { dot: string; gap: string; lift: number }
 > = {
-  sm: { dot: "w-size-1p5 h-size-1p5", gap: "gap-space-1", lift: 4 },
-  md: { dot: "w-size-2 h-size-2", gap: "gap-space-1", lift: 6 },
-  lg: { dot: "w-size-3 h-size-3", gap: "gap-space-2", lift: 8 },
+  sm: { dot: 'w-size-1p5 h-size-1p5', gap: 'gap-space-1', lift: 4 },
+  md: { dot: 'w-size-2 h-size-2', gap: 'gap-space-1', lift: 6 },
+  lg: { dot: 'w-size-3 h-size-3', gap: 'gap-space-2', lift: 8 },
 };
 
 const variantConfig: Record<BeatLoaderVariant, string> = {
-  green: "text-green-base",
-  gold: "text-gold-base",
-  muted: "text-text-muted",
+  green: 'text-green-base',
+  gold: 'text-gold-base',
+  muted: 'text-text-muted',
 };
 
 const speedConfig: Record<BeatLoaderSpeed, number> = {
@@ -37,10 +37,10 @@ const speedConfig: Record<BeatLoaderSpeed, number> = {
 };
 
 export function BeatLoader({
-  size = "md",
-  variant = "green",
-  speed = "normal",
-  label = "Loading",
+  size = 'md',
+  variant = 'green',
+  speed = 'normal',
+  label = 'Loading',
   className,
 }: BeatLoaderProps) {
   const reduced = useReducedMotion();
@@ -52,7 +52,7 @@ export function BeatLoader({
       role="status"
       aria-label={label}
       className={clsx(
-        "inline-flex items-end",
+        'inline-flex items-end',
         gap,
         variantConfig[variant],
         className
@@ -61,7 +61,7 @@ export function BeatLoader({
       {[0, 1, 2].map((i) => (
         <motion.span
           key={i}
-          className={clsx("rounded-full bg-current shrink-0", dot)}
+          className={clsx('rounded-full bg-current shrink-0', dot)}
           animate={
             reduced
               ? { opacity: [1, 0.3, 1] }
@@ -74,7 +74,7 @@ export function BeatLoader({
           transition={{
             duration,
             repeat: Infinity,
-            ease: "easeInOut",
+            ease: 'easeInOut',
             delay: i * (duration / 3),
             times: [0, 0.4, 1],
           }}
@@ -84,4 +84,4 @@ export function BeatLoader({
   );
 }
 
-BeatLoader.displayName = "BeatLoader";
+BeatLoader.displayName = 'BeatLoader';

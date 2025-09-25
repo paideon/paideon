@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { motion, useTransform } from "framer-motion";
+import { motion, useTransform } from 'framer-motion';
 
-import { useCountUp } from "../../hooks/useCountUp";
-import { cn } from "../../utilities/cn";
-import { ButtonLink } from "../atoms/ButtonLink";
-import { SchoolLogo } from "../icons/brand/SchoolLogo";
-import { Divider } from "../layout/Divider";
-import { NavLink } from "../navigation/NavLink";
-import { EyebrowLabel } from "../typography/EyebrowLabel";
-import { Heading } from "../typography/Heading";
-import { Text } from "../typography/Text";
+import { useCountUp } from '../../hooks/useCountUp';
+import { cn } from '../../utilities/cn';
+import { ButtonLink } from '../atoms/ButtonLink';
+import { SchoolLogo } from '../icons/brand/SchoolLogo';
+import { Divider } from '../layout/Divider';
+import { NavLink } from '../navigation/NavLink';
+import { EyebrowLabel } from '../typography/EyebrowLabel';
+import { Heading } from '../typography/Heading';
+import { Text } from '../typography/Text';
 
 export interface QuickLink {
   href: string;
@@ -18,12 +18,12 @@ export interface QuickLink {
 }
 
 const DEFAULT_QUICK_LINKS: QuickLink[] = [
-  { href: "/", label: "Homepage" },
-  { href: "/news", label: "News" },
-  { href: "/events", label: "Events" },
-  { href: "/about", label: "About KCC" },
-  { href: "/admissions", label: "Admissions" },
-  { href: "/contact", label: "Contact" },
+  { href: '/', label: 'Homepage' },
+  { href: '/news', label: 'News' },
+  { href: '/events', label: 'Events' },
+  { href: '/about', label: 'About KCC' },
+  { href: '/admissions', label: 'Admissions' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 export interface NotFoundPageProps {
@@ -38,14 +38,14 @@ export interface NotFoundPageProps {
 }
 
 export function NotFoundPage({
-  eyebrowLabel = "Page not found",
+  eyebrowLabel = 'Page not found',
   message = "The page you're looking for may have been moved, renamed, or removed.",
-  ctaLabel = "Return to homepage",
-  ctaHref = "/",
-  quickNavAriaLabel = "Quick navigation links",
-  quickLinksIntro = "Or jump to",
+  ctaLabel = 'Return to homepage',
+  ctaHref = '/',
+  quickNavAriaLabel = 'Quick navigation links',
+  quickLinksIntro = 'Or jump to',
   quickLinks = DEFAULT_QUICK_LINKS,
-  footerText = "C.W.W. Kannangara Central College, Mathugama — Est. 1873",
+  footerText = 'C.W.W. Kannangara Central College, Mathugama — Est. 1873',
 }: NotFoundPageProps) {
   const { value: animated404 } = useCountUp(404);
   const display404 = useTransform(animated404, Math.round);
@@ -106,12 +106,12 @@ export function NotFoundPage({
                 <NavLink
                   href={link.href}
                   className={cn(
-                    "font-body text-caption uppercase tracking-caption",
-                    "text-text-inverse/55 px-space-3 py-space-1.5",
-                    "border border-white/15 rounded-sm",
-                    "transition-colors duration-fast ease-snap",
-                    "hover:text-gold-base hover:border-gold-base/40",
-                    "focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2"
+                    'font-body text-caption uppercase tracking-caption',
+                    'text-text-inverse/55 px-space-3 py-space-1.5',
+                    'border border-white/15 rounded-sm',
+                    'transition-colors duration-fast ease-snap',
+                    'hover:text-gold-base hover:border-gold-base/40',
+                    'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2'
                   )}
                   activeClassName="text-gold-base border-gold-base"
                 >

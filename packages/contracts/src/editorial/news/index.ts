@@ -4,21 +4,21 @@ export {
   NewsArticleSchema,
   NewsCardVariant,
   NewsCardVariantValues,
-} from "./article.ts";
+} from './article.ts';
 export type {
   ArticleCardData,
   NewsArticleData,
   NewsCardVariantType,
-} from "./article.ts";
+} from './article.ts';
 
 export {
   NEWS_CATEGORIES,
   NEWS_CATEGORY_CONTENT_TYPE,
   NEWS_CATEGORY_META,
   NewsCategorySchema,
-} from "./category.ts";
+} from './category.ts';
 export type {
   Category,
   NewsCategoryKey,
   NewsCategoryMeta,
-} from "./category.ts";
+} from './category.ts';

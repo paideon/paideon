@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { cn } from "../../utilities/cn";
-import { ButtonLink } from "../atoms/ButtonLink";
+import { cn } from '../../utilities/cn';
+import { ButtonLink } from '../atoms/ButtonLink';
 
-type FileTypes = "pdf" | "doc" | "xls" | "zip";
+type FileTypes = 'pdf' | 'doc' | 'xls' | 'zip';
 export interface DownloadableDocumentItemProps {
   title: string;
   fileType: FileTypes;
@@ -80,12 +80,12 @@ export function DownloadableDocumentItem({
   url,
   description,
   className,
-  downloadLabel = "Download",
+  downloadLabel = 'Download',
 }: DownloadableDocumentItemProps) {
   return (
     <div
       className={cn(
-        "flex items-start gap-4 p-4 bg-surface-default border border-border-light rounded-md",
+        'flex items-start gap-4 p-4 bg-surface-default border border-border-light rounded-md',
         className
       )}
     >

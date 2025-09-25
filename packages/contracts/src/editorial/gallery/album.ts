@@ -15,9 +15,9 @@
 // layer stores `year: number` accordingly, not the old schema's
 // `date: string`.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-export const GALLERY_ALBUM_CONTENT_TYPE = "gallery-album";
+export const GALLERY_ALBUM_CONTENT_TYPE = 'gallery-album';
 
 // Card projection — matches @paideon/ui's GalleryAlbumCardProps exactly.
 export const GalleryAlbumCardSchema = z.object({

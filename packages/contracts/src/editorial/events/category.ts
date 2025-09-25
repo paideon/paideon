@@ -2,17 +2,17 @@
 //
 // Event category definitions.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-export const EVENT_CATEGORY_CONTENT_TYPE = "event-category";
+export const EVENT_CATEGORY_CONTENT_TYPE = 'event-category';
 
 export const EVENT_CATEGORIES = {
-  academic: "Academic",
-  sports: "Sports",
-  cultural: "Cultural",
-  exam: "Exam",
-  holiday: "Holiday",
-  other: "Other",
+  academic: 'Academic',
+  sports: 'Sports',
+  cultural: 'Cultural',
+  exam: 'Exam',
+  holiday: 'Holiday',
+  other: 'Other',
 } as const;
 
 export type EventCategoryKey = keyof typeof EVENT_CATEGORIES;

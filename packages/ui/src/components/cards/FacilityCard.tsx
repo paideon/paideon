@@ -1,20 +1,20 @@
 import type {
   FacilityCardData,
   FacilityCardVariantType,
-} from "@paideon/contracts";
-import Image from "next/image";
-import Link from "next/link";
+} from '@paideon/contracts';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
-export interface FacilityCardProps extends Omit<FacilityCardData, "variant"> {
+export interface FacilityCardProps extends Omit<FacilityCardData, 'variant'> {
   variant?: FacilityCardVariantType;
   className?: string;
   scheduleLabel?: string;
 }
 
 export function FacilityCard({
-  variant = "standard",
+  variant = 'standard',
   name,
   description,
   features,
@@ -23,14 +23,14 @@ export function FacilityCard({
   imageAlt,
   schedule,
   className,
-  scheduleLabel = "Schedule",
+  scheduleLabel = 'Schedule',
 }: FacilityCardProps) {
   const content = (
     <div
       className={cn(
-        "bg-surface-elevated border border-border-light overflow-hidden",
-        "shadow-elevation-1 transition-all duration-gentle",
-        "group-hover:shadow-elevation-3 group-hover:-translate-y-0.5",
+        'bg-surface-elevated border border-border-light overflow-hidden',
+        'shadow-elevation-1 transition-all duration-gentle',
+        'group-hover:shadow-elevation-3 group-hover:-translate-y-0.5',
         className
       )}
     >
@@ -49,8 +49,8 @@ export function FacilityCard({
       <div className="p-space-6">
         <h3
           className={cn(
-            "font-display text-h3 font-medium text-text-primary mb-space-2",
-            "transition-colors duration-fast group-hover:text-gold-active"
+            'font-display text-h3 font-medium text-text-primary mb-space-2',
+            'transition-colors duration-fast group-hover:text-gold-active'
           )}
         >
           {name}
@@ -68,7 +68,7 @@ export function FacilityCard({
             </li>
           ))}
         </ul>
-        {variant === "schedule" && schedule && schedule.length > 0 && (
+        {variant === 'schedule' && schedule && schedule.length > 0 && (
           <div>
             <p className="font-body text-caption uppercase tracking-caption text-text-muted mb-space-2.5">
               {scheduleLabel}
@@ -79,8 +79,8 @@ export function FacilityCard({
                   <tr
                     key={`${slot.day}-${slot.time}`}
                     className={cn(
-                      "border-b border-border-light",
-                      i % 2 === 0 ? "bg-surface-base" : "bg-surface-default"
+                      'border-b border-border-light',
+                      i % 2 === 0 ? 'bg-surface-base' : 'bg-surface-default'
                     )}
                   >
                     <td className="font-body text-caption text-gold-base font-semibold p-space-1.5 whitespace-nowrap">

@@ -9,7 +9,7 @@
 // so those call sites share one client, one error shape, and one set of
 // header/pagination/serialization helpers instead of each reinventing them.
 
-export { api } from "./client/index.js";
+export { api } from './client/index.js';
 export type {
   ApiClientConfig,
   ApiHooks,
@@ -18,7 +18,7 @@ export type {
   Fetcher,
   HeadersInit,
   BodyInit,
-} from "./client/index.js";
+} from './client/index.js';
 export {
   retry,
   timeout,
@@ -32,42 +32,42 @@ export {
   isJsonResponse,
   isTextResponse,
   isBlobResponse,
-} from "./client/index.js";
+} from './client/index.js';
 
-export { ApiError, normalizeError, codeFromStatus } from "./errors/index.js";
+export { ApiError, normalizeError, codeFromStatus } from './errors/index.js';
 export type {
   ApiErrorCode,
   ApiErrorDetails,
   ApiErrorParams,
-} from "./errors/index.js";
+} from './errors/index.js';
 
 export {
   createJsonHeaders,
   createAuthHeaders,
   createCacheHeaders,
   createNoCacheHeaders,
-} from "./headers/index.js";
-export type { AuthScheme } from "./headers/index.js";
+} from './headers/index.js';
+export type { AuthScheme } from './headers/index.js';
 
-export { buildQuery, joinUrl, mergeDeep } from "./utils/index.js";
-export type { PlainObject } from "./utils/index.js";
+export { buildQuery, joinUrl, mergeDeep } from './utils/index.js';
+export type { PlainObject } from './utils/index.js';
 
 export {
   toJson,
   fromJson,
   toSearchParams,
   toFormData,
-} from "./serialization/index.js";
+} from './serialization/index.js';
 
 export {
   parseCursorParams,
   createCursorPage,
   parseOffsetParams,
   createOffsetPage,
-} from "./pagination/index.js";
+} from './pagination/index.js';
 export type {
   CursorPageParams,
   CursorPage,
   OffsetPageParams,
   OffsetPage,
-} from "./pagination/index.js";
+} from './pagination/index.js';

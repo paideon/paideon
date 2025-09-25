@@ -7,35 +7,35 @@
 // apps/web and apps/admin; all the actual token-flattening logic lives
 // here so it can be unit tested and reused without touching disk.
 
-import { colors } from "./tailwind.ts";
-import { scale } from "../primitives/effects.ts";
+import { colors } from './tailwind.ts';
+import { scale } from '../primitives/effects.ts';
 import {
   blur,
   opacity,
   aspectRatio,
   zIndex,
   backgroundImage,
-} from "../primitives/effects.ts";
+} from '../primitives/effects.ts';
 import {
   transitionDuration,
   transitionTimingFunction,
-} from "../primitives/motion.ts";
-import { borderRadius } from "../primitives/radius.ts";
-import { boxShadow } from "../primitives/shadows.ts";
-import { sizing } from "../primitives/sizing.ts";
-import { spacing } from "../primitives/spacing.ts";
+} from '../primitives/motion.ts';
+import { borderRadius } from '../primitives/radius.ts';
+import { boxShadow } from '../primitives/shadows.ts';
+import { sizing } from '../primitives/sizing.ts';
+import { spacing } from '../primitives/spacing.ts';
 import {
   fontFamily,
   fontSize,
   lineHeight,
   letterSpacing,
-} from "../primitives/typography.ts";
+} from '../primitives/typography.ts';
 
 function flattenObject(obj: Record<string, unknown>, prefix: string): string {
-  let css = "";
+  let css = '';
   for (const [key, value] of Object.entries(obj)) {
     const varName = `${prefix}-${key}`;
-    if (value && typeof value === "object" && !Array.isArray(value)) {
+    if (value && typeof value === 'object' && !Array.isArray(value)) {
       css += flattenObject(value as Record<string, unknown>, varName);
     } else {
       css += `  --${varName}: ${value};\n`;
@@ -51,15 +51,15 @@ export function generateCssVariables(): string {
     css += `\n  /* ${comment} */\n`;
   };
 
-  addComment("Colors (semantic)");
-  css += flattenObject(colors, "color");
+  addComment('Colors (semantic)');
+  css += flattenObject(colors, 'color');
 
-  addComment("Spacing (4px scale)");
+  addComment('Spacing (4px scale)');
   for (const [key, value] of Object.entries(spacing)) {
     css += `  --${key}: ${value};\n`;
   }
 
-  addComment("Typography – base sizes & metrics");
+  addComment('Typography – base sizes & metrics');
   for (const [key, [size, options]] of Object.entries(fontSize)) {
     css += `  --font-size-${key}: ${size};\n`;
     css += `  --line-height-${key}: ${options.lineHeight};\n`;
@@ -70,7 +70,7 @@ export function generateCssVariables(): string {
   const fontSizeKeys = new Set(Object.keys(fontSize));
 
   addComment(
-    "Standalone letter spacing (utility scale, independent of font-size tokens)"
+    'Standalone letter spacing (utility scale, independent of font-size tokens)'
   );
   for (const [key, value] of Object.entries(letterSpacing)) {
     if (fontSizeKeys.has(key)) continue;
@@ -78,68 +78,68 @@ export function generateCssVariables(): string {
   }
 
   addComment(
-    "Standalone line height (utility scale, independent of font-size tokens)"
+    'Standalone line height (utility scale, independent of font-size tokens)'
   );
   for (const [key, value] of Object.entries(lineHeight)) {
     if (fontSizeKeys.has(key)) continue;
     css += `  --line-height-${key}: ${value};\n`;
   }
 
-  addComment("Motion – Durations");
+  addComment('Motion – Durations');
   for (const [key, value] of Object.entries(transitionDuration)) {
     css += `  --duration-${key}: ${value};\n`;
   }
-  addComment("Motion – Easing");
+  addComment('Motion – Easing');
   for (const [key, value] of Object.entries(transitionTimingFunction)) {
     css += `  --ease-${key}: ${value};\n`;
   }
 
-  addComment("Border radius");
+  addComment('Border radius');
   for (const [key, value] of Object.entries(borderRadius)) {
     css += `  --radius-${key}: ${value};\n`;
   }
 
-  addComment("Elevation shadows");
+  addComment('Elevation shadows');
   for (const [key, value] of Object.entries(boxShadow)) {
     css += `  --shadow-${key}: ${value};\n`;
   }
 
-  addComment("Z-index tiers");
+  addComment('Z-index tiers');
   for (const [key, value] of Object.entries(zIndex)) {
     css += `  --z-${key}: ${value};\n`;
   }
 
-  addComment("Opacity scale");
+  addComment('Opacity scale');
   for (const [key, value] of Object.entries(opacity)) {
     css += `  --opacity-${key}: ${value};\n`;
   }
 
-  addComment("Blur values");
+  addComment('Blur values');
   for (const [key, value] of Object.entries(blur)) {
     css += `  --blur-${key}: ${value};\n`;
   }
 
-  addComment("Aspect ratios");
+  addComment('Aspect ratios');
   for (const [key, value] of Object.entries(aspectRatio)) {
     css += `  --aspect-${key}: ${value};\n`;
   }
 
-  addComment("Sizing (width/height)");
+  addComment('Sizing (width/height)');
   for (const [key, value] of Object.entries(sizing)) {
     css += `  --${key}: ${value};\n`;
   }
 
-  addComment("Whitelist gradients");
+  addComment('Whitelist gradients');
   for (const [key, value] of Object.entries(backgroundImage)) {
     css += `  --bg-${key}: ${value};\n`;
   }
 
-  addComment("Font families");
+  addComment('Font families');
   for (const [key, value] of Object.entries(fontFamily)) {
-    css += `  --font-family-${key}: ${value.join(", ")};\n`;
+    css += `  --font-family-${key}: ${value.join(', ')};\n`;
   }
 
-  addComment("Transform scales");
+  addComment('Transform scales');
   for (const [key, value] of Object.entries(scale)) {
     css += `  --${key}: ${value};\n`;
   }

@@ -1,9 +1,9 @@
 // packages/contracts/src/blocks/page-specific/map.ts
 // Defines the data shape for map blocks.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { MAP_BLOCK } from "../block-type.js";
+import { MAP_BLOCK } from '../block-type.js';
 
 export const MapSchema = z.object({
   blockType: z.literal(MAP_BLOCK),

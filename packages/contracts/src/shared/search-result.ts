@@ -6,7 +6,7 @@
 //   SearchResultSchema — id, label, meta?, href
 //   SearchResultData   — z.infer type
 
-import { z } from "zod";
+import { z } from 'zod';
 
 export const SearchResultSchema = z.object({
   id: z.string(),

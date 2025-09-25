@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import type { AchievementCardData } from "@paideon/contracts";
-import Image from "next/image";
-import Link from "next/link";
+import type { AchievementCardData } from '@paideon/contracts';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { cn } from "../../utilities/cn";
-import { Badge } from "../atoms/Badge";
+import { cn } from '../../utilities/cn';
+import { Badge } from '../atoms/Badge';
 
-type AchievementCardVariant = "ticker-item" | "archive-post";
+type AchievementCardVariant = 'ticker-item' | 'archive-post';
 
-interface AchievementCardProps extends Omit<AchievementCardData, "id"> {
+interface AchievementCardProps extends Omit<AchievementCardData, 'id'> {
   id?: string;
   variant?: AchievementCardVariant;
   className?: string;
 }
 
 export function AchievementCard({
-  variant = "archive-post",
+  variant = 'archive-post',
   studentName,
   title,
   year,
@@ -27,13 +27,13 @@ export function AchievementCard({
   href,
   className,
 }: AchievementCardProps) {
-  if (variant === "ticker-item") {
+  if (variant === 'ticker-item') {
     return (
       <div
         className={cn(
-          "inline-flex items-center gap-space-3 px-space-5 py-space-2",
-          "bg-surface-elevated border border-border-light",
-          "whitespace-nowrap flex-shrink-0",
+          'inline-flex items-center gap-space-3 px-space-5 py-space-2',
+          'bg-surface-elevated border border-border-light',
+          'whitespace-nowrap flex-shrink-0',
           className
         )}
       >
@@ -51,9 +51,9 @@ export function AchievementCard({
   const content = (
     <div
       className={cn(
-        "bg-surface-elevated border border-border-light overflow-hidden",
-        "shadow-elevation-1 transition-all duration-gentle ease-out",
-        "group-hover:shadow-elevation-3 group-hover:-translate-y-0.5",
+        'bg-surface-elevated border border-border-light overflow-hidden',
+        'shadow-elevation-1 transition-all duration-gentle ease-out',
+        'group-hover:shadow-elevation-3 group-hover:-translate-y-0.5',
         className
       )}
     >
@@ -76,8 +76,8 @@ export function AchievementCard({
         </div>
         <h3
           className={cn(
-            "font-display text-h3 font-medium text-text-primary mb-space-1",
-            "transition-colors duration-fast group-hover:text-gold-active"
+            'font-display text-h3 font-medium text-text-primary mb-space-1',
+            'transition-colors duration-fast group-hover:text-gold-active'
           )}
         >
           {title}

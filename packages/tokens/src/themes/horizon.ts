@@ -10,7 +10,7 @@
 // exists so the token layer is ready, but Horizon is not wired into the
 // portal's theme switcher until product decides to ship it.
 
-import { semantic } from "../semantic/index.ts";
+import { semantic } from '../semantic/index.ts';
 
 export function getHorizonTheme() {
   return semantic;

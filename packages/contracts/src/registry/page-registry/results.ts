@@ -9,32 +9,32 @@
 // from the Academics page's small manual stats strip, which has no live
 // results feed behind it at all.
 
-import { HeroSchema } from "../../blocks/index.ts";
-import { ResultsPageSchema } from "../../domains/results/display.ts";
-import type { PageRegistry } from "../types.ts";
+import { HeroSchema } from '../../blocks/index.ts';
+import { ResultsPageSchema } from '../../domains/results/display.ts';
+import type { PageRegistry } from '../types.ts';
 
 export const ResultsHeroSchema = HeroSchema;
 
 export const resultsRegistry: PageRegistry = {
-  page: "results",
-  scope: "page:results",
-  label: "Results",
+  page: 'results',
+  scope: 'page:results',
+  label: 'Results',
   description:
-    "Manage the Results page \u2014 aggregate O/L and A/L exam statistics by year. Composed from OLResult and ALResult records; never individual student data.",
+    'Manage the Results page \u2014 aggregate O/L and A/L exam statistics by year. Composed from OLResult and ALResult records; never individual student data.',
   sections: [
     {
-      key: "results.hero",
-      blockKey: "hero",
-      label: "Hero Banner",
-      description: "Top-of-page headline and eyebrow text.",
+      key: 'results.hero',
+      blockKey: 'hero',
+      label: 'Hero Banner',
+      description: 'Top-of-page headline and eyebrow text.',
       schema: ResultsHeroSchema,
     },
     {
-      key: "results.page",
-      blockKey: "results-display",
-      label: "Results by Year",
+      key: 'results.page',
+      blockKey: 'results-display',
+      label: 'Results by Year',
       description:
-        "One entry per year, each with optional O/L and A/L aggregate result data, plus an optional disclaimer.",
+        'One entry per year, each with optional O/L and A/L aggregate result data, plus an optional disclaimer.',
       schema: ResultsPageSchema,
     },
   ],

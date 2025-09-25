@@ -1,9 +1,9 @@
 // packages/contracts/src/blocks/page-specific/crest-symbol.ts
 // Defines the schema for crest-related symbol entries.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { CREST_SYMBOLS_BLOCK } from "../block-type.ts";
+import { CREST_SYMBOLS_BLOCK } from '../block-type.ts';
 
 export const CrestSymbolSchema = z.object({
   id: z.string(),

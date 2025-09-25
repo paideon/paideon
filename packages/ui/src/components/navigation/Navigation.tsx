@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
-import { LanguageSwitcher, type LanguageOption } from "./LanguageSwitcher";
-import { MobileMenu } from "./MobileMenu";
-import { NavLink } from "./NavLink";
-import { cn } from "../../utilities/cn";
-import { HStack } from "../layout/Stack";
+import { LanguageSwitcher, type LanguageOption } from './LanguageSwitcher';
+import { MobileMenu } from './MobileMenu';
+import { NavLink } from './NavLink';
+import { cn } from '../../utilities/cn';
+import { HStack } from '../layout/Stack';
 
-type NavVariant = "transparent-overlay" | "solid";
+type NavVariant = 'transparent-overlay' | 'solid';
 
 // Renamed from `NavLink` (the earlier version shadowed the imported NavLink
 // *component* with a same-named local *type*, which is legal TS but easy to
@@ -51,20 +51,20 @@ export interface NavigationProps {
 }
 
 const DEFAULT_LINKS: NavLinkItem[] = [
-  { label: "About", href: "/about" },
+  { label: 'About', href: '/about' },
   {
-    label: "Academics",
-    href: "/academics",
+    label: 'Academics',
+    href: '/academics',
     children: [
-      { label: "Streams", href: "/academics/streams" },
-      { label: "Results", href: "/academics/results" },
+      { label: 'Streams', href: '/academics/streams' },
+      { label: 'Results', href: '/academics/results' },
     ],
   },
-  { label: "News", href: "/news" },
-  { label: "Societies", href: "/societies" },
-  { label: "Facilities", href: "/facilities" },
-  { label: "Admissions", href: "/admissions" },
-  { label: "Contact", href: "/contact" },
+  { label: 'News', href: '/news' },
+  { label: 'Societies', href: '/societies' },
+  { label: 'Facilities', href: '/facilities' },
+  { label: 'Admissions', href: '/admissions' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 function NavDropdown({ children }: { children: NavLinkItem[] }) {
@@ -96,10 +96,10 @@ function NavItem({
   const hasChildren = !!link.children?.length;
 
   const textColor = isActive
-    ? "text-gold-base"
+    ? 'text-gold-base'
     : isSolid
-    ? "text-text-primary"
-    : "text-text-inverse";
+    ? 'text-text-primary'
+    : 'text-text-inverse';
 
   return (
     <div
@@ -116,14 +116,14 @@ function NavItem({
         align="center"
         spacing={3}
         className={cn(
-          "px-space-8 font-body uppercase hover:text-gold-base",
+          'px-space-8 font-body uppercase hover:text-gold-base',
           textColor
         )}
       >
         <NavLink
           href={link.href}
           aria-expanded={hasChildren ? open : undefined}
-          aria-haspopup={hasChildren ? "true" : undefined}
+          aria-haspopup={hasChildren ? 'true' : undefined}
         >
           {link.label}
           {hasChildren && (
@@ -143,20 +143,20 @@ function NavItem({
 // ─── Main Navigation ──────────────────────────────────────────────────────────
 
 export function Navigation({
-  variant = "solid",
+  variant = 'solid',
   links = DEFAULT_LINKS,
   heroHeight,
-  locale = "en",
+  locale = 'en',
   languages,
-  applyLabel = "Apply",
-  applyHref = "/admissions",
-  schoolName = "C.W.W. Kannangara Central College",
-  schoolShortName = "KCC",
-  schoolLocation = "Mathugama",
+  applyLabel = 'Apply',
+  applyHref = '/admissions',
+  schoolName = 'C.W.W. Kannangara Central College',
+  schoolShortName = 'KCC',
+  schoolLocation = 'Mathugama',
   homeAriaLabel,
-  mainNavAriaLabel = "Main navigation",
-  openMenuLabel = "Open menu",
-  closeMenuLabel = "Close menu",
+  mainNavAriaLabel = 'Main navigation',
+  openMenuLabel = 'Open menu',
+  closeMenuLabel = 'Close menu',
   mobileMenuLabel,
   mobileBackLabel,
 }: NavigationProps) {
@@ -164,7 +164,7 @@ export function Navigation({
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const isOverlay = variant === "transparent-overlay";
+  const isOverlay = variant === 'transparent-overlay';
   const isSolid = !isOverlay || scrolled;
   const resolvedHomeAriaLabel = homeAriaLabel ?? `${schoolName} — Home`;
 
@@ -173,23 +173,23 @@ export function Navigation({
     const threshold = heroHeight ?? window.innerHeight * 0.7;
 
     const onScroll = () => setScrolled(window.scrollY > threshold);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, [isOverlay, heroHeight]);
 
   return (
     <>
       <header
         className={cn(
-          "transition-colors duration-standard ease-out",
-          isOverlay ? "fixed" : "sticky",
-          "left-0 right-0 top-0 z-40",
+          'transition-colors duration-standard ease-out',
+          isOverlay ? 'fixed' : 'sticky',
+          'left-0 right-0 top-0 z-40',
           isSolid
             ? cn(
-                "border-b border-border-light bg-surface-base",
-                scrolled && "shadow-elevation-1"
+                'border-b border-border-light bg-surface-base',
+                scrolled && 'shadow-elevation-1'
               )
-            : "border-b border-transparent bg-transparent"
+            : 'border-b border-transparent bg-transparent'
         )}
       >
         <div className="content-width flex h-[68px] items-center gap-space-10">
@@ -209,8 +209,8 @@ export function Navigation({
                 </p>
                 <p
                   className={cn(
-                    "font-body text-label uppercase leading-none tracking-label",
-                    isSolid ? "text-text-muted" : "text-text-inverse/50"
+                    'font-body text-label uppercase leading-none tracking-label',
+                    isSolid ? 'text-text-muted' : 'text-text-inverse/50'
                   )}
                 >
                   {schoolLocation}
@@ -230,7 +230,7 @@ export function Navigation({
                 link={link}
                 isSolid={isSolid}
                 isActive={
-                  pathname === link.href || pathname.startsWith(link.href + "/")
+                  pathname === link.href || pathname.startsWith(link.href + '/')
                 }
               />
             ))}
@@ -263,8 +263,8 @@ export function Navigation({
               <span
                 key={i}
                 className={cn(
-                  "block h-[1.5px] w-[22px]",
-                  isSolid ? "bg-text-primary" : "bg-text-inverse/85"
+                  'block h-[1.5px] w-[22px]',
+                  isSolid ? 'bg-text-primary' : 'bg-text-inverse/85'
                 )}
               />
             ))}
@@ -299,4 +299,4 @@ export function Navigation({
   );
 }
 
-Navigation.displayName = "Navigation";
+Navigation.displayName = 'Navigation';

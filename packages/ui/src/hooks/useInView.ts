@@ -1,6 +1,6 @@
 // hooks/useInView.ts
-"use client";
-import { useEffect, useRef, useState } from "react";
+'use client';
+import { useEffect, useRef, useState } from 'react';
 
 export interface UseInViewOptions {
   /** Root margin – same as IntersectionObserver API */
@@ -12,7 +12,7 @@ export interface UseInViewOptions {
 }
 
 export function useInView<T extends HTMLElement = HTMLElement>({
-  rootMargin = "0px",
+  rootMargin = '0px',
   threshold = 0,
   triggerOnce = true,
 }: UseInViewOptions = {}) {

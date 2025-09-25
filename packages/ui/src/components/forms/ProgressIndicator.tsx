@@ -1,11 +1,11 @@
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
 export interface ProgressStep {
   id: string;
   label: string;
 }
 
-export type ProgressIndicatorVariant = "steps" | "bar";
+export type ProgressIndicatorVariant = 'steps' | 'bar';
 
 export interface ProgressIndicatorProps {
   variant?: ProgressIndicatorVariant;
@@ -21,16 +21,16 @@ export interface ProgressIndicatorProps {
 }
 
 export function ProgressIndicator({
-  variant = "steps",
+  variant = 'steps',
   steps = [],
   activeStep = 0,
   value = 0,
   label,
   showPercentage = true,
-  stepsAriaLabel = "Progress steps",
-  barAriaLabel = "Progress",
+  stepsAriaLabel = 'Progress steps',
+  barAriaLabel = 'Progress',
 }: ProgressIndicatorProps) {
-  if (variant === "bar") {
+  if (variant === 'bar') {
     const pct = Math.max(0, Math.min(100, value));
     return (
       <div>
@@ -76,34 +76,34 @@ export function ProgressIndicator({
           return (
             <li
               key={step.id}
-              aria-current={isActive ? "step" : undefined}
+              aria-current={isActive ? 'step' : undefined}
               className={cn(
-                isLast ? "flex-none" : "flex-1",
-                "flex items-center"
+                isLast ? 'flex-none' : 'flex-1',
+                'flex items-center'
               )}
             >
               <div className="flex flex-col items-center gap-space-2">
                 <div
                   className={cn(
-                    "w-8 h-8 rounded-full flex items-center justify-center",
-                    "font-body text-sm font-semibold transition-all duration-fast",
+                    'w-8 h-8 rounded-full flex items-center justify-center',
+                    'font-body text-sm font-semibold transition-all duration-fast',
                     isCompleted
-                      ? "bg-green-base text-text-inverse border-2 border-green-base"
+                      ? 'bg-green-base text-text-inverse border-2 border-green-base'
                       : isActive
-                      ? "bg-transparent text-gold-base border-2 border-gold-base"
-                      : "bg-transparent text-text-muted border-2 border-border-default"
+                      ? 'bg-transparent text-gold-base border-2 border-gold-base'
+                      : 'bg-transparent text-text-muted border-2 border-border-default'
                   )}
                 >
-                  {isCompleted ? "✓" : idx + 1}
+                  {isCompleted ? '✓' : idx + 1}
                 </div>
                 <span
                   className={cn(
-                    "font-body text-caption uppercase tracking-caption text-center whitespace-nowrap",
+                    'font-body text-caption uppercase tracking-caption text-center whitespace-nowrap',
                     isCompleted
-                      ? "text-green-base"
+                      ? 'text-green-base'
                       : isActive
-                      ? "text-gold-base"
-                      : "text-text-muted"
+                      ? 'text-gold-base'
+                      : 'text-text-muted'
                   )}
                 >
                   {step.label}
@@ -113,8 +113,8 @@ export function ProgressIndicator({
                 <div
                   aria-hidden="true"
                   className={cn(
-                    "flex-1 h-0.5 mb-[26px] min-w-space-6 transition-colors duration-gentle",
-                    isCompleted ? "bg-green-base" : "bg-border-light"
+                    'flex-1 h-0.5 mb-[26px] min-w-space-6 transition-colors duration-gentle',
+                    isCompleted ? 'bg-green-base' : 'bg-border-light'
                   )}
                 />
               )}

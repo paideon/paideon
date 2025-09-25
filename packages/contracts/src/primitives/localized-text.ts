@@ -2,7 +2,7 @@
 
 // Field-level locale scoping for short translatable strings.
 
-import { z } from "zod";
+import { z } from 'zod';
 
 export const LocalizedTextSchema = z.object({
   en: z.string().min(1),

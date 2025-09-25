@@ -2,7 +2,7 @@ import jwt, {
   type JwtPayload,
   type SignOptions,
   type Secret,
-} from "jsonwebtoken";
+} from 'jsonwebtoken';
 
 export type AuthJwtPayload = JwtPayload & {
   sub?: string;

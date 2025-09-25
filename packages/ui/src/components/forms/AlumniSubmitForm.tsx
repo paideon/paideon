@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 // packages/ui/src/components/forms/AlumniSubmitForm.tsx
 //
@@ -32,16 +32,16 @@
 // function's own header note for the full reasoning, including why no
 // rate limiting exists yet.
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { z, type ZodType } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z, type ZodType } from 'zod';
 
-import { FormFieldGroup } from "./FormFieldGroup";
-import { Input } from "./Input";
-import { Select } from "./Select";
-import { Textarea } from "./Textarea";
-import { Button } from "../atoms/Button";
+import { FormFieldGroup } from './FormFieldGroup';
+import { Input } from './Input';
+import { Select } from './Select';
+import { Textarea } from './Textarea';
+import { Button } from '../atoms/Button';
 
 // Default English validation messages — pass a `schema` prop built with
 // your own translated messages to localize these, same convention as
@@ -52,17 +52,17 @@ export function buildAlumniSubmitSchema(messages?: {
   quote?: string;
 }) {
   return z.object({
-    name: z.string().min(2, messages?.name ?? "Name is required"),
+    name: z.string().min(2, messages?.name ?? 'Name is required'),
     graduationYear: z
       .string()
-      .min(4, messages?.graduationYear ?? "Graduation year is required")
-      .max(9, messages?.graduationYear ?? "Graduation year is required"),
+      .min(4, messages?.graduationYear ?? 'Graduation year is required')
+      .max(9, messages?.graduationYear ?? 'Graduation year is required'),
     stream: z.string().optional(),
     currentRole: z.string().optional(),
     currentOrg: z.string().optional(),
     quote: z
       .string()
-      .max(280, messages?.quote ?? "Quote must be 280 characters or fewer")
+      .max(280, messages?.quote ?? 'Quote must be 280 characters or fewer')
       .optional(),
     // Honeypot — see this file's header note. Left out of
     // `AlumniSubmitValues` below deliberately; a human's submission never
@@ -74,7 +74,7 @@ export function buildAlumniSubmitSchema(messages?: {
 export type AlumniSubmitFormValues = z.infer<
   ReturnType<typeof buildAlumniSubmitSchema>
 >;
-export type AlumniSubmitValues = Omit<AlumniSubmitFormValues, "website">;
+export type AlumniSubmitValues = Omit<AlumniSubmitFormValues, 'website'>;
 
 export interface AlumniSubmitFormLabels {
   name?: string;
@@ -113,19 +113,19 @@ export interface AlumniSubmitFormProps {
 }
 
 const DEFAULT_LABELS: Required<AlumniSubmitFormLabels> = {
-  name: "Full Name",
-  namePlaceholder: "e.g. Kamal Perera",
-  graduationYear: "Graduation Year",
-  graduationYearPlaceholder: "e.g. 2020",
-  stream: "Stream",
-  streamUnknown: "— Unknown —",
-  currentRole: "Current Role",
-  currentOrg: "Organization",
-  quote: "A short quote (optional)",
-  submit: "Submit Profile",
+  name: 'Full Name',
+  namePlaceholder: 'e.g. Kamal Perera',
+  graduationYear: 'Graduation Year',
+  graduationYearPlaceholder: 'e.g. 2020',
+  stream: 'Stream',
+  streamUnknown: '— Unknown —',
+  currentRole: 'Current Role',
+  currentOrg: 'Organization',
+  quote: 'A short quote (optional)',
+  submit: 'Submit Profile',
   successMessage:
-    "Thank you! Your profile has been submitted and will appear once reviewed.",
-  errorMessage: "Failed to submit. Please try again later.",
+    'Thank you! Your profile has been submitted and will appear once reviewed.',
+  errorMessage: 'Failed to submit. Please try again later.',
 };
 
 export function AlumniSubmitForm({
@@ -138,8 +138,8 @@ export function AlumniSubmitForm({
   const resolvedLabels = { ...DEFAULT_LABELS, ...labels };
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
-    "idle" | "success" | "error"
-  >("idle");
+    'idle' | 'success' | 'error'
+  >('idle');
 
   const {
     register,
@@ -155,71 +155,71 @@ export function AlumniSubmitForm({
     // success state without ever calling `onSubmit`; see this file's
     // header note for why.
     if (data.website) {
-      setSubmitStatus("success");
+      setSubmitStatus('success');
       reset();
-      setTimeout(() => setSubmitStatus("idle"), 3000);
+      setTimeout(() => setSubmitStatus('idle'), 3000);
       return;
     }
 
     const { website: _website, ...values } = data;
 
     setIsSubmitting(true);
-    setSubmitStatus("idle");
+    setSubmitStatus('idle');
     try {
       await onSubmit(values);
-      setSubmitStatus("success");
+      setSubmitStatus('success');
       reset();
-      setTimeout(() => setSubmitStatus("idle"), 3000);
+      setTimeout(() => setSubmitStatus('idle'), 3000);
     } catch {
-      setSubmitStatus("error");
+      setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const streamSelectOptions = [
-    { value: "", label: resolvedLabels.streamUnknown },
+    { value: '', label: resolvedLabels.streamUnknown },
     ...streamOptions,
   ];
 
   return (
     <form
       onSubmit={handleSubmit(handleFormSubmit)}
-      className={className ?? "flex flex-col gap-space-6"}
+      className={className ?? 'flex flex-col gap-space-6'}
     >
       <FormFieldGroup>
         <Input
           label={resolvedLabels.name}
           placeholder={resolvedLabels.namePlaceholder}
-          {...register("name")}
+          {...register('name')}
           error={errors.name?.message}
         />
         <Input
           label={resolvedLabels.graduationYear}
           placeholder={resolvedLabels.graduationYearPlaceholder}
-          {...register("graduationYear")}
+          {...register('graduationYear')}
           error={errors.graduationYear?.message}
         />
         <Select
           label={resolvedLabels.stream}
           options={streamSelectOptions}
-          {...register("stream")}
+          {...register('stream')}
           error={errors.stream?.message}
         />
         <Input
           label={resolvedLabels.currentRole}
-          {...register("currentRole")}
+          {...register('currentRole')}
           error={errors.currentRole?.message}
         />
         <Input
           label={resolvedLabels.currentOrg}
-          {...register("currentOrg")}
+          {...register('currentOrg')}
           error={errors.currentOrg?.message}
         />
         <Textarea
           label={resolvedLabels.quote}
           rows={3}
-          {...register("quote")}
+          {...register('quote')}
           error={errors.quote?.message}
         />
       </FormFieldGroup>
@@ -233,7 +233,7 @@ export function AlumniSubmitForm({
       <div
         aria-hidden="true"
         className="absolute h-px w-px overflow-hidden opacity-0"
-        style={{ left: "-9999px" }}
+        style={{ left: '-9999px' }}
       >
         <label htmlFor="alumni-submit-website">Leave this field blank</label>
         <input
@@ -241,7 +241,7 @@ export function AlumniSubmitForm({
           type="text"
           tabIndex={-1}
           autoComplete="off"
-          {...register("website")}
+          {...register('website')}
         />
       </div>
 
@@ -249,12 +249,12 @@ export function AlumniSubmitForm({
         {resolvedLabels.submit}
       </Button>
 
-      {submitStatus === "success" && (
+      {submitStatus === 'success' && (
         <p className="text-center text-semantic-success-base font-body text-body-sm">
           {resolvedLabels.successMessage}
         </p>
       )}
-      {submitStatus === "error" && (
+      {submitStatus === 'error' && (
         <p className="text-center text-semantic-error-base font-body text-body-sm">
           {resolvedLabels.errorMessage}
         </p>

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useRef, useState, type ChangeEvent } from "react";
+import { useRef, useState, type ChangeEvent } from 'react';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
 export interface SliderProps {
   label?: string;
@@ -49,10 +49,10 @@ export function Slider({
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (disabled) return;
     let delta = 0;
-    if (e.key === "ArrowRight" || e.key === "ArrowUp") delta = step;
-    if (e.key === "ArrowLeft" || e.key === "ArrowDown") delta = -step;
-    if (e.key === "Home") delta = min - currentValue;
-    if (e.key === "End") delta = max - currentValue;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') delta = step;
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') delta = -step;
+    if (e.key === 'Home') delta = min - currentValue;
+    if (e.key === 'End') delta = max - currentValue;
     if (delta !== 0) {
       e.preventDefault();
       handleChange(currentValue + delta);
@@ -60,7 +60,7 @@ export function Slider({
   };
 
   return (
-    <div className={cn("w-full", className)}>
+    <div className={cn('w-full', className)}>
       {/*
         Hidden native range input — mirrors the visual custom slider below so
         this component has a real ref target and `name`/`value` pair, the
@@ -95,7 +95,7 @@ export function Slider({
           {showValue && (
             <span className="font-body text-label text-gold-base">
               {currentValue}
-              {max === 100 ? "%" : ""}
+              {max === 100 ? '%' : ''}
             </span>
           )}
         </div>
@@ -103,8 +103,8 @@ export function Slider({
       <div
         ref={sliderRef}
         className={cn(
-          "relative w-full h-2 rounded-full bg-surface-deep",
-          disabled ? "cursor-not-allowed opacity-40" : "cursor-pointer"
+          'relative w-full h-2 rounded-full bg-surface-deep',
+          disabled ? 'cursor-not-allowed opacity-40' : 'cursor-pointer'
         )}
         onClick={(e) => {
           if (disabled) return;
@@ -129,9 +129,9 @@ export function Slider({
           aria-disabled={disabled}
           onKeyDown={handleKeyDown}
           className={cn(
-            "absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white shadow-elevation-2",
-            "focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2",
-            disabled ? "cursor-not-allowed" : "cursor-pointer"
+            'absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white shadow-elevation-2',
+            'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2',
+            disabled ? 'cursor-not-allowed' : 'cursor-pointer'
           )}
           style={{ left: `calc(${percentage}% - 8px)` }}
         />

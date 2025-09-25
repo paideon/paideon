@@ -15,10 +15,10 @@ export function parseCursorParams(
   query: Record<string, unknown>,
   defaultLimit = 20
 ): CursorPageParams {
-  const cursor = typeof query.cursor === "string" ? query.cursor : undefined;
+  const cursor = typeof query.cursor === 'string' ? query.cursor : undefined;
   const rawLimit = query.limit;
   const limit =
-    typeof rawLimit === "string" || typeof rawLimit === "number"
+    typeof rawLimit === 'string' || typeof rawLimit === 'number'
       ? Number(rawLimit)
       : defaultLimit;
 

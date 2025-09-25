@@ -1,2 +1,2 @@
-export { FacebookColor } from "./FacebookColor";
-export { FacebookWhite } from "./FacebookWhite";
+export { FacebookColor } from './FacebookColor';
+export { FacebookWhite } from './FacebookWhite';

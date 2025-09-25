@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { z, type ZodType } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z, type ZodType } from 'zod';
 
-import { FormFieldGroup } from "./FormFieldGroup";
-import { Input } from "./Input";
-import { Textarea } from "./Textarea";
-import { Button } from "../atoms/Button";
+import { FormFieldGroup } from './FormFieldGroup';
+import { Input } from './Input';
+import { Textarea } from './Textarea';
+import { Button } from '../atoms/Button';
 
 // Default English validation messages. Pass a `schema` prop built with your
 // own translated messages (see `buildContactSchema`) to localize these.
@@ -19,12 +19,12 @@ export function buildContactSchema(messages?: {
   message?: string;
 }) {
   return z.object({
-    name: z.string().min(2, messages?.name ?? "Name is required"),
-    email: z.string().email(messages?.email ?? "Valid email is required"),
-    subject: z.string().min(3, messages?.subject ?? "Subject is required"),
+    name: z.string().min(2, messages?.name ?? 'Name is required'),
+    email: z.string().email(messages?.email ?? 'Valid email is required'),
+    subject: z.string().min(3, messages?.subject ?? 'Subject is required'),
     message: z
       .string()
-      .min(10, messages?.message ?? "Message must be at least 10 characters"),
+      .min(10, messages?.message ?? 'Message must be at least 10 characters'),
   });
 }
 
@@ -55,13 +55,13 @@ export interface ContactFormProps {
 }
 
 const DEFAULT_LABELS: Required<ContactFormLabels> = {
-  name: "Full Name",
-  email: "Email Address",
-  subject: "Subject",
-  message: "Message",
-  submit: "Send Message",
+  name: 'Full Name',
+  email: 'Email Address',
+  subject: 'Subject',
+  message: 'Message',
+  submit: 'Send Message',
   successMessage: "Message sent successfully. We'll get back to you soon.",
-  errorMessage: "Failed to send. Please try again later.",
+  errorMessage: 'Failed to send. Please try again later.',
 };
 
 export function ContactForm({
@@ -73,8 +73,8 @@ export function ContactForm({
   const resolvedLabels = { ...DEFAULT_LABELS, ...labels };
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
-    "idle" | "success" | "error"
-  >("idle");
+    'idle' | 'success' | 'error'
+  >('idle');
 
   const {
     register,
@@ -87,14 +87,14 @@ export function ContactForm({
 
   const handleFormSubmit = async (data: ContactFormValues) => {
     setIsSubmitting(true);
-    setSubmitStatus("idle");
+    setSubmitStatus('idle');
     try {
       await onSubmit(data);
-      setSubmitStatus("success");
+      setSubmitStatus('success');
       reset();
-      setTimeout(() => setSubmitStatus("idle"), 3000);
+      setTimeout(() => setSubmitStatus('idle'), 3000);
     } catch {
-      setSubmitStatus("error");
+      setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
     }
@@ -103,29 +103,29 @@ export function ContactForm({
   return (
     <form
       onSubmit={handleSubmit(handleFormSubmit)}
-      className={className ?? "flex flex-col gap-space-6"}
+      className={className ?? 'flex flex-col gap-space-6'}
     >
       <FormFieldGroup>
         <Input
           label={resolvedLabels.name}
-          {...register("name")}
+          {...register('name')}
           error={errors.name?.message}
         />
         <Input
           label={resolvedLabels.email}
           type="email"
-          {...register("email")}
+          {...register('email')}
           error={errors.email?.message}
         />
         <Input
           label={resolvedLabels.subject}
-          {...register("subject")}
+          {...register('subject')}
           error={errors.subject?.message}
         />
         <Textarea
           label={resolvedLabels.message}
           rows={5}
-          {...register("message")}
+          {...register('message')}
           error={errors.message?.message}
         />
       </FormFieldGroup>
@@ -134,12 +134,12 @@ export function ContactForm({
         {resolvedLabels.submit}
       </Button>
 
-      {submitStatus === "success" && (
+      {submitStatus === 'success' && (
         <p className="text-center text-semantic-success-base font-body text-body-sm">
           {resolvedLabels.successMessage}
         </p>
       )}
-      {submitStatus === "error" && (
+      {submitStatus === 'error' && (
         <p className="text-center text-semantic-error-base font-body text-body-sm">
           {resolvedLabels.errorMessage}
         </p>

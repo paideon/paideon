@@ -1,9 +1,9 @@
 // packages/contracts/src/system/api/response-envelope.ts
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { ErrorEnvelopeSchema } from "./error-envelope.ts";
-import { PaginationMetaSchema } from "../../primitives/pagination.ts";
+import { ErrorEnvelopeSchema } from './error-envelope.ts';
+import { PaginationMetaSchema } from '../../primitives/pagination.ts';
 
 export const ResponseEnvelopeSchema = <T extends z.ZodType>(dataSchema: T) =>
   z.object({

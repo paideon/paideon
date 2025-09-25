@@ -1,16 +1,16 @@
 // packages/ui/src/components/sections/CategorizedPhotoStrip.tsx
-"use client";
+'use client';
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from 'react';
 
-import { cn } from "../../utilities/cn";
-import { ImageFrame } from "../media/ImageFrame";
+import { cn } from '../../utilities/cn';
+import { ImageFrame } from '../media/ImageFrame';
 
 export interface PhotoStripItem {
   id: string;
   imageSrc: string;
   imageAlt: string;
-  category: "sports" | "events" | "performances" | "academic";
+  category: 'sports' | 'events' | 'performances' | 'academic';
   title?: string;
 }
 
@@ -18,42 +18,42 @@ export interface CategorizedPhotoStripProps {
   items: PhotoStripItem[];
   className?: string;
   allLabel?: string;
-  categoryLabels?: Record<PhotoStripItem["category"], string>;
+  categoryLabels?: Record<PhotoStripItem['category'], string>;
   scrollLeftLabel?: string;
   scrollRightLabel?: string;
 }
 
-const DEFAULT_CATEGORY_LABELS: Record<PhotoStripItem["category"], string> = {
-  sports: "Sports",
-  events: "Events",
-  performances: "Performances",
-  academic: "Academic",
+const DEFAULT_CATEGORY_LABELS: Record<PhotoStripItem['category'], string> = {
+  sports: 'Sports',
+  events: 'Events',
+  performances: 'Performances',
+  academic: 'Academic',
 };
 
 export function CategorizedPhotoStrip({
   items,
   className,
-  allLabel = "All",
+  allLabel = 'All',
   categoryLabels = DEFAULT_CATEGORY_LABELS,
-  scrollLeftLabel = "Scroll left",
-  scrollRightLabel = "Scroll right",
+  scrollLeftLabel = 'Scroll left',
+  scrollRightLabel = 'Scroll right',
 }: CategorizedPhotoStripProps) {
-  const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [activeCategory, setActiveCategory] = useState<string>('all');
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const filteredItems =
-    activeCategory === "all"
+    activeCategory === 'all'
       ? items
       : items.filter((item) => item.category === activeCategory);
 
-  const scroll = (direction: "left" | "right") => {
+  const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
       const scrollAmount = scrollRef.current.clientWidth * 0.8;
       scrollRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth',
       });
     }
   };
@@ -69,25 +69,25 @@ export function CategorizedPhotoStrip({
   useEffect(() => {
     const ref = scrollRef.current;
     if (ref) {
-      ref.addEventListener("scroll", handleScroll);
+      ref.addEventListener('scroll', handleScroll);
       handleScroll();
-      return () => ref.removeEventListener("scroll", handleScroll);
+      return () => ref.removeEventListener('scroll', handleScroll);
     }
     // Explicit return when ref is null
     return undefined;
   }, [filteredItems]);
 
   return (
-    <div className={cn("relative", className)}>
+    <div className={cn('relative', className)}>
       {/* Category filters */}
       <div className="flex justify-center gap-2 mb-8 flex-wrap">
         <button
-          onClick={() => setActiveCategory("all")}
+          onClick={() => setActiveCategory('all')}
           className={cn(
-            "px-4 py-2 font-body text-label uppercase tracking-wide rounded-full transition-all",
-            activeCategory === "all"
-              ? "bg-green-base text-text-inverse"
-              : "bg-surface-default text-text-muted hover:bg-surface-deep"
+            'px-4 py-2 font-body text-label uppercase tracking-wide rounded-full transition-all',
+            activeCategory === 'all'
+              ? 'bg-green-base text-text-inverse'
+              : 'bg-surface-default text-text-muted hover:bg-surface-deep'
           )}
         >
           {allLabel}
@@ -97,10 +97,10 @@ export function CategorizedPhotoStrip({
             key={key}
             onClick={() => setActiveCategory(key)}
             className={cn(
-              "px-4 py-2 font-body text-label uppercase tracking-wide rounded-full transition-all",
+              'px-4 py-2 font-body text-label uppercase tracking-wide rounded-full transition-all',
               activeCategory === key
-                ? "bg-green-base text-text-inverse"
-                : "bg-surface-default text-text-muted hover:bg-surface-deep"
+                ? 'bg-green-base text-text-inverse'
+                : 'bg-surface-default text-text-muted hover:bg-surface-deep'
             )}
           >
             {label}
@@ -112,7 +112,7 @@ export function CategorizedPhotoStrip({
       <div className="relative">
         {showLeftArrow && (
           <button
-            onClick={() => scroll("left")}
+            onClick={() => scroll('left')}
             className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-surface-elevated rounded-full p-2 shadow-elevation-2 hover:bg-gold-base transition-colors"
             aria-label={scrollLeftLabel}
           >
@@ -153,7 +153,7 @@ export function CategorizedPhotoStrip({
 
         {showRightArrow && (
           <button
-            onClick={() => scroll("right")}
+            onClick={() => scroll('right')}
             className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-surface-elevated rounded-full p-2 shadow-elevation-2 hover:bg-gold-base transition-colors"
             aria-label={scrollRightLabel}
           >

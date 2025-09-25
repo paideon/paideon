@@ -6,18 +6,18 @@
 // domains/admissions/ for why there's no ApplicationFormSchema in this
 // package at all.
 
-import { z } from "zod";
+import { z } from 'zod';
 
 import {
   DownloadItemSchema,
   FaqSchema,
   HeroSchema,
-} from "../../blocks/index.ts";
-import { EligibilitySchema } from "../../domains/admissions/eligibility-requirements.ts";
-import { AdmissionsCalendarSchema } from "../../domains/admissions/key-dates.ts";
-import { AdmissionsProcessSchema } from "../../domains/admissions/process-steps.ts";
-import { ContactFormSchema } from "../../domains/contact/contact-form.ts";
-import type { PageRegistry } from "../types.ts";
+} from '../../blocks/index.ts';
+import { EligibilitySchema } from '../../domains/admissions/eligibility-requirements.ts';
+import { AdmissionsCalendarSchema } from '../../domains/admissions/key-dates.ts';
+import { AdmissionsProcessSchema } from '../../domains/admissions/process-steps.ts';
+import { ContactFormSchema } from '../../domains/contact/contact-form.ts';
+import type { PageRegistry } from '../types.ts';
 
 export const AdmissionsHeroSchema = HeroSchema;
 
@@ -46,76 +46,76 @@ export const AdmissionsTransportSchema = z.object({
 export type AdmissionsTransportData = z.infer<typeof AdmissionsTransportSchema>;
 
 export const admissionsRegistry: PageRegistry = {
-  page: "admissions",
-  scope: "page:admissions",
-  label: "Admissions",
+  page: 'admissions',
+  scope: 'page:admissions',
+  label: 'Admissions',
   description:
-    "Manage the Admissions page — process steps, key dates, requirements, downloadable documents, FAQ, and the enquiry form.",
+    'Manage the Admissions page — process steps, key dates, requirements, downloadable documents, FAQ, and the enquiry form.',
   sections: [
     {
-      key: "admissions.hero",
-      blockKey: "hero",
-      label: "Hero Banner",
-      description: "Top-of-page headline and eyebrow text.",
+      key: 'admissions.hero',
+      blockKey: 'hero',
+      label: 'Hero Banner',
+      description: 'Top-of-page headline and eyebrow text.',
       schema: AdmissionsHeroSchema,
     },
     {
-      key: "admissions.processSteps",
-      blockKey: "process-steps",
-      label: "Admissions Process Steps",
+      key: 'admissions.processSteps',
+      blockKey: 'process-steps',
+      label: 'Admissions Process Steps',
       description:
-        "4–5 steps: Apply Online → Interview → Documents → Acceptance.",
+        '4–5 steps: Apply Online → Interview → Documents → Acceptance.',
       schema: AdmissionsProcessSchema,
     },
     {
-      key: "admissions.keyDates",
-      blockKey: "key-dates",
-      label: "Key Dates Timeline",
+      key: 'admissions.keyDates',
+      blockKey: 'key-dates',
+      label: 'Key Dates Timeline',
       description:
-        "Applications open, deadline, interview dates, and other admissions milestones.",
+        'Applications open, deadline, interview dates, and other admissions milestones.',
       schema: AdmissionsCalendarSchema,
     },
     {
-      key: "admissions.requirements",
-      blockKey: "rich-text-block",
-      label: "Requirements Checklist",
-      description: "Printable checklist of required documents, by grade level.",
+      key: 'admissions.requirements',
+      blockKey: 'rich-text-block',
+      label: 'Requirements Checklist',
+      description: 'Printable checklist of required documents, by grade level.',
       schema: EligibilitySchema,
     },
     {
-      key: "admissions.documents",
-      blockKey: "downloads",
-      label: "Downloadable Documents",
-      description: "Application form PDF, prospectus, fee structure (from R2).",
+      key: 'admissions.documents',
+      blockKey: 'downloads',
+      label: 'Downloadable Documents',
+      description: 'Application form PDF, prospectus, fee structure (from R2).',
       schema: AdmissionsDocumentsSchema,
     },
     {
-      key: "admissions.faq",
-      blockKey: "faq",
-      label: "FAQ",
-      description: "Common questions — age limits, scholarships, transport.",
+      key: 'admissions.faq',
+      blockKey: 'faq',
+      label: 'FAQ',
+      description: 'Common questions — age limits, scholarships, transport.',
       schema: AdmissionsFaqSchema,
     },
     {
-      key: "admissions.enquiryForm",
-      blockKey: "rich-text-block",
-      label: "Enquiry Form",
+      key: 'admissions.enquiryForm',
+      blockKey: 'rich-text-block',
+      label: 'Enquiry Form',
       description:
-        "Name, email, phone, message — routed to the admissions office.",
+        'Name, email, phone, message — routed to the admissions office.',
       schema: AdmissionsEnquiryFormSchema,
     },
     {
-      key: "admissions.contact",
-      blockKey: "rich-text-block",
-      label: "Dedicated Admissions Contact",
-      description: "Phone, email, office hours.",
+      key: 'admissions.contact',
+      blockKey: 'rich-text-block',
+      label: 'Dedicated Admissions Contact',
+      description: 'Phone, email, office hours.',
       schema: AdmissionsContactSchema,
     },
     {
-      key: "admissions.transport",
-      blockKey: "map",
-      label: "Transport and Accessibility",
-      description: "School transport routes and accessibility features.",
+      key: 'admissions.transport',
+      blockKey: 'map',
+      label: 'Transport and Accessibility',
+      description: 'School transport routes and accessibility features.',
       schema: AdmissionsTransportSchema,
     },
   ],

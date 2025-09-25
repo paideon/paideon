@@ -1,9 +1,9 @@
 // packages/contracts/src/domains/results/display.ts
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { ALResultSchema, ALGradeEnum } from "./al-aggregate-statistics.ts";
-import { OLResultSchema, OLGradeEnum } from "./ol-aggregate-statistics.ts";
+import { ALResultSchema, ALGradeEnum } from './al-aggregate-statistics.ts';
+import { OLResultSchema, OLGradeEnum } from './ol-aggregate-statistics.ts';
 
 export const GradeBadgeSchema = z.object({
   grade: z.union([OLGradeEnum, ALGradeEnum]),

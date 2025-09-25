@@ -9,10 +9,10 @@
 // This file was referenced by every page-registry file from the start but
 // never actually created — every one of them failed to compile as a result.
 
-import type { z } from "zod";
+import type { z } from 'zod';
 
-import type { PageKeyEnumData } from "./page-key.ts";
-import type { BlockTypeEnumData } from "../blocks/block-type.ts";
+import type { PageKeyEnumData } from './page-key.ts';
+import type { BlockTypeEnumData } from '../blocks/block-type.ts';
 
 export interface PageSection {
   key: string;

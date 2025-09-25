@@ -3,7 +3,7 @@
 export type PlainObject = Record<string, unknown>;
 
 function isPlainObject(value: unknown): value is PlainObject {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
 /** Recursively merges `source` over `target`; plain objects are merged key-by-key, everything else is overwritten. */

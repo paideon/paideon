@@ -2,12 +2,12 @@
 
 // Subject contracts.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { ALStreamSchema } from "./al-stream.ts";
-import { DepartmentKeyEnum } from "./department.ts";
+import { ALStreamSchema } from './al-stream.ts';
+import { DepartmentKeyEnum } from './department.ts';
 
-export const SubjectLevelEnum = z.enum(["OL", "AL", "both"]);
+export const SubjectLevelEnum = z.enum(['OL', 'AL', 'both']);
 
 export const SubjectSchema = z.object({
   id: z.string().min(1),

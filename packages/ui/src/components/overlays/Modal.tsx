@@ -1,11 +1,11 @@
-"use client";
-import { useEffect, useRef } from "react";
-import { createPortal } from "react-dom";
+'use client';
+import { useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
-import { useLockBodyScroll } from "../../hooks/useLockBodyScroll";
-import { cn } from "../../utilities/cn";
+import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
+import { cn } from '../../utilities/cn';
 
-export type ModalVariant = "confirmation" | "information";
+export type ModalVariant = 'confirmation' | 'information';
 
 export interface ModalProps {
   variant?: ModalVariant;
@@ -25,12 +25,12 @@ const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 export function Modal({
-  variant = "information",
+  variant = 'information',
   open,
   onClose,
   title,
   description,
-  confirmLabel = "Confirm",
+  confirmLabel = 'Confirm',
   closeLabel,
   onConfirm,
   destructive = false,
@@ -39,7 +39,7 @@ export function Modal({
   const dialogRef = useRef<HTMLDivElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
   const resolvedCloseLabel =
-    closeLabel ?? (variant === "information" ? "Close" : "Cancel");
+    closeLabel ?? (variant === 'information' ? 'Close' : 'Cancel');
 
   useLockBodyScroll(open);
 
@@ -54,11 +54,11 @@ export function Modal({
     focusables?.[0]?.focus();
 
     const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
+      if (e.key === 'Escape') {
         onClose();
         return;
       }
-      if (e.key !== "Tab" || !dialogRef.current) return;
+      if (e.key !== 'Tab' || !dialogRef.current) return;
 
       const nodes = Array.from(
         dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
@@ -76,14 +76,14 @@ export function Modal({
       }
     };
 
-    document.addEventListener("keydown", handler);
+    document.addEventListener('keydown', handler);
     return () => {
-      document.removeEventListener("keydown", handler);
+      document.removeEventListener('keydown', handler);
       previouslyFocused.current?.focus();
     };
   }, [open, onClose]);
 
-  if (typeof document === "undefined") return null;
+  if (typeof document === 'undefined') return null;
 
   return createPortal(
     <>
@@ -91,11 +91,11 @@ export function Modal({
         onClick={onClose}
         aria-hidden="true"
         className={cn(
-          "fixed inset-0 bg-overlay-medium z-80",
-          "transition-opacity duration-standard ease-out",
+          'fixed inset-0 bg-overlay-medium z-80',
+          'transition-opacity duration-standard ease-out',
           open
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
+            ? 'opacity-100 pointer-events-auto'
+            : 'opacity-0 pointer-events-none'
         )}
       />
       <div
@@ -104,18 +104,18 @@ export function Modal({
         aria-modal="true"
         aria-labelledby="modal-title"
         className={cn(
-          "fixed top-1/2 left-1/2 z-90 w-[min(520px,calc(100vw-32px))]",
-          "bg-surface-elevated shadow-elevation-3",
-          "transition-all duration-standard ease-out",
+          'fixed top-1/2 left-1/2 z-90 w-[min(520px,calc(100vw-32px))]',
+          'bg-surface-elevated shadow-elevation-3',
+          'transition-all duration-standard ease-out',
           open
-            ? "opacity-100 scale-100 -translate-x-1/2 -translate-y-1/2"
-            : "opacity-0 scale-97 -translate-x-1/2 -translate-y-[48%] pointer-events-none"
+            ? 'opacity-100 scale-100 -translate-x-1/2 -translate-y-1/2'
+            : 'opacity-0 scale-97 -translate-x-1/2 -translate-y-[48%] pointer-events-none'
         )}
       >
         <div
           className={cn(
-            "h-1",
-            destructive ? "bg-semantic-error-base" : "bg-gold-base"
+            'h-1',
+            destructive ? 'bg-semantic-error-base' : 'bg-gold-base'
           )}
         />
         <div className="p-space-8 pb-space-9">
@@ -135,28 +135,28 @@ export function Modal({
             <button
               onClick={onClose}
               className={cn(
-                "px-space-6 py-space-2.5",
-                "font-body text-caption uppercase tracking-caption",
-                "border border-border-default bg-transparent text-text-muted",
-                "transition-colors duration-fast",
-                "hover:border-text-muted hover:text-text-primary",
-                "focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2"
+                'px-space-6 py-space-2.5',
+                'font-body text-caption uppercase tracking-caption',
+                'border border-border-default bg-transparent text-text-muted',
+                'transition-colors duration-fast',
+                'hover:border-text-muted hover:text-text-primary',
+                'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2'
               )}
             >
               {resolvedCloseLabel}
             </button>
-            {variant === "confirmation" && (
+            {variant === 'confirmation' && (
               <button
                 onClick={() => {
                   onConfirm?.();
                   onClose();
                 }}
                 className={cn(
-                  "px-space-6 py-space-2.5",
-                  "font-body text-caption uppercase tracking-caption text-text-inverse",
-                  "transition-opacity duration-fast",
-                  destructive ? "bg-semantic-error-base" : "bg-green-base",
-                  "hover:opacity-85 focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2"
+                  'px-space-6 py-space-2.5',
+                  'font-body text-caption uppercase tracking-caption text-text-inverse',
+                  'transition-opacity duration-fast',
+                  destructive ? 'bg-semantic-error-base' : 'bg-green-base',
+                  'hover:opacity-85 focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2'
                 )}
               >
                 {confirmLabel}

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useId } from "react";
+import { useId } from 'react';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
 type Props = {
   label: string;
@@ -33,8 +33,8 @@ export function Radio({
     <label
       htmlFor={id}
       className={cn(
-        "inline-flex items-center gap-space-3 cursor-pointer select-none",
-        disabled && "opacity-40 cursor-not-allowed",
+        'inline-flex items-center gap-space-3 cursor-pointer select-none',
+        disabled && 'opacity-40 cursor-not-allowed',
         className
       )}
     >
@@ -49,11 +49,11 @@ export function Radio({
         disabled={disabled}
         onChange={onChange}
         className={cn(
-          "appearance-none w-4 h-4 rounded-full border border-border-default bg-surface-elevated shrink-0",
-          "transition-all duration-fast ease-snap",
-          "checked:border-green-base checked:bg-green-base",
-          "checked:bg-[url(/icons/radio-dot.svg)] checked:bg-center checked:bg-no-repeat",
-          "focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-[3px]"
+          'appearance-none w-4 h-4 rounded-full border border-border-default bg-surface-elevated shrink-0',
+          'transition-all duration-fast ease-snap',
+          'checked:border-green-base checked:bg-green-base',
+          'checked:bg-[url(/icons/radio-dot.svg)] checked:bg-center checked:bg-no-repeat',
+          'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-[3px]'
         )}
       />
       <span className="font-body text-body text-text-primary">{label}</span>

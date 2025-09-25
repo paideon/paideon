@@ -1,30 +1,30 @@
 // packages/contracts/src/blocks/index.ts
 
-export * from "./block-type.js";
+export * from './block-type.js';
 
 // generic blocks
-export * from "./generic/announcement.js";
-export * from "./generic/cta.js";
-export * from "./generic/downloads.js";
-export * from "./generic/faq.js";
-export * from "./generic/hero.js";
-export * from "./generic/quote.js";
-export * from "./generic/stats.js";
-export * from "./generic/rich-text-block.js";
+export * from './generic/announcement.js';
+export * from './generic/cta.js';
+export * from './generic/downloads.js';
+export * from './generic/faq.js';
+export * from './generic/hero.js';
+export * from './generic/quote.js';
+export * from './generic/stats.js';
+export * from './generic/rich-text-block.js';
 
 // page specific blocks
-export * from "./page-specific/anthem.js";
-export * from "./page-specific/contact-info.js";
-export * from "./page-specific/crest-symbol.ts";
-export * from "./page-specific/gallery.js";
-export * from "./page-specific/key-dates.js";
-export * from "./page-specific/map.js";
-export * from "./page-specific/staff-grid.js";
-export * from "./page-specific/photo-strip.js";
-export * from "./page-specific/process-steps.js";
-export * from "./page-specific/results-display.js";
-export * from "./page-specific/timeline.js";
-export * from "./page-specific/values-grid.js";
+export * from './page-specific/anthem.js';
+export * from './page-specific/contact-info.js';
+export * from './page-specific/crest-symbol.ts';
+export * from './page-specific/gallery.js';
+export * from './page-specific/key-dates.js';
+export * from './page-specific/map.js';
+export * from './page-specific/staff-grid.js';
+export * from './page-specific/photo-strip.js';
+export * from './page-specific/process-steps.js';
+export * from './page-specific/results-display.js';
+export * from './page-specific/timeline.js';
+export * from './page-specific/values-grid.js';
 
 // packages/contracts/src/blocks/index.ts
 //

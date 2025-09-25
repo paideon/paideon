@@ -1,8 +1,8 @@
 // packages/contracts/src/primitives/enums/link-target.ts
 
-import { z } from "zod";
+import { z } from 'zod';
 
-export const LINK_TARGET_VALUES = ["self", "blank"] as const;
+export const LINK_TARGET_VALUES = ['self', 'blank'] as const;
 
 export const LinkTargetEnum = z.enum(LINK_TARGET_VALUES);
 

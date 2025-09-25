@@ -1,9 +1,9 @@
 // packages/ui/src/components/visualization/StudentJourneyFlow.tsx
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
 export interface JourneyNode {
   id: string;
@@ -32,9 +32,9 @@ export function StudentJourneyFlow({
   nodes,
   edges,
   className,
-  corePathLabel = "Core Path",
-  selectedLabel = "Selected",
-  optionalPathLabel = "Optional Path",
+  corePathLabel = 'Core Path',
+  selectedLabel = 'Selected',
+  optionalPathLabel = 'Optional Path',
 }: StudentJourneyFlowProps) {
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
@@ -57,7 +57,7 @@ export function StudentJourneyFlow({
   };
 
   return (
-    <div className={cn("relative overflow-x-auto py-space-8", className)}>
+    <div className={cn('relative overflow-x-auto py-space-8', className)}>
       <svg
         viewBox="0 0 1000 400"
         className="w-full min-w-[800px] h-auto bg-surface-base"
@@ -93,11 +93,11 @@ export function StudentJourneyFlow({
                 y2={toNode.position.y}
                 stroke={
                   isHighlightedEdge
-                    ? "var(--color-gold-base)"
-                    : "var(--border-light)"
+                    ? 'var(--color-gold-base)'
+                    : 'var(--border-light)'
                 }
                 strokeWidth={isHighlightedEdge ? 2 : 1.5}
-                strokeDasharray={isHighlightedEdge ? "none" : "4"}
+                strokeDasharray={isHighlightedEdge ? 'none' : '4'}
                 markerEnd="url(#arrowhead)"
               />
               {edge.label && (
@@ -134,15 +134,15 @@ export function StudentJourneyFlow({
                 rx={4}
                 fill={
                   isHighlightedNode
-                    ? "var(--surface-elevated)"
-                    : "var(--surface-default)"
+                    ? 'var(--surface-elevated)'
+                    : 'var(--surface-default)'
                 }
                 stroke={
                   isSelected
-                    ? "var(--color-gold-base)"
+                    ? 'var(--color-gold-base)'
                     : isHighlightedNode
-                    ? "var(--color-gold-pale)"
-                    : "var(--border-light)"
+                    ? 'var(--color-gold-pale)'
+                    : 'var(--border-light)'
                 }
                 strokeWidth={isSelected ? 2 : 1}
                 className="transition-all duration-200"
@@ -152,8 +152,8 @@ export function StudentJourneyFlow({
                 y={-5}
                 textAnchor="middle"
                 className={cn(
-                  "font-display text-sm fill-text-primary font-medium",
-                  isSelected && "fill-gold-base"
+                  'font-display text-sm fill-text-primary font-medium',
+                  isSelected && 'fill-gold-base'
                 )}
               >
                 {node.label}
@@ -165,7 +165,7 @@ export function StudentJourneyFlow({
                   textAnchor="middle"
                   className="font-body text-caption fill-text-muted"
                 >
-                  {node.streams.join(", ")}
+                  {node.streams.join(', ')}
                 </text>
               )}
               {node.description && isSelected && (

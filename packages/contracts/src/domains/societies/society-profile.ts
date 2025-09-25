@@ -10,15 +10,15 @@
 // SocietyCard actually renders directly: SocietyCardSchema and the
 // category taxonomy.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { AvatarSchema } from "../../primitives/media/index.ts";
+import { AvatarSchema } from '../../primitives/media/index.ts';
 
 export const SocietyCategoryEnum = z.enum([
-  "academic",
-  "sports",
-  "arts",
-  "technology",
+  'academic',
+  'sports',
+  'arts',
+  'technology',
 ]);
 
 /** Label map for the admin category `<Select>` and public category-filter
@@ -27,10 +27,10 @@ export const SocietyCategoryEnum = z.enum([
  * precedent exactly (this file previously had only the bare enum, with no
  * display-label source anywhere). */
 export const SOCIETY_CATEGORIES = {
-  academic: "Academic",
-  sports: "Sports",
-  arts: "Arts",
-  technology: "Technology",
+  academic: 'Academic',
+  sports: 'Sports',
+  arts: 'Arts',
+  technology: 'Technology',
 } as const;
 
 export type SocietyCategoryMeta = {
@@ -45,7 +45,7 @@ export const SOCIETY_CATEGORY_META: SocietyCategoryMeta[] = Object.entries(
   label,
 }));
 
-export const SocietyCardVariantEnum = z.enum(["hub-grid", "featured"]);
+export const SocietyCardVariantEnum = z.enum(['hub-grid', 'featured']);
 
 export const SocietyCardSchema = z.object({
   id: z.string().min(1),

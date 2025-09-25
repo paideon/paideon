@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from 'react';
 
-export type ScrollDirection = "up" | "down" | null;
+export type ScrollDirection = 'up' | 'down' | null;
 
 export function useScrollDirection(threshold = 10): ScrollDirection {
   const [direction, setDirection] = useState<ScrollDirection>(null);
@@ -14,13 +14,13 @@ export function useScrollDirection(threshold = 10): ScrollDirection {
       const delta = currentY - lastYRef.current;
 
       if (Math.abs(delta) >= threshold) {
-        setDirection(delta > 0 ? "down" : "up");
+        setDirection(delta > 0 ? 'down' : 'up');
         lastYRef.current = currentY;
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [threshold]);
 
   return direction;

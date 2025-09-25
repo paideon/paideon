@@ -2,21 +2,21 @@
 
 // 'head-prefect' is a real StaffRole value even though prefects are students,
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { AvatarSchema } from "../../primitives/media/index.ts";
-import { DepartmentKeyEnum } from "../academics/department.ts";
+import { AvatarSchema } from '../../primitives/media/index.ts';
+import { DepartmentKeyEnum } from '../academics/department.ts';
 
 export const StaffRoleEnum = z.enum([
-  "principal",
-  "deputy-principal",
-  "assistant-principal",
-  "head-prefect",
-  "teacher",
-  "support",
+  'principal',
+  'deputy-principal',
+  'assistant-principal',
+  'head-prefect',
+  'teacher',
+  'support',
 ]);
 
-export const StaffCardVariantEnum = z.enum(["principal", "grid", "compact"]);
+export const StaffCardVariantEnum = z.enum(['principal', 'grid', 'compact']);
 
 export const StaffSchema = z.object({
   id: z.string().min(1),
@@ -56,21 +56,21 @@ export type StaffCardData = z.infer<typeof StaffCardSchema>;
  * support, teacher), which is not the intended hierarchy.
  */
 export const STAFF_ROLE_HIERARCHY: readonly StaffRoleEnumData[] = [
-  "principal",
-  "deputy-principal",
-  "assistant-principal",
-  "head-prefect",
-  "teacher",
-  "support",
+  'principal',
+  'deputy-principal',
+  'assistant-principal',
+  'head-prefect',
+  'teacher',
+  'support',
 ];
 
 export const STAFF_ROLE_LABELS: Record<StaffRoleEnumData, string> = {
-  principal: "Principal",
-  "deputy-principal": "Deputy Principal",
-  "assistant-principal": "Assistant Principal",
-  "head-prefect": "Head Prefect",
-  teacher: "Teacher",
-  support: "Support Staff",
+  principal: 'Principal',
+  'deputy-principal': 'Deputy Principal',
+  'assistant-principal': 'Assistant Principal',
+  'head-prefect': 'Head Prefect',
+  teacher: 'Teacher',
+  support: 'Support Staff',
 };
 
 /**
@@ -94,7 +94,7 @@ export const STAFF_ROLE_LABELS: Record<StaffRoleEnumData, string> = {
  */
 export function toStaffCardData(
   staff: StaffData,
-  overrides: Partial<Pick<StaffCardData, "href">> = {}
+  overrides: Partial<Pick<StaffCardData, 'href'>> = {}
 ): StaffCardData {
   return {
     id: staff.id,

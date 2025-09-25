@@ -6,8 +6,8 @@
 // — it isn't a registry section here, since it's one article at a time,
 // not a page composed of interchangeable ContentEntry sections.
 
-import { AnnouncementSchema, HeroSchema } from "../../blocks/index.ts";
-import type { PageRegistry } from "../types.ts";
+import { AnnouncementSchema, HeroSchema } from '../../blocks/index.ts';
+import type { PageRegistry } from '../types.ts';
 
 export const NewsHeroSchema = HeroSchema;
 
@@ -23,23 +23,23 @@ export const NewsAnnouncementSchema = AnnouncementSchema;
 // hand-authored page-chrome sections remain here.
 
 export const newsRegistry: PageRegistry = {
-  page: "news",
-  scope: "page:news",
-  label: "News and Announcements",
+  page: 'news',
+  scope: 'page:news',
+  label: 'News and Announcements',
   description:
-    "Manage the News page hero and announcement banner. The featured article and news feed are populated automatically from published articles — manage those under the News module, not here.",
+    'Manage the News page hero and announcement banner. The featured article and news feed are populated automatically from published articles — manage those under the News module, not here.',
   sections: [
     {
-      key: "news.hero",
-      blockKey: "hero",
-      label: "Hero Banner",
-      description: "Top-of-page headline and eyebrow text.",
+      key: 'news.hero',
+      blockKey: 'hero',
+      label: 'Hero Banner',
+      description: 'Top-of-page headline and eyebrow text.',
       schema: NewsHeroSchema,
     },
     {
-      key: "news.announcement",
-      blockKey: "announcement",
-      label: "Announcement Banner",
+      key: 'news.announcement',
+      blockKey: 'announcement',
+      label: 'Announcement Banner',
       description:
         'Optional dismissible urgent notice (e.g. "School reopens 5 May").',
       schema: NewsAnnouncementSchema,

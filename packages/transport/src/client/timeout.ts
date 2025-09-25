@@ -30,12 +30,12 @@ export function timeout(fetcher: Fetcher, ms: number): Fetcher {
 }
 
 function mergeSignals(a: AbortSignal, b: AbortSignal): AbortSignal {
-  if (typeof AbortSignal.any === "function") return AbortSignal.any([a, b]);
+  if (typeof AbortSignal.any === 'function') return AbortSignal.any([a, b]);
 
   // Fallback for runtimes without AbortSignal.any (Node < 20 / older browsers).
   const controller = new AbortController();
   const onAbort = () => controller.abort();
-  a.addEventListener("abort", onAbort, { once: true });
-  b.addEventListener("abort", onAbort, { once: true });
+  a.addEventListener('abort', onAbort, { once: true });
+  b.addEventListener('abort', onAbort, { once: true });
   return controller.signal;
 }

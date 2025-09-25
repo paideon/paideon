@@ -1,8 +1,8 @@
 // packages/contracts/src/primitives/enums/visibility.ts
 
-import { z } from "zod";
+import { z } from 'zod';
 
-export const VISIBILITY_VALUES = ["public", "internal", "admin-only"] as const;
+export const VISIBILITY_VALUES = ['public', 'internal', 'admin-only'] as const;
 
 export const VisibilityEnum = z.enum(VISIBILITY_VALUES);
 

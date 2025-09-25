@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { motion, useReducedMotion } from "framer-motion";
-import { memo, useEffect } from "react";
+import { motion, useReducedMotion } from 'framer-motion';
+import { memo, useEffect } from 'react';
 
-import { SchoolLogo } from "./SchoolLogo";
-import { cn } from "../../../utilities/cn";
+import { SchoolLogo } from './SchoolLogo';
+import { cn } from '../../../utilities/cn';
 
 // -----------------------------------------------------------------------------
 // Size map
 // -----------------------------------------------------------------------------
 const sizeMap = {
-  sm: "w-size-24 h-size-24",
-  md: "w-size-32 h-size-32",
-  lg: "w-size-48 h-size-48",
+  sm: 'w-size-24 h-size-24',
+  md: 'w-size-32 h-size-32',
+  lg: 'w-size-48 h-size-48',
 } as const;
 
 type CrestSize = keyof typeof sizeMap;
@@ -23,7 +23,7 @@ export interface CrestAnimationProps {
    * 'hero'    — fade-in, single gold sweep, settles into faint glow.
    * 'loading' — continuous breathing glow, static crest.
    */
-  variant?: "hero" | "loading";
+  variant?: 'hero' | 'loading';
   /** Play the intro animation on mount (default: true) */
   animateOnMount?: boolean;
   /**
@@ -58,7 +58,7 @@ const HeroAnimation = ({
 
   if (reduced) {
     return (
-      <div className={cn("relative", sizeMap[size])}>
+      <div className={cn('relative', sizeMap[size])}>
         <SchoolLogo variant="crest-only" className="w-full h-full" />
       </div>
     );
@@ -66,7 +66,7 @@ const HeroAnimation = ({
 
   return (
     <motion.div
-      className={cn("relative", sizeMap[size])}
+      className={cn('relative', sizeMap[size])}
       initial={{ opacity: 0, scale: 0.92 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -85,11 +85,11 @@ const HeroAnimation = ({
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-20">
         <motion.div
           className="absolute w-full h-full bg-gradient-to-br from-transparent via-gold-base/40 to-transparent blur-md"
-          style={{ transform: "rotate(45deg) scale(2)" }}
-          initial={{ x: "-100%", y: "-100%", opacity: 0 }}
+          style={{ transform: 'rotate(45deg) scale(2)' }}
+          initial={{ x: '-100%', y: '-100%', opacity: 0 }}
           animate={{
-            x: ["-100%", "100%"],
-            y: ["-100%", "100%"],
+            x: ['-100%', '100%'],
+            y: ['-100%', '100%'],
             opacity: [0, 1, 0],
           }}
           transition={{
@@ -114,7 +114,7 @@ const HeroAnimation = ({
         transition={{
           duration: 2.0,
           delay: 0.6,
-          ease: "easeOut",
+          ease: 'easeOut',
           times: [0, 0.4, 1],
           // No repeat — glow fades in and holds at a steady value.
         }}
@@ -131,14 +131,14 @@ const LoadingAnimation = ({ size }: { size: CrestSize }) => {
 
   if (reduced) {
     return (
-      <div className={cn("relative", sizeMap[size])}>
+      <div className={cn('relative', sizeMap[size])}>
         <SchoolLogo variant="crest-only" className="w-full h-full" />
       </div>
     );
   }
 
   return (
-    <div className={cn("relative", sizeMap[size])}>
+    <div className={cn('relative', sizeMap[size])}>
       {/*
         Outer breathing glow.
         bg-gold-base/20 — valid.  blur-lg — largest valid blur token.
@@ -152,7 +152,7 @@ const LoadingAnimation = ({ size }: { size: CrestSize }) => {
         transition={{
           duration: 2.8,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: 'easeInOut',
         }}
       />
 
@@ -175,7 +175,7 @@ const LoadingAnimation = ({ size }: { size: CrestSize }) => {
         transition={{
           duration: 2.2,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: 'easeInOut',
           delay: 0.3,
         }}
       />
@@ -187,15 +187,15 @@ const LoadingAnimation = ({ size }: { size: CrestSize }) => {
 // Main component
 // -----------------------------------------------------------------------------
 export const CrestAnimation = memo(function CrestAnimation({
-  size = "md",
-  variant = "hero",
+  size = 'md',
+  variant = 'hero',
   animateOnMount = true,
   onComplete,
   className,
 }: CrestAnimationProps) {
   if (!animateOnMount) {
     return (
-      <div className={cn("relative", sizeMap[size], className)}>
+      <div className={cn('relative', sizeMap[size], className)}>
         <SchoolLogo variant="crest-only" className="w-full h-full" />
       </div>
     );
@@ -203,7 +203,7 @@ export const CrestAnimation = memo(function CrestAnimation({
 
   return (
     <div className={cn(className)}>
-      {variant === "hero" ? (
+      {variant === 'hero' ? (
         <HeroAnimation size={size} onComplete={onComplete} />
       ) : (
         <LoadingAnimation size={size} />

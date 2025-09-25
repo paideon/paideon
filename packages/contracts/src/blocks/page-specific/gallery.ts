@@ -1,10 +1,10 @@
 // packages/contracts/src/blocks/page-specific/gallery.ts
 // Defines the schema for gallery blocks and their image items.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { ImageSchema } from "../../primitives/index.ts";
-import { GALLERY_BLOCK } from "../block-type.js";
+import { ImageSchema } from '../../primitives/index.ts';
+import { GALLERY_BLOCK } from '../block-type.js';
 
 export const GalleryImageSchema = ImageSchema.extend({ id: z.string() });
 

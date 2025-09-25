@@ -1,8 +1,8 @@
-import type { StaffCardData, StaffCardVariantType } from "@paideon/contracts";
-import Image from "next/image";
-import Link from "next/link";
+import type { StaffCardData, StaffCardVariantType } from '@paideon/contracts';
+import Image from 'next/image';
+import Link from 'next/link';
 
-export interface StaffCardProps extends Omit<StaffCardData, "variant"> {
+export interface StaffCardProps extends Omit<StaffCardData, 'variant'> {
   variant?: StaffCardVariantType;
   className?: string;
   /** Only used by the principal variant */
@@ -18,7 +18,7 @@ function StaffCardPrincipal({
   imageSrc,
   imageAlt,
   href,
-  readMoreLabel = "Read Full Message →",
+  readMoreLabel = 'Read Full Message →',
 }: StaffCardProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-12 bg-surface-elevated border border-border-light overflow-hidden">
@@ -154,8 +154,8 @@ function StaffCardCompact({ name, title, imageSrc, imageAlt }: StaffCardProps) {
   );
 }
 
-export function StaffCard({ variant = "grid", ...props }: StaffCardProps) {
-  if (variant === "principal") return <StaffCardPrincipal {...props} />;
-  if (variant === "compact") return <StaffCardCompact {...props} />;
+export function StaffCard({ variant = 'grid', ...props }: StaffCardProps) {
+  if (variant === 'principal') return <StaffCardPrincipal {...props} />;
+  if (variant === 'compact') return <StaffCardCompact {...props} />;
   return <StaffCardGrid {...props} />;
 }

@@ -25,7 +25,7 @@ export function SvgDebugGrid({
   width = 480,
   height = 420,
   step = 10,
-  color = "var(--color-text-primary)",
+  color = 'var(--color-text-primary)',
   strokeWidth = 0.1,
   opacity = 1,
   majorEvery = 5,

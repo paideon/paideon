@@ -1,10 +1,10 @@
 // packages/ui/src/components/navigation/Tabs.tsx
-"use client";
+'use client';
 
-import { clsx } from "clsx";
-import { useState } from "react";
+import { clsx } from 'clsx';
+import { useState } from 'react';
 
-type TabVariant = "line" | "pills";
+type TabVariant = 'line' | 'pills';
 interface TabItem {
   id: string;
   label: string;
@@ -24,7 +24,7 @@ export function Tabs({
   tabs,
   defaultTabId,
   onChange,
-  variant = "line",
+  variant = 'line',
   className,
 }: TabsProps) {
   const [activeId, setActiveId] = useState(defaultTabId || tabs[0]?.id);
@@ -40,8 +40,8 @@ export function Tabs({
     <div className={className}>
       <div
         className={clsx(
-          "flex gap-1 border-b border-border-light",
-          variant === "pills" && "border-b-0 gap-2 flex-wrap"
+          'flex gap-1 border-b border-border-light',
+          variant === 'pills' && 'border-b-0 gap-2 flex-wrap'
         )}
       >
         {tabs.map((tab) => {
@@ -51,18 +51,18 @@ export function Tabs({
               key={tab.id}
               onClick={() => handleChange(tab.id)}
               className={clsx(
-                "px-4 py-2 font-body text-label uppercase tracking-wide transition-all",
-                variant === "line" && [
-                  "border-b-2 -mb-px",
+                'px-4 py-2 font-body text-label uppercase tracking-wide transition-all',
+                variant === 'line' && [
+                  'border-b-2 -mb-px',
                   isActive
-                    ? "border-gold-base text-gold-base"
-                    : "border-transparent text-text-muted hover:text-text-primary",
+                    ? 'border-gold-base text-gold-base'
+                    : 'border-transparent text-text-muted hover:text-text-primary',
                 ],
-                variant === "pills" && [
-                  "rounded-full",
+                variant === 'pills' && [
+                  'rounded-full',
                   isActive
-                    ? "bg-green-base text-text-inverse"
-                    : "bg-surface-default text-text-muted hover:bg-surface-deep",
+                    ? 'bg-green-base text-text-inverse'
+                    : 'bg-surface-default text-text-muted hover:bg-surface-deep',
                 ]
               )}
             >
@@ -70,10 +70,10 @@ export function Tabs({
               {tab.badge !== undefined && (
                 <span
                   className={clsx(
-                    "ml-2 text-xs px-1.5 py-0.5 rounded-full",
-                    isActive && variant === "line"
-                      ? "bg-gold-pale text-gold-active"
-                      : "bg-surface-deep text-text-muted"
+                    'ml-2 text-xs px-1.5 py-0.5 rounded-full',
+                    isActive && variant === 'line'
+                      ? 'bg-gold-pale text-gold-active'
+                      : 'bg-surface-deep text-text-muted'
                   )}
                 >
                   {tab.badge}

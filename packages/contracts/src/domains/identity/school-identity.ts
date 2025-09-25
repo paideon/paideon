@@ -2,9 +2,9 @@
 
 // Core school identity — the typed shape assembled from SiteSettings.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import { AddressSchema } from "../../primitives/address.ts";
+import { AddressSchema } from '../../primitives/address.ts';
 
 export const SchoolSchema = z.object({
   name: z.string().min(1),

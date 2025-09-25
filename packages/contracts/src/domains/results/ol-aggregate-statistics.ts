@@ -2,9 +2,9 @@
 
 // O/L exam results — aggregate school-level statistics only.
 
-import { z } from "zod";
+import { z } from 'zod';
 
-export const OLGradeEnum = z.enum(["A", "B", "C", "S", "F", "AB"]);
+export const OLGradeEnum = z.enum(['A', 'B', 'C', 'S', 'F', 'AB']);
 
 export const OLSubjectResultSchema = z.object({
   subject: z.string().min(1),

@@ -1,8 +1,8 @@
 // packages/contracts/src/registry/globals/navigation.ts
 
-import { z } from "zod";
+import { z } from 'zod';
 
-import type { PageSection } from "../types.ts";
+import type { PageSection } from '../types.ts';
 
 export interface NavLinkData {
   id: string;
@@ -27,9 +27,9 @@ export const NavigationContentSchema = z.object({
 export type NavigationContentData = z.infer<typeof NavigationContentSchema>;
 
 export const navigationSection: PageSection = {
-  key: "global.navigation",
-  blockKey: "navigation",
-  label: "Navigation",
-  description: "Primary site navigation links, including nested submenus.",
+  key: 'global.navigation',
+  blockKey: 'navigation',
+  label: 'Navigation',
+  description: 'Primary site navigation links, including nested submenus.',
   schema: NavigationContentSchema,
 };

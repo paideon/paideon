@@ -1,6 +1,6 @@
 // packages/contracts/src/features/admissions/process.ts
 
-import { z } from "zod";
+import { z } from 'zod';
 
 export const AdmissionsStepSchema = z.object({
   id: z.string().min(1),

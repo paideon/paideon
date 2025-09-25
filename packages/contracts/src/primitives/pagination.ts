@@ -13,7 +13,7 @@
 //   editorial/news/article.ts — article list pagination
 //   editorial/events/event.ts — event list pagination
 
-import { z } from "zod";
+import { z } from 'zod';
 
 export const PageInputSchema = z.object({
   page: z.number().int().min(1).default(1),

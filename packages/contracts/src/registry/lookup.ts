@@ -4,9 +4,9 @@
 // used to be a stub that returned its own enum/schema regardless of input —
 // none of it actually looked anything up. This is the real implementation.
 
-import type { z } from "zod";
+import type { z } from 'zod';
 
-import type { BlockTypeEnumData } from "../blocks/block-type.ts";
+import type { BlockTypeEnumData } from '../blocks/block-type.ts';
 import {
   AnnouncementSchema,
   AnthemSchema,
@@ -28,11 +28,11 @@ import {
   StatsSchema,
   TimelineSchema,
   ValuesSchema,
-} from "../blocks/index.ts";
-import * as GlobalRegistry from "./global-registry/index.ts";
-import type { PageKeyEnumData } from "./page-key.ts";
-import * as PageRegistries from "./page-registry/index.ts";
-import type { PageRegistry, PageSection } from "./types.ts";
+} from '../blocks/index.ts';
+import * as GlobalRegistry from './global-registry/index.ts';
+import type { PageKeyEnumData } from './page-key.ts';
+import * as PageRegistries from './page-registry/index.ts';
+import type { PageRegistry, PageSection } from './types.ts';
 
 // ─── Block-level schema map ──────────────────────────────────────────────
 //
@@ -52,17 +52,17 @@ export const BLOCK_SCHEMA_MAP = {
   gallery: GallerySchema,
   downloads: DownloadsSchema,
   announcement: AnnouncementSchema,
-  "contact-info": ContactInfoSchema,
+  'contact-info': ContactInfoSchema,
   map: MapSchema,
-  "staff-grid": MembersSchema,
-  "photo-strip": PhotoStripSchema,
-  "process-steps": ProcessStepsSchema,
-  "results-display": ResultsDisplaySchema,
-  "rich-text-block": RichTextBlockSchema,
-  "key-dates": KeyDatesSchema,
-  "crest-symbols": CrestSchema,
+  'staff-grid': MembersSchema,
+  'photo-strip': PhotoStripSchema,
+  'process-steps': ProcessStepsSchema,
+  'results-display': ResultsDisplaySchema,
+  'rich-text-block': RichTextBlockSchema,
+  'key-dates': KeyDatesSchema,
+  'crest-symbols': CrestSchema,
   anthem: AnthemSchema,
-  "values-grid": ValuesSchema,
+  'values-grid': ValuesSchema,
   footer: GlobalRegistry.FooterContentSchema,
   navigation: GlobalRegistry.NavigationContentSchema,
 } as const satisfies Record<BlockTypeEnumData, z.ZodTypeAny>;
@@ -102,10 +102,10 @@ export function getSectionDefinition(
   scope: string,
   sectionKey: string
 ): PageSection | undefined {
-  if (scope === "global" || scope.startsWith("global:")) {
+  if (scope === 'global' || scope.startsWith('global:')) {
     return getGlobalSection(sectionKey);
   }
-  const pageKey = scope.replace(/^page:/, "") as PageKeyEnumData;
+  const pageKey = scope.replace(/^page:/, '') as PageKeyEnumData;
   const page = PAGE_REGISTRY[pageKey];
   return page?.sections.find((section) => section.key === sectionKey);
 }
@@ -149,9 +149,9 @@ export function getContentSchema(
 }
 
 export function getContentTypesByCategory(
-  category: "block" | "editorial" | "domain"
+  category: 'block' | 'editorial' | 'domain'
 ): readonly string[] {
-  if (category === "block") {
+  if (category === 'block') {
     return Object.keys(BLOCK_SCHEMA_MAP);
   }
   // Editorial and domain categories aren't split out from

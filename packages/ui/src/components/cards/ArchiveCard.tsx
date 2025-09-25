@@ -1,7 +1,7 @@
-import type { ArchiveCardData } from "@paideon/contracts";
-import Image from "next/image";
+import type { ArchiveCardData } from '@paideon/contracts';
+import Image from 'next/image';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
 export interface ArchiveCardProps extends ArchiveCardData {
   className?: string;
@@ -17,15 +17,15 @@ export function ArchiveCard({
   fileSrc,
   fileAlt,
   className,
-  categoryLabel = "",
-  yearLabel = "",
+  categoryLabel = '',
+  yearLabel = '',
 }: ArchiveCardProps) {
   return (
     <div
       className={cn(
-        "bg-surface-elevated border border-border-light overflow-hidden",
-        "shadow-elevation-1 transition-all duration-gentle",
-        "hover:shadow-elevation-2 hover:-translate-y-0.5",
+        'bg-surface-elevated border border-border-light overflow-hidden',
+        'shadow-elevation-1 transition-all duration-gentle',
+        'hover:shadow-elevation-2 hover:-translate-y-0.5',
         className
       )}
     >

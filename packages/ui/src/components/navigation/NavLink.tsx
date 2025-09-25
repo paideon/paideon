@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { type ReactNode, type ElementType } from "react";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { type ReactNode, type ElementType } from 'react';
 
-import { cn } from "../../utilities/cn";
+import { cn } from '../../utilities/cn';
 
 const checkIsExternal = (href: string): boolean =>
-  href.startsWith("http://") ||
-  href.startsWith("https://") ||
-  href.startsWith("mailto:") ||
-  href.startsWith("tel:");
+  href.startsWith('http://') ||
+  href.startsWith('https://') ||
+  href.startsWith('mailto:') ||
+  href.startsWith('tel:');
 
 export type AriaCurrentValue =
-  | "page"
-  | "step"
-  | "location"
-  | "date"
-  | "time"
+  | 'page'
+  | 'step'
+  | 'location'
+  | 'date'
+  | 'time'
   | true;
 
-export interface NavLinkProps extends Omit<React.ComponentProps<"a">, "href"> {
+export interface NavLinkProps extends Omit<React.ComponentProps<'a'>, 'href'> {
   href: string;
   children: ReactNode;
   active?: boolean;
@@ -35,20 +35,20 @@ export interface NavLinkProps extends Omit<React.ComponentProps<"a">, "href"> {
 }
 
 const baseStyles = [
-  "font-body text-label uppercase tracking-label",
-  "border-b-2 border-transparent",
-  "transition-colors duration-fast ease-snap",
-  "focus-visible:ring-2 focus-visible:ring-gold-base focus-visible:ring-offset-2 focus-visible:outline-none",
-].join(" ");
+  'font-body text-label uppercase tracking-label',
+  'border-b-2 border-transparent',
+  'transition-colors duration-fast ease-snap',
+  'focus-visible:ring-2 focus-visible:ring-gold-base focus-visible:ring-offset-2 focus-visible:outline-none',
+].join(' ');
 
 const inactiveStyles = {
-  light: "text-text-muted hover:text-gold-base",
-  dark: "text-text-inverse/55 hover:text-gold-base",
+  light: 'text-text-muted hover:text-gold-base',
+  dark: 'text-text-inverse/55 hover:text-gold-base',
 } as const;
 
 const activeStyles = {
-  light: "text-gold-base border-gold-base",
-  dark: "text-gold-base border-gold-base",
+  light: 'text-gold-base border-gold-base',
+  dark: 'text-gold-base border-gold-base',
 } as const;
 
 export function NavLink({
@@ -61,7 +61,7 @@ export function NavLink({
   external,
   onClick,
   prefetch = true,
-  ariaCurrent = "page",
+  ariaCurrent = 'page',
   as: Component,
   ref,
   ...rest
@@ -71,15 +71,15 @@ export function NavLink({
 
   const isActive =
     active ??
-    (href === "/"
-      ? pathname === "/"
+    (href === '/'
+      ? pathname === '/'
       : pathname === href || pathname.startsWith(`${href}/`));
 
   const linkClasses = cn(
     baseStyles,
     isActive
-      ? activeStyles[onDark ? "dark" : "light"]
-      : inactiveStyles[onDark ? "dark" : "light"],
+      ? activeStyles[onDark ? 'dark' : 'light']
+      : inactiveStyles[onDark ? 'dark' : 'light'],
     isActive && activeClassName,
     className // consumer className applied last — always wins via twMerge
   );
@@ -89,14 +89,14 @@ export function NavLink({
     href,
     className: linkClasses,
     onClick,
-    "aria-current": isActive ? ariaCurrent : undefined,
+    'aria-current': isActive ? ariaCurrent : undefined,
   };
 
   // Polymorphic — e.g. <NavLink as={motion.a}>
   if (Component) {
     return (
       <Component ref={ref} {...commonProps}>
-        {" "}
+        {' '}
         {children}
       </Component>
     );
@@ -116,7 +116,7 @@ export function NavLink({
         {...rest}
       >
         {children}
-        <span className="sr-only">(opens in new tab)</span>{" "}
+        <span className="sr-only">(opens in new tab)</span>{' '}
       </a>
     );
   }
