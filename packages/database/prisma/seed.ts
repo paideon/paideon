@@ -3,9 +3,12 @@ import {
   Role,
   UserStatus,
 } from '@paideon/database/generated/client/client';
+import { PrismaPg } from '@prisma/adapter-pg';
 import * as bcrypt from 'bcryptjs';
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+  adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL ?? '' }),
+});
 const schoolCode = 'PAIDEON-SEED';
 const adminPassword = 'LibraryAdmin!2026';
 const librarianPassword = 'LibraryDesk!2026';
