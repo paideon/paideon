@@ -76,12 +76,27 @@ async function send(path: string, init: RequestInit) {
   });
 }
 
-async function errorMessage(response: Response) {
+export class ApiError extends Error {
+  readonly status: number;
+  readonly code?: string;
+
+  constructor(message: string, status: number, code?: string) {
+    super(message);
+    this.name = 'ApiError';
+    this.status = status;
+    this.code = code;
+  }
+}
+
+async function readError(response: Response): Promise<ApiError> {
   const body = (await response.json().catch(() => null)) as {
     message?: string | string[];
+    code?: string;
   } | null;
-  if (Array.isArray(body?.message)) return body.message.join(', ');
-  return body?.message ?? `Request failed (${response.status})`;
+  const message = Array.isArray(body?.message)
+    ? body.message.join(', ')
+    : (body?.message ?? `Request failed (${response.status})`);
+  return new ApiError(message, response.status, body?.code);
 }
 
 export async function apiFetch<T>(
@@ -102,7 +117,7 @@ export async function apiFetch<T>(
   }
 
   if (!response.ok) {
-    throw new Error(await errorMessage(response));
+    throw await readError(response);
   }
 
   if (response.status === 204) return undefined as T;
