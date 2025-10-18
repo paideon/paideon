@@ -23,7 +23,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@paideon/contracts": ["../../packages/contracts/src/index.ts"]
+      "@paideon/contracts": ["../../packages/contracts/src/index.ts"],
+      "@paideon/ui": ["../../packages/ui/src/index.ts"]
     },
     "baseUrl": ".",
     "outDir": "dist",

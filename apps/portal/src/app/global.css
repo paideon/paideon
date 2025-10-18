@@ -1,6 +1,8 @@
 @import 'tailwindcss';
+@config '../../tailwind.config.js';
+@import './tokens.css';
 
 body {
-  background-color: #fff;
-  color: #0f172a;
+  background-color: var(--color-surface-base);
+  color: var(--color-text-primary);
 }
