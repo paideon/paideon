@@ -2,8 +2,10 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { LogoutButton } from '@/components/library/LogoutButton';
+
+import { LogoutButton } from '@/components/auth/LogoutButton';
 import { apiFetch, CurrentUser } from '@/lib/api';
+import { tilesFor } from '@/lib/home-tiles';
 
 type Loan = {
   id: string;
@@ -14,7 +16,7 @@ type Loan = {
   };
 };
 
-export default function StudentHomePage() {
+export default function HomePage() {
   const [user, setUser] = useState<CurrentUser | null>(null);
   const [loans, setLoans] = useState<Loan[]>([]);
   const [error, setError] = useState('');
@@ -39,7 +41,7 @@ export default function StudentHomePage() {
     <main className="mx-auto max-w-4xl space-y-6 p-6">
       <header className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold">My library</h1>
+          <h1 className="text-2xl font-bold">Home</h1>
           {user && (
             <p>
               Signed in as{' '}
@@ -50,11 +52,22 @@ export default function StudentHomePage() {
         </div>
         <LogoutButton />
       </header>
-      <p>
-        <Link className="underline" href="/books">
-          Search books
-        </Link>
-      </p>
+
+      {user && (
+        <nav aria-label="Your tools">
+          <ul className="grid gap-3 md:grid-cols-2">
+            {tilesFor(user).map((tile) => (
+              <li key={tile.href}>
+                <Link href={tile.href} className="block rounded border p-4">
+                  <span className="font-semibold">{tile.label}</span>
+                  <span className="block">{tile.description}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+
       <section>
         <h2 className="mb-2 text-xl font-semibold">My current loans</h2>
         {error && (
