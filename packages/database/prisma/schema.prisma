@@ -228,6 +228,11 @@ model School {
   fines              Fine[]
   libraryConfig      LibraryConfig?
 
+  // Access (roles and grants)
+  accessRoles  AccessRole[]
+  memberRoles  MemberRole[]
+  memberGrants MemberGrant[]
+
   // Layer 29
   qualification   Qualification[]
   serviceRecord   ServiceRecord[]
@@ -378,6 +383,11 @@ model User {
   // Library
   loans           Loan[]
   fines           Fine[]
+
+  // Access: what this person may do comes from roles and grants, not from
+  // the `role` column (which only says what kind of person they are).
+  memberRoles  MemberRole[]
+  memberGrants MemberGrant[]
 
   // Media
   mediaUploaded           Media[]                   @relation("MediaUploadedBy")
@@ -760,6 +770,86 @@ model AuditLog {
   @@index([actorUserId])
   @@index([entityType, entityId])
   @@index([createdAt])
+}
+
+// =============================================================================
+// ACCESS — roles, assignments, and direct grants
+// Capabilities are defined in code (packages/contracts). The database stores
+// only which ones a role holds and who holds which role, so adding a
+// capability never needs a migration. Capability and scope are plain strings
+// validated by the contracts; scope is 'SCHOOL', 'GRADE:n' or 'CLASS:id'.
+// Every change here must write an AuditLog entry.
+// =============================================================================
+
+// A named bundle of capabilities, per school.
+model AccessRole {
+  id           String   @id @default(cuid())
+  schoolId     String
+  key          String // stable handle, e.g. 'librarian'
+  name         String
+  description  String?
+  isSystem     Boolean  @default(false) // created by the system: cannot be deleted
+  locked       Boolean  @default(false) // cannot be edited (the super admin)
+  // Kinds of person (User.role values) who hold this role without being given it.
+  defaultForKinds String[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  school       School           @relation(fields: [schoolId], references: [id])
+  capabilities RoleCapability[]
+  members      MemberRole[]
+
+  @@unique([schoolId, key])
+  @@index([schoolId])
+}
+
+model RoleCapability {
+  roleId     String
+  capability String
+
+  role AccessRole @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, capability])
+}
+
+// A person holding a role (optionally for one grade or class).
+model MemberRole {
+  id         String   @id @default(cuid())
+  schoolId   String
+  userId     String
+  roleId     String
+  scope      String   @default("SCHOOL")
+  assignedBy String
+  createdAt  DateTime @default(now())
+
+  school School     @relation(fields: [schoolId], references: [id])
+  user   User       @relation(fields: [userId], references: [id])
+  role   AccessRole @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, roleId, scope])
+  @@index([schoolId, userId])
+  @@index([roleId])
+}
+
+// One extra capability given straight to a person, with a reason and an
+// optional end date. For exceptions; most access should come from roles.
+model MemberGrant {
+  id         String    @id @default(cuid())
+  schoolId   String
+  userId     String
+  capability String
+  scope      String    @default("SCHOOL")
+  reason     String
+  expiresAt  DateTime?
+  grantedBy  String
+  createdAt  DateTime  @default(now())
+
+  school School @relation(fields: [schoolId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@unique([userId, capability, scope])
+  @@index([schoolId, userId])
+  @@index([expiresAt])
 }
 
 // =============================================================================
