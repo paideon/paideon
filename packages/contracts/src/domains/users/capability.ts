@@ -1,8 +1,10 @@
 // Capabilities: what a person is allowed to do, and where.
 //
-// A capability is granted with a scope: the whole school, one grade, or one
-// class. Roles are only PRESETS of capabilities (see capability-presets.ts).
-// The names below are the ones defined in 00-FOUNDATIONS.md section 4.
+// Only the developer adds a capability: add it here, describe it in
+// capability-registry.ts, and check it on the server. People never get a
+// role in code; they get roles and grants stored in the database (see
+// system-roles.ts and "Library and Access Plan.md"). The names below are the
+// ones defined in 00-FOUNDATIONS.md section 4.
 
 import { z } from 'zod';
 
@@ -16,6 +18,8 @@ export const CAPABILITY_VALUES = [
   'entry.coordinate',
   'stats.view',
   'stats.sensitive',
+  'library.catalog.read',
+  'library.own.read',
   'library.desk',
   'library.members.read',
   'library.manage',
