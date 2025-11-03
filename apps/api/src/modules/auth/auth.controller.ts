@@ -12,7 +12,6 @@ import {
 } from '@nestjs/common';
 import type { Request, Response } from 'express';
 import {
-  capabilitiesForRole,
   ChangePasswordSchema,
   ConfirmActivationSchema,
   ForgotPasswordSchema,
@@ -29,6 +28,7 @@ import type {
   ResetPasswordData,
 } from '@paideon/contracts';
 import { ZodBody } from '../../common/pipes/zod-validation.pipe';
+import { AccessService } from '../access/access.service';
 import { AuthService } from './auth.service';
 import { AccountSecurityService } from './account-security.service';
 import { ActivationLookupService } from './activation-lookup.service';
@@ -44,6 +44,7 @@ export class AuthController {
     private authService: AuthService,
     private activationLookup: ActivationLookupService,
     private accountSecurity: AccountSecurityService,
+    private access: AccessService,
   ) {}
 
   // ─────────────────────────────────────────────────────────────
@@ -128,12 +129,16 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   async me(@CurrentUser() user: JwtPayload) {
     const me = await this.authService.getCurrentUser(user.sub);
-    // photoUrl: no photo storage yet. capabilities: derived from the role
-    // until the database stores grants (see capability-presets.ts).
+    // photoUrl: no photo storage yet. capabilities: what the person's roles
+    // and grants add up to (see AccessService).
     return {
       ...me,
       photoUrl: null,
-      capabilities: capabilitiesForRole(me.role),
+      capabilities: await this.access.capabilitiesFor({
+        sub: user.sub,
+        schoolId: user.schoolId,
+        role: me.role,
+      }),
     };
   }
 
