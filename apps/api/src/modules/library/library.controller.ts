@@ -12,11 +12,10 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { Role } from '@paideon/database/generated/client/client';
+import { Requires } from '../access/decorators/requires.decorator';
+import { CapabilityGuard } from '../access/guards/capability.guard';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
-import { Roles } from '../auth/decorators/roles.decorator';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { RolesGuard } from '../auth/guards/roles.guard';
 import type { JwtPayload } from '../auth/types/jwt-payload.type';
 import {
   AddCopyDto,
@@ -32,24 +31,27 @@ import { LibraryService } from './library.service';
 
 type CsvUpload = { buffer: Buffer; originalname: string };
 
+// Every route says which capability opens it. A route with no @Requires() is
+// refused (see CapabilityGuard), so a forgotten label never leaves one open.
 @Controller('library')
-@UseGuards(JwtAuthGuard, RolesGuard)
-@Roles(Role.ADMIN, Role.LIBRARIAN)
+@UseGuards(JwtAuthGuard, CapabilityGuard)
 export class LibraryController {
   constructor(private readonly library: LibraryService) {}
 
   @Get('books')
-  @Roles(Role.ADMIN, Role.LIBRARIAN, Role.STUDENT)
+  @Requires('library.catalog.read')
   listBooks(@CurrentUser() user: JwtPayload, @Query() query: BooksQueryDto) {
     return this.library.listBooks(user.schoolId, query);
   }
 
   @Post('books')
+  @Requires('library.manage')
   createBook(@CurrentUser() user: JwtPayload, @Body() dto: CreateBookDto) {
     return this.library.createBook(user.schoolId, dto);
   }
 
   @Patch('books/:id')
+  @Requires('library.manage')
   updateBook(
     @CurrentUser() user: JwtPayload,
     @Param('id') id: string,
@@ -59,6 +61,7 @@ export class LibraryController {
   }
 
   @Post('books/:id/copies')
+  @Requires('library.manage')
   addCopy(
     @CurrentUser() user: JwtPayload,
     @Param('id') id: string,
@@ -68,6 +71,7 @@ export class LibraryController {
   }
 
   @Post('books/import')
+  @Requires('library.manage')
   @UseInterceptors(
     FileInterceptor('file', { limits: { fileSize: 10 * 1024 * 1024 } }),
   )
@@ -82,16 +86,19 @@ export class LibraryController {
   }
 
   @Get('members')
+  @Requires('library.members.read')
   members(@CurrentUser() user: JwtPayload, @Query('search') search?: string) {
     return this.library.searchMembers(user.schoolId, search);
   }
 
   @Get('members/:id')
+  @Requires('library.members.read')
   memberDetail(@CurrentUser() user: JwtPayload, @Param('id') id: string) {
     return this.library.memberDetail(user.schoolId, id);
   }
 
   @Post('circulation/checkout')
+  @Requires('library.desk')
   checkout(@CurrentUser() user: JwtPayload, @Body() dto: CheckoutDto) {
     return this.library.checkout(
       user.schoolId,
@@ -102,16 +109,19 @@ export class LibraryController {
   }
 
   @Post('circulation/return')
+  @Requires('library.desk')
   returnCopy(@CurrentUser() user: JwtPayload, @Body() dto: ReturnDto) {
     return this.library.returnCopy(user.schoolId, user.sub, dto.copyBarcode);
   }
 
   @Post('circulation/renew')
+  @Requires('library.desk')
   renew(@CurrentUser() user: JwtPayload, @Body() dto: RenewDto) {
     return this.library.renew(user.schoolId, dto.copyBarcode);
   }
 
   @Get('fines')
+  @Requires('library.fines', 'library.members.read')
   unpaidFines(
     @CurrentUser() user: JwtPayload,
     @Query('memberId') memberId?: string,
@@ -120,11 +130,13 @@ export class LibraryController {
   }
 
   @Patch('fines/:id/pay')
+  @Requires('library.fines')
   payFine(@CurrentUser() user: JwtPayload, @Param('id') id: string) {
     return this.library.payFine(user.schoolId, id);
   }
 
   @Patch('fines/:id/waive')
+  @Requires('library.fines')
   waiveFine(
     @CurrentUser() user: JwtPayload,
     @Param('id') id: string,
@@ -134,21 +146,23 @@ export class LibraryController {
   }
 
   @Get('reports/overdue')
+  @Requires('library.reports', 'library.desk')
   overdue(@CurrentUser() user: JwtPayload) {
     return this.library.overdue(user.schoolId);
   }
 
   @Get('reports/stats')
+  @Requires('library.reports', 'library.desk')
   stats(@CurrentUser() user: JwtPayload) {
     return this.library.stats(user.schoolId);
   }
 }
 
 // A person's own library record: loans and fines. It only ever reads the
-// rows of the person in the access token, so every role may call it.
+// rows of the person in the access token, so there is no id to tamper with.
 @Controller('library/me')
-@UseGuards(JwtAuthGuard, RolesGuard)
-@Roles(...Object.values(Role))
+@UseGuards(JwtAuthGuard, CapabilityGuard)
+@Requires('library.own.read')
 export class MyLibraryController {
   constructor(private readonly library: LibraryService) {}
 
