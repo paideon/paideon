@@ -8,9 +8,11 @@ describe('safeNext', () => {
   });
 
   it('keeps a path on this site, with its query', () => {
-    expect(safeNext('/books')).toBe('/books');
-    expect(safeNext('/books?q=maths')).toBe('/books?q=maths');
-    expect(safeNext('/librarian/checkout')).toBe('/librarian/checkout');
+    expect(safeNext('/library')).toBe('/library');
+    expect(safeNext('/library/catalog?q=maths')).toBe(
+      '/library/catalog?q=maths',
+    );
+    expect(safeNext('/library/checkout')).toBe('/library/checkout');
   });
 
   it('refuses addresses on other sites', () => {
@@ -18,16 +20,16 @@ describe('safeNext', () => {
     expect(safeNext('//evil.test')).toBe('/home');
     expect(safeNext('/\\evil.test')).toBe('/home');
     expect(safeNext('javascript:alert(1)')).toBe('/home');
-    expect(safeNext('books')).toBe('/home');
+    expect(safeNext('library')).toBe('/home');
   });
 
   it('refuses control characters', () => {
-    expect(safeNext('/books\r\nSet-Cookie: x=1')).toBe('/home');
+    expect(safeNext('/library\r\nSet-Cookie: x=1')).toBe('/home');
   });
 
   it('never returns to a sign-in page', () => {
     expect(safeNext('/login')).toBe('/home');
-    expect(safeNext('/login?next=/books')).toBe('/home');
+    expect(safeNext('/login?next=/library')).toBe('/home');
     expect(safeNext('/activate/abc')).toBe('/home');
     expect(safeNext('/')).toBe('/home');
   });
@@ -49,7 +51,13 @@ describe('isPublicPath', () => {
   });
 
   it('treats everything else as signed-in only', () => {
-    for (const path of ['/home', '/books', '/librarian', '/403', '/loginx']) {
+    for (const path of [
+      '/home',
+      '/library',
+      '/library/checkout',
+      '/403',
+      '/loginx',
+    ]) {
       expect(isPublicPath(path)).toBe(false);
     }
   });
