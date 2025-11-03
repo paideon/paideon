@@ -1,7 +1,7 @@
 import type { CapabilityEnumData, CurrentUserData } from '@paideon/contracts';
 import type { IconName, SidebarGroup } from '@paideon/ui';
 
-import { can } from './capabilities';
+import { canAny } from './capabilities';
 import { ROUTES } from './routes';
 
 // The sidebar and the Home tiles come from this one table, so a person with
@@ -18,10 +18,28 @@ type NavEntry = {
   label: string;
   href: string;
   icon: IconName;
-  needs?: CapabilityEnumData;
+  /** The person needs any ONE of these. Leave out for everyone signed in. */
+  needs?: CapabilityEnumData | readonly CapabilityEnumData[];
   /** Show as a card on /home too. */
   tile?: string;
+  /** A librarian's tool: shown as a card on the /library page, not on /home. */
+  staffBlurb?: string;
 };
+
+// Anything that makes /library worth opening. A person with none of these has
+// no library at all, so the sidebar does not show it.
+export const LIBRARY_CAPABILITIES: readonly CapabilityEnumData[] = [
+  'library.own.read',
+  'library.catalog.read',
+  'library.desk',
+  'library.manage',
+  'library.members.read',
+  'library.fines',
+  'library.reports',
+];
+
+const asList = (needs: NavEntry['needs']): readonly CapabilityEnumData[] =>
+  needs === undefined ? [] : typeof needs === 'string' ? [needs] : needs;
 
 export const NAV_GROUPS: { id: string; label: string }[] = [
   { id: 'home', label: 'Home' },
@@ -33,69 +51,66 @@ export const NAV_GROUPS: { id: string; label: string }[] = [
 const NAV_ENTRIES: NavEntry[] = [
   { id: 'home', group: 'home', label: 'Home', href: ROUTES.home, icon: 'home' },
   {
-    id: 'books',
+    id: 'library',
     group: 'library',
-    label: 'Search books',
-    href: ROUTES.books,
-    icon: 'search',
-    tile: 'Find a book and see if it is available.',
+    label: 'Library',
+    href: ROUTES.library,
+    icon: 'book-open',
+    needs: LIBRARY_CAPABILITIES,
+    tile: 'Your borrowed books, due dates and fines, and the catalog.',
   },
   {
-    id: 'desk',
+    id: 'catalog',
     group: 'library',
-    label: 'Library desk',
-    href: ROUTES.libraryDesk,
-    icon: 'book-open',
-    needs: 'library.desk',
-    tile: 'Checkout, return, members and overdue books.',
+    label: 'Search books',
+    href: ROUTES.libraryCatalog,
+    icon: 'search',
+    needs: 'library.catalog.read',
   },
   {
     id: 'checkout',
     group: 'library',
     label: 'Checkout',
-    href: '/librarian/checkout',
+    href: ROUTES.libraryCheckout,
     icon: 'arrow-right',
     needs: 'library.desk',
+    staffBlurb: 'Lend books: scan a member, then the books.',
   },
   {
     id: 'return',
     group: 'library',
     label: 'Return',
-    href: '/librarian/return',
+    href: ROUTES.libraryReturn,
     icon: 'arrow-left',
     needs: 'library.desk',
+    staffBlurb: 'Take books back and see any fine.',
   },
   {
     id: 'manage-books',
     group: 'library',
     label: 'Books',
-    href: '/librarian/books',
+    href: ROUTES.libraryBooks,
     icon: 'archive',
     needs: 'library.manage',
+    staffBlurb: 'Add and edit books and copies.',
   },
   {
     id: 'members',
     group: 'library',
     label: 'Members and fines',
-    href: '/librarian/members',
+    href: ROUTES.libraryMembers,
     icon: 'users',
     needs: 'library.members.read',
+    staffBlurb: "Look up a member's loans and fines.",
   },
   {
     id: 'overdue',
     group: 'library',
     label: 'Overdue',
-    href: '/librarian/overdue',
+    href: ROUTES.libraryOverdue,
     icon: 'clock',
     needs: 'library.reports',
-  },
-  {
-    id: 'my-library',
-    group: 'account',
-    label: 'My library',
-    href: ROUTES.accountLibrary,
-    icon: 'book-open',
-    tile: 'Books you have borrowed, fines and your history.',
+    staffBlurb: 'Books that are late, and who has them.',
   },
   {
     id: 'badge',
@@ -136,7 +151,7 @@ export function navFor(
   user: Pick<CurrentUserData, 'capabilities'>,
 ): Navigation {
   const allowed = NAV_ENTRIES.filter(
-    (entry) => entry.needs === undefined || can(user, entry.needs),
+    (entry) => entry.needs === undefined || canAny(user, asList(entry.needs)),
   );
 
   const groups: SidebarGroup[] = NAV_GROUPS.map((group) => ({
@@ -156,4 +171,18 @@ export function navFor(
     }));
 
   return { groups, tiles };
+}
+
+/** The librarian's tools the person may use, for the cards on /library. */
+export function staffLibraryTiles(
+  user: Pick<CurrentUserData, 'capabilities'>,
+): HomeTile[] {
+  return NAV_ENTRIES.filter(
+    (entry) =>
+      entry.staffBlurb !== undefined && canAny(user, asList(entry.needs)),
+  ).map((entry) => ({
+    label: entry.label,
+    description: entry.staffBlurb as string,
+    href: entry.href,
+  }));
 }

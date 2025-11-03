@@ -1,81 +1,97 @@
-import { capabilitiesForRole } from '@paideon/contracts';
+import { grantsForSystemRoles } from '@paideon/contracts';
 
-import { navFor } from './nav';
+import { navFor, staffLibraryTiles } from './nav';
 
-const as = (role: Parameters<typeof capabilitiesForRole>[0]) => ({
-  capabilities: capabilitiesForRole(role),
+// People are described by the roles they hold; the menu follows the
+// capabilities those roles add up to.
+const holding = (...roleKeys: string[]) => ({
+  capabilities: grantsForSystemRoles(roleKeys),
 });
 
-const hrefs = (user: ReturnType<typeof as>) =>
+const hrefs = (user: ReturnType<typeof holding>) =>
   navFor(user as never).groups.flatMap((g) => g.items.map((i) => i.href));
 
 describe('navFor', () => {
-  const ACCOUNT = [
-    '/account/library',
-    '/account/badge',
-    '/account',
-    '/account/security',
-  ];
+  const ACCOUNT = ['/account/badge', '/account', '/account/security'];
 
-  it('shows a student Home, book search, their account and help only', () => {
-    const nav = navFor(as('STUDENT') as never);
+  it('shows a reader Home, the library, their account and help only', () => {
+    const reader = holding('reader');
+    const nav = navFor(reader as never);
     expect(nav.groups.map((g) => g.id)).toEqual([
       'home',
       'library',
       'account',
       'help',
     ]);
-    expect(hrefs(as('STUDENT'))).toEqual([
+    expect(hrefs(reader)).toEqual([
       '/home',
-      '/books',
+      '/library',
+      '/library/catalog',
       ...ACCOUNT,
       '/privacy',
     ]);
     expect(nav.tiles.map((t) => t.href)).toEqual([
-      '/books',
-      '/account/library',
+      '/library',
       '/account/badge',
     ]);
   });
 
-  it('shows a librarian the whole library desk', () => {
-    expect(hrefs(as('LIBRARIAN'))).toEqual([
+  it('shows a librarian, who is also a reader, the whole library desk', () => {
+    const librarian = holding('reader', 'librarian');
+    expect(hrefs(librarian)).toEqual([
       '/home',
-      '/books',
-      '/librarian',
-      '/librarian/checkout',
-      '/librarian/return',
-      '/librarian/books',
-      '/librarian/members',
-      '/librarian/overdue',
+      '/library',
+      '/library/catalog',
+      '/library/checkout',
+      '/library/return',
+      '/library/books',
+      '/library/members',
+      '/library/overdue',
       ...ACCOUNT,
       '/privacy',
     ]);
-    expect(navFor(as('LIBRARIAN') as never).tiles.map((t) => t.href)).toEqual([
-      '/books',
-      '/librarian',
-      '/account/library',
+    expect(navFor(librarian as never).tiles.map((t) => t.href)).toEqual([
+      '/library',
       '/account/badge',
     ]);
   });
 
-  it('shows an admin everything a librarian sees', () => {
-    expect(hrefs(as('ADMIN'))).toEqual(hrefs(as('LIBRARIAN')));
+  it('shows a super admin everything a librarian sees, for now', () => {
+    expect(hrefs(holding('super-admin'))).toEqual(
+      hrefs(holding('reader', 'librarian')),
+    );
   });
 
   it('follows capabilities, not roles', () => {
-    const onlyFines = {
+    const onlyMembers = {
       capabilities: [{ capability: 'library.members.read', scope: 'SCHOOL' }],
     };
-    expect(hrefs(onlyFines as never)).toContain('/librarian/members');
-    expect(hrefs(onlyFines as never)).not.toContain('/librarian/checkout');
+    expect(hrefs(onlyMembers as never)).toContain('/library');
+    expect(hrefs(onlyMembers as never)).toContain('/library/members');
+    expect(hrefs(onlyMembers as never)).not.toContain('/library/checkout');
   });
 
-  it('drops a group that has nothing to show', () => {
+  it('hides the library from someone who holds no library capability', () => {
     const groups = navFor({ capabilities: [] } as never).groups.map(
       (g) => g.id,
     );
-    expect(groups).toEqual(['home', 'library', 'account', 'help']);
-    expect(groups).not.toContain('people');
+    expect(groups).toEqual(['home', 'account', 'help']);
+  });
+});
+
+describe('staffLibraryTiles', () => {
+  it('is empty for a reader', () => {
+    expect(staffLibraryTiles(holding('reader') as never)).toEqual([]);
+  });
+
+  it("lists the librarian's tools for someone holding the desk capabilities", () => {
+    const tiles = staffLibraryTiles(holding('reader', 'librarian') as never);
+    expect(tiles.map((t) => t.href)).toEqual([
+      '/library/checkout',
+      '/library/return',
+      '/library/books',
+      '/library/members',
+      '/library/overdue',
+    ]);
   });
 });
