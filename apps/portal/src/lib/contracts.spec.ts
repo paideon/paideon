@@ -13,8 +13,14 @@ import {
   type LoanSummaryData,
   PASSWORD_RULES,
   ResetPasswordSchema,
-  capabilitiesForRole,
+  CAPABILITY_CATALOG,
   CAPABILITY_VALUES,
+  CreateGrantSchema,
+  UpdateRoleSchema,
+  expandGrants,
+  grantsForSystemRoles,
+  holdsCapability,
+  resolveCapabilities,
 } from '@paideon/contracts';
 
 describe('PASSWORD_RULES', () => {
@@ -45,22 +51,97 @@ describe('PASSWORD_RULES', () => {
 });
 
 describe('capabilities', () => {
-  it('gives an admin every capability, school-wide', () => {
-    const grants = capabilitiesForRole('ADMIN');
+  it('gives the super admin every capability, school-wide', () => {
+    const grants = grantsForSystemRoles(['super-admin']);
     expect(grants.map((g) => g.capability)).toEqual([...CAPABILITY_VALUES]);
     expect(grants.every((g) => g.scope === 'SCHOOL')).toBe(true);
   });
 
+  it('gives a reader only their own library record and the catalog', () => {
+    expect(grantsForSystemRoles(['reader']).map((g) => g.capability)).toEqual([
+      'library.catalog.read',
+      'library.own.read',
+    ]);
+  });
+
   it('gives a librarian only library capabilities', () => {
-    const names = capabilitiesForRole('LIBRARIAN').map((g) => g.capability);
+    const names = grantsForSystemRoles(['librarian']).map((g) => g.capability);
     expect(names.length).toBeGreaterThan(0);
     expect(names.every((n) => n.startsWith('library.'))).toBe(true);
   });
 
-  it('gives students, parents, teachers and staff nothing yet', () => {
-    for (const role of ['STUDENT', 'PARENT', 'TEACHER', 'STAFF'] as const) {
-      expect(capabilitiesForRole(role)).toEqual([]);
+  it('gives nothing for a role it does not know', () => {
+    expect(grantsForSystemRoles(['nobody'])).toEqual([]);
+  });
+
+  it('describes every capability for the access screen', () => {
+    for (const capability of CAPABILITY_VALUES) {
+      expect(CAPABILITY_CATALOG[capability].label.length).toBeGreaterThan(0);
     }
+  });
+
+  it('adds what a capability implies, at the same scope', () => {
+    const names = expandGrants([
+      { capability: 'library.desk', scope: 'SCHOOL' },
+    ]).map((g) => g.capability);
+    expect(names).toEqual(
+      expect.arrayContaining([
+        'library.desk',
+        'library.catalog.read',
+        'library.members.read',
+      ]),
+    );
+  });
+
+  it('lets a school-wide grant cover the same capability for one grade', () => {
+    expect(
+      expandGrants([
+        { capability: 'people.read', scope: 'GRADE:7' },
+        { capability: 'people.read', scope: 'SCHOOL' },
+      ]),
+    ).toEqual([{ capability: 'people.read', scope: 'SCHOOL' }]);
+  });
+
+  it('ignores a direct grant once it has ended', () => {
+    const past = new Date(Date.now() - 1000);
+    const future = new Date(Date.now() + 60_000);
+    const held = (expiresAt: Date) =>
+      resolveCapabilities({
+        roles: [],
+        grants: [{ capability: 'library.desk', scope: 'SCHOOL', expiresAt }],
+      });
+    expect(held(past)).toEqual([]);
+    expect(held(future).map((g) => g.capability)).toContain('library.desk');
+  });
+
+  it('answers "do they hold it?" with the same scope rule as the portal', () => {
+    const grants = [
+      { capability: 'people.read', scope: 'GRADE:7' },
+      { capability: 'library.desk', scope: 'SCHOOL' },
+    ] as const;
+    expect(holdsCapability(grants, 'people.read')).toBe(true);
+    expect(holdsCapability(grants, 'people.read', 'GRADE:7')).toBe(true);
+    expect(holdsCapability(grants, 'people.read', 'GRADE:8')).toBe(false);
+    expect(holdsCapability(grants, 'library.desk', 'GRADE:8')).toBe(true);
+    expect(holdsCapability(grants, 'audit.view')).toBe(false);
+  });
+
+  it('asks for a reason when giving a person an extra capability', () => {
+    expect(
+      CreateGrantSchema.safeParse({ capability: 'library.desk', reason: 'x' })
+        .success,
+    ).toBe(false);
+    expect(
+      CreateGrantSchema.safeParse({
+        capability: 'library.desk',
+        reason: 'Covering the desk this term',
+      }).success,
+    ).toBe(true);
+  });
+
+  it('refuses a role change that changes nothing', () => {
+    expect(UpdateRoleSchema.safeParse({}).success).toBe(false);
+    expect(UpdateRoleSchema.safeParse({ name: 'Helper' }).success).toBe(true);
   });
 
   it('accepts school, grade and class scopes only', () => {
