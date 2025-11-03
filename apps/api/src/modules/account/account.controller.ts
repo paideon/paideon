@@ -6,17 +6,17 @@ import { ZodBody } from '../../common/pipes/zod-validation.pipe';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import type { JwtPayload } from '../auth/types/jwt-payload.type';
-import { MeService } from './me.service';
+import { AccountService } from './account.service';
 
 // A person's own record. Every route works on the signed-in person only.
-@Controller('me')
+@Controller('Account')
 @UseGuards(JwtAuthGuard)
-export class MeController {
-  constructor(private readonly me: MeService) {}
+export class AccountController {
+  constructor(private readonly account: AccountService) {}
 
   @Get('profile')
   profile(@CurrentUser() user: JwtPayload) {
-    return this.me.profile(user);
+    return this.account.profile(user);
   }
 
   @Patch('contact')
@@ -25,7 +25,7 @@ export class MeController {
     @ZodBody(UpdateMyContactSchema) dto: UpdateMyContactData,
     @Req() req: Request,
   ) {
-    return this.me.updateContact(user, dto, {
+    return this.account.updateContact(user, dto, {
       ipAddress: req.ip ?? req.socket.remoteAddress,
       userAgent: req.get('user-agent'),
     });
