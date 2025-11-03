@@ -13,7 +13,8 @@ export type JwtPayload = {
   // Which school this user belongs to — used by SchoolGuard on EVERY request
   schoolId: string;
 
-  // The user's role — used by RolesGuard + @Roles() decorator
+  // The kind of person (student, teacher, ...). It is NOT what they may do:
+  // that comes from their roles and grants (AccessService.capabilitiesFor).
   role: Role;
 
   // Human-readable ID for logging, audit trails, and display
