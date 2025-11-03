@@ -18,8 +18,8 @@ export default function HomePage() {
 
   // Extras follow what the person can do, not their role.
   const atTheDesk = can(user, 'library.desk');
-  // Parents have no library membership. Everyone else may have books out.
-  const mayBorrow = user.role !== 'PARENT';
+  // Anyone who may see their own library record may have books out.
+  const mayBorrow = can(user, 'library.own.read');
 
   return (
     <div className="grid gap-space-8 lg:grid-cols-[1fr_20rem]">
