@@ -1,17 +1,8 @@
-import { PageHeader } from '@paideon/ui';
+import { redirect } from 'next/navigation';
 
-import { MyLibrary } from '@/components/library/MyLibrary';
+import { ROUTES } from '@/lib/routes';
 
-export const metadata = { title: 'My library · Paideon' };
-
-export default function MyLibraryPage() {
-  return (
-    <>
-      <PageHeader
-        title="My library"
-        description="Books you have borrowed, any fines, and your history."
-      />
-      <MyLibrary />
-    </>
-  );
+// My library moved to /library, where everyone's library page now lives.
+export default function OldMyLibraryPage() {
+  redirect(ROUTES.library);
 }

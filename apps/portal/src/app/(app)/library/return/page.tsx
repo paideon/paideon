@@ -48,8 +48,8 @@ export default function ReturnPage() {
   }
 
   return (
-    <main className="mx-auto max-w-xl space-y-5 p-6">
-      <Link className="underline" href="/librarian">
+    <div className="mx-auto max-w-xl space-y-5 p-6">
+      <Link className="underline" href="/library">
         Back to library
       </Link>
       <h1 className="text-2xl font-bold">Return a book</h1>
@@ -81,6 +81,6 @@ export default function ReturnPage() {
           {message}
         </p>
       )}
-    </main>
+    </div>
   );
 }

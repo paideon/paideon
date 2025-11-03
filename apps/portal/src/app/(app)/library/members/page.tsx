@@ -90,8 +90,8 @@ export default function MembersPage() {
   }
 
   return (
-    <main className="mx-auto max-w-6xl space-y-5 p-6">
-      <Link className="underline" href="/librarian">
+    <div className="mx-auto max-w-6xl space-y-5 p-6">
+      <Link className="underline" href="/library">
         Back to library
       </Link>
       <h1 className="text-2xl font-bold">Members and fines</h1>
@@ -201,6 +201,6 @@ export default function MembersPage() {
           </div>
         </section>
       )}
-    </main>
+    </div>
   );
 }
