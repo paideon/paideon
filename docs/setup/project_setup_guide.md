@@ -166,24 +166,24 @@ Create `docker-compose.yml` in the project root:
 cat > docker-compose.yml << 'EOF'
 services:
   postgres:
-    image: postgres:16-alpine
+    image: postgres:16
     container_name: nexus_postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: nexus_dev
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
     ports:
-      - "5432:5432"
+      - "${DB_PORT}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
   redis:
-    image: redis:7-alpine
+    image: redis:7
     container_name: nexus_redis
     restart: unless-stopped
     ports:
-      - "6379:6379"
+      - "${REDIS_PORT}:6379"
     volumes:
       - redis_data:/data
 
@@ -200,10 +200,15 @@ EOF
 ```bash
 cat > .env.example << 'EOF'
 # Database
-DATABASE_URL="postgresql://postgres:password@localhost:5432/nexus_dev"
+DATABASE_URL="postgresql://postgres:your_strong_password_here@localhost:5433/nexus_dev"
+DB_USER=postgres
+BD_PASSWORD=your_strong_password_here
+BD_NAME=nexus_dev
+DB_PORT=5433
 
 # Redis
 REDIS_URL="redis://localhost:6379"
+REDIS_PORT=6379
 
 # JWT
 JWT_SECRET="change-this-to-a-long-random-string-in-production"

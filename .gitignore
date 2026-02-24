@@ -42,3 +42,16 @@ Thumbs.db
 .nx/workspace-data
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
+
+test-output
+
+# Environment
+.env
+.env.local
+
+# Prisma generated client
+packages/database/src/generated/
+
+# Next.js
+.next
+out
