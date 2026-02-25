@@ -903,7 +903,7 @@ cinderax@icloud.com
 **"Empowering Readers, Digitizing Dreams."**  
 **S.C. Roshana | Cinderax**  
 +94 750 604 820 | cinderax@icloud.com  
-_Built with heart for C.W.W. Kannangara Central College._
+_Built with 💚  for C.W.W. Kannangara Central College._
 
 **Project NEXUS © 2026**
 

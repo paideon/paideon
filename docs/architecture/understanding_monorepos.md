@@ -116,7 +116,7 @@ NEXUS has deep code sharing between its projects:
 
 With this much sharing, a polyrepo would be unworkable for a solo developer. A monorepo makes it natural.
 
-Beyond sharing, NEXUS will grow. The proposal mentions a future school management system on top of the library system. In a monorepo, adding a new app is as simple as running one Nx generator command. All the shared packages are already there, already configured, ready to import.
+Beyond sharing, NEXUS will grow. A future school management system on top of the library system. In a monorepo, adding a new app is as simple as running one Nx generator command. All the shared packages are already there, already configured, ready to import.
 
 ---
 
