@@ -1,7 +1,4 @@
-
 > Every command you will need from project start to production deployment. All commands are run from the **project root** unless explicitly stated otherwise.
-
-**Version:** 1.0 **Author:** S.C. Roshana (Cinderax)
 
 ---
 
@@ -129,20 +126,40 @@ pnpm add prisma @prisma/client --filter @nexus/database
 
 ## 3. Nx — Running Apps
 
+> **Important:** NestJS and Next.js use different target names in Nx.
+> 
+> - API (NestJS) → `serve`
+> - Web (Next.js) → `dev`
+> 
+> This is because Nx mirrors each framework's own native conventions.
+
 ```bash
 # Start the API dev server (NestJS)
 pnpm nx serve api
 # Available at: http://localhost:3001
 
 # Start the Web dev server (Next.js)
-pnpm nx serve web
+pnpm nx dev web
 # Available at: http://localhost:3000
 
-# Start both API and Web at the same time
-pnpm nx run-many --target=serve --projects=api,web --parallel
+# Start both at the same time (recommended)
+pnpm dev
+# This requires the root package.json script below — add it once:
+# "scripts": { "dev": "nx run-many --targets=serve,dev --projects=api,web --parallel" }
+```
 
-# Start everything (all apps in the workspace)
-pnpm nx run-many --target=serve --all --parallel
+**Add this to your root `package.json` scripts once:**
+
+```json
+"scripts": {
+  "dev": "nx run-many --targets=serve,dev --projects=api,web --parallel"
+}
+```
+
+Then starting everything is just:
+
+```bash
+pnpm dev
 ```
 
 ---
@@ -320,9 +337,9 @@ git branch -a
 **Always include the scope in brackets when relevant:**
 
 ```bash
-git commit -m "feat(api): ..."    # change is in the API
-git commit -m "feat(web): ..."    # change is in the web app
-git commit -m "fix(database): ..." # change is in the database package
+git commit -m "feat(api): ..."     # change is in the API
+git commit -m "feat(web): ..."     # change is in the web app
+git commit -m "fix(database): ..."  # change is in the database package
 ```
 
 ---
@@ -524,43 +541,46 @@ pnpm install
 ## Quick Reference Card
 
 ```bash
-# ── Daily startup ─────────────────────────────────────────────
-docker compose up -d                          # Start databases
-pnpm nx run-many --target=serve \
-  --projects=api,web --parallel               # Run everything
+# ── Daily startup ──────────────────────────────────────────────
+docker compose up -d                           # Start databases
+pnpm dev                                       # Start API + Web
 
-# ── Add a dependency ──────────────────────────────────────────
-pnpm add <pkg> --filter api                   # Add to API
-pnpm add <pkg> --filter web                   # Add to Web
+# ── Individual apps ────────────────────────────────────────────
+pnpm nx serve api                              # API only  → :3001
+pnpm nx dev web                                # Web only  → :3000
 
-# ── Generate NestJS code ──────────────────────────────────────
+# ── Add a dependency ───────────────────────────────────────────
+pnpm add <pkg> --filter api                    # Add to API
+pnpm add <pkg> --filter web                    # Add to Web
+
+# ── Generate NestJS code ───────────────────────────────────────
 pnpm nx g @nx/nest:resource \
-  --name=<n> --project=api                    # Full CRUD module
+  --name=<name> --project=api                  # Full CRUD module
 
-# ── Database ──────────────────────────────────────────────────
+# ── Database ───────────────────────────────────────────────────
 pnpm --filter @nexus/database \
-  prisma migrate dev --name <description>     # New migration
+  prisma migrate dev --name <description>      # New migration
 pnpm --filter @nexus/database \
-  prisma generate                             # Regenerate client
+  prisma generate                              # Regenerate client
 pnpm --filter @nexus/database \
-  prisma studio                               # Visual DB browser
+  prisma studio                                # Visual DB browser
 
-# ── Quality ───────────────────────────────────────────────────
-pnpm nx test api                              # Test API
-pnpm nx test web                              # Test Web
-pnpm nx lint api                              # Lint API
-pnpm prettier --write .                       # Format everything
+# ── Quality ────────────────────────────────────────────────────
+pnpm nx test api                               # Test API
+pnpm nx test web                               # Test Web
+pnpm nx lint api                               # Lint API
+pnpm prettier --write .                        # Format everything
 
-# ── Git ───────────────────────────────────────────────────────
-git add . && git commit -m "feat(api): ..."   # Commit
-git push origin main                          # Push
+# ── Git ────────────────────────────────────────────────────────
+git add . && git commit -m "feat(api): ..."    # Commit
+git push origin main                           # Push
 
-# ── Nx utilities ──────────────────────────────────────────────
-pnpm nx graph                                 # Dependency map
-pnpm nx reset                                 # Clear cache
-pnpm nx affected --target=build               # Build only what changed
+# ── Nx utilities ───────────────────────────────────────────────
+pnpm nx graph                                  # Dependency map
+pnpm nx reset                                  # Clear cache
+pnpm nx affected --target=build                # Build only what changed
 ```
 
 ---
 
-_Project NEXUS © 2026 — S.C. Roshana (Cinderax) | C.W.W. Kannangara Central College_
+_Project NEXUS © 2026 — Cinderax | C.W.W. Kannangara Central College_
