@@ -1,1122 +1,427 @@
-## Complete Design Specification Report
+### Project NEXUS · C.W.W. Kannangara Central College · Mathugama
 
-**Version:** 1.0  
-**Date:** February 7, 2026  
-**Project:** NEXUS Library Management System  
-**School:** C.W.W. Kannangara Central College - Mathugama  
-**Prepared by:** clude ai
+**Version:** 2.0  
+**Date:** February 2026  
+**Replaces:** Version 1.0 (February 7, 2026)  
+**Prepared with:** Claude AI  
+**Related document:** `color_and_typography_psychology.md`
+
+> This document is the single source of truth for all visual and design decisions made for the NEXUS platform. Every decision here has a reason. For the full psychological rationale behind color and typography choices, refer to `color_and_typography_psychology.md`.
 
 ---
 
 ## Table of Contents
 
-1. [Logo Analysis & Opinion](#1-logo-analysis--opinion)
-2. [Design Philosophy](#2-design-philosophy)
-3. [Color System](#3-color-system)
-4. [Typography System](#4-typography-system)
-5. [Spacing & Layout](#5-spacing--layout)
-6. [Component Styling Guidelines](#6-component-styling-guidelines)
-7. [Dark Mode Specifications](#7-dark-mode-specifications)
+1. [Design Philosophy](#1-design-philosophy)
+2. [Color System](#2-color-system)
+3. [Typography System](#3-typography-system)
+4. [Global Base Styles](#4-global-base-styles)
+5. [Tailwind Configuration](#5-tailwind-configuration)
+6. [Spacing & Layout](#6-spacing--layout)
+7. [Component Guidelines](#7-component-guidelines)
 8. [Animation & Motion](#8-animation--motion)
-9. [Accessibility Considerations](#9-accessibility-considerations)
-10. [Implementation Guide](#10-implementation-guide)
+9. [Theme System](#9-theme-system)
+10. [Accessibility](#10-accessibility)
+11. [Responsive Design](#11-responsive-design)
+12. [Project Folder Structure](#12-project-folder-structure)
+13. [Implementation Checklist](#13-implementation-checklist)
 
 ---
 
-## 1. Logo Analysis & Opinion
+## 1. Design Philosophy
 
-### 1.1 Current Logo Assessment
+### 1.1 The Direction
 
-**Visual Analysis:**
+**Aesthetic identity: "Dark Scholarly"**
 
-- **Color Palette:** The logo uses a warm cream/beige (#FCEBD0), soft sage green (#B8CFC8), and deep navy blue (#27334B)
-- **Style:** Illustrative, organic, hand-drawn aesthetic with flowing natural forms
-- **Imagery:** Features an open book with abstract flourishes and organic shapes
-- **Mood:** Scholarly, approachable, slightly whimsical
+NEXUS is not a generic school system. It is a premium, institutional platform that respects the intelligence of its users — students, teachers, and staff alike. The visual language is sharp, minimal, and considered. It draws from the world of editorial design, premium digital products, and serious academic publishing.
 
-### 1.2 Strengths ✅
+**What NEXUS looks like:**
 
-1. **Unique Character:** The hand-drawn, organic style is distinctive and memorable—avoiding the generic "corporate library" aesthetic
-2. **Warm & Approachable:** The cream and sage color palette feels inviting and accessible, perfect for a student-facing application
-3. **Educational Context:** The book imagery clearly communicates the library/education focus
-4. **Versatility:** The organic shapes provide visual interest that can be extracted as design elements throughout the UI
-5. **Cultural Resonance:** The natural, flowing aesthetic has a timeless quality that won't feel dated
+- Dark by default, like a focused study environment at night
+- Sharp edges, not rounded. Angular, not soft
+- Generous whitespace that gives content room to breathe
+- Subtle, purposeful motion — nothing decorative
+- Typography that does real emotional work
 
-### 1.3 Areas for Enhancement 🔧
+**What NEXUS does not look like:**
 
-1. **Scalability Concerns:** The intricate detail may be lost at small sizes (mobile icons, favicons)
-    
-    - **Recommendation:** Create a simplified icon version for small displays
-2. **Color Contrast:** The cream and sage colors may struggle with accessibility standards
-    
-    - **Recommendation:** Use darker variants for text/UI elements while keeping logo intact
-3. **Digital Optimization:** SVG appears to have very high path complexity
-    
-    - **Recommendation:** Simplify paths for better web performance without losing visual quality
+- A government portal — cold, bureaucratic, unstyled
+- A children's app — loud colors, excessive roundness, cartoon elements
+- A generic SaaS dashboard — every component feels the same
+- A marketing website — style without substance
 
-### 1.4 Overall Verdict: ⭐⭐⭐⭐ (4/5)
+### 1.2 The Four Design Pillars
 
-**I genuinely like this logo.** It breaks away from the typical "modern minimalist geometric" library logos and embraces an organic, artistic identity that feels:
+**Trustworthy** — The institution must feel credible. Administrative users, teachers, and parents need to trust the system immediately.
 
-- **Human & Accessible:** Not intimidating or overly corporate
-- **Distinctive:** Won't be confused with generic library systems
-- **Age-Appropriate:** Appeals to both younger students and staff
-- **Expandable:** The organic elements can become part of the broader design language
+**Inviting** — Students must want to come back. The environment should feel warm enough to spend time in, not just functional enough to complete a task.
 
-**My professional opinion:** Keep the logo, but create the following variants:
+**Focused** — Every interface must reduce cognitive load, not increase it. Every element present is present for a reason.
 
-1. **Full Logo:** Use in headers, login screens, about pages
-2. **Icon Mark:** Simplified book symbol for app icons (512x512px, 192x192px)
-3. **Wordmark Version:** "NEXUS" text with simplified book accent for narrow spaces
-4. **Monochrome Version:** Single-color variant for print materials
+**Scalable** — Every decision made today must still work when NEXUS expands into a full LMS with dozens of pages, hundreds of components, and thousands of daily users.
+
+### 1.3 Design Language Summary
+
+|Aspect|Decision|
+|---|---|
+|Theme default|Dark|
+|Corner style|Sharp — max 8px radius|
+|Motion style|Subtle, purposeful, eased|
+|Spacing philosophy|Generous, 8px base grid|
+|Color count|Minimal — two brand colors, three semantic|
+|Typography layers|Three — Display, Body, Mono|
 
 ---
 
-## 2. Design Philosophy
+## 2. Color System
 
-### 2.1 Core Aesthetic Direction
+### 2.1 CSS Variables — Both Themes
 
-**Theme:** **"Organic Scholastic"** – A fusion of natural warmth with structured academic precision
-
-**Design Pillars:**
-
-1. **Approachable Intelligence:** Sophisticated but never intimidating
-2. **Calm Focus:** Create reading-conducive environments with low visual noise
-3. **Youthful Energy:** Engage 4,198 students with contemporary UI patterns
-4. **Trust & Stability:** Convey professionalism for administrative users
-
-### 2.2 Visual Tone
-
-- **NOT:** Cold corporate blues, stark minimalism, brutalist layouts
-- **YES:** Warm earth tones, generous whitespace, organic accents, thoughtful typography
-
----
-
-## 3. Color System
-
-### 3.1 Primary Palette (Derived from Logo)
+The entire color system is built on CSS variables. Tailwind classes point to these variables so theme switching happens automatically across every component.
 
 ```css
-:root {
-  /* Primary Colors - From Logo */
-  --nexus-cream: #FCEBD0;
-  --nexus-sage: #B8CFC8;
-  --nexus-navy: #27334B;
-  
-  /* Extended Primary Palette */
-  --nexus-cream-light: #FFF5E6;
-  --nexus-cream-dark: #E8D4B0;
-  
-  --nexus-sage-light: #D4E4DF;
-  --nexus-sage-medium: #B8CFC8;
-  --nexus-sage-dark: #8FA99F;
-  
-  --nexus-navy-light: #3D4C6D;
-  --nexus-navy-medium: #27334B;
-  --nexus-navy-dark: #1A2233;
-}
-```
-
-### 3.2 Semantic Color System
-
-```css
+/* ── DARK THEME (Default) ───────────────────────────────── */
 :root {
   /* Backgrounds */
-  --bg-primary: #FFFFFF;
-  --bg-secondary: #FFF5E6;          /* Cream Light */
-  --bg-tertiary: #F5F5F5;
-  --bg-elevated: #FFFFFF;
-  
-  /* Text Colors */
-  --text-primary: #1A2233;           /* Navy Dark */
-  --text-secondary: #3D4C6D;         /* Navy Light */
-  --text-tertiary: #6B7280;
-  --text-inverse: #FFFFFF;
-  
+  --background:         #0e1117;
+  --background-card:    #161b27;
+  --background-hover:   #1c2333;
+
+  /* Text */
+  --foreground:         #e8e4dc;
+  --foreground-muted:   #8892a4;
+  --foreground-subtle:  #3d4659;
+
+  /* Brand */
+  --primary:            #4e7c6f;
+  --primary-light:      #6a9e8f;
+  --primary-muted:      rgba(78, 124, 111, 0.15);
+
+  /* Accent */
+  --gold:               #c9a84c;
+  --gold-muted:         rgba(201, 168, 76, 0.15);
+
+  /* Semantic */
+  --success:            #4e7c6f;
+  --warning:            #c9a84c;
+  --danger:             #c0544d;
+
   /* Borders */
-  --border-light: #E8D4B0;           /* Cream Dark */
-  --border-medium: #D4E4DF;          /* Sage Light */
-  --border-strong: #8FA99F;          /* Sage Dark */
-  
-  /* Interactive Elements */
-  --interactive-primary: #27334B;    /* Navy - Buttons, Links */
-  --interactive-primary-hover: #3D4C6D;
-  --interactive-secondary: #B8CFC8;  /* Sage - Secondary Actions */
-  --interactive-secondary-hover: #8FA99F;
+  --border:             rgba(255, 255, 255, 0.06);
+  --border-strong:      rgba(255, 255, 255, 0.12);
+
+  /* Typography (referenced in body styles) */
+  --font-display:       'Cormorant Garamond', serif;
+  --font-body:          'Inter', sans-serif;
+  --font-mono:          'JetBrains Mono', monospace;
+}
+
+/* ── LIGHT THEME ────────────────────────────────────────── */
+[data-theme="light"] {
+  --background:         #faf8f4;
+  --background-card:    #ffffff;
+  --background-hover:   #f0ede7;
+
+  --foreground:         #1a1f2e;
+  --foreground-muted:   #5a6478;
+  --foreground-subtle:  #a0a8b8;
+
+  --border:             rgba(0, 0, 0, 0.07);
+  --border-strong:      rgba(0, 0, 0, 0.14);
+
+  /* primary, gold, success, warning, danger — unchanged in light mode */
 }
 ```
 
-### 3.3 Functional Colors
+### 2.2 Color Token Reference
 
-```css
-:root {
-  /* Status Colors */
-  --success: #059669;               /* Available Books */
-  --success-bg: #D1FAE5;
-  --success-text: #065F46;
-  
-  --warning: #D97706;               /* Due Soon */
-  --warning-bg: #FEF3C7;
-  --warning-text: #92400E;
-  
-  --error: #DC2626;                 /* Overdue, Errors */
-  --error-bg: #FEE2E2;
-  --error-text: #991B1B;
-  
-  --info: #2563EB;                  /* Notifications */
-  --info-bg: #DBEAFE;
-  --info-text: #1E40AF;
-  
-  /* Special Highlights */
-  --highlight-streak: #F59E0B;      /* Gamification Streaks */
-  --highlight-new: #8B5CF6;         /* New Arrivals */
-  --highlight-reserved: #EC4899;    /* Reserved Books */
-}
-```
-
-### 3.4 Gradient Library
-
-```css
-:root {
-  /* Hero Gradients */
-  --gradient-hero: linear-gradient(135deg, #FFF5E6 0%, #D4E4DF 100%);
-  --gradient-card: linear-gradient(to bottom right, #FFFFFF 0%, #FFF5E6 100%);
-  
-  /* Accent Gradients */
-  --gradient-accent: linear-gradient(90deg, #B8CFC8 0%, #8FA99F 100%);
-  --gradient-dark: linear-gradient(135deg, #27334B 0%, #1A2233 100%);
-  
-  /* Overlay Gradients */
-  --gradient-overlay-light: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.9) 100%);
-  --gradient-overlay-dark: linear-gradient(180deg, rgba(26, 34, 51, 0) 0%, rgba(26, 34, 51, 0.95) 100%);
-}
-```
-
-### 3.5 Color Usage Guidelines
-
-|Context|Primary Color|Accent|Background|
+|Token|Dark Value|Light Value|Usage|
 |---|---|---|---|
-|**Login Screen**|Navy|Sage|Cream Light|
-|**Student Dashboard**|Navy|Sage|White/Cream Light|
-|**Book Cards**|Navy|Sage|White with Cream borders|
-|**Admin Dashboard**|Navy|Sage Dark|White/Gray|
-|**Digital Vault**|Navy|Info Blue|White|
-|**Gamification**|Navy|Highlight Streak|Cream Light|
+|`--background`|`#0e1117`|`#faf8f4`|Page background|
+|`--background-card`|`#161b27`|`#ffffff`|Cards, panels, modals|
+|`--background-hover`|`#1c2333`|`#f0ede7`|Hover states on cards/rows|
+|`--foreground`|`#e8e4dc`|`#1a1f2e`|Primary text, headings|
+|`--foreground-muted`|`#8892a4`|`#5a6478`|Secondary text, descriptions|
+|`--foreground-subtle`|`#3d4659`|`#a0a8b8`|Placeholders, disabled, decorative|
+|`--primary`|`#4e7c6f`|`#4e7c6f`|Brand color, primary actions, success|
+|`--primary-light`|`#6a9e8f`|`#6a9e8f`|Hover state of primary|
+|`--primary-muted`|`rgba(78,124,111,0.15)`|same|Subtle primary backgrounds|
+|`--gold`|`#c9a84c`|`#c9a84c`|Achievements, CTAs, highlights|
+|`--gold-muted`|`rgba(201,168,76,0.15)`|same|Subtle gold backgrounds|
+|`--danger`|`#c0544d`|`#c0544d`|Overdue, errors, destructive actions|
+|`--border`|`rgba(255,255,255,0.06)`|`rgba(0,0,0,0.07)`|Default borders|
+|`--border-strong`|`rgba(255,255,255,0.12)`|`rgba(0,0,0,0.14)`|Emphasized borders|
+
+### 2.3 Color Usage Rules
+
+**Primary green `#4e7c6f`** is used for:
+
+- Primary buttons and interactive elements
+- Success states (book returned, task complete, streak active)
+- Active navigation states
+- Progress indicators
+
+**Gold `#c9a84c`** is used for:
+
+- Achievement badges and reading milestones
+- Reading streak highlights
+- Key call-to-action elements (Sign In, Open Vault)
+- Premium or featured content labels
+
+**Danger `#c0544d`** is used for:
+
+- Overdue book notifications
+- Form validation errors
+- Destructive actions (delete, remove)
+- Critical system alerts
+
+**Gold and primary must never appear together** on the same element. They are both accent colors and will compete visually.
+
+### 2.4 What Not to Do
+
+- Never use `#000000` or `#ffffff` anywhere in the UI
+- Never use primary green for decorative purposes — it must mean something interactive or successful
+- Never use gold for anything other than achievement, reward, or primary CTA
+- Never place light text on `--primary-muted` or `--gold-muted` backgrounds — contrast is too low for text
 
 ---
 
-## 4. Typography System
+## 3. Typography System
 
-### 4.1 Font Selection Philosophy
-
-**Objective:** Choose fonts that are:
-
-- **Readable:** Optimized for long-form reading (book descriptions, articles)
-- **Characterful:** Not generic (avoid Inter, Roboto, Arial)
-- **Professional:** Appropriate for educational context
-- **Web-Safe:** Good performance and licensing
-
-### 4.2 Selected Font Families
-
-#### Primary Typeface: **Crimson Pro** (Display & Headings)
+### 3.1 Font Stack
 
 ```css
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&display=swap');
+/* Display — Cormorant Garamond */
+/* Used for: All headings, hero text, pull quotes, anything 32px+ */
+font-family: 'Cormorant Garamond', Georgia, serif;
 
---font-display: 'Crimson Pro', 'Georgia', serif;
+/* Body — Inter */
+/* Used for: Everything else. Body text, buttons, nav, forms, cards */
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+/* Mono — JetBrains Mono */
+/* Used for: Labels, tags, ISBN, dates, metadata, section counters */
+font-family: 'JetBrains Mono', 'Courier New', monospace;
 ```
 
-**Why Crimson Pro:**
-
-- ✅ Classic serif with scholarly elegance
-- ✅ Excellent readability at large sizes
-- ✅ Evokes literary/library aesthetic
-- ✅ Distinguished but approachable
-- ✅ Open-source (SIL Open Font License)
-
-**Usage:**
-
-- Page titles, hero headings, section headers
-- Book titles in featured sections
-- Marketing/promotional content
-
----
-
-#### Secondary Typeface: **DM Sans** (Body & UI)
+### 3.2 Google Fonts Import
 
 ```css
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
-
---font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap');
 ```
 
-**Why DM Sans:**
+In Next.js this import lives at the top of `global.css`, above all `@tailwind` directives.
 
-- ✅ Clean, modern geometric sans-serif
-- ✅ Exceptional legibility at small sizes
-- ✅ Unique character (distinctive lowercase 'a', 'g')
-- ✅ Excellent for UI elements (buttons, labels)
-- ✅ Open-source (SIL Open Font License)
+### 3.3 Font Loading in Next.js
 
-**Usage:**
+Fonts are loaded via `next/font` in `apps/web/src/app/layout.tsx` for optimal performance. Google Fonts loaded through `next/font`are self-hosted automatically by Next.js, eliminating the external network request.
 
-- Body text, paragraphs, descriptions
-- Form labels, input fields
-- Buttons, navigation menus
-- Data tables, statistics
+```tsx
+import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google'
 
----
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400', '600'],
+  style: ['normal', 'italic'],
+  variable: '--font-display',
+})
 
-#### Monospace: **JetBrains Mono** (Code & Accession Numbers)
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-body',
+})
 
-```css
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
-
---font-mono: 'JetBrains Mono', 'Courier New', monospace;
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  variable: '--font-mono',
+})
 ```
 
-**Why JetBrains Mono:**
+### 3.4 Type Scale
 
-- ✅ Designed for readability
-- ✅ Distinct character shapes (reduced confusion between 0/O, 1/l/I)
-- ✅ Perfect for ISBN, accession numbers, barcodes
-- ✅ Open-source (SIL Open Font License)
+|Token|Value|Usage|
+|---|---|---|
+|`text-display-2xl`|`clamp(64px, 12vw, 160px)`|Hero titles, magnetic text|
+|`text-display-xl`|`clamp(48px, 8vw, 100px)`|Major section heroes|
+|`text-display-lg`|`clamp(36px, 6vw, 72px)`|Section headings|
+|`text-display-md`|`clamp(28px, 4vw, 52px)`|Page titles, card headings|
+|`text-display-sm`|`clamp(22px, 3vw, 36px)`|Sub-headings|
+|`text-label`|`0.625rem`|All mono labels with tracking|
 
-**Usage:**
+Tailwind's default scale (`text-sm`, `text-base`, `text-lg`, etc.) is used for body text — no need to override these.
 
-- ISBN numbers, accession numbers
-- Book IDs, barcode displays
-- System logs (admin panel)
-- Developer documentation
+### 3.5 Font Usage Rules
+
+|Font|Weight|Use case|
+|---|---|---|
+|Cormorant Garamond|300 (light)|Large display headings|
+|Cormorant Garamond|400 (regular)|Mid-size headings|
+|Cormorant Garamond Italic|300–400|Emphasis, brand voice moments, pull quotes|
+|Inter|300 (light)|Long body text, descriptions|
+|Inter|400 (regular)|Standard body, paragraphs|
+|Inter|500 (medium)|Navigation, secondary labels|
+|Inter|600 (semibold)|Buttons, strong UI labels|
+|JetBrains Mono|300–400|All mono usage — always small, always tracked|
+
+### 3.6 The Letter-Spacing Rule for Mono
+
+All JetBrains Mono usage should have `tracking-[0.2em]` or wider applied. This is what gives the labels their distinctive precision feel. Mono without wide tracking loses its character.
+
+```tsx
+// ✅ Correct mono usage
+<span className="font-mono text-label tracking-[0.3em] uppercase text-subtle">
+  01 — About
+</span>
+
+// ❌ Wrong — no tracking, loses the effect
+<span className="font-mono text-sm">
+  01 — About
+</span>
+```
 
 ---
 
-### 4.3 Type Scale
+## 4. Global Base Styles
+
+### 4.1 Complete `global.css`
 
 ```css
+/* ── 1. FONT IMPORT ─────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+/* ── 2. TAILWIND DIRECTIVES ─────────────────────────────── */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── 3. CSS VARIABLES ───────────────────────────────────── */
 :root {
-  /* Font Sizes - Responsive Scale */
-  --text-xs: 0.75rem;      /* 12px - Labels, captions */
-  --text-sm: 0.875rem;     /* 14px - Secondary text */
-  --text-base: 1rem;       /* 16px - Body text */
-  --text-lg: 1.125rem;     /* 18px - Large body */
-  --text-xl: 1.25rem;      /* 20px - Small headings */
-  --text-2xl: 1.5rem;      /* 24px - Section headings */
-  --text-3xl: 1.875rem;    /* 30px - Page titles */
-  --text-4xl: 2.25rem;     /* 36px - Hero headings */
-  --text-5xl: 3rem;        /* 48px - Landing hero */
-  
-  /* Font Weights */
-  --font-light: 300;
-  --font-normal: 400;
-  --font-medium: 500;
-  --font-semibold: 600;
-  --font-bold: 700;
-  
-  /* Line Heights */
-  --leading-tight: 1.25;
-  --leading-normal: 1.5;
-  --leading-relaxed: 1.75;
-  --leading-loose: 2;
+  --background:         #0e1117;
+  --background-card:    #161b27;
+  --background-hover:   #1c2333;
+  --foreground:         #e8e4dc;
+  --foreground-muted:   #8892a4;
+  --foreground-subtle:  #3d4659;
+  --primary:            #4e7c6f;
+  --primary-light:      #6a9e8f;
+  --primary-muted:      rgba(78, 124, 111, 0.15);
+  --gold:               #c9a84c;
+  --gold-muted:         rgba(201, 168, 76, 0.15);
+  --success:            #4e7c6f;
+  --warning:            #c9a84c;
+  --danger:             #c0544d;
+  --border:             rgba(255, 255, 255, 0.06);
+  --border-strong:      rgba(255, 255, 255, 0.12);
+  --font-display:       'Cormorant Garamond', serif;
+  --font-body:          'Inter', sans-serif;
+  --font-mono:          'JetBrains Mono', monospace;
 }
-```
 
-### 4.4 Typography Usage Matrix
-
-|Element|Font|Size|Weight|Line Height|
-|---|---|---|---|---|
-|**H1 (Hero)**|Crimson Pro|3rem|700|1.25|
-|**H2 (Page Title)**|Crimson Pro|2.25rem|600|1.25|
-|**H3 (Section)**|Crimson Pro|1.875rem|600|1.25|
-|**H4 (Subsection)**|DM Sans|1.25rem|600|1.5|
-|**Body Text**|DM Sans|1rem|400|1.75|
-|**Small Text**|DM Sans|0.875rem|400|1.5|
-|**Button Text**|DM Sans|1rem|600|1.25|
-|**Nav Links**|DM Sans|0.875rem|500|1.25|
-|**Book Titles**|Crimson Pro|1.125rem|600|1.5|
-|**ISBN/Codes**|JetBrains Mono|0.875rem|500|1.5|
-
----
-
-## 5. Spacing & Layout
-
-### 5.1 Spacing Scale
-
-```css
-:root {
-  /* Spacing System (8px base) */
-  --space-0: 0;
-  --space-1: 0.25rem;    /* 4px */
-  --space-2: 0.5rem;     /* 8px */
-  --space-3: 0.75rem;    /* 12px */
-  --space-4: 1rem;       /* 16px */
-  --space-5: 1.25rem;    /* 20px */
-  --space-6: 1.5rem;     /* 24px */
-  --space-8: 2rem;       /* 32px */
-  --space-10: 2.5rem;    /* 40px */
-  --space-12: 3rem;      /* 48px */
-  --space-16: 4rem;      /* 64px */
-  --space-20: 5rem;      /* 80px */
-  --space-24: 6rem;      /* 96px */
+[data-theme="light"] {
+  --background:         #faf8f4;
+  --background-card:    #ffffff;
+  --background-hover:   #f0ede7;
+  --foreground:         #1a1f2e;
+  --foreground-muted:   #5a6478;
+  --foreground-subtle:  #a0a8b8;
+  --border:             rgba(0, 0, 0, 0.07);
+  --border-strong:      rgba(0, 0, 0, 0.14);
 }
-```
 
-### 5.2 Layout Containers
-
-```css
-:root {
-  /* Container Widths */
-  --container-sm: 640px;    /* Mobile */
-  --container-md: 768px;    /* Tablet */
-  --container-lg: 1024px;   /* Desktop */
-  --container-xl: 1280px;   /* Wide Desktop */
-  --container-2xl: 1536px;  /* Ultra Wide */
-  
-  /* Content Max Widths */
-  --content-narrow: 65ch;   /* Optimal reading line length */
-  --content-medium: 75ch;
-  --content-wide: 90ch;
+/* ── 4. BASE RESET ──────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  cursor: none;
 }
-```
 
-### 5.3 Border Radius
-
-```css
-:root {
-  /* Border Radius */
-  --radius-sm: 0.25rem;    /* 4px - Small elements */
-  --radius-md: 0.5rem;     /* 8px - Cards, buttons */
-  --radius-lg: 0.75rem;    /* 12px - Large cards */
-  --radius-xl: 1rem;       /* 16px - Hero elements */
-  --radius-2xl: 1.5rem;    /* 24px - Special features */
-  --radius-full: 9999px;   /* Pills, avatars */
+/* ── 5. HTML + BODY ─────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
 }
-```
 
-### 5.4 Shadows
-
-```css
-:root {
-  /* Elevation Shadows */
-  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  
-  /* Colored Shadows (Subtle Accent) */
-  --shadow-sage: 0 10px 25px -5px rgba(184, 207, 200, 0.3);
-  --shadow-navy: 0 10px 25px -5px rgba(39, 51, 75, 0.2);
-}
-```
-
----
-
-## 6. Component Styling Guidelines
-
-### 6.1 Buttons
-
-#### Primary Button
-
-```css
-.btn-primary {
-  background: var(--nexus-navy);
-  color: var(--text-inverse);
-  padding: var(--space-3) var(--space-6);
-  border-radius: var(--radius-md);
+body {
+  background-color: var(--background);
+  color: var(--foreground);
   font-family: var(--font-body);
-  font-size: var(--text-base);
-  font-weight: var(--font-semibold);
-  transition: all 0.2s ease;
-  box-shadow: var(--shadow-sm);
-}
-
-.btn-primary:hover {
-  background: var(--nexus-navy-light);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
-}
-
-.btn-primary:active {
-  transform: translateY(0);
-  box-shadow: var(--shadow-xs);
-}
-```
-
-#### Secondary Button
-
-```css
-.btn-secondary {
-  background: var(--nexus-sage);
-  color: var(--nexus-navy);
-  padding: var(--space-3) var(--space-6);
-  border-radius: var(--radius-md);
-  font-family: var(--font-body);
-  font-size: var(--text-base);
-  font-weight: var(--font-semibold);
-  transition: all 0.2s ease;
-}
-
-.btn-secondary:hover {
-  background: var(--nexus-sage-dark);
-  color: var(--text-inverse);
-}
-```
-
-#### Ghost Button
-
-```css
-.btn-ghost {
-  background: transparent;
-  color: var(--nexus-navy);
-  padding: var(--space-3) var(--space-6);
-  border: 2px solid var(--nexus-sage);
-  border-radius: var(--radius-md);
-  font-family: var(--font-body);
-  font-size: var(--text-base);
-  font-weight: var(--font-medium);
-  transition: all 0.2s ease;
-}
-
-.btn-ghost:hover {
-  background: var(--nexus-sage-light);
-  border-color: var(--nexus-sage-dark);
-}
-```
-
----
-
-### 6.2 Cards
-
-#### Book Card
-
-```css
-.book-card {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg);
-  padding: var(--space-4);
-  box-shadow: var(--shadow-sm);
-  transition: all 0.3s ease;
-  overflow: hidden;
-}
-
-.book-card:hover {
-  border-color: var(--nexus-sage);
-  box-shadow: var(--shadow-sage);
-  transform: translateY(-4px);
-}
-
-.book-card__cover {
-  aspect-ratio: 2/3;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  margin-bottom: var(--space-3);
-  background: var(--gradient-card);
-}
-
-.book-card__title {
-  font-family: var(--font-display);
-  font-size: var(--text-lg);
-  font-weight: var(--font-semibold);
-  color: var(--text-primary);
-  margin-bottom: var(--space-2);
-  line-height: var(--leading-tight);
-}
-
-.book-card__author {
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
-  color: var(--text-secondary);
-  margin-bottom: var(--space-3);
-}
-```
-
-#### Info Card (Dashboard Stats)
-
-```css
-.info-card {
-  background: var(--gradient-card);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-xl);
-  padding: var(--space-6);
-  box-shadow: var(--shadow-md);
-  position: relative;
-  overflow: hidden;
-}
-
-.info-card::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(184, 207, 200, 0.1) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.info-card__value {
-  font-family: var(--font-display);
-  font-size: var(--text-5xl);
-  font-weight: var(--font-bold);
-  color: var(--nexus-navy);
-  line-height: 1;
-  margin-bottom: var(--space-2);
-}
-
-.info-card__label {
-  font-family: var(--font-body);
-  font-size: var(--text-base);
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-```
-
----
-
-### 6.3 Forms
-
-#### Input Fields
-
-```css
-.input {
-  font-family: var(--font-body);
-  font-size: var(--text-base);
-  color: var(--text-primary);
-  background: var(--bg-primary);
-  border: 2px solid var(--border-medium);
-  border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-4);
-  transition: all 0.2s ease;
-  width: 100%;
-}
-
-.input:focus {
-  outline: none;
-  border-color: var(--nexus-navy);
-  box-shadow: 0 0 0 3px rgba(39, 51, 75, 0.1);
-}
-
-.input::placeholder {
-  color: var(--text-tertiary);
-}
-
-.input--error {
-  border-color: var(--error);
-}
-
-.input--error:focus {
-  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
-}
-```
-
-#### Labels
-
-```css
-.label {
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
-  font-weight: var(--font-medium);
-  color: var(--text-primary);
-  margin-bottom: var(--space-2);
-  display: block;
-}
-```
-
-#### Search Bar
-
-```css
-.search-bar {
-  position: relative;
-  max-width: 600px;
-}
-
-.search-bar__input {
-  font-family: var(--font-body);
-  font-size: var(--text-base);
-  padding: var(--space-4) var(--space-4) var(--space-4) var(--space-12);
-  background: var(--bg-secondary);
-  border: 2px solid transparent;
-  border-radius: var(--radius-full);
-  width: 100%;
-  transition: all 0.3s ease;
-}
-
-.search-bar__input:focus {
-  background: var(--bg-primary);
-  border-color: var(--nexus-navy);
-  box-shadow: var(--shadow-lg);
-}
-
-.search-bar__icon {
-  position: absolute;
-  left: var(--space-4);
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--text-tertiary);
-}
-```
-
----
-
-### 6.4 Navigation
-
-#### Header Navigation
-
-```css
-.navbar {
-  background: var(--bg-elevated);
-  border-bottom: 1px solid var(--border-light);
-  padding: var(--space-4) 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.95);
-}
-
-.navbar__link {
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
-  font-weight: var(--font-medium);
-  color: var(--text-secondary);
-  text-decoration: none;
-  padding: var(--space-2) var(--space-4);
-  border-radius: var(--radius-md);
-  transition: all 0.2s ease;
-}
-
-.navbar__link:hover {
-  color: var(--nexus-navy);
-  background: var(--nexus-sage-light);
-}
-
-.navbar__link--active {
-  color: var(--nexus-navy);
-  background: var(--nexus-sage);
-  font-weight: var(--font-semibold);
-}
-```
-
-#### Sidebar Navigation
-
-```css
-.sidebar {
-  background: var(--gradient-dark);
-  color: var(--text-inverse);
-  padding: var(--space-6);
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   min-height: 100vh;
-  width: 280px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.sidebar__link {
-  font-family: var(--font-body);
-  font-size: var(--text-base);
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: none;
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  transition: all 0.2s ease;
-  margin-bottom: var(--space-2);
-}
-
-.sidebar__link:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--text-inverse);
-}
-
-.sidebar__link--active {
-  background: var(--nexus-sage);
-  color: var(--nexus-navy);
-  font-weight: var(--font-semibold);
-}
-```
-
----
-
-### 6.5 Badges & Tags
-
-#### Status Badge
-
-```css
-.badge {
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  font-weight: var(--font-semibold);
-  padding: var(--space-1) var(--space-3);
-  border-radius: var(--radius-full);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  display: inline-block;
-}
-
-.badge--available {
-  background: var(--success-bg);
-  color: var(--success-text);
-}
-
-.badge--checked-out {
-  background: var(--error-bg);
-  color: var(--error-text);
-}
-
-.badge--reserved {
-  background: var(--info-bg);
-  color: var(--info-text);
-}
-
-.badge--due-soon {
-  background: var(--warning-bg);
-  color: var(--warning-text);
-}
-```
-
-#### Genre Tag
-
-```css
-.tag {
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  padding: var(--space-2) var(--space-3);
-  background: var(--nexus-sage-light);
-  color: var(--nexus-navy);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--nexus-sage);
-  display: inline-block;
-  transition: all 0.2s ease;
-}
-
-.tag:hover {
-  background: var(--nexus-sage);
-  cursor: pointer;
-}
-```
-
----
-
-### 6.6 Modals & Dialogs
-
-```css
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(26, 34, 51, 0.6);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: var(--space-4);
-}
-
-.modal {
-  background: var(--bg-elevated);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-xl);
-  max-width: 600px;
-  width: 100%;
-  padding: var(--space-8);
-  position: relative;
-  animation: modalSlideIn 0.3s ease;
-}
-
-@keyframes modalSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px) scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.modal__header {
+/* ── 6. TYPOGRAPHY BASE ─────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  font-size: var(--text-2xl);
-  font-weight: var(--font-semibold);
-  color: var(--text-primary);
-  margin-bottom: var(--space-4);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--foreground);
 }
 
-.modal__close {
-  position: absolute;
-  top: var(--space-4);
-  right: var(--space-4);
-  background: transparent;
-  border: none;
-  font-size: var(--text-2xl);
-  color: var(--text-tertiary);
-  cursor: pointer;
-  transition: color 0.2s ease;
+p {
+  font-family: var(--font-body);
+  color: var(--foreground-muted);
+  line-height: 1.8;
 }
 
-.modal__close:hover {
-  color: var(--text-primary);
-}
-```
-
----
-
-## 7. Dark Mode Specifications
-
-### 7.1 Dark Mode Color Palette
-
-```css
-[data-theme="dark"] {
-  /* Backgrounds */
-  --bg-primary: #0F1419;
-  --bg-secondary: #1A2233;           /* Navy Dark */
-  --bg-tertiary: #27334B;            /* Navy */
-  --bg-elevated: #1F2937;
-  
-  /* Text Colors */
-  --text-primary: #F9FAFB;
-  --text-secondary: #D1D5DB;
-  --text-tertiary: #9CA3AF;
-  --text-inverse: #1A2233;
-  
-  /* Borders */
-  --border-light: #374151;
-  --border-medium: #4B5563;
-  --border-strong: #6B7280;
-  
-  /* Interactive Elements */
-  --interactive-primary: #B8CFC8;    /* Sage becomes primary in dark mode */
-  --interactive-primary-hover: #D4E4DF;
-  --interactive-secondary: #3D4C6D;
-  --interactive-secondary-hover: #4D5F85;
-  
-  /* Shadows (Softer in dark mode) */
-  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
-  
-  /* Accent Shadows */
-  --shadow-sage: 0 10px 25px -5px rgba(184, 207, 200, 0.15);
-}
-```
-
-### 7.2 Dark Mode Component Overrides
-
-```css
-[data-theme="dark"] .book-card {
-  background: var(--bg-tertiary);
-  border-color: var(--border-medium);
+code, kbd, pre {
+  font-family: var(--font-mono);
 }
 
-[data-theme="dark"] .book-card:hover {
-  border-color: var(--nexus-sage);
-  box-shadow: var(--shadow-sage);
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-[data-theme="dark"] .navbar {
-  background: rgba(15, 20, 25, 0.95);
-  border-bottom-color: var(--border-light);
+/* ── 7. SELECTION COLOR ─────────────────────────────────── */
+::selection {
+  background-color: var(--primary-muted);
+  color: var(--foreground);
 }
 
-[data-theme="dark"] .btn-primary {
-  background: var(--nexus-sage);
-  color: var(--nexus-navy);
+/* ── 8. CUSTOM SCROLLBAR ────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
 }
 
-[data-theme="dark"] .btn-primary:hover {
-  background: var(--nexus-sage-light);
-}
-```
-
----
-
-## 8. Animation & Motion
-
-### 8.1 Timing Functions
-
-```css
-:root {
-  /* Easing Functions */
-  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-out: cubic-bezier(0, 0, 0.2, 1);
-  --ease-in: cubic-bezier(0.4, 0, 1, 1);
-  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  
-  /* Duration */
-  --duration-instant: 100ms;
-  --duration-fast: 200ms;
-  --duration-normal: 300ms;
-  --duration-slow: 500ms;
-}
-```
-
-### 8.2 Page Transitions
-
-```css
-.page-enter {
-  opacity: 0;
-  transform: translateY(20px);
+::-webkit-scrollbar-track {
+  background: var(--background);
 }
 
-.page-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity var(--duration-normal) var(--ease-out),
-              transform var(--duration-normal) var(--ease-out);
+::-webkit-scrollbar-thumb {
+  background: var(--foreground-subtle);
+  border-radius: 999px;
 }
 
-.page-exit {
-  opacity: 1;
-  transform: translateY(0);
+::-webkit-scrollbar-thumb:hover {
+  background: var(--foreground-muted);
 }
 
-.page-exit-active {
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity var(--duration-fast) var(--ease-in),
-              transform var(--duration-fast) var(--ease-in);
-}
-```
-
-### 8.3 Micro-interactions
-
-```css
-/* Hover Lift Effect */
-.hover-lift {
-  transition: transform var(--duration-fast) var(--ease-out),
-              box-shadow var(--duration-fast) var(--ease-out);
-}
-
-.hover-lift:hover {
-  transform: translateY(-4px);
-}
-
-/* Pulse Animation (Notifications) */
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
+/* ── 9. REDUCED MOTION ──────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
-.pulse {
-  animation: pulse 2s var(--ease-in-out) infinite;
-}
-
-/* Skeleton Loading */
-@keyframes skeleton-loading {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.skeleton {
-  background: linear-gradient(
-    90deg,
-    var(--bg-secondary) 25%,
-    var(--bg-tertiary) 50%,
-    var(--bg-secondary) 75%
-  );
-  background-size: 200% 100%;
-  animation: skeleton-loading 1.5s ease-in-out infinite;
-  border-radius: var(--radius-md);
-}
-```
-
-### 8.4 Scroll Animations
-
-```css
-/* Fade In On Scroll */
-.fade-in-scroll {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity var(--duration-slow) var(--ease-out),
-              transform var(--duration-slow) var(--ease-out);
-}
-
-.fade-in-scroll.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Stagger Children Animation */
-.stagger-children > * {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: staggerFadeIn var(--duration-normal) var(--ease-out) forwards;
-}
-
-.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
-.stagger-children > *:nth-child(2) { animation-delay: 100ms; }
-.stagger-children > *:nth-child(3) { animation-delay: 200ms; }
-.stagger-children > *:nth-child(4) { animation-delay: 300ms; }
-
-@keyframes staggerFadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-```
-
----
-
-## 9. Accessibility Considerations
-
-### 9.1 Color Contrast Ratios
-
-**WCAG 2.1 Level AA Compliance:**
-
-|Text Type|Background|Foreground|Contrast Ratio|Status|
-|---|---|---|---|---|
-|**Normal Text**|#FFFFFF|#1A2233|15.2:1|✅ AAA|
-|**Large Text**|#FFFFFF|#3D4C6D|7.8:1|✅ AAA|
-|**Button Text**|#27334B|#FFFFFF|12.6:1|✅ AAA|
-|**Links**|#FFFFFF|#27334B|12.6:1|✅ AAA|
-|**Status Success**|#D1FAE5|#065F46|8.3:1|✅ AAA|
-|**Status Error**|#FEE2E2|#991B1B|7.9:1|✅ AAA|
-
-**Note:** The original logo cream (#FCEBD0) should NOT be used as a background for dark text as it fails WCAG AA (contrast ratio ~3.2:1). Use cream only as:
-
-- Decorative accents
-- Backgrounds with dark overlays
-- Secondary backgrounds with proper foreground colors
-
-### 9.2 Focus States
-
-```css
-/* Visible Focus Indicators */
-*:focus {
-  outline: 2px solid var(--nexus-navy);
+/* ── 10. FOCUS STATES ───────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
-/* Custom Focus Rings */
-.btn:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(39, 51, 75, 0.3);
-}
-
-.input:focus-visible {
-  outline: none;
-  border-color: var(--nexus-navy);
-  box-shadow: 0 0 0 3px rgba(39, 51, 75, 0.1);
-}
-```
-
-### 9.3 Screen Reader Support
-
-```css
-/* Screen Reader Only Text */
+/* ── 11. SCREEN READER UTILITY ──────────────────────────── */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -1128,301 +433,671 @@
   white-space: nowrap;
   border-width: 0;
 }
-
-/* Skip to Main Content Link */
-.skip-link {
-  position: absolute;
-  top: -100px;
-  left: 0;
-  background: var(--nexus-navy);
-  color: var(--text-inverse);
-  padding: var(--space-3) var(--space-4);
-  z-index: 10000;
-  transition: top 0.2s ease;
-}
-
-.skip-link:focus {
-  top: 0;
-}
-```
-
-### 9.4 Reduced Motion Support
-
-```css
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
 ```
 
 ---
 
-## 10. Implementation Guide
+## 5. Tailwind Configuration
 
-### 10.1 Tailwind CSS Configuration
+### 5.1 Complete `tailwind.config.js`
 
-Create `tailwind.config.js`:
-
-```javascript
+```js
+/** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: ['class', '[data-theme="dark"]'],
+  content: [
+    './{src,pages,components,app}/**/*.{ts,tsx,js,jsx,html}',
+    '!./{src,pages,components,app}/**/*.{stories,spec}.{ts,tsx,js,jsx,html}',
+  ],
   theme: {
     extend: {
+
+      // ── Colors ────────────────────────────────────────
       colors: {
-        nexus: {
-          cream: {
-            light: '#FFF5E6',
-            DEFAULT: '#FCEBD0',
-            dark: '#E8D4B0',
-          },
-          sage: {
-            light: '#D4E4DF',
-            DEFAULT: '#B8CFC8',
-            dark: '#8FA99F',
-          },
-          navy: {
-            light: '#3D4C6D',
-            DEFAULT: '#27334B',
-            dark: '#1A2233',
-          },
-        },
+        background:       'var(--background)',
+        card:             'var(--background-card)',
+        hover:            'var(--background-hover)',
+        foreground:       'var(--foreground)',
+        muted:            'var(--foreground-muted)',
+        subtle:           'var(--foreground-subtle)',
+        primary:          'var(--primary)',
+        'primary-light':  'var(--primary-light)',
+        'primary-muted':  'var(--primary-muted)',
+        gold:             'var(--gold)',
+        'gold-muted':     'var(--gold-muted)',
+        success:          'var(--success)',
+        warning:          'var(--warning)',
+        danger:           'var(--danger)',
+        border:           'var(--border)',
+        'border-strong':  'var(--border-strong)',
       },
+
+      // ── Typography ─────────────────────────────────────
       fontFamily: {
-        display: ['Crimson Pro', 'Georgia', 'serif'],
-        sans: ['DM Sans', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Courier New', 'monospace'],
+        display: ['Cormorant Garamond', 'serif'],
+        body:    ['Inter', 'sans-serif'],
+        mono:    ['JetBrains Mono', 'monospace'],
       },
+
+      // ── Display Font Sizes ─────────────────────────────
       fontSize: {
-        'xs': '0.75rem',
-        'sm': '0.875rem',
-        'base': '1rem',
-        'lg': '1.125rem',
-        'xl': '1.25rem',
-        '2xl': '1.5rem',
-        '3xl': '1.875rem',
-        '4xl': '2.25rem',
-        '5xl': '3rem',
+        'display-2xl': 'clamp(64px, 12vw, 160px)',
+        'display-xl':  'clamp(48px, 8vw, 100px)',
+        'display-lg':  'clamp(36px, 6vw, 72px)',
+        'display-md':  'clamp(28px, 4vw, 52px)',
+        'display-sm':  'clamp(22px, 3vw, 36px)',
+        'label':       '0.625rem',
       },
-      boxShadow: {
-        'sage': '0 10px 25px -5px rgba(184, 207, 200, 0.3)',
-        'navy': '0 10px 25px -5px rgba(39, 51, 75, 0.2)',
+
+      // ── Border Radius (sharp design language) ──────────
+      borderRadius: {
+        'none': '0px',
+        'sm':   '2px',
+        'md':   '4px',
+        'lg':   '8px',
       },
-      animation: {
-        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'skeleton': 'skeleton-loading 1.5s ease-in-out infinite',
-      },
+
+      // ── Animations ─────────────────────────────────────
       keyframes: {
-        'skeleton-loading': {
-          '0%': { backgroundPosition: '-200% 0' },
+        fadeIn: {
+          '0%':   { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%':   { transform: 'translateY(24px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)',    opacity: '1' },
+        },
+        slideDown: {
+          '0%':   { transform: 'translateY(-24px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)',     opacity: '1' },
+        },
+        skeletonLoad: {
+          '0%':   { backgroundPosition: '-200% 0' },
           '100%': { backgroundPosition: '200% 0' },
         },
       },
+      animation: {
+        'fade-in':       'fadeIn 0.5s ease forwards',
+        'slide-up':      'slideUp 0.6s ease forwards',
+        'slide-down':    'slideDown 0.6s ease forwards',
+        'pulse-slow':    'pulse 3s ease-in-out infinite',
+        'skeleton':      'skeletonLoad 1.5s ease-in-out infinite',
+      },
+
     },
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/typography'),
-  ],
-}
+  plugins: [],
+};
 ```
 
-### 10.2 CSS Variables Setup
+### 5.2 Using Tokens in Components
 
-Create `globals.css`:
+```tsx
+// ✅ Always use token-based classes
+<div className="bg-background text-foreground">
+<div className="bg-card border border-border">
+<h1 className="font-display text-display-lg text-foreground">
+<p className="font-body text-muted">
+<span className="font-mono text-label tracking-[0.3em] uppercase text-subtle">
+<button className="bg-primary text-foreground">
+<span className="text-gold">
+<div className="animate-slide-up">
 
-```css
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
-
-:root {
-  /* [Insert all CSS variables from sections above] */
-}
-
-[data-theme="dark"] {
-  /* [Insert dark mode overrides] */
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: var(--font-body);
-  color: var(--text-primary);
-  background: var(--bg-primary);
-  line-height: var(--leading-normal);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-  line-height: var(--leading-tight);
-  color: var(--text-primary);
-}
-
-/* Smooth transitions for theme switching */
-* {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
+// ❌ Never hardcode color values in components
+<div style={{ backgroundColor: '#161b27' }}>
+<div className="bg-[#0e1117]">
 ```
 
-### 10.3 Component Library Structure
+The only exception to the no-hardcode rule is the landing page's existing magnetic letter effects and grain textures, which use values that don't map to semantic tokens.
+
+---
+
+## 6. Spacing & Layout
+
+### 6.1 Base Grid
+
+All spacing decisions use an **8px base grid**. This means every margin, padding, gap, and size should be a multiple of 8px (or 4px for micro-spacing). Tailwind's default spacing scale already follows this — `p-4` = 16px, `p-8` = 32px, `p-12` = 48px.
+
+### 6.2 Page Layout Widths
 
 ```
-/components
-  /ui
-    /Button
-      - Button.tsx
-      - Button.module.css
-    /Card
-      - BookCard.tsx
-      - InfoCard.tsx
-      - Card.module.css
-    /Input
-      - Input.tsx
-      - SearchBar.tsx
-      - Input.module.css
-    /Badge
-      - StatusBadge.tsx
-      - GenreTag.tsx
-      - Badge.module.css
-    /Modal
-      - Modal.tsx
-      - Modal.module.css
-    /Navigation
-      - Navbar.tsx
-      - Sidebar.tsx
-      - Navigation.module.css
+Content narrow:   65ch    (optimal reading line length — book descriptions, articles)
+Content medium:   75ch    (standard content)
+Content wide:     1280px  (page containers, dashboards)
+Full bleed:       100%    (hero sections, full-width elements)
 ```
 
-### 10.4 Responsive Design Breakpoints
+### 6.3 Section Padding
 
-```css
-/* Mobile First Approach */
+Horizontal page padding uses viewport-relative values for fluidity:
 
-/* Extra Small (Mobile) - Default */
-/* 320px - 639px */
+```
+Mobile:   px-[5vw]
+Tablet:   px-[8vw]
+Desktop:  px-[10vw]
+```
 
-/* Small (Large Mobile) */
-@media (min-width: 640px) {
-  /* Tablet portrait adjustments */
-}
+Vertical section padding is `py-20` (80px) minimum for breathing room.
 
-/* Medium (Tablet) */
-@media (min-width: 768px) {
-  /* Tablet landscape, small desktop */
-}
+### 6.4 Border Radius Philosophy
 
-/* Large (Desktop) */
-@media (min-width: 1024px) {
-  /* Standard desktop */
-}
+NEXUS uses a sharp, angular design language. Rounded corners signal softness and playfulness — the wrong tone for a scholarly platform. The maximum border radius used anywhere in the system is `8px` (`rounded-lg`).
 
-/* Extra Large (Wide Desktop) */
-@media (min-width: 1280px) {
-  /* Large desktop, high-res */
-}
+|Token|Value|Use|
+|---|---|---|
+|`rounded-none`|`0px`|Default for most elements — cards, buttons, inputs|
+|`rounded-sm`|`2px`|Subtle rounding on small tags, badges|
+|`rounded-md`|`4px`|Optional softening on interactive elements|
+|`rounded-lg`|`8px`|Maximum — used sparingly on modals|
+|`rounded-full`|`999px`|Pills only — for status badges and avatar images|
 
-/* 2XL (Ultra Wide) */
-@media (min-width: 1536px) {
-  /* Ultra-wide monitors */
-}
+---
+
+## 7. Component Guidelines
+
+### 7.1 Buttons
+
+Buttons come in three variants. All buttons use `font-body`, `font-semibold`, `tracking-[0.12em]`, and `uppercase` text.
+
+**Primary Button** — for the most important action on a screen
+
+```tsx
+<button className="
+  bg-card hover:bg-hover
+  text-foreground
+  border border-border hover:border-border-strong
+  font-body text-xs font-semibold tracking-[0.15em] uppercase
+  px-9 py-4
+  transition-all duration-200
+  inline-flex items-center gap-3 group
+">
+  Sign In
+  <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+</button>
+```
+
+**Gold Button** — for the single highest-priority CTA on a page
+
+```tsx
+<button className="
+  bg-gold-muted hover:bg-gold
+  text-gold hover:text-background
+  border border-gold/20 hover:border-gold
+  font-body text-xs font-semibold tracking-[0.15em] uppercase
+  px-9 py-4
+  transition-all duration-200
+">
+  Get Started
+</button>
+```
+
+**Ghost Button** — for secondary actions
+
+```tsx
+<button className="
+  bg-transparent
+  text-muted hover:text-foreground
+  border border-border hover:border-border-strong
+  font-body text-xs font-semibold tracking-[0.15em] uppercase
+  px-9 py-4
+  transition-all duration-200
+">
+  Learn More
+</button>
+```
+
+### 7.2 Cards
+
+All cards use zero or minimal border radius. The card surface is `bg-card`, border is `border border-border`.
+
+**Standard Card**
+
+```tsx
+<div className="
+  bg-card
+  border border-border hover:border-border-strong
+  hover:bg-hover
+  transition-all duration-300
+  p-8
+">
+```
+
+**Feature Card** (for Why NEXUS style grids)
+
+```tsx
+<div className="
+  bg-card
+  border border-border
+  p-10
+  flex flex-col gap-4
+  hover:bg-hover
+  transition-colors duration-300
+  group
+">
+```
+
+### 7.3 Input Fields
+
+```tsx
+<input className="
+  bg-card
+  text-foreground
+  border border-border focus:border-border-strong
+  font-body text-sm font-light
+  px-6 py-4
+  w-full
+  outline-none
+  placeholder:text-subtle
+  transition-colors duration-300
+" />
+```
+
+### 7.4 Status Badges
+
+```tsx
+// Available
+<span className="
+  bg-primary-muted text-primary
+  font-mono text-label tracking-[0.15em] uppercase
+  px-3 py-1 rounded-full
+">Available</span>
+
+// Overdue
+<span className="
+  bg-danger/10 text-danger
+  font-mono text-label tracking-[0.15em] uppercase
+  px-3 py-1 rounded-full
+">Overdue</span>
+
+// Achievement / streak
+<span className="
+  bg-gold-muted text-gold
+  font-mono text-label tracking-[0.15em] uppercase
+  px-3 py-1 rounded-full
+">🔥 12 Day Streak</span>
+```
+
+### 7.5 Section Labels (Mono Labels)
+
+The section counter pattern used throughout the landing page should be used consistently:
+
+```tsx
+<span className="
+  font-mono text-label
+  tracking-[0.3em]
+  text-subtle
+  uppercase
+">
+  01 — About
+</span>
+```
+
+### 7.6 Navigation Bar
+
+The navbar is hidden in the hero section and appears as the user scrolls past it (IntersectionObserver on the hero section).
+
+```tsx
+// Visible state
+<nav className="
+  fixed top-0 left-0 right-0 z-50
+  flex items-center justify-between
+  px-12 py-6
+  bg-background/80 backdrop-blur-md
+  border-b border-border
+">
+```
+
+### 7.7 Modal / Dialog
+
+```tsx
+<div className="
+  fixed inset-0 z-50
+  bg-background/60 backdrop-blur-sm
+  flex items-center justify-center
+  p-4
+">
+  <div className="
+    bg-card
+    border border-border
+    max-w-lg w-full
+    p-10
+    animate-slide-up
+  ">
+```
+
+### 7.8 Skeleton Loading
+
+Used while data is being fetched. The animation is defined in Tailwind config.
+
+```tsx
+<div className="
+  animate-skeleton
+  bg-gradient-to-r from-card via-hover to-card
+  bg-[length:200%_100%]
+  h-4 rounded-sm
+" />
 ```
 
 ---
 
-## 📊 Design System Summary
+## 8. Animation & Motion
 
-### Quick Reference
+### 8.1 Principles
 
-|Aspect|Specification|
+**Purposeful** — animation must serve a function. It communicates state, guides attention, or confirms an action. Never decorative.
+
+**Subtle** — NEXUS is a focused, scholarly environment. Motion should be felt, not seen. If an animation draws attention to itself, it's too strong.
+
+**Fast** — most transitions are 200–300ms. Anything longer than 500ms feels sluggish for UI interactions. Only entrance animations on scroll use longer durations.
+
+### 8.2 Timing Reference
+
+|Duration|Use case|
 |---|---|
-|**Primary Font**|Crimson Pro (Display/Headings)|
-|**Body Font**|DM Sans (UI/Body Text)|
-|**Mono Font**|JetBrains Mono (Codes/Data)|
-|**Primary Color**|Navy #27334B|
-|**Secondary Color**|Sage #B8CFC8|
-|**Accent Color**|Cream #FCEBD0|
-|**Base Spacing**|8px (0.5rem)|
-|**Border Radius**|8px (Cards), 4px (Small)|
-|**Button Padding**|12px 24px (0.75rem 1.5rem)|
-|**Transition Speed**|200ms (Fast), 300ms (Normal)|
-|**Shadow Elevation**|sm, md, lg, xl (4 levels)|
-|**Max Content Width**|1280px (Desktop)|
-|**Mobile Breakpoint**|640px (sm)|
-|**Tablet Breakpoint**|768px (md)|
-|**Desktop Breakpoint**|1024px (lg)|
+|`100ms`|Instant feedback — button press, checkbox tick|
+|`200ms`|Fast transitions — hover color changes, border changes|
+|`300ms`|Standard — theme switch, dropdown open|
+|`500–600ms`|Entrance animations — card reveal on scroll|
+|`800–1000ms`|Hero animations — first load only|
+
+### 8.3 Easing Functions
+
+```
+ease-out  →  Default for entrances (fast start, slow end — feels natural)
+ease-in   →  Exits only (element leaving the screen)
+[0.22, 1, 0.36, 1]  →  Premium ease — used for card deal and hero animations
+backOut   →  Framer Motion — used for the mask cursor grow effect
+```
+
+### 8.4 Scroll Reveal Pattern
+
+All sections use `IntersectionObserver` with a `threshold: 0.12` to trigger entrance. The `CardSection` component handles this — wrap any section in it and it gets the reveal animation automatically.
+
+```
+Initial state:  opacity: 0, x: -6%, y: 4%, rotate: -1deg, scale: 0.97
+Animated to:    opacity: 1, x: 0, y: 0, rotate: 0deg, scale: 1
+Duration:       0.85s
+Easing:         [0.22, 1, 0.36, 1]
+```
+
+### 8.5 Framer Motion Usage
+
+Framer Motion is installed in `apps/web`. It is used for:
+
+- The mask cursor effect (webkitMaskPosition animation)
+- The magnetic letter hero effect (useMotionValue + useSpring)
+- The navbar show/hide (AnimatePresence)
+- The CardSection scroll reveal (motion.section)
+- The loading screen exit animation
+
+All Framer Motion components must be in files with `"use client"` at the top.
+
+### 8.6 Custom Cursor
+
+NEXUS uses a two-element custom cursor — a small dot and a larger ring — defined in CSS and controlled via JavaScript through the `useMousePosition` hook.
+
+**Files:**
+
+- CSS in `global.css`
+- Hook in `apps/web/src/hooks/useMousePosition.ts`
+- Component at `apps/web/src/components/layout/CustomCursor.tsx`
+- Imported in `apps/web/src/app/layout.tsx`
+
+The ring expands on hover over links and buttons via `body:has(a:hover)` CSS selector — no JavaScript needed for the hover effect.
 
 ---
 
-## 🎯 Design Principles
+## 9. Theme System
 
-1. **Approachability Over Intimidation:** Use warm colors, generous spacing, and friendly typography to make the system inviting to all age groups (Grades 1-13).
-    
-2. **Clarity Over Complexity:** Prioritize readability and clear visual hierarchy. Every element should have a clear purpose.
-    
-3. **Consistency Over Novelty:** Use the design system components consistently across all pages. Innovation should enhance, not confuse.
-    
-4. **Performance Over Decoration:** Every visual element should serve a functional purpose. Beautiful animations should not compromise load times.
-    
-5. **Accessibility is Non-Negotiable:** WCAG 2.1 Level AA compliance is mandatory. 5,300+ users with diverse needs must all have equitable access.
-    
-6. **Mobile-First Mindset:** 80% of student access will be via smartphones. Design for mobile, enhance for desktop.
-    
+### 9.1 How Themes Work
 
----
+Theme switching is handled by setting a `data-theme` attribute on the `<html>` element. The CSS variables in `global.css`respond to this attribute and update every color across every component simultaneously.
 
-## 🚀 Next Steps for Implementation
+```
+Default (no attribute or data-theme="dark") → Dark theme (:root variables)
+data-theme="light"                          → Light theme ([data-theme="light"] variables)
+```
 
-1. **Week 1-2:** Set up Tailwind configuration with custom theme
-2. **Week 3-4:** Build component library (buttons, cards, forms)
-3. **Week 5-6:** Create page templates (dashboard, catalog, profile)
-4. **Week 7-8:** Implement dark mode and accessibility testing
-5. **Week 9-10:** Polish animations and micro-interactions
-6. **Week 11-12:** User testing with students and staff
+### 9.2 Theme Toggle Logic
 
----
+```tsx
+// In a ThemeToggle component (must be "use client")
+const toggleTheme = () => {
+  const current = document.documentElement.getAttribute('data-theme')
+  const next = current === 'light' ? 'dark' : 'light'
+  document.documentElement.setAttribute('data-theme', next)
+  localStorage.setItem('theme', next)
+}
+```
 
-## 📝 Final Recommendations
+### 9.3 Preventing Flash on Load
 
-### Logo Usage
+This script must be placed inside `<head>` in `layout.tsx` and must run **before** React hydrates. This prevents the wrong theme flashing on page load.
 
-- ✅ **KEEP** the current logo—it's distinctive and fits the brand
-- ✅ **CREATE** simplified icon variants for small sizes
-- ✅ **ENSURE** proper spacing around logo (minimum clear space = logo height ÷ 2)
+```tsx
+<script dangerouslySetInnerHTML={{
+  __html: `
+    try {
+      const theme = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch(e) {}
+  `
+}} />
+```
 
-### Typography
+### 9.4 Default Behavior
 
-- ✅ **PRIORITIZE** readability over decoration
-- ✅ **LIMIT** font weights to 3-4 variants to improve load times
-- ✅ **USE** system font fallbacks for offline PWA functionality
-
-### Color
-
-- ✅ **MAINTAIN** high contrast for accessibility
-- ✅ **AVOID** using cream as a text background
-- ✅ **TEST** all color combinations with WebAIM contrast checker
-
-### Components
-
-- ✅ **BUILD** a reusable component library before coding pages
-- ✅ **DOCUMENT** each component with usage examples
-- ✅ **VERSION** the design system for future updates
+Dark theme is the default. If a user has never visited, they see dark. Their preference is stored in `localStorage` and applied on every subsequent visit.
 
 ---
 
-**Prepared with care for Project NEXUS**  
-_Empowering Readers, Digitizing Dreams._
+## 10. Accessibility
+
+### 10.1 Contrast Ratios
+
+All text must meet WCAG 2.1 Level AA minimum (4.5:1 for normal text, 3:1 for large text).
+
+|Combination|Contrast|Status|
+|---|---|---|
+|`--foreground` on `--background`|~11:1|✅ AAA|
+|`--foreground-muted` on `--background`|~4.8:1|✅ AA|
+|`--foreground` on `--background-card`|~10:1|✅ AAA|
+|`--primary` on `--background`|~3.8:1|✅ AA Large|
+|`--gold` on `--background`|~5.2:1|✅ AA|
+|`--danger` on `--background`|~4.6:1|✅ AA|
+
+**Note:** `--foreground-subtle` (`#3d4659`) does not meet AA contrast on the dark background. It must only be used for decorative text, placeholders, and disabled states — never for readable content.
+
+### 10.2 Focus States
+
+Focus states use `outline: 2px solid var(--primary)` with a `2px` offset. This is defined globally in `global.css` and applies to all focusable elements. Never remove focus outlines without providing an alternative.
+
+### 10.3 Reduced Motion
+
+The `@media (prefers-reduced-motion: reduce)` block in `global.css` collapses all animations and transitions to near-zero for users who have requested reduced motion in their OS settings. All animations must work in a no-motion environment — they enhance, never gate functionality.
+
+### 10.4 Screen Reader Support
+
+The `.sr-only` utility class is defined in `global.css`. Use it for icon buttons, decorative elements, and any visual content that needs a text alternative.
+
+### 10.5 Custom Cursor Accessibility
+
+The custom cursor is a visual enhancement only. It must not affect keyboard navigation or touch interaction. `pointer-events: none` is applied to both cursor elements to ensure this. On touch devices, the cursor simply doesn't appear.
 
 ---
 
-**Document End**
+## 11. Responsive Design
+
+### 11.1 Breakpoints (Tailwind Defaults)
+
+|Breakpoint|Width|Target|
+|---|---|---|
+|`sm`|640px|Large mobile|
+|`md`|768px|Tablet|
+|`lg`|1024px|Desktop|
+|`xl`|1280px|Wide desktop|
+|`2xl`|1536px|Ultra-wide|
+
+### 11.2 Mobile-First Rule
+
+All styles are written mobile-first. Base styles target mobile, breakpoint prefixes add complexity for larger screens.
+
+```tsx
+// ✅ Mobile first
+<div className="px-5 md:px-[8vw] lg:px-[10vw]">
+<h1 className="text-display-sm lg:text-display-lg">
+
+// ❌ Desktop first (wrong)
+<div className="px-[10vw] sm:px-5">
+```
+
+### 11.3 Expected Device Distribution
+
+Based on the school context, approximately 80% of student access will be via smartphones. Desktop access is expected primarily from the librarian admin dashboard and teachers. Every component must be fully functional and readable on a 375px wide screen before being considered complete.
+
+---
+
+## 12. Project Folder Structure
+
+### 12.1 Frontend Structure
+
+```
+apps/web/src/
+  app/
+    page.tsx              ← Landing page (assembles sections)
+    layout.tsx            ← Root layout, fonts, theme script, cursor, loading screen
+    global.css            ← All base styles, CSS variables
+    login/
+      page.tsx
+    vault/
+      page.tsx
+    dashboard/
+      page.tsx
+    search/
+      page.tsx
+
+  components/
+    ui/                   ← Tiny, reusable, stateless building blocks
+      CountUp.tsx
+      MagneticLetter.tsx
+      CardSection.tsx
+      Button.tsx
+      Badge.tsx
+      Tag.tsx
+      Skeleton.tsx
+
+    layout/               ← App-level wrappers (exist on every page)
+      Nav.tsx
+      Footer.tsx
+      CustomCursor.tsx
+      LoadingScreen.tsx
+      ThemeToggle.tsx
+
+    sections/             ← Landing page sections (used once, large)
+      HeroSection.tsx
+      AboutSection.tsx
+      AccessSection.tsx
+      ExploreSection.tsx
+      WhyNexusSection.tsx
+      CtaSection.tsx
+
+    features/             ← Feature-specific components grouped by domain
+      catalog/
+        BookCard.tsx
+        BookSearch.tsx
+        BookFilters.tsx
+        BookDetail.tsx
+      auth/
+        LoginForm.tsx
+        RoleSelector.tsx
+      vault/
+        VaultGrid.tsx
+        PaperCard.tsx
+        SubjectFilter.tsx
+      dashboard/
+        StatsCard.tsx
+        BorrowingChart.tsx
+        RecentActivity.tsx
+        ReadingStreak.tsx
+      admin/
+        BookForm.tsx
+        UserTable.tsx
+        FineCalculator.tsx
+
+  hooks/
+    useMousePosition.ts
+    useIntersection.ts
+    useTheme.ts
+    useCountUp.ts
+
+  lib/
+    constants.ts          ← App-wide constants (roles, routes, etc.)
+    utils.ts              ← Pure helper functions
+    api.ts                ← API call wrappers
+```
+
+### 12.2 Component Placement Rules
+
+|Question|Folder|
+|---|---|
+|Is it tiny, reusable, no business logic?|`components/ui/`|
+|Does it wrap the whole app or every page?|`components/layout/`|
+|Is it a full landing page section?|`components/sections/`|
+|Is it tied to a specific feature?|`components/features/[feature]/`|
+|Does it use React hooks and return data?|`hooks/`|
+|Is it a pure function with no React?|`lib/utils.ts`|
+
+---
+
+## 13. Implementation Checklist
+
+### Foundation (Must be complete before building any components)
+
+- [x] `global.css` — CSS variables, base reset, typography, scrollbar, cursor
+- [x] `tailwind.config.js` — colors, fonts, font sizes, radius, animations
+- [ ] `layout.tsx` — next/font setup, theme flash prevention script, CustomCursor, LoadingScreen
+- [ ] `hooks/useMousePosition.ts` — mouse tracking hook
+- [ ] `components/layout/CustomCursor.tsx` — two-element cursor component
+- [ ] `components/layout/LoadingScreen.tsx` — 5 second entrance animation
+- [ ] `components/layout/ThemeToggle.tsx` — dark/light toggle with localStorage
+
+### Landing Page
+
+- [ ] `components/ui/MagneticLetter.tsx`
+- [ ] `components/ui/CountUp.tsx`
+- [ ] `components/ui/CardSection.tsx`
+- [ ] `components/layout/Nav.tsx`
+- [ ] `components/sections/HeroSection.tsx`
+- [ ] `components/sections/AboutSection.tsx`
+- [ ] `components/sections/AccessSection.tsx`
+- [ ] `components/sections/ExploreSection.tsx`
+- [ ] `components/sections/WhyNexusSection.tsx`
+- [ ] `components/sections/CtaSection.tsx`
+- [ ] `app/page.tsx` — assembles all sections
+
+### Authentication
+
+- [ ] `app/login/page.tsx`
+- [ ] `components/features/auth/LoginForm.tsx`
+- [ ] `components/features/auth/RoleSelector.tsx`
+
+### Core Features (Phase 2+)
+
+- [ ] Book catalog and search
+- [ ] Student dashboard
+- [ ] Digital vault
+- [ ] Admin dashboard
+- [ ] Borrowing and fine system
+- [ ] Reading gamification (streaks, badges)
+
+---
+
+## Document Notes
+
+This document replaces `design_system_&_visual_identity.md` version 1.0 entirely. The previous version used a different color palette (Navy/Sage/Cream derived from the original logo), different fonts (Crimson Pro and DM Sans), and a light-first theme approach. All of those decisions have been superseded by this document.
+
+The psychological reasoning behind every color and typography decision is documented separately in `color_and_typography_psychology.md`. This document covers the implementation. That document covers the why.
+
+---
+
+_Project NEXUS · Design System Version 2.0_ _C.W.W. Kannangara Central College · Mathugama_ _Built by S.C. Roshana · Cinderax · © 2026_
