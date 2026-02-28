@@ -10,5 +10,3 @@ export function CustomCursor() {
         <div></div>
     )
 }
-
-export default CustomCursor
