@@ -1,34 +1,3 @@
-// ## How The Math Works
-
-// ```
-// Hero           →  100vh   (sticky, no scroll range needed)
-// About          →  200vh   (100vh to turn in + 100vh to read)
-// Access         →  200vh
-// Explore        →  200vh
-// Why NEXUS      →  200vh
-// CTA            →  200vh
-// ─────────────────────────
-// Total          →  1100vh  ← this is the outer main height
-// ```
-
-// The browser needs to know the total scroll height upfront. `1100vh` gives it exactly that — 11 full screen lengths of scroll space.
-
-// ---
-
-// ## Background Color Alternation
-
-// ```
-// Hero        bg-background   #0e1117  ← dark base
-// About       bg-card         #161b27  ← slightly lighter
-// Access      bg-background   #0e1117  ← back to dark
-// Explore     bg-card         #161b27  ← lighter again
-// Why NEXUS   bg-background   #0e1117  ← dark
-// CTA         bg-background   #0e1117  ← matches hero
-// ```
-
-// The alternation means each new page turning in has a visually distinct surface — you can see the edge of the new page arriving because it's a different shade. Without this alternation all pages would be the same color and the effect would be invisible.
-
-
 import { CardSection } from '@/components/ui/CardSection'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { AboutSection } from '@/components/sections/AboutSection'
@@ -41,40 +10,7 @@ const TOTAL = 6
 
 export default function LandingPage() {
   return (
-    /*
-     * ── How the book page turn works ──────────────────────────
-     *
-     * The outer <main> has height = TOTAL × 100vh = 600vh.
-     * This gives the browser the full scroll space.
-     *
-     * Inside is ONE sticky container that takes up exactly 100vh
-     * and sticks to the top for the entire 600vh of scrolling.
-     * The user "scrolls" but the viewport never actually moves —
-     * the sticky container stays fixed in place.
-     *
-     * Inside the sticky container, ALL 6 pages are stacked on top
-     * of each other using position: absolute, inset: 0.
-     *
-     * Z-index stacking (first page on top):
-     *   Hero    → z: 6  (starts on top, first to turn)
-     *   About   → z: 5  (revealed when Hero turns away)
-     *   Access  → z: 4
-     *   Explore → z: 3
-     *   Why     → z: 2
-     *   CTA     → z: 1  (bottom of the stack, never turns)
-     *
-     * Scroll progress 0→1 is divided into 6 equal ranges.
-     * Each page turns (rotateY 0 → -180) in its own range.
-     * When rotateY hits -180 the page is invisible (backface hidden)
-     * and the page below is revealed.
-     *
-     * This is exactly what happens when you turn a real book page:
-     * - The current page rotates around the spine (left edge)
-     * - It sweeps right-to-left across the screen
-     * - It disappears, revealing the next page underneath
-     * - Scroll back up = pages turn back in reverse
-     * ─────────────────────────────────────────────────────────
-     */
+
     <main style={{ height: `${TOTAL * 100}vh` }}>
 
       {/*

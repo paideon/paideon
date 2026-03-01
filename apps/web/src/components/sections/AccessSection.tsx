@@ -1,10 +1,10 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion, useInView} from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 
 import { SpotlightPanel } from '@/components/ui/SpotlightPanel'
-import { FillButton } from '@/components/ui/FillButton'
+import { Button } from '@/components/ui/Button'
 
 export function AccessSection() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -46,7 +46,7 @@ export function AccessSection() {
               flex items-center gap-3
               after:content-[''] after:flex-1 after:h-px after:bg-border
             ">
-              Student &amp; Staff Portal
+              Student & Staff Portal
             </span>
 
             {/* Heading */}
@@ -83,7 +83,7 @@ export function AccessSection() {
             >
               {[
                 'Real-time book availability',
-                'Reserve &amp; renew remotely',
+                'Reserve & renew remotely',
                 'Reading streak tracking',
                 'Overdue reminders',
               ].map((feature, i) => (
@@ -92,7 +92,7 @@ export function AccessSection() {
                   className="flex items-center gap-3 font-body text-xs text-subtle"
                 >
                   <span className="w-1 h-1 rounded-full bg-primary flex-shrink-0" />
-                  <span dangerouslySetInnerHTML={{ __html: feature }} />
+                  <span>{feature}</span>
                 </li>
               ))}
             </motion.ul>
@@ -103,7 +103,7 @@ export function AccessSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.5, duration: 0.8, ease: 'easeOut' }}
             >
-              <FillButton href="/login">Sign In</FillButton>
+              <Button href="/login">Sign In</Button>
             </motion.div>
 
           </div>
@@ -171,17 +171,17 @@ export function AccessSection() {
               className="flex flex-col gap-2"
             >
               {[
-                'O/L &amp; A/L past papers',
+                'O/L & A/L past papers',
                 'Ministry of Education textbooks',
                 'Internal test papers',
-                'Searchable by grade &amp; subject',
+                'Searchable by grade & subject',
               ].map((feature, i) => (
                 <li
                   key={i}
                   className="flex items-center gap-3 font-body text-xs text-subtle"
                 >
                   <span className="w-1 h-1 rounded-full bg-gold flex-shrink-0" />
-                  <span dangerouslySetInnerHTML={{ __html: feature }} />
+                  <span>{feature}</span>
                 </li>
               ))}
             </motion.ul>
@@ -192,7 +192,7 @@ export function AccessSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.55, duration: 0.8, ease: 'easeOut' }}
             >
-              <FillButton href="/vault" variant="gold">Open Vault</FillButton>
+              <Button href="/vault" variant="gold">Open Vault</Button>
             </motion.div>
 
           </div>

@@ -68,12 +68,22 @@ export function WhyNexusSection() {
       "
     >
 
+      {/* Section label — consistent with all other sections */}
+      <motion.span
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.7 }}
+        className="font-mono text-label tracking-[0.3em] text-subtle uppercase"
+      >
+        04 — Why NEXUS
+      </motion.span>
+
       {/* Header row */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 0.7 }}
-        className="flex items-end justify-between w-full border-b border-border pb-8"
+        className="flex items-end justify-between w-full border-b border-border pb-8 -mt-6"
       >
         {/* Heading */}
         <div className="overflow-hidden">
@@ -125,16 +135,6 @@ export function WhyNexusSection() {
           />
         ))}
       </div>
-
-      {/*  Section label */}
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ delay: 0.5, duration: 0.7 }}
-        className="font-mono text-label tracking-[0.3em] text-subtle uppercase"
-      >
-        04 — Why NEXUS
-      </motion.span>
 
     </section>
   )
