@@ -8,8 +8,8 @@ import {
 
 import './global.css';
 
-import { CustomCursor } from '@/app/components/layout/CustomCursor'
-import { LoadingScreen } from '@/app/components/layout/LoadingScreen'
+import { CustomCursor } from '@/components/layout/CustomCursor'
+import { LoadingScreen } from '@/components/layout/LoadingScreen'
 
 // Font Setup
 

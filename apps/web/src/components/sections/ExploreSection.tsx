@@ -1,35 +1,8 @@
-// ## What's In This Section
-
-// **The breathing search bar** — when the user isn't interacting with it, the border pulses with a slow 3-second breathing animation going from `4%` to `9%` opacity and back. The moment the user focuses the input, it snaps to a steady `12%` opacity and stays there. It feels alive and waiting without being distracting.
-
-// **`StatCard` with `CountUp`** — each stat card uses your `CountUp` component with the scramble effect. The stats arrive in a stagger — `0ms`, `80ms`, `160ms`, `240ms`. The bottom accent line on each card grows and shifts from `border-strong` to `primary` green on hover — a small but satisfying detail.
-
-// **The stats grid gap trick** — the grid has `gap-px` and `bg-border` on the container. This means the `1px` gap between cards is actually the background color of the container showing through — creating perfectly thin dividers between cards without any border styling on individual cards.
-
-// **Filter dropdown** — five options covering the main catalog categories. Styled to match the rest of the search bar — transparent background, mono font, tracked text.
-
-// **The hint text** — "Press Enter to search · 8,500+ titles available" in very subtle mono type below the search bar. Gives users a cue without being instructional.
-
-// ---
-
-// ## Animation Sequence
-
-// ```
-// 0ms    →  section label slides in
-// 100ms  →  heading rises from clip
-// 250ms  →  search bar fades up
-// 400ms  →  stats grid appears
-// 400ms+ →  each stat card staggers in with CountUp starting
-// 700ms  →  bottom note fades in
-// 800ms  →  hint text under search bar fades in
-// ```
-
-
 'use client'
 
 import { useRef, useState } from 'react'
-import { motion, useInView, animate } from 'framer-motion'
-import { CountUp } from '@/app/components/ui/CountUp'
+import { motion, useInView } from 'framer-motion'
+import { CountUp } from '@/components/ui/CountUp'
 
 // ── Stat card ─────────────────────────────────────────────
 function StatCard({
@@ -196,7 +169,7 @@ function SearchBar() {
   )
 }
 
-// ── Main section ──────────────────────────────────────────
+// Main section
 export function ExploreSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, { once: true, margin: '-8% 0px' })
@@ -223,24 +196,6 @@ export function ExploreSection() {
       "
     >
 
-      {/* ── Grain ───────────────────────────────────── */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.025]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-        }}
-      />
-
-      {/* ── Radial glow top right ────────────────────── */}
-      <div
-        className="absolute top-0 right-0 pointer-events-none"
-        style={{
-          width: '40vw',
-          height: '40vw',
-          background: 'radial-gradient(circle, rgba(78,124,111,0.04) 0%, transparent 70%)',
-        }}
-      />
-
       {/* ── Section label ────────────────────────────── */}
       <motion.span
         initial={{ opacity: 0, x: -16 }}
@@ -251,7 +206,7 @@ export function ExploreSection() {
         03 — Explore the Catalog
       </motion.span>
 
-      {/* ── Heading ──────────────────────────────────── */}
+      {/*  Heading */}
       <div className="overflow-hidden">
         <motion.h2
           initial={{ y: '110%' }}
@@ -264,7 +219,7 @@ export function ExploreSection() {
         </motion.h2>
       </div>
 
-      {/* ── Search bar ───────────────────────────────── */}
+      {/* Search bar */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -274,7 +229,7 @@ export function ExploreSection() {
         <SearchBar />
       </motion.div>
 
-      {/* ── Stats grid ───────────────────────────────── */}
+      {/*  Stats grid  */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
@@ -291,7 +246,7 @@ export function ExploreSection() {
         ))}
       </motion.div>
 
-      {/* ── Bottom note ──────────────────────────────── */}
+      {/* Bottom note  */}
       <motion.p
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
@@ -301,14 +256,6 @@ export function ExploreSection() {
         Full catalog search available after sign in. Digital Vault resources
         are freely accessible without an account.
       </motion.p>
-
-      {/* ── Decorative large number ───────────────────── */}
-      <span
-        className="absolute right-[6vw] bottom-8 font-display text-[180px] font-light leading-none select-none pointer-events-none text-foreground opacity-[0.015]"
-        aria-hidden="true"
-      >
-        03
-      </span>
 
     </section>
   )
