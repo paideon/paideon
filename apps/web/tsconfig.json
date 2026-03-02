@@ -13,17 +13,26 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
+    "composite": false,
+    "declaration": false,
+    "declarationMap": false,
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@nexus/types": ["../../packages/types/src/index.ts"],
+      "@nexus/types/*": ["../../packages/types/src/*"],
+      "@nexus/database": ["../../packages/database/src/index.ts"],
+      "@nexus/database/*": ["../../packages/database/src/*"],
+      "@nexus/ui": ["../../packages/ui/src/index.ts"],
+      "@nexus/ui/*": ["../../packages/ui/src/*"]
     },
     "types": ["jest", "node"],
     "outDir": "dist",
-    "rootDir": "src",
+    "rootDir": "../..",
     "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo"
   },
   "include": [

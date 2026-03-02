@@ -94,8 +94,8 @@ export function CtaSection() {
         <img
           src="/nexus_logo.svg"
           alt="NEXUS"
-          width={28}
-          height={28}
+          width={100}
+          height={100}
           style={{ objectFit: 'contain', opacity: 1 }}
         />
         <div className="flex-1 h-px bg-border" />

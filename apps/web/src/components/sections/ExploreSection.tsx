@@ -147,7 +147,7 @@ export function ExploreSection({ stats }: { stats: LibraryStats }) {
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ delay: 0.7, duration: 0.6 }}
-        className="font-mono text-label tracking-[0.15em] text-subtle opacity-40 max-w-md leading-[1.8] text-justify"
+        className="font-mono text-label tracking-[0.15em] text-subtle opacity-40 max-w-md leading-[1.8] text-center"
       >
         Full catalog search available after sign in. Digital Vault resources
         are freely accessible without an account.

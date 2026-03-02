@@ -5,104 +5,64 @@ import { AccessSection } from '@/components/sections/AccessSection'
 import { ExploreSection } from '@/components/sections/ExploreSection'
 import { WhyNexusSection } from '@/components/sections/WhyNexusSection'
 import { CtaSection } from '@/components/sections/CtaSection'
+import { LIBRARY_STATS_FALLBACK, type LibraryStats } from '@nexus/types'
 
 const TOTAL = 6
 
-export default function LandingPage() {
+// ── Data fetching ─────────────────────────────────────────────────────────────
+async function getLibraryStats(): Promise<LibraryStats> {
+  // PHASE 2 — uncomment this block and delete the fallback return below:
+  //
+  // try {
+  //   const res = await fetch(`${process.env.API_URL}/stats`, {
+  //     next: { revalidate: 3600 },
+  //   })
+  //   if (!res.ok) throw new Error('Stats fetch failed')
+  //   return res.json()
+  // } catch {
+  //   return LIBRARY_STATS_FALLBACK
+  // }
+
+  return LIBRARY_STATS_FALLBACK
+}
+
+// ── Page ──────────────────────────────────────────────────────────────────────
+export default async function LandingPage() {
+  const stats = await getLibraryStats()
+
   return (
+    <main>
 
-    <main style={{ height: `${TOTAL * 100}vh` }}>
+      {/* ── Hero ─────────────────────────────────────────── */}
+      <CardSection index={0} totalSections={TOTAL} id="hero" className="bg-background">
+        <HeroSection />
+      </CardSection>
 
-      {/*
-       * The sticky book viewport.
-       * position: sticky keeps it pinned to top: 0 for the
-       * entire 600vh scroll range. overflow: hidden clips
-       * any page content that might bleed outside.
-       */}
-      <div
-        style={{
-          position: 'sticky',
-          top: 0,
-          height: '100vh',
-          overflow: 'hidden',
-        }}
-      >
+      {/* ── About ────────────────────────────────────────── */}
+      <CardSection index={1} totalSections={TOTAL} id="about" className="bg-card">
+        <AboutSection stats={stats} />
+      </CardSection>
 
-        {/* ── Page 1 — Hero ──────────────────────────────── */}
-        {/* z: 6 — on top of everything. First page to turn.
-            bg-background (#0e1117) — the darkest surface. */}
-        <CardSection
-          index={0}
-          totalSections={TOTAL}
-          id="hero"
-          className="bg-background"
-        >
-          <HeroSection />
-        </CardSection>
+      {/* ── Access ───────────────────────────────────────── */}
+      <CardSection index={2} totalSections={TOTAL} id="access" className="bg-background">
+        <AccessSection />
+      </CardSection>
 
-        {/* ── Page 2 — About ─────────────────────────────── */}
-        {/* z: 5 — revealed when Hero turns away.
-            bg-card (#161b27) — slightly lighter than hero,
-            so the page turn reveals a visibly different surface. */}
-        <CardSection
-          index={1}
-          totalSections={TOTAL}
-          id="about"
-          className="bg-card"
-        >
-          <AboutSection />
-        </CardSection>
+      {/* ── Explore ──────────────────────────────────────── */}
+      <CardSection index={3} totalSections={TOTAL} id="explore" className="bg-card">
+        <ExploreSection stats={stats} />
+      </CardSection>
 
-        {/* ── Page 3 — Access ────────────────────────────── */}
-        {/* z: 4 — split screen section.
-            bg-background — alternates back to dark. */}
-        <CardSection
-          index={2}
-          totalSections={TOTAL}
-          id="access"
-          className="bg-background"
-        >
-          <AccessSection />
-        </CardSection>
+      {/* ── Why NEXUS ────────────────────────────────────── */}
+      <CardSection index={4} totalSections={TOTAL} id="why-nexus" className="bg-background">
+        <WhyNexusSection />
+      </CardSection>
 
-        {/* ── Page 4 — Explore ───────────────────────────── */}
-        {/* z: 3 — catalog search section.
-            bg-card — alternates lighter again. */}
-        <CardSection
-          index={3}
-          totalSections={TOTAL}
-          id="explore"
-          className="bg-card"
-        >
-          <ExploreSection />
-        </CardSection>
+      {/* ── CTA ──────────────────────────────────────────── */}
+      <CardSection index={5} totalSections={TOTAL} id="cta" className="bg-background">
+        <CtaSection />
+      </CardSection>
 
-        {/* ── Page 5 — Why NEXUS ─────────────────────────── */}
-        {/* z: 2 — feature grid section.
-            bg-background — alternates back to dark. */}
-        <CardSection
-          index={4}
-          totalSections={TOTAL}
-          id="why-nexus"
-          className="bg-background"
-        >
-          <WhyNexusSection />
-        </CardSection>
-
-        {/* ── Page 6 — CTA ───────────────────────────────── */}
-        {/* z: 1 — the back cover. Lowest z-index.
-            Never turns — just gets revealed when Why NEXUS turns.
-            bg-background — matches Hero for full circle feel. */}
-        <CardSection
-          index={5}
-          totalSections={TOTAL}
-          id="cta"
-          className="bg-background"
-        >
-          <CtaSection />
-        </CardSection>
-
-      </div>
     </main>
   )
 }

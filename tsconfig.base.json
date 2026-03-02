@@ -16,6 +16,14 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    "customConditions": ["@org/source"]
+    "customConditions": ["@org/source"],
+    "paths": {
+      "@nexus/types": ["packages/types/src/index.ts"],
+      "@nexus/types/*": ["packages/types/src/*"],
+      "@nexus/database": ["packages/database/src/index.ts"],
+      "@nexus/database/*": ["packages/database/src/*"],
+      "@nexus/ui": ["packages/ui/src/index.ts"],
+      "@nexus/ui/*": ["packages/ui/src/*"]
+    }
   }
 }

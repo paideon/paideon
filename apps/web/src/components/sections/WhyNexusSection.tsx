@@ -59,7 +59,7 @@ export function WhyNexusSection() {
       id="why-nexus"
       className="
         relative w-full min-h-screen
-        flex flex-col items-start justify-center
+        flex flex-col items-center justify-center 
         px-[5vw] md:px-[8vw] lg:px-[10vw]
         py-20
         gap-14
@@ -83,7 +83,7 @@ export function WhyNexusSection() {
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 0.7 }}
-        className="flex items-end justify-between w-full border-b border-border pb-8 -mt-6"
+        className="flex items-end justify-center w-full border-b border-border pb-8 -mt-6"
       >
         {/* Heading */}
         <div className="overflow-hidden">
@@ -98,15 +98,6 @@ export function WhyNexusSection() {
           </motion.h2>
         </div>
 
-        {/* Counter */}
-        <motion.span
-          initial={{ opacity: 0, x: 16 }}
-          animate={isInView ? { opacity: 1, x: 0 } : {}}
-          transition={{ delay: 0.3, duration: 0.7 }}
-          className="font-mono text-label tracking-[0.2em] text-subtle uppercase pb-1"
-        >
-          06 reasons
-        </motion.span>
       </motion.div>
 
       {/*  Intro line  */}
@@ -114,10 +105,10 @@ export function WhyNexusSection() {
         initial={{ opacity: 0, y: 16 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.25, duration: 0.8 }}
-        className="text-[14px] font-light leading-[1.9] text-muted max-w-lg -mt-6"
+        className="text-[14px] font-light leading-[1.9] text-muted max-w-lg -mt-6 text-center"
       >
         Every feature exists because a real problem at the school demanded it.
-        None of this is speculative — it is the direct response to six years
+        None of this is speculative it is the direct response to six years
         of accumulated friction.
       </motion.p>
 
