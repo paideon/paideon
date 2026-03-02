@@ -215,10 +215,11 @@ importers:
         specifier: ^11.0.0
         version: 11.1.14(@nestjs/common@11.1.14(reflect-metadata@0.1.14)(rxjs@7.8.2))(@nestjs/core@11.1.14)(@nestjs/platform-express@11.1.14)
 
-  apps/api-e2e: {}
-
   apps/web:
     dependencies:
+      '@nexus/types':
+        specifier: workspace:*
+        version: link:../../packages/types
       framer-motion:
         specifier: ^12.34.3
         version: 12.34.3(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -231,8 +232,6 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.2.4(react@19.2.4)
-
-  apps/web-e2e: {}
 
   packages/database:
     dependencies:

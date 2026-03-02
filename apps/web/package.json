@@ -6,6 +6,7 @@
     "name": "web"
   },
   "dependencies": {
+    "@nexus/types": "workspace:*",
     "framer-motion": "^12.34.3",
     "next": "~16.0.1",
     "react": "^19.0.0",
