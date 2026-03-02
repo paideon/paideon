@@ -3,12 +3,12 @@
 import { useEffect, useState } from 'react'
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
+  const [theme, setTheme] = useState<'dark' | 'light'>('light')
 
   useEffect(() => {
     // Read current theme from html attribute on mount
     const current = document.documentElement.getAttribute('data-theme')
-    if (current === 'light') setTheme('light')
+    if (current === 'dark') setTheme('dark')
   }, [])
 
   const toggle = () => {

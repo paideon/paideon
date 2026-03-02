@@ -123,7 +123,6 @@ export function AccessSection() {
           px-[8vw] md:px-[6vw] lg:px-[8vw]
           py-20
           h-full min-h-[50vh] md:min-h-screen
-          bg-card
         ">
 
           {/* Panel content */}

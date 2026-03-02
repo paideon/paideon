@@ -2,28 +2,38 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+
 import { RevealText } from '@/components/ui/RevealText'
 import { QuoteCard } from '@/components/ui/QuoteCard'
+import { CountUp } from '@/components/ui/CountUp'
+import type { LibraryStats } from '@nexus/types'
 
-// Quote data 
+// Quote data
 const QUOTES = [
   {
-    text: '"A library is not a luxury but one of the necessities of life."',
-    author: 'Henry Ward Beecher',
+    text: '"A reader lives a thousand lives before he dies. The man who never reads lives only one."',
+    author: 'George R.R. Martin',
   },
   {
-    text: '"The library is the temple of learning, and learning has liberated more people than all the wars in history."',
-    author: 'Carl T. Rowan',
+    text: '"The world belongs to those who read."',
+    author: 'Rick Holland',
   },
   {
-    text: '"Today a reader, tomorrow a leader."',
-    author: 'Margaret Fuller',
+    text: '"A book is a dream that you hold in your hands."',
+    author: 'Neil Gaiman',
   },
 ]
 
-export function AboutSection() {
+export function AboutSection({ stats }: { stats: LibraryStats }) {
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, { once: true, margin: '-8% 0px' })
+
+  const STATS = [
+    { target: stats.students, label: 'Students' },
+    { target: stats.teachers, label: 'Teachers' },
+    { target: stats.staff,    label: 'Staff' },
+    { target: stats.books,    label: 'Books' },
+  ]
 
   return (
     <section
@@ -31,23 +41,14 @@ export function AboutSection() {
       id="about"
       className="
         relative w-full min-h-screen
-        flex flex-col items-start justify-center
-        px-[5vw] md:px-[8vw] lg:px-[10vw]
-        py-20
+        flex flex-col items-center justify-center
+        py-10
+        px-10
         gap-16
         bg-card
         overflow-hidden
       "
     >
-
-      {/* Vertical left accent line */}
-      <motion.div
-        initial={{ scaleY: 0 }}
-        animate={isInView ? { scaleY: 1 } : {}}
-        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute left-[5vw] md:left-[8vw] lg:left-[10vw] top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-border-strong to-transparent origin-top"
-      />
-
       {/* Section label */}
       <motion.span
         initial={{ opacity: 0, x: -16 }}
@@ -59,7 +60,7 @@ export function AboutSection() {
       </motion.span>
 
       {/* Main heading */}
-      <div className="pl-6 max-w-2xl flex flex-col gap-3">
+      <div className="pl-6 max-w-2xl flex flex-col gap-3 items-center text-center">
         <RevealText>
           <h2 className="font-display text-display-md font-light leading-[1.1] text-foreground">
             A library built for the
@@ -72,20 +73,26 @@ export function AboutSection() {
         </RevealText>
       </div>
 
-      {/* Body text */}
+      {/* Body text — inline mentions still use CountUp for the animated feel */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.3, duration: 0.9, ease: 'easeOut' }}
         className="pl-6 max-w-xl"
       >
-        <p className="text-[15px] font-light leading-[1.9] text-muted">
+        <p className="text-[15px] font-light leading-[1.9] text-muted text-center">
           NEXUS replaces a 2012-era spreadsheet system at C.W.W. Kannangara
-          Central College with a mobile-first, intelligent library platform —
+          Central College with a mobile-first, intelligent library platform
           serving{' '}
-          <span className="text-foreground">4,198 students</span>,{' '}
-          <span className="text-foreground">188 teachers</span>, and{' '}
-          <span className="text-foreground">77 staff</span>.
+          <span className="text-foreground font-normal">
+            {stats.students}
+          </span>{' '}students,{' '}
+          <span className="text-foreground font-normal">
+            {stats.teachers}
+          </span>{' '}teachers, and{' '}
+          <span className="text-foreground font-normal">
+           {stats.staff}
+          </span>{' '}staff.
           Every workflow automated. Every book discoverable. Every rupee
           justified with data.
         </p>
@@ -98,15 +105,10 @@ export function AboutSection() {
         transition={{ delay: 0.45, duration: 0.9, ease: 'easeOut' }}
         className="pl-6 flex gap-12"
       >
-        {[
-          { value: '4,198', label: 'Students' },
-          { value: '188', label: 'Teachers' },
-          { value: '77', label: 'Staff' },
-          { value: '8,500+', label: 'Books' },
-        ].map((stat) => (
+        {STATS.map((stat) => (
           <div key={stat.label} className="flex flex-col gap-1">
             <span className="font-display text-3xl font-light text-foreground leading-none">
-              {stat.value}
+              <CountUp target={stat.target} />
             </span>
             <span className="font-mono text-label tracking-[0.2em] text-subtle uppercase">
               {stat.label}
