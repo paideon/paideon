@@ -1,5 +1,3 @@
-### Project NEXUS · C.W.W. Kannangara Central College
-
 > This document explains the psychological reasoning behind every color and typography decision made for the NEXUS platform. These are not aesthetic preferences — they are deliberate, research-backed choices made to serve the platform's core mission: to make students want to read, learn, and return.
 
 ---
@@ -23,18 +21,18 @@ These four goals directly shaped every color and font decision documented below.
 
 ### 2.1 The Palette
 
-|Role|Token|Dark Mode|Light Mode|
-|---|---|---|---|
-|Background|`--background`|`#0e1117`|`#faf8f4`|
-|Card Surface|`--background-card`|`#161b27`|`#ffffff`|
-|Hover Surface|`--background-hover`|`#1c2333`|`#f0ede7`|
-|Primary Text|`--foreground`|`#e8e4dc`|`#1a1f2e`|
-|Secondary Text|`--foreground-muted`|`#8892a4`|`#5a6478`|
-|Subtle Text|`--foreground-subtle`|`#3d4659`|`#a0a8b8`|
-|Brand Green|`--primary`|`#4e7c6f`|`#4e7c6f`|
-|Brand Green Light|`--primary-light`|`#6a9e8f`|`#6a9e8f`|
-|Gold Accent|`--gold`|`#c9a84c`|`#c9a84c`|
-|Danger|`--danger`|`#c0544d`|`#c0544d`|
+| Role              | Token                 | Dark Mode | Light Mode |
+| ----------------- | --------------------- | --------- | ---------- |
+| Background        | `--background`        | `#0e1117` | `#faf8f4`  |
+| Card Surface      | `--background-card`   | `#161b27` | `#ffffff`  |
+| Hover Surface     | `--background-hover`  | `#1c2333` | `#f0ede7`  |
+| Primary Text      | `--foreground`        | `#e8e4dc` | `#1a1f2e`  |
+| Secondary Text    | `--foreground-muted`  | `#8892a4` | `#5a6478`  |
+| Subtle Text       | `--foreground-subtle` | `#3d4659` | `#a0a8b8`  |
+| Brand Green       | `--primary`           | `#4e7c6f` | `#4e7c6f`  |
+| Brand Green Light | `--primary-light`     | `#6a9e8f` | `#6a9e8f`  |
+| Gold Accent       | `--gold`              | `#c9a84c` | `#c9a84c`  |
+| Danger            | `--danger`            | `#c0544d` | `#c0544d`  |
 
 ---
 
@@ -200,7 +198,7 @@ The decision to offer both themes and default to dark was not arbitrary.
 
 Research on digital reading environments shows that dark mode reduces blue light emission significantly, which is directly linked to melatonin suppression. For a school context where students may use the platform in the evening for homework research or reading, dark mode is genuinely better for sleep health and eye comfort. Dark mode also creates the focused, immersive feeling appropriate to serious study.
 
-Additionally, NEXUS's primary audience includes students aged 12–20, a demographic that strongly associates dark interfaces with modernity and quality. First impressions matter — a dark default immediately signals that NEXUS is not another generic school system.
+Additionally, NEXUS's primary audience includes students aged 12–20, a demographic that strongly associates dark interfaces with modernity and quality. First impressions matter, a dark default immediately signals that NEXUS is not another generic school system.
 
 **Why offer light mode:**
 
@@ -225,5 +223,3 @@ Colors were chosen not for beauty but for the specific emotional and behavioral 
 That is the foundation every component in NEXUS is built on.
 
 ---
-
-_Document maintained by the NEXUS design system._ _Last updated: 2026_ _Related: `design_system_&_visual_identity.md`_

@@ -1,11 +1,3 @@
-### Project NEXUS · C.W.W. Kannangara Central College · Mathugama
-
-**Version:** 2.0  
-**Date:** February 2026  
-**Replaces:** Version 1.0 (February 7, 2026)  
-**Prepared with:** Claude AI  
-**Related document:** `color_and_typography_psychology.md`
-
 > This document is the single source of truth for all visual and design decisions made for the NEXUS platform. Every decision here has a reason. For the full psychological rationale behind color and typography choices, refer to `color_and_typography_psychology.md`.
 
 ---
@@ -23,8 +15,6 @@
 9. [Theme System](#9-theme-system)
 10. [Accessibility](#10-accessibility)
 11. [Responsive Design](#11-responsive-design)
-12. [Project Folder Structure](#12-project-folder-structure)
-13. [Implementation Checklist](#13-implementation-checklist)
 
 ---
 
@@ -63,14 +53,14 @@ NEXUS is not a generic school system. It is a premium, institutional platform th
 
 ### 1.3 Design Language Summary
 
-|Aspect|Decision|
-|---|---|
-|Theme default|Dark|
-|Corner style|Sharp — max 8px radius|
-|Motion style|Subtle, purposeful, eased|
-|Spacing philosophy|Generous, 8px base grid|
-|Color count|Minimal — two brand colors, three semantic|
-|Typography layers|Three — Display, Body, Mono|
+| Aspect             | Decision                                   |
+| ------------------ | ------------------------------------------ |
+| Theme default      | Dark                                       |
+| Corner style       | Sharp — max 8px radius                     |
+| Motion style       | Subtle, purposeful, eased                  |
+| Spacing philosophy | Generous, 8px base grid                    |
+| Color count        | Minimal — two brand colors, three semantic |
+| Typography layers  | Three — Display, Body, Mono                |
 
 ---
 
@@ -136,22 +126,22 @@ The entire color system is built on CSS variables. Tailwind classes point to the
 
 ### 2.2 Color Token Reference
 
-|Token|Dark Value|Light Value|Usage|
-|---|---|---|---|
-|`--background`|`#0e1117`|`#faf8f4`|Page background|
-|`--background-card`|`#161b27`|`#ffffff`|Cards, panels, modals|
-|`--background-hover`|`#1c2333`|`#f0ede7`|Hover states on cards/rows|
-|`--foreground`|`#e8e4dc`|`#1a1f2e`|Primary text, headings|
-|`--foreground-muted`|`#8892a4`|`#5a6478`|Secondary text, descriptions|
-|`--foreground-subtle`|`#3d4659`|`#a0a8b8`|Placeholders, disabled, decorative|
-|`--primary`|`#4e7c6f`|`#4e7c6f`|Brand color, primary actions, success|
-|`--primary-light`|`#6a9e8f`|`#6a9e8f`|Hover state of primary|
-|`--primary-muted`|`rgba(78,124,111,0.15)`|same|Subtle primary backgrounds|
-|`--gold`|`#c9a84c`|`#c9a84c`|Achievements, CTAs, highlights|
-|`--gold-muted`|`rgba(201,168,76,0.15)`|same|Subtle gold backgrounds|
-|`--danger`|`#c0544d`|`#c0544d`|Overdue, errors, destructive actions|
-|`--border`|`rgba(255,255,255,0.06)`|`rgba(0,0,0,0.07)`|Default borders|
-|`--border-strong`|`rgba(255,255,255,0.12)`|`rgba(0,0,0,0.14)`|Emphasized borders|
+| Token                 | Dark Value               | Light Value        | Usage                                 |
+| --------------------- | ------------------------ | ------------------ | ------------------------------------- |
+| `--background`        | `#0e1117`                | `#faf8f4`          | Page background                       |
+| `--background-card`   | `#161b27`                | `#ffffff`          | Cards, panels, modals                 |
+| `--background-hover`  | `#1c2333`                | `#f0ede7`          | Hover states on cards/rows            |
+| `--foreground`        | `#e8e4dc`                | `#1a1f2e`          | Primary text, headings                |
+| `--foreground-muted`  | `#8892a4`                | `#5a6478`          | Secondary text, descriptions          |
+| `--foreground-subtle` | `#3d4659`                | `#a0a8b8`          | Placeholders, disabled, decorative    |
+| `--primary`           | `#4e7c6f`                | `#4e7c6f`          | Brand color, primary actions, success |
+| `--primary-light`     | `#6a9e8f`                | `#6a9e8f`          | Hover state of primary                |
+| `--primary-muted`     | `rgba(78,124,111,0.15)`  | same               | Subtle primary backgrounds            |
+| `--gold`              | `#c9a84c`                | `#c9a84c`          | Achievements, CTAs, highlights        |
+| `--gold-muted`        | `rgba(201,168,76,0.15)`  | same               | Subtle gold backgrounds               |
+| `--danger`            | `#c0544d`                | `#c0544d`          | Overdue, errors, destructive actions  |
+| `--border`            | `rgba(255,255,255,0.06)` | `rgba(0,0,0,0.07)` | Default borders                       |
+| `--border-strong`     | `rgba(255,255,255,0.12)` | `rgba(0,0,0,0.14)` | Emphasized borders                    |
 
 ### 2.3 Color Usage Rules
 
@@ -242,29 +232,29 @@ const jetbrainsMono = JetBrains_Mono({
 
 ### 3.4 Type Scale
 
-|Token|Value|Usage|
-|---|---|---|
-|`text-display-2xl`|`clamp(64px, 12vw, 160px)`|Hero titles, magnetic text|
-|`text-display-xl`|`clamp(48px, 8vw, 100px)`|Major section heroes|
-|`text-display-lg`|`clamp(36px, 6vw, 72px)`|Section headings|
-|`text-display-md`|`clamp(28px, 4vw, 52px)`|Page titles, card headings|
-|`text-display-sm`|`clamp(22px, 3vw, 36px)`|Sub-headings|
-|`text-label`|`0.625rem`|All mono labels with tracking|
+| Token              | Value                      | Usage                         |
+| ------------------ | -------------------------- | ----------------------------- |
+| `text-display-2xl` | `clamp(64px, 12vw, 160px)` | Hero titles, magnetic text    |
+| `text-display-xl`  | `clamp(48px, 8vw, 100px)`  | Major section heroes          |
+| `text-display-lg`  | `clamp(36px, 6vw, 72px)`   | Section headings              |
+| `text-display-md`  | `clamp(28px, 4vw, 52px)`   | Page titles, card headings    |
+| `text-display-sm`  | `clamp(22px, 3vw, 36px)`   | Sub-headings                  |
+| `text-label`       | `0.625rem`                 | All mono labels with tracking |
 
 Tailwind's default scale (`text-sm`, `text-base`, `text-lg`, etc.) is used for body text — no need to override these.
 
 ### 3.5 Font Usage Rules
 
-|Font|Weight|Use case|
-|---|---|---|
-|Cormorant Garamond|300 (light)|Large display headings|
-|Cormorant Garamond|400 (regular)|Mid-size headings|
-|Cormorant Garamond Italic|300–400|Emphasis, brand voice moments, pull quotes|
-|Inter|300 (light)|Long body text, descriptions|
-|Inter|400 (regular)|Standard body, paragraphs|
-|Inter|500 (medium)|Navigation, secondary labels|
-|Inter|600 (semibold)|Buttons, strong UI labels|
-|JetBrains Mono|300–400|All mono usage — always small, always tracked|
+| Font                      | Weight         | Use case                                      |
+| ------------------------- | -------------- | --------------------------------------------- |
+| Cormorant Garamond        | 300 (light)    | Large display headings                        |
+| Cormorant Garamond        | 400 (regular)  | Mid-size headings                             |
+| Cormorant Garamond Italic | 300–400        | Emphasis, brand voice moments, pull quotes    |
+| Inter                     | 300 (light)    | Long body text, descriptions                  |
+| Inter                     | 400 (regular)  | Standard body, paragraphs                     |
+| Inter                     | 500 (medium)   | Navigation, secondary labels                  |
+| Inter                     | 600 (semibold) | Buttons, strong UI labels                     |
+| JetBrains Mono            | 300–400        | All mono usage — always small, always tracked |
 
 ### 3.6 The Letter-Spacing Rule for Mono
 
@@ -548,8 +538,6 @@ module.exports = {
 <div className="bg-[#0e1117]">
 ```
 
-The only exception to the no-hardcode rule is the landing page's existing magnetic letter effects and grain textures, which use values that don't map to semantic tokens.
-
 ---
 
 ## 6. Spacing & Layout
@@ -583,13 +571,13 @@ Vertical section padding is `py-20` (80px) minimum for breathing room.
 
 NEXUS uses a sharp, angular design language. Rounded corners signal softness and playfulness — the wrong tone for a scholarly platform. The maximum border radius used anywhere in the system is `8px` (`rounded-lg`).
 
-|Token|Value|Use|
-|---|---|---|
-|`rounded-none`|`0px`|Default for most elements — cards, buttons, inputs|
-|`rounded-sm`|`2px`|Subtle rounding on small tags, badges|
-|`rounded-md`|`4px`|Optional softening on interactive elements|
-|`rounded-lg`|`8px`|Maximum — used sparingly on modals|
-|`rounded-full`|`999px`|Pills only — for status badges and avatar images|
+| Token          | Value   | Use                                                |
+| -------------- | ------- | -------------------------------------------------- |
+| `rounded-none` | `0px`   | Default for most elements — cards, buttons, inputs |
+| `rounded-sm`   | `2px`   | Subtle rounding on small tags, badges              |
+| `rounded-md`   | `4px`   | Optional softening on interactive elements         |
+| `rounded-lg`   | `8px`   | Maximum — used sparingly on modals                 |
+| `rounded-full` | `999px` | Pills only — for status badges and avatar images   |
 
 ---
 
@@ -792,13 +780,13 @@ Used while data is being fetched. The animation is defined in Tailwind config.
 
 ### 8.2 Timing Reference
 
-|Duration|Use case|
-|---|---|
-|`100ms`|Instant feedback — button press, checkbox tick|
-|`200ms`|Fast transitions — hover color changes, border changes|
-|`300ms`|Standard — theme switch, dropdown open|
-|`500–600ms`|Entrance animations — card reveal on scroll|
-|`800–1000ms`|Hero animations — first load only|
+| Duration     | Use case                                               |
+| ------------ | ------------------------------------------------------ |
+| `100ms`      | Instant feedback — button press, checkbox tick         |
+| `200ms`      | Fast transitions — hover color changes, border changes |
+| `300ms`      | Standard — theme switch, dropdown open                 |
+| `500–600ms`  | Entrance animations — card reveal on scroll            |
+| `800–1000ms` | Hero animations — first load only                      |
 
 ### 8.3 Easing Functions
 
@@ -930,13 +918,13 @@ The custom cursor is a visual enhancement only. It must not affect keyboard navi
 
 ### 11.1 Breakpoints (Tailwind Defaults)
 
-|Breakpoint|Width|Target|
-|---|---|---|
-|`sm`|640px|Large mobile|
-|`md`|768px|Tablet|
-|`lg`|1024px|Desktop|
-|`xl`|1280px|Wide desktop|
-|`2xl`|1536px|Ultra-wide|
+| Breakpoint | Width  | Target       |
+| ---------- | ------ | ------------ |
+| `sm`       | 640px  | Large mobile |
+| `md`       | 768px  | Tablet       |
+| `lg`       | 1024px | Desktop      |
+| `xl`       | 1280px | Wide desktop |
+| `2xl`      | 1536px | Ultra-wide   |
 
 ### 11.2 Mobile-First Rule
 
@@ -957,147 +945,3 @@ Based on the school context, approximately 80% of student access will be via sma
 
 ---
 
-## 12. Project Folder Structure
-
-### 12.1 Frontend Structure
-
-```
-apps/web/src/
-  app/
-    page.tsx              ← Landing page (assembles sections)
-    layout.tsx            ← Root layout, fonts, theme script, cursor, loading screen
-    global.css            ← All base styles, CSS variables
-    login/
-      page.tsx
-    vault/
-      page.tsx
-    dashboard/
-      page.tsx
-    search/
-      page.tsx
-
-  components/
-    ui/                   ← Tiny, reusable, stateless building blocks
-      CountUp.tsx
-      MagneticLetter.tsx
-      CardSection.tsx
-      Button.tsx
-      Badge.tsx
-      Tag.tsx
-      Skeleton.tsx
-
-    layout/               ← App-level wrappers (exist on every page)
-      Nav.tsx
-      Footer.tsx
-      CustomCursor.tsx
-      LoadingScreen.tsx
-      ThemeToggle.tsx
-
-    sections/             ← Landing page sections (used once, large)
-      HeroSection.tsx
-      AboutSection.tsx
-      AccessSection.tsx
-      ExploreSection.tsx
-      WhyNexusSection.tsx
-      CtaSection.tsx
-
-    features/             ← Feature-specific components grouped by domain
-      catalog/
-        BookCard.tsx
-        BookSearch.tsx
-        BookFilters.tsx
-        BookDetail.tsx
-      auth/
-        LoginForm.tsx
-        RoleSelector.tsx
-      vault/
-        VaultGrid.tsx
-        PaperCard.tsx
-        SubjectFilter.tsx
-      dashboard/
-        StatsCard.tsx
-        BorrowingChart.tsx
-        RecentActivity.tsx
-        ReadingStreak.tsx
-      admin/
-        BookForm.tsx
-        UserTable.tsx
-        FineCalculator.tsx
-
-  hooks/
-    useMousePosition.ts
-    useIntersection.ts
-    useTheme.ts
-    useCountUp.ts
-
-  lib/
-    constants.ts          ← App-wide constants (roles, routes, etc.)
-    utils.ts              ← Pure helper functions
-    api.ts                ← API call wrappers
-```
-
-### 12.2 Component Placement Rules
-
-|Question|Folder|
-|---|---|
-|Is it tiny, reusable, no business logic?|`components/ui/`|
-|Does it wrap the whole app or every page?|`components/layout/`|
-|Is it a full landing page section?|`components/sections/`|
-|Is it tied to a specific feature?|`components/features/[feature]/`|
-|Does it use React hooks and return data?|`hooks/`|
-|Is it a pure function with no React?|`lib/utils.ts`|
-
----
-
-## 13. Implementation Checklist
-
-### Foundation (Must be complete before building any components)
-
-- [x] `global.css` — CSS variables, base reset, typography, scrollbar, cursor
-- [x] `tailwind.config.js` — colors, fonts, font sizes, radius, animations
-- [ ] `layout.tsx` — next/font setup, theme flash prevention script, CustomCursor, LoadingScreen
-- [ ] `hooks/useMousePosition.ts` — mouse tracking hook
-- [ ] `components/layout/CustomCursor.tsx` — two-element cursor component
-- [ ] `components/layout/LoadingScreen.tsx` — 5 second entrance animation
-- [ ] `components/layout/ThemeToggle.tsx` — dark/light toggle with localStorage
-
-### Landing Page
-
-- [ ] `components/ui/MagneticLetter.tsx`
-- [ ] `components/ui/CountUp.tsx`
-- [ ] `components/ui/CardSection.tsx`
-- [ ] `components/layout/Nav.tsx`
-- [ ] `components/sections/HeroSection.tsx`
-- [ ] `components/sections/AboutSection.tsx`
-- [ ] `components/sections/AccessSection.tsx`
-- [ ] `components/sections/ExploreSection.tsx`
-- [ ] `components/sections/WhyNexusSection.tsx`
-- [ ] `components/sections/CtaSection.tsx`
-- [ ] `app/page.tsx` — assembles all sections
-
-### Authentication
-
-- [ ] `app/login/page.tsx`
-- [ ] `components/features/auth/LoginForm.tsx`
-- [ ] `components/features/auth/RoleSelector.tsx`
-
-### Core Features (Phase 2+)
-
-- [ ] Book catalog and search
-- [ ] Student dashboard
-- [ ] Digital vault
-- [ ] Admin dashboard
-- [ ] Borrowing and fine system
-- [ ] Reading gamification (streaks, badges)
-
----
-
-## Document Notes
-
-This document replaces `design_system_&_visual_identity.md` version 1.0 entirely. The previous version used a different color palette (Navy/Sage/Cream derived from the original logo), different fonts (Crimson Pro and DM Sans), and a light-first theme approach. All of those decisions have been superseded by this document.
-
-The psychological reasoning behind every color and typography decision is documented separately in `color_and_typography_psychology.md`. This document covers the implementation. That document covers the why.
-
----
-
-_Project NEXUS · Design System Version 2.0_ _C.W.W. Kannangara Central College · Mathugama_ _Built by S.C. Roshana · Cinderax · © 2026_

@@ -1,10 +1,3 @@
-
-**Version:** 1.0  
-**Date:** January 27, 2026  
-**For:** Students of C.W.W. Kannangara Central College
-
----
-
 ## Welcome to NEXUS! 📚
 
 NEXUS is your new digital library companion. This guide will help you discover books, borrow them, and make the most of your reading experience.

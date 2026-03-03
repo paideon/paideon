@@ -1,19 +1,3 @@
-# 🛠️ Project NEXUS: Technology Stack
-
-> Finalized technology decisions for the NEXUS Library Management System.
-
-**Version:** 1.1 **Date:** February 2026 **Author:** S.C. Roshana (Cinderax) **Project:** NEXUS Library Management System**School:** C.W.W. Kannangara Central College - Mathugama
-
----
-
-## Document Control
-
-|Version|Date|Changes|
-|---|---|---|
-|1.0|Jan 2026|Initial technology stack|
-|1.1|Feb 2026|Updated to reflect finalized monorepo architecture, ORM, and tooling decisions|
-
----
 
 ## 1. 🗂️ Monorepo & Project Management
 
@@ -88,58 +72,58 @@ BookRecord (metadata concept)
 
 ## 5. ⚙️ Development Infrastructure
 
-|Component|Technology|Rationale|
-|---|---|---|
-|**Local Databases**|**Docker + Docker Compose**|Runs PostgreSQL and Redis in isolated containers locally. No local installation of database software needed. One command (`docker compose up -d`) starts everything.|
-|**Code Editor**|**Visual Studio Code**|Professional-grade editor with superior TypeScript, ESLint, Prisma, and Tailwind CSS extensions.|
-|**Version Control**|**Git + GitHub**|Git for local tracking. GitHub for remote hosting, backup, and future CI/CD. All source code hosted on a school-owned GitHub Organization account.|
-|**Commit Convention**|**Conventional Commits**|Standardized commit message format: `feat:`, `fix:`, `chore:`, `docs:`. Keeps Git history readable and enables automatic changelog generation.|
-|**Linting**|**ESLint**|Enforces code quality rules across all apps and packages via a shared root config inherited by every project.|
-|**Formatting**|**Prettier**|Automatic, opinionated code formatting. Eliminates debates about code style. Shared config at root, applied to all files.|
-|**Environment Variables**|**.env + .env.example**|`.env` holds real secrets (never committed). `.env.example` is the committed template showing what variables are needed.|
+| Component                 | Technology                  | Rationale                                                                                                                                                            |
+| ------------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Local Databases**       | **Docker + Docker Compose** | Runs PostgreSQL and Redis in isolated containers locally. No local installation of database software needed. One command (`docker compose up -d`) starts everything. |
+| **Code Editor**           | **Visual Studio Code**      | Professional-grade editor with superior TypeScript, ESLint, Prisma, and Tailwind CSS extensions.                                                                     |
+| **Version Control**       | **Git + GitHub**            | Git for local tracking. GitHub for remote hosting, backup, and future CI/CD. All source code hosted on a school-owned GitHub Organization account.                   |
+| **Commit Convention**     | **Conventional Commits**    | Standardized commit message format: `feat:`, `fix:`, `chore:`, `docs:`. Keeps Git history readable and enables automatic changelog generation.                       |
+| **Linting**               | **ESLint**                  | Enforces code quality rules across all apps and packages via a shared root config inherited by every project.                                                        |
+| **Formatting**            | **Prettier**                | Automatic, opinionated code formatting. Eliminates debates about code style. Shared config at root, applied to all files.                                            |
+| **Environment Variables** | **.env + .env.example**     | `.env` holds real secrets (never committed). `.env.example` is the committed template showing what variables are needed.                                             |
 
 ---
 
 ## 6. 🔐 Security
 
-|Component|Technology|Rationale|
-|---|---|---|
-|**Authentication**|**JWT (JSON Web Tokens)** via `@nestjs/jwt`|Stateless authentication. Tokens are issued on login and verified on each request. 7-day expiry.|
-|**Password Hashing**|**bcrypt** (10 rounds)|Industry-standard one-way hashing for passwords. Even if the database is compromised, passwords cannot be recovered.|
-|**Authorization**|**NestJS Guards + RBAC**|Role-Based Access Control enforced at the controller level. Five roles: STUDENT, TEACHER, STAFF, LIBRARIAN, ADMIN.|
-|**Input Validation**|**class-validator**|Every API endpoint validates incoming data before it reaches business logic. Prevents malformed or malicious input.|
-|**SQL Injection**|**Prisma ORM**|Prisma uses parameterized queries by design. Direct SQL injection is structurally prevented.|
-|**Rate Limiting**|**@nestjs/throttler**|Prevents brute-force attacks. 100 requests/minute per user. 5 failed login attempts triggers a 15-minute lockout.|
+| Component            | Technology                                  | Rationale                                                                                                            |
+| -------------------- | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **Authentication**   | **JWT (JSON Web Tokens)** via `@nestjs/jwt` | Stateless authentication. Tokens are issued on login and verified on each request. 7-day expiry.                     |
+| **Password Hashing** | **bcrypt** (10 rounds)                      | Industry-standard one-way hashing for passwords. Even if the database is compromised, passwords cannot be recovered. |
+| **Authorization**    | **NestJS Guards + RBAC**                    | Role-Based Access Control enforced at the controller level. Five roles: STUDENT, TEACHER, STAFF, LIBRARIAN, ADMIN.   |
+| **Input Validation** | **class-validator**                         | Every API endpoint validates incoming data before it reaches business logic. Prevents malformed or malicious input.  |
+| **SQL Injection**    | **Prisma ORM**                              | Prisma uses parameterized queries by design. Direct SQL injection is structurally prevented.                         |
+| **Rate Limiting**    | **@nestjs/throttler**                       | Prevents brute-force attacks. 100 requests/minute per user. 5 failed login attempts triggers a 15-minute lockout.    |
 
 ---
 
 ## 7. 📧 Notifications & Communication
 
-|Component|Technology|Rationale|
-|---|---|---|
-|**Email**|**Nodemailer + Gmail SMTP**|Sends automated emails for due date reminders, overdue notices, reservation alerts. Free for the volume needed.|
-|**SMS** (future)|**Dialog SMS API / Twilio**|For critical notifications to users without consistent internet access. Phase 2 feature.|
-|**Push Notifications**|**Web Push API** (via PWA)|Browser push notifications for reservation availability alerts. Works after PWA is installed.|
+| Component              | Technology                  | Rationale                                                                                                       |
+| ---------------------- | --------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| **Email**              | **Nodemailer + Gmail SMTP** | Sends automated emails for due date reminders, overdue notices, reservation alerts. Free for the volume needed. |
+| **SMS** (future)       | **Dialog SMS API / Twilio** | For critical notifications to users without consistent internet access. Phase 2 feature.                        |
+| **Push Notifications** | **Web Push API** (via PWA)  | Browser push notifications for reservation availability alerts. Works after PWA is installed.                   |
 
 ---
 
 ## 8. 📊 Analytics & Reporting
 
-|Component|Technology|Rationale|
-|---|---|---|
-|**Analytics Engine**|**Custom (NestJS + Prisma queries)**|Library-specific analytics built directly into the API. Dead stock analysis, acquisition recommendations, circulation trends.|
-|**Charts (Frontend)**|**Recharts**|React-native charting library. Lightweight, responsive, and easy to customize for the admin dashboard.|
-|**Report Export**|**PDFKit / ExcelJS**|Generates downloadable PDF and Excel reports from analytics data for administration.|
+| Component             | Technology                           | Rationale                                                                                                                     |
+| --------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| **Analytics Engine**  | **Custom (NestJS + Prisma queries)** | Library-specific analytics built directly into the API. Dead stock analysis, acquisition recommendations, circulation trends. |
+| **Charts (Frontend)** | **Recharts**                         | React-native charting library. Lightweight, responsive, and easy to customize for the admin dashboard.                        |
+| **Report Export**     | **PDFKit / ExcelJS**                 | Generates downloadable PDF and Excel reports from analytics data for administration.                                          |
 
 ---
 
 ## 9. 🗄️ File Storage
 
-|Component|Technology|Rationale|
-|---|---|---|
-|**Book Covers**|**Cloud Object Storage** (AWS S3 or Cloudflare R2)|Stores uploaded book cover images. R2 is preferred — no egress fees, cheaper than S3 for a school budget.|
-|**Digital Vault PDFs**|**Same cloud storage**|Past papers, Ministry of Education textbooks stored securely. Served via CDN for fast loading.|
-|**Local Dev**|**Local filesystem**|During development, files stored locally. Switched to cloud storage in production.|
+| Component              | Technology                                         | Rationale                                                                                                 |
+| ---------------------- | -------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| **Book Covers**        | **Cloud Object Storage** (AWS S3 or Cloudflare R2) | Stores uploaded book cover images. R2 is preferred — no egress fees, cheaper than S3 for a school budget. |
+| **Digital Vault PDFs** | **Same cloud storage**                             | Past papers, Ministry of Education textbooks stored securely. Served via CDN for fast loading.            |
+| **Local Dev**          | **Local filesystem**                               | During development, files stored locally. Switched to cloud storage in production.                        |
 
 ---
 
@@ -147,11 +131,11 @@ BookRecord (metadata concept)
 
 Deployment platform has not been finalized. Candidates being evaluated:
 
-|Option|Pros|Cons|
-|---|---|---|
-|**Railway**|Simple, Git-based deploy, affordable|Less control|
-|**VPS (DigitalOcean / Hetzner)**|Full control, cheapest long-term|Requires server management|
-|**Google Cloud Platform**|Mentioned in proposal, free tier|More complex setup|
+| Option                           | Pros                                 | Cons                       |
+| -------------------------------- | ------------------------------------ | -------------------------- |
+| **Railway**                      | Simple, Git-based deploy, affordable | Less control               |
+| **VPS (DigitalOcean / Hetzner)** | Full control, cheapest long-term     | Requires server management |
+| **Google Cloud Platform**        | Mentioned in proposal, free tier     | More complex setup         |
 
 **Decision will be made before Month 10 (deployment phase).**
 
@@ -198,15 +182,15 @@ prisma, @prisma/client
 
 ## 12. ❌ Technologies Considered but Rejected
 
-|Technology|Reason Rejected|
-|---|---|
-|**MySQL**|PostgreSQL is more capable — better JSON support, full-text search, and advanced indexing|
-|**TypeORM**|Prisma has a significantly better developer experience, type safety, and migration tooling|
-|**MySQL Workbench**|Not needed — Prisma schema is the single source of truth for database design. Prisma Migrate handles DDL generation.|
-|**GraphQL**|Adds complexity that isn't justified for this project. REST with Swagger is sufficient and easier for future maintainers.|
-|**Yarn / npm**|pnpm is faster, more disk-efficient, and has better native monorepo support|
-|**Create React App**|Deprecated. Next.js supersedes it with SSR, routing, and PWA support built in.|
-|**Nx Cloud**|Remote caching for teams. Not needed for a solo developer on one machine.|
+| Technology           | Reason Rejected                                                                                                           |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| **MySQL**            | PostgreSQL is more capable — better JSON support, full-text search, and advanced indexing                                 |
+| **TypeORM**          | Prisma has a significantly better developer experience, type safety, and migration tooling                                |
+| **MySQL Workbench**  | Not needed — Prisma schema is the single source of truth for database design. Prisma Migrate handles DDL generation.      |
+| **GraphQL**          | Adds complexity that isn't justified for this project. REST with Swagger is sufficient and easier for future maintainers. |
+| **Yarn / npm**       | pnpm is faster, more disk-efficient, and has better native monorepo support                                               |
+| **Create React App** | Deprecated. Next.js supersedes it with SSR, routing, and PWA support built in.                                            |
+| **Nx Cloud**         | Remote caching for teams. Not needed for a solo developer on one machine.                                                 |
 
 ---
 

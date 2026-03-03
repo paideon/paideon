@@ -1,19 +1,3 @@
-**Version:** 1.0  
-**Date:** January 27, 2026  
-**Project:** NEXUS Library Management System  
-**School:** C.W.W. Kannangara Central College - Mathugama
-
----
-
-## Document Control
-
-|Version|Date|Author|Changes|
-|---|---|---|---|
-|1.0|2026-01-27|S.C. Roshana|Initial requirements document|
-|1.1|2026-02-24|S.C. Roshana|Updated architecture diagram (added Redis, monorepo structure), updated compatibility table (Next.js 15, Nx, pnpm, Prisma, Redis), expanded security requirements|
-
----
-
 ## Table of Contents
 
 1. [Introduction](#1-introduction)
@@ -55,15 +39,15 @@ NEXUS will serve:
 
 ### 1.4 Definitions
 
-|Term|Definition|
-|---|---|
-|**Accession Number**|Unique identifier assigned to each physical book copy|
-|**ISBN**|International Standard Book Number (10 or 13 digits)|
-|**Loan Period**|Duration a book can be borrowed (14 days default)|
-|**Dead Stock**|Books not borrowed in 12+ months|
-|**PWA**|Progressive Web App (installable mobile web application)|
-|**QR Code**|Quick Response code for library card|
-|**Reservation Queue**|Waitlist for checked-out books|
+| Term                  | Definition                                               |
+| --------------------- | -------------------------------------------------------- |
+| **Accession Number**  | Unique identifier assigned to each physical book copy    |
+| **ISBN**              | International Standard Book Number (10 or 13 digits)     |
+| **Loan Period**       | Duration a book can be borrowed (14 days default)        |
+| **Dead Stock**        | Books not borrowed in 12+ months                         |
+| **PWA**               | Progressive Web App (installable mobile web application) |
+| **QR Code**           | Quick Response code for library card                     |
+| **Reservation Queue** | Waitlist for checked-out books                           |
 
 ---
 
@@ -104,17 +88,17 @@ Shared packages (packages/):
 
 ### 2.2 Core Modules
 
-|Module|Description|
-|---|---|
-|**User Management**|Authentication, authorization, profile management|
-|**Catalog Management**|Book CRUD, ISBN auto-fetch, search|
-|**Circulation**|Check-out, check-in, renewals|
-|**Reservations**|Queue management, notifications|
-|**Fines & Penalties**|Automated calculation, payment tracking|
-|**Digital Vault**|Textbooks, past papers repository|
-|**Analytics**|Usage reports, dead stock analysis|
-|**Gamification**|Badges, streaks, leaderboards|
-|**Notifications**|Email, SMS, push notifications|
+| Module                 | Description                                       |
+| ---------------------- | ------------------------------------------------- |
+| **User Management**    | Authentication, authorization, profile management |
+| **Catalog Management** | Book CRUD, ISBN auto-fetch, search                |
+| **Circulation**        | Check-out, check-in, renewals                     |
+| **Reservations**       | Queue management, notifications                   |
+| **Fines & Penalties**  | Automated calculation, payment tracking           |
+| **Digital Vault**      | Textbooks, past papers repository                 |
+| **Analytics**          | Usage reports, dead stock analysis                |
+| **Gamification**       | Badges, streaks, leaderboards                     |
+| **Notifications**      | Email, SMS, push notifications                    |
 
 ---
 
@@ -142,55 +126,55 @@ Shared packages (packages/):
 
 ### 3.2 Permissions Matrix
 
-|Feature|Student|Teacher|Staff|Librarian|Admin|
-|---|---|---|---|---|---|
-|**Books**||||||
-|Browse catalog|✅|✅|✅|✅|✅|
-|View book details|✅|✅|✅|✅|✅|
-|Search books|✅|✅|✅|✅|✅|
-|Add new books|❌|❌|❌|✅|✅|
-|Edit book details|❌|❌|❌|✅|✅|
-|Delete books|❌|❌|❌|❌|✅|
-|ISBN auto-fetch|❌|❌|❌|✅|✅|
-|Bulk import|❌|❌|❌|✅|✅|
-|**Circulation**||||||
-|Check-out (self)|❌|❌|❌|✅|✅|
-|Check-in (self)|❌|❌|❌|✅|✅|
-|Renew books|✅|✅|✅|✅|✅|
-|View loan history|✅ (own)|✅ (own)|✅ (own)|✅ (all)|✅ (all)|
-|**Reservations**||||||
-|Create reservation|✅|✅|✅|✅|✅|
-|Cancel reservation|✅ (own)|✅ (own)|✅ (own)|✅ (all)|✅ (all)|
-|View queue position|✅|✅|✅|✅|✅|
-|**Fines**||||||
-|View own fines|✅|✅|✅|✅|✅|
-|Pay fines|✅|✅|✅|✅|✅|
-|Waive fines|❌|❌|❌|❌|✅|
-|View all fines|❌|❌|❌|✅|✅|
-|**Digital Vault**||||||
-|View resources|✅|✅|✅|✅|✅|
-|Download resources|✅|✅|✅|✅|✅|
-|Upload resources|❌|❌|❌|✅|✅|
-|Delete resources|❌|❌|❌|❌|✅|
-|**Analytics**||||||
-|View personal stats|✅|✅|✅|✅|✅|
-|View library stats|❌|❌|❌|✅|✅|
-|Generate reports|❌|❌|❌|✅|✅|
-|Dead stock analysis|❌|❌|❌|✅|✅|
-|**Gamification**||||||
-|View leaderboard|✅|✅|✅|✅|✅|
-|Opt-in/out leaderboard|✅|✅|✅|✅|✅|
-|View badges|✅|✅|✅|✅|✅|
-|**User Management**||||||
-|Edit own profile|✅|✅|✅|✅|✅|
-|View other profiles|❌|❌|❌|✅|✅|
-|Create users|❌|❌|❌|❌|✅|
-|Suspend users|❌|❌|❌|❌|✅|
-|Assign roles|❌|❌|❌|❌|✅|
-|**System**||||||
-|View system logs|❌|❌|❌|❌|✅|
-|Modify system config|❌|❌|❌|❌|✅|
-|Backup database|❌|❌|❌|❌|✅|
+| Feature                | Student | Teacher | Staff   | Librarian | Admin   |
+| ---------------------- | ------- | ------- | ------- | --------- | ------- |
+| **Books**              |         |         |         |           |         |
+| Browse catalog         | ✅       | ✅       | ✅       | ✅         | ✅       |
+| View book details      | ✅       | ✅       | ✅       | ✅         | ✅       |
+| Search books           | ✅       | ✅       | ✅       | ✅         | ✅       |
+| Add new books          | ❌       | ❌       | ❌       | ✅         | ✅       |
+| Edit book details      | ❌       | ❌       | ❌       | ✅         | ✅       |
+| Delete books           | ❌       | ❌       | ❌       | ❌         | ✅       |
+| ISBN auto-fetch        | ❌       | ❌       | ❌       | ✅         | ✅       |
+| Bulk import            | ❌       | ❌       | ❌       | ✅         | ✅       |
+| **Circulation**        |         |         |         |           |         |
+| Check-out (self)       | ❌       | ❌       | ❌       | ✅         | ✅       |
+| Check-in (self)        | ❌       | ❌       | ❌       | ✅         | ✅       |
+| Renew books            | ✅       | ✅       | ✅       | ✅         | ✅       |
+| View loan history      | ✅ (own) | ✅ (own) | ✅ (own) | ✅ (all)   | ✅ (all) |
+| **Reservations**       |         |         |         |           |         |
+| Create reservation     | ✅       | ✅       | ✅       | ✅         | ✅       |
+| Cancel reservation     | ✅ (own) | ✅ (own) | ✅ (own) | ✅ (all)   | ✅ (all) |
+| View queue position    | ✅       | ✅       | ✅       | ✅         | ✅       |
+| **Fines**              |         |         |         |           |         |
+| View own fines         | ✅       | ✅       | ✅       | ✅         | ✅       |
+| Pay fines              | ✅       | ✅       | ✅       | ✅         | ✅       |
+| Waive fines            | ❌       | ❌       | ❌       | ❌         | ✅       |
+| View all fines         | ❌       | ❌       | ❌       | ✅         | ✅       |
+| **Digital Vault**      |         |         |         |           |         |
+| View resources         | ✅       | ✅       | ✅       | ✅         | ✅       |
+| Download resources     | ✅       | ✅       | ✅       | ✅         | ✅       |
+| Upload resources       | ❌       | ❌       | ❌       | ✅         | ✅       |
+| Delete resources       | ❌       | ❌       | ❌       | ✅         | ✅       |
+| **Analytics**          |         |         |         |           |         |
+| View personal stats    | ✅       | ✅       | ✅       | ✅         | ✅       |
+| View library stats     | ❌       | ❌       | ❌       | ✅         | ✅       |
+| Generate reports       | ❌       | ❌       | ❌       | ✅         | ✅       |
+| Dead stock analysis    | ❌       | ❌       | ❌       | ✅         | ✅       |
+| **Gamification**       |         |         |         |           |         |
+| View leaderboard       | ✅       | ✅       | ✅       | ✅         | ✅       |
+| Opt-in/out leaderboard | ✅       | ✅       | ✅       | ✅         | ✅       |
+| View badges            | ✅       | ✅       | ✅       | ✅         | ✅       |
+| **User Management**    |         |         |         |           |         |
+| Edit own profile       | ✅       | ✅       | ✅       | ✅         | ✅       |
+| View other profiles    | ❌       | ❌       | ❌       | ✅         | ✅       |
+| Create users           | ❌       | ❌       | ❌       | ❌         | ✅       |
+| Suspend users          | ❌       | ❌       | ❌       | ❌         | ✅       |
+| Assign roles           | ❌       | ❌       | ❌       | ❌         | ✅       |
+| **System**             |         |         |         |           |         |
+| View system logs       | ❌       | ❌       | ❌       | ❌         | ✅       |
+| Modify system config   | ❌       | ❌       | ❌       | ❌         | ✅       |
+| Backup database        | ❌       | ❌       | ❌       | ❌         | ✅       |
 
 ---
 
