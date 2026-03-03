@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion'
 
 // Each letter: scaleY drives the dramatic height variation
-// baselineShift pushes taller letters downward so bottoms align
 const LETTERS = [
   { char: 'N', scaleY: 0.72 },
   { char: 'E', scaleY: 1.10 },
@@ -18,7 +17,7 @@ export function HeroSection() {
       className="relative w-full h-screen overflow-hidden bg-background"
     >
 
-      {/* ─── GIANT variable-height NEXUS — tops aligned, bottoms ragged ─── */}
+      {/* GIANT variable-height NEXUS — tops aligned, bottoms ragged  */}
       <div
         className="absolute inset-0 flex items-start justify-center pointer-events-none overflow-hidden mb-8"
         style={{ paddingTop: '0px' }}
@@ -59,7 +58,7 @@ export function HeroSection() {
         </motion.h1>
       </div>
 
-      {/* ─── Centered Logo ─── */}
+      {/*  Centered Logo  */}
 
       <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none mt-56">
         <motion.div
@@ -79,7 +78,7 @@ export function HeroSection() {
       </div>
 
 
-      {/* ─── Scroll Indicator ─── */}
+      {/*  Scroll Indicator  */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

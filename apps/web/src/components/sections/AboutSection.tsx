@@ -73,7 +73,7 @@ export function AboutSection({ stats }: { stats: LibraryStats }) {
         </RevealText>
       </div>
 
-      {/* Body text — inline mentions still use CountUp for the animated feel */}
+      {/* Body text */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}

@@ -7,7 +7,7 @@ import { CountUp } from '@/components/ui/CountUp'
 import { SearchBar, type SearchFilter } from '@/components/ui/SearchBar'
 import type { LibraryStats } from '@nexus/types'
 
-// ── StatCard ───────────────────────────────────────────────────────────────
+// StatCard 
 function StatCard({
   target,
   label,
@@ -53,7 +53,7 @@ function StatCard({
   )
 }
 
-// ── ExploreSection ─────────────────────────────────────────────────────────
+//  ExploreSection 
 export function ExploreSection({ stats }: { stats: LibraryStats }) {
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, { once: true, margin: '-8% 0px' })
@@ -66,8 +66,6 @@ export function ExploreSection({ stats }: { stats: LibraryStats }) {
     { target: 0,              label: 'Manual\nProcesses' },
   ]
 
-  // Landing page handler — navigates to /search with query + filter in URL.
-  // The /search page reads these params, pre-fills SearchBar, and calls the API.
   const handleSearch = (query: string, filter: SearchFilter) => {
     const params = new URLSearchParams({ q: query })
     if (filter !== 'All Books') params.set('filter', filter)
@@ -112,7 +110,7 @@ export function ExploreSection({ stats }: { stats: LibraryStats }) {
         </motion.h2>
       </div>
 
-      {/* Search bar — onSearch handles navigation, SearchBar stays pure */}
+      {/* Search bar */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}

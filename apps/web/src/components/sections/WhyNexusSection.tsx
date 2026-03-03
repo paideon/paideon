@@ -68,7 +68,7 @@ export function WhyNexusSection() {
       "
     >
 
-      {/* Section label — consistent with all other sections */}
+      {/* Section label  */}
       <motion.span
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
