@@ -48,7 +48,7 @@ export function StatCard({
         {label}
       </span>
 
-      {/* Bottom accent line — grows on hover */}
+      {/* Bottom accent line */}
       <div className="w-4 h-px bg-border-strong group-hover:w-8 group-hover:bg-primary transition-all duration-500 mt-auto" />
     </motion.div>
   )

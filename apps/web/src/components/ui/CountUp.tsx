@@ -1,25 +1,4 @@
-// ## What Makes This Different From Your Original
 
-// **The scramble phase** — for the first 30% of the animation, random digits cycle rapidly like a slot machine or combination lock. Then it snaps into the smooth count up. This is the detail that makes people stop and watch the number settle.
-
-// **Two phase timing:**
-// ```
-// 0ms  ────── 540ms ────────────────── 1800ms
-//   [scramble]      [smooth count up]
-//    random digits   eased to final value
-// ```
-
-// **Ease out cubic** instead of ease out power-3 from before. This makes the count decelerate more dramatically at the end — like a spinning wheel losing momentum. The final few digits slow down noticeably, drawing attention to the number landing on its exact value.
-
-// **`IntersectionObserver` disconnects after triggering** — once the animation starts it won't restart if the user scrolls away and back. The number stays at its final value. This is the correct behavior.
-
-// **String support** — passing `"24/7"` as target just displays it immediately with no animation. Your explore section stats use this for the "24/7 Digital Access" stat.
-
-// ---
-
-// ## How to Use It
-
-// ```tsx
 // // Number with scramble
 // <CountUp target={8500} />
 
@@ -34,7 +13,6 @@
 
 // // Without scramble if you prefer clean count
 // <CountUp target={8500} scramble={false} />
-// ```
 
 'use client'
 
@@ -43,8 +21,8 @@ import { useRef, useState, useEffect } from 'react'
 interface CountUpProps {
   target: number | string
   suffix?: string
-  duration?: number     // ms — how long the count takes
-  scramble?: boolean    // random digit scramble before settling
+  duration?: number    
+  scramble?: boolean 
 }
 
 export function CountUp({

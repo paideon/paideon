@@ -35,7 +35,7 @@ export function FillButton({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Fill animation — floods from left on hover */}
+      {/* Fill animation */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
         initial={{ scaleX: 0 }}

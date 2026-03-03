@@ -18,8 +18,6 @@ export function QuoteCard({
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-5% 0px' })
 
-  // Diagonal wave — cards 0, then 1, then 2
-  // But with overlap: 0 starts at 0ms, 1 at 120ms, 2 at 240ms
   const delay = index * 0.12
 
   return (

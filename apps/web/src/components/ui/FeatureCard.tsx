@@ -37,7 +37,7 @@ export function FeatureCard({
       onMouseLeave={() => setIsHovered(false)}
     >
 
-      {/* ── Gold corner accent — draws on hover ─────── */}
+      {/*  Gold corner accent — draws on hover  */}
       {/* Top-left corner */}
       <motion.div
         className="absolute top-0 left-0 pointer-events-none"
@@ -80,7 +80,7 @@ export function FeatureCard({
         />
       </motion.div>
 
-      {/* ── Subtle hover background shift ───────────── */}
+      {/*  Subtle hover background shift  */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
         animate={{ opacity: isHovered ? 1 : 0 }}
@@ -90,7 +90,7 @@ export function FeatureCard({
         }}
       />
 
-      {/* ── Card content ─────────────────────────────── */}
+      {/*  Card content  */}
       <span className="font-mono text-label tracking-[0.2em] text-subtle group-hover:text-muted transition-colors duration-300 relative z-10">
         {card.n}
       </span>

@@ -1,11 +1,11 @@
 // @nexus/types
 // @nexus/types
-//
+
 // Shared types used by both apps/web and apps/api.
 // Neither app defines its own version of these — they both import from here.
 // If a shape changes, TypeScript errors surface in both places simultaneously.
 
-// ── Library Stats ──────────────────────────────────────────────────────────
+//  Library Stats 
 // The shape of the school statistics object returned by GET /api/stats.
 // Used as:
 //   - The API controller return type (apps/api)
