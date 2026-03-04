@@ -47,7 +47,7 @@ export default async function LandingPage() {
       </CardSection>
 
       {/*  CTA  */}
-      <CardSection index={5} totalSections={TOTAL} id="cta" className="bg-background">
+      <CardSection index={5} totalSections={TOTAL} id="cta" className="bg-card">
         <CtaSection />
       </CardSection>
 
