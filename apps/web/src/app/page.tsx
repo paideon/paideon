@@ -22,32 +22,32 @@ export default async function LandingPage() {
     <main>
 
       {/* Hero  */}
-      <CardSection index={0} totalSections={TOTAL} id="hero" className="bg-background">
+      <CardSection index={0} id="hero" className="bg-background">
         <HeroSection />
       </CardSection>
 
       {/*  About  */}
-      <CardSection index={1} totalSections={TOTAL} id="about" className="bg-card">
+      <CardSection index={1} id="about" className="bg-card">
         <AboutSection stats={stats} />
       </CardSection>
 
       {/*  Access  */}
-      <CardSection index={2} totalSections={TOTAL} id="access" className="bg-background">
+      <CardSection index={2} id="access" className="bg-background">
         <AccessSection />
       </CardSection>
 
       {/*  Explore  */}
-      <CardSection index={3} totalSections={TOTAL} id="explore" className="bg-card">
+      <CardSection index={3} id="explore" className="bg-card">
         <ExploreSection stats={stats} />
       </CardSection>
 
       {/*  Why NEXUS  */}
-      <CardSection index={4} totalSections={TOTAL} id="why-nexus" className="bg-background">
+      <CardSection index={4} id="why-nexus" className="bg-background">
         <WhyNexusSection />
       </CardSection>
 
       {/*  CTA  */}
-      <CardSection index={5} totalSections={TOTAL} id="cta" className="bg-card">
+      <CardSection index={5} id="cta" className="bg-card">
         <CtaSection />
       </CardSection>
 
