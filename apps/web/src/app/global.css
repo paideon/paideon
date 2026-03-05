@@ -140,6 +140,29 @@ a {
 
 /* Custom Cursor */
 
-/* * {
+* {
     cursor: none;
-} */
+}
+
+/* Hide scrollbar */
+
+* {
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* IE / Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none;                /* Chrome / Safari / Opera */
+}
+
+/* Section + container base styles for the scroll animation */
+
+section {
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  transform-origin: bottom left;
+  will-change: transform;
+}
