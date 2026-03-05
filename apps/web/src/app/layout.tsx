@@ -10,6 +10,7 @@ import './global.css';
 
 import { CustomCursor } from '@/components/layout/CustomCursor'
 import { LoadingScreen } from '@/components/layout/LoadingScreen'
+import { ScrollProvider } from '@/components/layout/ScrollProvider';
 
 // Font Setup
 
@@ -69,7 +70,9 @@ export default function RootLayout({
       <body>
         <LoadingScreen />
         <CustomCursor />
-        {children}
+        <ScrollProvider>
+          {children}
+        </ScrollProvider>
       </body>
     </html>
   );
