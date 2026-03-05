@@ -1,26 +1,26 @@
-'use client'
+'use client';
 
-import { useEffect } from 'react'
-import { useMousePosition } from '@/hooks/useMousePosition'
-import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { useEffect } from 'react';
+import { useMousePosition } from '@/hooks/useMousePosition';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 export function CustomCursor() {
-  const { x, y } = useMousePosition()
-  const cursorX = useMotionValue(-100)
-  const cursorY = useMotionValue(-100)
+  const { x, y } = useMousePosition();
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
 
   // Dot snaps instantly
-  const dotX = useSpring(cursorX, { stiffness: 800, damping: 40 })
-  const dotY = useSpring(cursorY, { stiffness: 800, damping: 40 })
+  const dotX = useSpring(cursorX, { stiffness: 800, damping: 40 });
+  const dotY = useSpring(cursorY, { stiffness: 800, damping: 40 });
 
   // Ring follows with lag — gives the trailing feel
-  const ringX = useSpring(cursorX, { stiffness: 120, damping: 18 })
-  const ringY = useSpring(cursorY, { stiffness: 120, damping: 18 })
+  const ringX = useSpring(cursorX, { stiffness: 120, damping: 18 });
+  const ringY = useSpring(cursorY, { stiffness: 120, damping: 18 });
 
   useEffect(() => {
-    cursorX.set(x)
-    cursorY.set(y)
-  }, [x, y, cursorX, cursorY])
+    cursorX.set(x);
+    cursorY.set(y);
+  }, [x, y, cursorX, cursorY]);
 
   return (
     <>
@@ -50,5 +50,5 @@ export function CustomCursor() {
         <div className="w-1.5 h-1.5 rounded-full bg-white" />
       </motion.div>
     </>
-  )
+  );
 }

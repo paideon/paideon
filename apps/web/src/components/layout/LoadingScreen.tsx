@@ -1,33 +1,33 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function LoadingScreen() {
-  const [isVisible, setIsVisible] = useState(true)
-  const [progress, setProgress] = useState(0)
+  const [isVisible, setIsVisible] = useState(true);
+  const [progress, setProgress] = useState(0);
 
   // ── Progress bar fills over 5 seconds ─────────────────────────
   useEffect(() => {
-    const duration = 5000
-    const interval = 16 // ~60fps
-    const step = (interval / duration) * 100
-    let current = 0
+    const duration = 5000;
+    const interval = 16; // ~60fps
+    const step = (interval / duration) * 100;
+    let current = 0;
 
     const timer = setInterval(() => {
-      current += step
-      setProgress(Math.min(current, 100))
-      if (current >= 100) clearInterval(timer)
-    }, interval)
+      current += step;
+      setProgress(Math.min(current, 100));
+      if (current >= 100) clearInterval(timer);
+    }, interval);
 
-    return () => clearInterval(timer)
-  }, [])
+    return () => clearInterval(timer);
+  }, []);
 
   // ── Dismiss after 5 seconds ────────────────────────────────────
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(false), 5000)
-    return () => clearTimeout(timer)
-  }, [])
+    const timer = setTimeout(() => setIsVisible(false), 5000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <AnimatePresence>
@@ -47,13 +47,66 @@ export function LoadingScreen() {
           >
             {/* Replace this with your actual <Image> logo */}
             <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <rect x="0.5" y="0.5" width="47" height="47" stroke="#3d4659" strokeWidth="0.8" />
-              <rect x="8.5" y="8.5" width="31" height="31" stroke="#3d4659" strokeWidth="0.5" opacity="0.5" />
-              <circle cx="24" cy="24" r="7" stroke="#4e7c6f" strokeWidth="0.8" />
-              <line x1="24" y1="0" x2="24" y2="17" stroke="#3d4659" strokeWidth="0.5" opacity="0.5" />
-              <line x1="24" y1="31" x2="24" y2="48" stroke="#3d4659" strokeWidth="0.5" opacity="0.5" />
-              <line x1="0" y1="24" x2="17" y2="24" stroke="#3d4659" strokeWidth="0.5" opacity="0.5" />
-              <line x1="31" y1="24" x2="48" y2="24" stroke="#3d4659" strokeWidth="0.5" opacity="0.5" />
+              <rect
+                x="0.5"
+                y="0.5"
+                width="47"
+                height="47"
+                stroke="#3d4659"
+                strokeWidth="0.8"
+              />
+              <rect
+                x="8.5"
+                y="8.5"
+                width="31"
+                height="31"
+                stroke="#3d4659"
+                strokeWidth="0.5"
+                opacity="0.5"
+              />
+              <circle
+                cx="24"
+                cy="24"
+                r="7"
+                stroke="#4e7c6f"
+                strokeWidth="0.8"
+              />
+              <line
+                x1="24"
+                y1="0"
+                x2="24"
+                y2="17"
+                stroke="#3d4659"
+                strokeWidth="0.5"
+                opacity="0.5"
+              />
+              <line
+                x1="24"
+                y1="31"
+                x2="24"
+                y2="48"
+                stroke="#3d4659"
+                strokeWidth="0.5"
+                opacity="0.5"
+              />
+              <line
+                x1="0"
+                y1="24"
+                x2="17"
+                y2="24"
+                stroke="#3d4659"
+                strokeWidth="0.5"
+                opacity="0.5"
+              />
+              <line
+                x1="31"
+                y1="24"
+                x2="48"
+                y2="24"
+                stroke="#3d4659"
+                strokeWidth="0.5"
+                opacity="0.5"
+              />
               <circle cx="24" cy="24" r="2" fill="#4e7c6f" />
             </svg>
 
@@ -107,5 +160,5 @@ export function LoadingScreen() {
         </motion.div>
       )}
     </AnimatePresence>
-  )
+  );
 }

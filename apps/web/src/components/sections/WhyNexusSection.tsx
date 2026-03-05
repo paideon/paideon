@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
-import { FeatureCard } from '@/components/ui/FeatureCard'
+import { FeatureCard } from '@/components/ui/FeatureCard';
 
 // Card data
 const CARDS = [
@@ -43,15 +43,14 @@ const CARDS = [
     body: 'Built to evolve. Year 2 adds e-books and parent portals. Year 3 adds assignments and grading. NEXUS grows with the school.',
     tag: 'Future-Ready',
   },
-]
-
+];
 
 export function WhyNexusSection() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const gridRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
-  const isInView = useInView(sectionRef, { once: true, margin: '-8% 0px' })
-  const isGridInView = useInView(gridRef, { once: true, margin: '-5% 0px' })
+  const isInView = useInView(sectionRef, { once: true, margin: '-8% 0px' });
+  const isGridInView = useInView(gridRef, { once: true, margin: '-5% 0px' });
 
   return (
     <section
@@ -67,7 +66,6 @@ export function WhyNexusSection() {
         overflow-hidden
       "
     >
-
       {/* Section label  */}
       <motion.span
         initial={{ opacity: 0 }}
@@ -93,11 +91,9 @@ export function WhyNexusSection() {
             transition={{ delay: 0.1, duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="font-display text-display-lg font-light text-foreground leading-none"
           >
-            Why{' '}
-            <em className="italic text-muted">NEXUS</em>
+            Why <em className="italic text-muted">NEXUS</em>
           </motion.h2>
         </div>
-
       </motion.div>
 
       {/*  Intro line  */}
@@ -108,8 +104,8 @@ export function WhyNexusSection() {
         className="text-[14px] font-light leading-[1.9] text-muted max-w-lg -mt-6 text-center"
       >
         Every feature exists because a real problem at the school demanded it.
-        None of this is speculative it is the direct response to six years
-        of accumulated friction.
+        None of this is speculative it is the direct response to six years of
+        accumulated friction.
       </motion.p>
 
       {/*  Cards grid  */}
@@ -126,7 +122,6 @@ export function WhyNexusSection() {
           />
         ))}
       </div>
-
     </section>
-  )
+  );
 }

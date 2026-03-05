@@ -1,15 +1,14 @@
-'use client'
+'use client';
 
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
-import { RevealText } from '@/components/ui/RevealText'
-import { Button } from '@/components/ui/Button'
-
+import { RevealText } from '@/components/ui/RevealText';
+import { Button } from '@/components/ui/Button';
 
 export function CtaSection() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const isInView = useInView(sectionRef, { once: true, margin: '-8% 0px' })
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: '-8% 0px' });
 
   return (
     <section
@@ -25,7 +24,6 @@ export function CtaSection() {
         overflow-hidden
       "
     >
-
       {/* Section label */}
       <motion.span
         initial={{ opacity: 0 }}
@@ -62,9 +60,9 @@ export function CtaSection() {
         transition={{ delay: 0.45, duration: 0.9 }}
         className="text-[13px] font-light leading-[1.9] text-muted text-center max-w-md"
       >
-        NEXUS is live at C.W.W. Kannangara Central College, Mathugama.
-        Sign in with your school credentials, or explore the Digital Vault
-        without an account.
+        NEXUS is live at C.W.W. Kannangara Central College, Mathugama. Sign in
+        with your school credentials, or explore the Digital Vault without an
+        account.
       </motion.p>
 
       {/* Buttons */}
@@ -78,9 +76,7 @@ export function CtaSection() {
           Sign In to NEXUS
         </Button>
 
-        <Button href="/vault">
-          Browse the Vault
-        </Button>
+        <Button href="/vault">Browse the Vault</Button>
       </motion.div>
 
       {/* Decorative horizontal rule with logo */}
@@ -115,7 +111,6 @@ export function CtaSection() {
           Built by S.C. Roshana · Cinderax · © 2026
         </span>
       </motion.div>
-
     </section>
-  )
+  );
 }

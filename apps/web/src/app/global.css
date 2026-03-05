@@ -6,62 +6,63 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* CSS Variables - Both Themes */
 
 :root {
   /* Background */
-  --background:         #0e1117;
-  --background-card:    #161b27;
-  --background-hover:   #1c2333;
+  --background: #0e1117;
+  --background-card: #161b27;
+  --background-hover: #1c2333;
 
   /* Text */
-  --foreground:         #e8e4dc;
-  --foreground-muted:   #8892a4;
-  --foreground-subtle:  #3d4659;
+  --foreground: #e8e4dc;
+  --foreground-muted: #8892a4;
+  --foreground-subtle: #3d4659;
 
   /* Brand */
-  --primary:            #4e7c6f;
-  --primary-light:      #6a9e8f;
-  --primary-muted:      rgba(78, 124, 111, 0.15);
+  --primary: #4e7c6f;
+  --primary-light: #6a9e8f;
+  --primary-muted: rgba(78, 124, 111, 0.15);
 
   /* Accent */
-  --gold:               #c9a84c;
-  --gold-muted:         rgba(201, 168, 76, 0.15);
+  --gold: #c9a84c;
+  --gold-muted: rgba(201, 168, 76, 0.15);
 
   /* Semantic */
-  --success:            #4e7c6f;
-  --warning:            #c9a84c;
-  --danger:             #c0544d;
+  --success: #4e7c6f;
+  --warning: #c9a84c;
+  --danger: #c0544d;
 
   /* Borders */
-  --border:             rgba(255, 255, 255, 0.06);
-  --border-strong:      rgba(255, 255, 255, 0.12);
+  --border: rgba(255, 255, 255, 0.06);
+  --border-strong: rgba(255, 255, 255, 0.12);
 
   /* Typography */
-  --font-display:       'Cormorant Garamond', serif;
-  --font-body:          'Inter', sans-serif;
-  --font-mono:          'JetBrains Mono', monospace;
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
-[data-theme="light"] {
-  --background:         #faf8f4;
-  --background-card:    #ffffff;
-  --background-hover:   #f0ede7;
+[data-theme='light'] {
+  --background: #faf8f4;
+  --background-card: #ffffff;
+  --background-hover: #f0ede7;
 
-  --foreground:         #1a1f2e;
-  --foreground-muted:   #5a6478;
-  --foreground-subtle:  #a0a8b8;
+  --foreground: #1a1f2e;
+  --foreground-muted: #5a6478;
+  --foreground-subtle: #a0a8b8;
 
-  --border:             rgba(0, 0, 0, 0.07);
-  --border-strong:      rgba(0, 0, 0, 0.14);
+  --border: rgba(0, 0, 0, 0.07);
+  --border-strong: rgba(0, 0, 0, 0.14);
 
   /* primary, gold, danger stay the same in both themes */
 }
 
 /* Base Reset */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -89,7 +90,12 @@ body {
 
 /* Typography Base */
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display);
   font-weight: 300;
   line-height: 1.1;
@@ -102,7 +108,9 @@ p {
   line-height: 1.8;
 }
 
-code, kbd, pre {
+code,
+kbd,
+pre {
   font-family: var(--font-mono);
 }
 
@@ -117,7 +125,6 @@ a {
   background-color: var(--primary-muted);
   color: var(--foreground);
 }
-
 
 /* Custom Scrollbar */
 
@@ -141,18 +148,18 @@ a {
 /* Custom Cursor */
 
 * {
-    cursor: none;
+  cursor: none;
 }
 
 /* Hide scrollbar */
 
 * {
-  scrollbar-width: none;        /* Firefox */
-  -ms-overflow-style: none;     /* IE / Edge */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE / Edge */
 }
 
 *::-webkit-scrollbar {
-  display: none;                /* Chrome / Safari / Opera */
+  display: none; /* Chrome / Safari / Opera */
 }
 
 /* Section + container base styles for the scroll animation */

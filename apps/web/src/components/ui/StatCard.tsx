@@ -1,22 +1,21 @@
-'use client'
+'use client';
 
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
-import { CountUp } from '@/components/ui/CountUp'
-
+import { CountUp } from '@/components/ui/CountUp';
 
 export function StatCard({
   target,
   label,
   index,
 }: {
-  target: number | string
-  label: string
-  index: number
+  target: number | string;
+  label: string;
+  index: number;
 }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-5% 0px' })
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-5% 0px' });
 
   return (
     <motion.div
@@ -51,5 +50,5 @@ export function StatCard({
       {/* Bottom accent line */}
       <div className="w-4 h-px bg-border-strong group-hover:w-8 group-hover:bg-primary transition-all duration-500 mt-auto" />
     </motion.div>
-  )
+  );
 }

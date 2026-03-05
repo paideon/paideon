@@ -1,12 +1,12 @@
-'use client'
+'use client';
 
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
-import { RevealText } from '@/components/ui/RevealText'
-import { QuoteCard } from '@/components/ui/QuoteCard'
-import { CountUp } from '@/components/ui/CountUp'
-import type { LibraryStats } from '@nexus/types'
+import { RevealText } from '@/components/ui/RevealText';
+import { QuoteCard } from '@/components/ui/QuoteCard';
+import { CountUp } from '@/components/ui/CountUp';
+import type { LibraryStats } from '@nexus/types';
 
 // Quote data
 const QUOTES = [
@@ -22,18 +22,18 @@ const QUOTES = [
     text: '"A book is a dream that you hold in your hands."',
     author: 'Neil Gaiman',
   },
-]
+];
 
 export function AboutSection({ stats }: { stats: LibraryStats }) {
-  const sectionRef = useRef<HTMLElement>(null)
-  const isInView = useInView(sectionRef, { once: true, margin: '-8% 0px' })
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: '-8% 0px' });
 
   const STATS = [
     { target: stats.students, label: 'Students' },
     { target: stats.teachers, label: 'Teachers' },
-    { target: stats.staff,    label: 'Staff' },
-    { target: stats.books,    label: 'Books' },
-  ]
+    { target: stats.staff, label: 'Staff' },
+    { target: stats.books, label: 'Books' },
+  ];
 
   return (
     <section
@@ -84,16 +84,12 @@ export function AboutSection({ stats }: { stats: LibraryStats }) {
           NEXUS replaces a 2012-era spreadsheet system at C.W.W. Kannangara
           Central College with a mobile-first, intelligent library platform
           serving{' '}
-          <span className="text-foreground font-normal">
-            {stats.students}
-          </span>{' '}students,{' '}
-          <span className="text-foreground font-normal">
-            {stats.teachers}
-          </span>{' '}teachers, and{' '}
-          <span className="text-foreground font-normal">
-           {stats.staff}
-          </span>{' '}staff.
-          Every workflow automated. Every book discoverable. Every rupee
+          <span className="text-foreground font-normal">{stats.students}</span>{' '}
+          students,{' '}
+          <span className="text-foreground font-normal">{stats.teachers}</span>{' '}
+          teachers, and{' '}
+          <span className="text-foreground font-normal">{stats.staff}</span>{' '}
+          staff. Every workflow automated. Every book discoverable. Every rupee
           justified with data.
         </p>
       </motion.div>
@@ -128,7 +124,6 @@ export function AboutSection({ stats }: { stats: LibraryStats }) {
           <QuoteCard key={i} text={q.text} author={q.author} index={i} />
         ))}
       </motion.div>
-
     </section>
-  )
+  );
 }

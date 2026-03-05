@@ -1,15 +1,15 @@
-'use client'
+'use client';
 
-import { useState } from "react"
-import { motion } from "framer-motion"
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 
-const WAVE_DELAYS = [0, 0.1, 0.2, 0.1, 0.2, 0.3]
+const WAVE_DELAYS = [0, 0.1, 0.2, 0.1, 0.2, 0.3];
 
 interface Cards {
-  n: string
-  title: string
-  body: string
-  tag: string
+  n: string;
+  title: string;
+  body: string;
+  tag: string;
 }
 
 export function FeatureCard({
@@ -17,11 +17,11 @@ export function FeatureCard({
   index,
   isGridInView,
 }: {
-  card: Cards
-  index: number
-  isGridInView: boolean
+  card: Cards;
+  index: number;
+  isGridInView: boolean;
 }) {
-  const [isHovered, setIsHovered] = useState(false)
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <motion.div
@@ -36,7 +36,6 @@ export function FeatureCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-
       {/*  Gold corner accent — draws on hover  */}
       {/* Top-left corner */}
       <motion.div
@@ -86,7 +85,8 @@ export function FeatureCard({
         animate={{ opacity: isHovered ? 1 : 0 }}
         transition={{ duration: 0.3 }}
         style={{
-          background: 'radial-gradient(ellipse 80% 60% at 20% 50%, rgba(201,168,76,0.03) 0%, transparent 70%)',
+          background:
+            'radial-gradient(ellipse 80% 60% at 20% 50%, rgba(201,168,76,0.03) 0%, transparent 70%)',
         }}
       />
 
@@ -107,7 +107,6 @@ export function FeatureCard({
       <span className="font-mono text-label tracking-[0.15em] text-subtle uppercase mt-auto relative z-10 group-hover:text-gold transition-colors duration-500">
         {card.tag}
       </span>
-
     </motion.div>
-  )
+  );
 }

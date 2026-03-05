@@ -1,26 +1,24 @@
-import { CardSection } from '@/components/ui/CardSection'
-import { HeroSection } from '@/components/sections/HeroSection'
-import { AboutSection } from '@/components/sections/AboutSection'
-import { AccessSection } from '@/components/sections/AccessSection'
-import { ExploreSection } from '@/components/sections/ExploreSection'
-import { WhyNexusSection } from '@/components/sections/WhyNexusSection'
-import { CtaSection } from '@/components/sections/CtaSection'
-import { LIBRARY_STATS_FALLBACK, type LibraryStats } from '@nexus/types'
+import { CardSection } from '@/components/ui/CardSection';
+import { HeroSection } from '@/components/sections/HeroSection';
+import { AboutSection } from '@/components/sections/AboutSection';
+import { AccessSection } from '@/components/sections/AccessSection';
+import { ExploreSection } from '@/components/sections/ExploreSection';
+import { WhyNexusSection } from '@/components/sections/WhyNexusSection';
+import { CtaSection } from '@/components/sections/CtaSection';
+import { LIBRARY_STATS_FALLBACK, type LibraryStats } from '@nexus/types';
 
-const TOTAL = 6
-
+const TOTAL = 6;
 
 async function getLibraryStats(): Promise<LibraryStats> {
-  return LIBRARY_STATS_FALLBACK
+  return LIBRARY_STATS_FALLBACK;
 }
 
-// Page 
+// Page
 export default async function LandingPage() {
-  const stats = await getLibraryStats()
+  const stats = await getLibraryStats();
 
   return (
     <main>
-
       {/* Hero  */}
       <CardSection index={0} id="hero" className="bg-background">
         <HeroSection />
@@ -50,7 +48,6 @@ export default async function LandingPage() {
       <CardSection index={5} id="cta" className="bg-card">
         <CtaSection />
       </CardSection>
-
     </main>
-  )
+  );
 }

@@ -1,24 +1,24 @@
-'use client'
+'use client';
 
-import { useRef } from 'react'
-import { useRouter } from 'next/navigation'
-import { motion, useInView } from 'framer-motion'
-import { CountUp } from '@/components/ui/CountUp'
-import { SearchBar, type SearchFilter } from '@/components/ui/SearchBar'
-import type { LibraryStats } from '@nexus/types'
+import { useRef } from 'react';
+import { useRouter } from 'next/navigation';
+import { motion, useInView } from 'framer-motion';
+import { CountUp } from '@/components/ui/CountUp';
+import { SearchBar, type SearchFilter } from '@/components/ui/SearchBar';
+import type { LibraryStats } from '@nexus/types';
 
-// StatCard 
+// StatCard
 function StatCard({
   target,
   label,
   index,
 }: {
-  target: number | string
-  label: string
-  index: number
+  target: number | string;
+  label: string;
+  index: number;
 }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-5% 0px' })
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-5% 0px' });
 
   return (
     <motion.div
@@ -50,27 +50,27 @@ function StatCard({
 
       <div className="w-4 h-px bg-border-strong group-hover:w-8 group-hover:bg-primary transition-all duration-500 mt-auto" />
     </motion.div>
-  )
+  );
 }
 
-//  ExploreSection 
+//  ExploreSection
 export function ExploreSection({ stats }: { stats: LibraryStats }) {
-  const sectionRef = useRef<HTMLElement>(null)
-  const isInView = useInView(sectionRef, { once: true, margin: '-8% 0px' })
-  const router = useRouter()
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: '-8% 0px' });
+  const router = useRouter();
 
   const STATS = [
-    { target: stats.books,    label: 'Books in\nCatalog' },
+    { target: stats.books, label: 'Books in\nCatalog' },
     { target: stats.students, label: 'Students\nServed' },
-    { target: '24/7',         label: 'Digital\nAccess' },
-    { target: 0,              label: 'Manual\nProcesses' },
-  ]
+    { target: '24/7', label: 'Digital\nAccess' },
+    { target: 0, label: 'Manual\nProcesses' },
+  ];
 
   const handleSearch = (query: string, filter: SearchFilter) => {
-    const params = new URLSearchParams({ q: query })
-    if (filter !== 'All Books') params.set('filter', filter)
-    router.push(`/search?${params.toString()}`)
-  }
+    const params = new URLSearchParams({ q: query });
+    if (filter !== 'All Books') params.set('filter', filter);
+    router.push(`/search?${params.toString()}`);
+  };
 
   return (
     <section
@@ -86,7 +86,6 @@ export function ExploreSection({ stats }: { stats: LibraryStats }) {
         overflow-hidden
       "
     >
-
       {/* Section label */}
       <motion.span
         initial={{ opacity: 0, x: -16 }}
@@ -105,7 +104,8 @@ export function ExploreSection({ stats }: { stats: LibraryStats }) {
           transition={{ delay: 0.1, duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="font-display text-display-lg font-light text-foreground leading-[1.1]"
         >
-          Find any book<br />
+          Find any book
+          <br />
           <em className="italic text-muted">in the collection.</em>
         </motion.h2>
       </div>
@@ -117,10 +117,7 @@ export function ExploreSection({ stats }: { stats: LibraryStats }) {
         transition={{ delay: 0.25, duration: 0.9, ease: 'easeOut' }}
         className="w-full flex flex-col items-center justify-center"
       >
-        <SearchBar
-          onSearch={handleSearch}
-          bookCount={stats.books}
-        />
+        <SearchBar onSearch={handleSearch} bookCount={stats.books} />
       </motion.div>
 
       {/* Stats grid */}
@@ -131,12 +128,7 @@ export function ExploreSection({ stats }: { stats: LibraryStats }) {
         className="grid grid-cols-2 md:grid-cols-4 gap-px w-full max-w-[740px] bg-border"
       >
         {STATS.map((stat, i) => (
-          <StatCard
-            key={i}
-            target={stat.target}
-            label={stat.label}
-            index={i}
-          />
+          <StatCard key={i} target={stat.target} label={stat.label} index={i} />
         ))}
       </motion.div>
 
@@ -147,10 +139,9 @@ export function ExploreSection({ stats }: { stats: LibraryStats }) {
         transition={{ delay: 0.7, duration: 0.6 }}
         className="font-mono text-label tracking-[0.15em] text-subtle opacity-40 max-w-md leading-[1.8] text-center"
       >
-        Full catalog search available after sign in. Digital Vault resources
-        are freely accessible without an account.
+        Full catalog search available after sign in. Digital Vault resources are
+        freely accessible without an account.
       </motion.p>
-
     </section>
-  )
+  );
 }

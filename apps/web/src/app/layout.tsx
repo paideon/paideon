@@ -1,15 +1,11 @@
 import type { Metadata } from 'next';
 
-import {
-  Cormorant_Garamond,
-  Inter,
-  JetBrains_Mono,
-} from 'next/font/google'
+import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
 
 import './global.css';
 
-import { CustomCursor } from '@/components/layout/CustomCursor'
-import { LoadingScreen } from '@/components/layout/LoadingScreen'
+import { CustomCursor } from '@/components/layout/CustomCursor';
+import { LoadingScreen } from '@/components/layout/LoadingScreen';
 import { ScrollProvider } from '@/components/layout/ScrollProvider';
 
 // Font Setup
@@ -20,27 +16,28 @@ const cormorant = Cormorant_Garamond({
   style: ['normal', 'italic'],
   variable: '--font-display',
   display: 'swap',
-})
+});
 const inter = Inter({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600'],
   variable: '--font-body',
   display: 'swap',
-})
+});
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['300', '400', '500'],
   variable: '--font-mono',
   display: 'swap',
-})
+});
 
 // Metadata
 
 export const metadata: Metadata = {
   title: 'NEXUS - C.W.W. Kannangara Central College Library',
-  description: 'A modern library and learning management system for C.W.W. Kannangara Central College, Mathugama.',
-}
+  description:
+    'A modern library and learning management system for C.W.W. Kannangara Central College, Mathugama.',
+};
 
 // Root Layout
 
@@ -70,9 +67,7 @@ export default function RootLayout({
       <body>
         <LoadingScreen />
         <CustomCursor />
-        <ScrollProvider>
-          {children}
-        </ScrollProvider>
+        <ScrollProvider>{children}</ScrollProvider>
       </body>
     </html>
   );

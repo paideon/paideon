@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
 interface CardSectionProps {
-  children: React.ReactNode
-  index: number
-  id?: string
-  className?: string
+  children: React.ReactNode;
+  index: number;
+  id?: string;
+  className?: string;
 }
 
 export function CardSection({
@@ -13,7 +13,6 @@ export function CardSection({
   id,
   className = '',
 }: CardSectionProps) {
-
   if (index === 0) {
     return (
       <section id={id} className={`w-full ${className}`}>
@@ -21,7 +20,7 @@ export function CardSection({
           {children}
         </div>
       </section>
-    )
+    );
   }
 
   return (
@@ -37,5 +36,5 @@ export function CardSection({
         {children}
       </div>
     </section>
-  )
+  );
 }

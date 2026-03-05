@@ -1,22 +1,19 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion';
 
 // Each letter: scaleY drives the dramatic height variation
 const LETTERS = [
   { char: 'N', scaleY: 0.72 },
-  { char: 'E', scaleY: 1.10 },
+  { char: 'E', scaleY: 1.1 },
   { char: 'X', scaleY: 0.88 },
   { char: 'U', scaleY: 1.35 },
-  { char: 'S', scaleY: 1.00 },
-]
+  { char: 'S', scaleY: 1.0 },
+];
 
 export function HeroSection() {
   return (
-    <section
-      className="relative w-full h-screen overflow-hidden bg-background"
-    >
-
+    <section className="relative w-full h-screen overflow-hidden bg-background">
       {/* GIANT variable-height NEXUS — tops aligned, bottoms ragged  */}
       <div
         className="absolute inset-0 flex items-start justify-center pointer-events-none overflow-hidden mb-8"
@@ -77,7 +74,6 @@ export function HeroSection() {
         </motion.div>
       </div>
 
-
       {/*  Scroll Indicator  */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -103,7 +99,6 @@ export function HeroSection() {
           />
         </div>
       </motion.div>
-
     </section>
-  )
+  );
 }

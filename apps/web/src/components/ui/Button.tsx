@@ -1,8 +1,7 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 export function Button({
   href,
@@ -11,19 +10,21 @@ export function Button({
   size = 'md',
   breathe = false,
 }: {
-  href: string
-  children: React.ReactNode
-  variant?: 'default' | 'gold'
-  size?: 'md' | 'lg'
-  breathe?: boolean
+  href: string;
+  children: React.ReactNode;
+  variant?: 'default' | 'gold';
+  size?: 'md' | 'lg';
+  breathe?: boolean;
 }) {
-  const [isHovered, setIsHovered] = useState(false)
+  const [isHovered, setIsHovered] = useState(false);
 
-  const isGold = variant === 'gold'
-  const isLg = size === 'lg'
+  const isGold = variant === 'gold';
+  const isLg = size === 'lg';
 
   // Fill color — gold variant floods solid gold (text flips to bg), default is a subtle white tint
-  const fillBackground = isGold ? 'rgba(201,168,76,1)' : 'rgba(255,255,255,0.04)'
+  const fillBackground = isGold
+    ? 'rgba(201,168,76,1)'
+    : 'rgba(255,255,255,0.04)';
 
   return (
     <motion.a
@@ -31,11 +32,7 @@ export function Button({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       // Breathing — very slow scale pulse when idle, stops on hover
-      animate={
-        breathe && !isHovered
-          ? { scale: [1, 1.015, 1] }
-          : { scale: 1 }
-      }
+      animate={breathe && !isHovered ? { scale: [1, 1.015, 1] } : { scale: 1 }}
       transition={
         breathe && !isHovered
           ? { duration: 2.8, repeat: Infinity, ease: 'easeInOut' }
@@ -47,7 +44,11 @@ export function Button({
         font-mono text-label uppercase
         transition-colors duration-200
         group
-        ${isLg ? 'gap-4 px-12 py-5 tracking-[0.18em]' : 'gap-3 px-9 py-4 tracking-[0.15em]'}
+        ${
+          isLg
+            ? 'gap-4 px-12 py-5 tracking-[0.18em]'
+            : 'gap-3 px-9 py-4 tracking-[0.15em]'
+        }
         ${
           isGold
             ? 'bg-gold-muted border border-gold/30 hover:border-gold text-gold hover:bg-gold hover:text-background'
@@ -81,5 +82,5 @@ export function Button({
         →
       </motion.span>
     </motion.a>
-  )
+  );
 }
