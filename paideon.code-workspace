@@ -1,0 +1,24 @@
+{
+  "folders": [
+    {
+      "name": "PORTAL",
+      "path": "apps/portal"
+    },
+    {
+      "name": "WEB",
+      "path": "apps/website"
+    },
+    {
+      "name": "MOBILE",
+      "path": "apps/mobile"
+    },
+    {
+      "name": "API",
+      "path": "apps/api"
+    },
+    {
+      "name": "ROOT",
+      "path": "."
+    }
+  ]
+}
