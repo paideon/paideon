@@ -45,7 +45,7 @@ const CARDS = [
   },
 ];
 
-export function WhypaideonSection() {
+export function WhyNexusSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 

@@ -3,7 +3,7 @@ import { HeroSection } from '@/components/sections/HeroSection';
 import { AboutSection } from '@/components/sections/AboutSection';
 import { AccessSection } from '@/components/sections/AccessSection';
 import { ExploreSection } from '@/components/sections/ExploreSection';
-import { WhypaideonSection } from '@/components/sections/WhypaideonSection';
+import { WhyNexusSection } from '@/components/sections/WhyNexusSection';
 import { CtaSection } from '@/components/sections/CtaSection';
 import { LIBRARY_STATS_FALLBACK, type LibraryStats } from '@paideon/types';
 
@@ -39,9 +39,9 @@ export default async function LandingPage() {
         <ExploreSection stats={stats} />
       </CardSection>
 
-      {/*  Why paideon  */}
+      {/*  Why Nexus  */}
       <CardSection index={4} id="why-paideon" className="bg-background">
-        <WhypaideonSection />
+        <WhyNexusSection />
       </CardSection>
 
       {/*  CTA  */}
