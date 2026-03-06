@@ -30,7 +30,7 @@
       "@paideon/ui": ["../../packages/ui/src/index.ts"],
       "@paideon/ui/*": ["../../packages/ui/src/*"]
     },
-    "types": ["jest", "node"],
+    "types": ["node"],
     "outDir": "dist",
     "rootDir": "../..",
     "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo"
@@ -40,7 +40,7 @@
     "src/**/*.tsx",
     "src/**/*.js",
     "src/**/*.jsx",
-    "../../apps/web/.next/types/**/*.ts",
+    ".next/types/**/*.ts",
     "../../dist/apps/web/.next/types/**/*.ts",
     "next-env.d.ts"
   ],
