@@ -34,7 +34,7 @@ const jetbrainsMono = JetBrains_Mono({
 // Metadata
 
 export const metadata: Metadata = {
-  title: 'NEXUS - C.W.W. Kannangara Central College Library',
+  title: 'paideon - C.W.W. Kannangara Central College Library',
   description:
     'A modern library and learning management system for C.W.W. Kannangara Central College, Mathugama.',
 };

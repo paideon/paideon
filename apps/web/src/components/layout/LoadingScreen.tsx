@@ -110,9 +110,9 @@ export function LoadingScreen() {
               <circle cx="24" cy="24" r="2" fill="#4e7c6f" />
             </svg>
 
-            {/* NEXUS letters staggered in */}
+            {/* paideon letters staggered in */}
             <div className="flex gap-[0.06em]">
-              {'NEXUS'.split('').map((char, i) => (
+              {'paideon'.split('').map((char, i) => (
                 <motion.span
                   key={i}
                   initial={{ opacity: 0, y: 12 }}

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { motion, useInView } from 'framer-motion';
 import { CountUp } from '@/components/ui/CountUp';
 import { SearchBar, type SearchFilter } from '@/components/ui/SearchBar';
-import type { LibraryStats } from '@nexus/types';
+import type { LibraryStats } from '@paideon/types';
 
 // StatCard
 function StatCard({

@@ -6,7 +6,7 @@ import { motion, useInView } from 'framer-motion';
 import { RevealText } from '@/components/ui/RevealText';
 import { QuoteCard } from '@/components/ui/QuoteCard';
 import { CountUp } from '@/components/ui/CountUp';
-import type { LibraryStats } from '@nexus/types';
+import type { LibraryStats } from '@paideon/types';
 
 // Quote data
 const QUOTES = [
@@ -81,7 +81,7 @@ export function AboutSection({ stats }: { stats: LibraryStats }) {
         className="pl-6 max-w-xl"
       >
         <p className="text-[15px] font-light leading-[1.9] text-muted text-center">
-          NEXUS replaces a 2012-era spreadsheet system at C.W.W. Kannangara
+          paideon replaces a 2012-era spreadsheet system at C.W.W. Kannangara
           Central College with a mobile-first, intelligent library platform
           serving{' '}
           <span className="text-foreground font-normal">{stats.students}</span>{' '}

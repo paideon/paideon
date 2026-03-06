@@ -22,7 +22,7 @@ const CARDS = [
   {
     n: '03',
     title: 'Dead Stock Intelligence',
-    body: '47% of the current collection has never been borrowed. NEXUS identifies it, values it, and recommends what to buy instead.',
+    body: '47% of the current collection has never been borrowed. paideon identifies it, values it, and recommends what to buy instead.',
     tag: 'Analytics',
   },
   {
@@ -40,12 +40,12 @@ const CARDS = [
   {
     n: '06',
     title: 'Foundation for LMS',
-    body: 'Built to evolve. Year 2 adds e-books and parent portals. Year 3 adds assignments and grading. NEXUS grows with the school.',
+    body: 'Built to evolve. Year 2 adds e-books and parent portals. Year 3 adds assignments and grading. paideon grows with the school.',
     tag: 'Future-Ready',
   },
 ];
 
-export function WhyNexusSection() {
+export function WhypaideonSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
@@ -55,7 +55,7 @@ export function WhyNexusSection() {
   return (
     <section
       ref={sectionRef}
-      id="why-nexus"
+      id="why-paideon"
       className="
         relative w-full min-h-screen
         flex flex-col items-center justify-center 
@@ -73,7 +73,7 @@ export function WhyNexusSection() {
         transition={{ duration: 0.7 }}
         className="font-mono text-label tracking-[0.3em] text-subtle uppercase"
       >
-        04 — Why NEXUS
+        04 — Why paideon
       </motion.span>
 
       {/* Header row */}
@@ -91,7 +91,7 @@ export function WhyNexusSection() {
             transition={{ delay: 0.1, duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="font-display text-display-lg font-light text-foreground leading-none"
           >
-            Why <em className="italic text-muted">NEXUS</em>
+            Why <em className="italic text-muted">paideon</em>
           </motion.h2>
         </div>
       </motion.div>

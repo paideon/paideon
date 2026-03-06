@@ -3,9 +3,9 @@ import { HeroSection } from '@/components/sections/HeroSection';
 import { AboutSection } from '@/components/sections/AboutSection';
 import { AccessSection } from '@/components/sections/AccessSection';
 import { ExploreSection } from '@/components/sections/ExploreSection';
-import { WhyNexusSection } from '@/components/sections/WhyNexusSection';
+import { WhypaideonSection } from '@/components/sections/WhypaideonSection';
 import { CtaSection } from '@/components/sections/CtaSection';
-import { LIBRARY_STATS_FALLBACK, type LibraryStats } from '@nexus/types';
+import { LIBRARY_STATS_FALLBACK, type LibraryStats } from '@paideon/types';
 
 const TOTAL = 6;
 
@@ -39,9 +39,9 @@ export default async function LandingPage() {
         <ExploreSection stats={stats} />
       </CardSection>
 
-      {/*  Why NEXUS  */}
-      <CardSection index={4} id="why-nexus" className="bg-background">
-        <WhyNexusSection />
+      {/*  Why paideon  */}
+      <CardSection index={4} id="why-paideon" className="bg-background">
+        <WhypaideonSection />
       </CardSection>
 
       {/*  CTA  */}

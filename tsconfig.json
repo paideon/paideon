@@ -4,12 +4,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@nexus/types": ["packages/types/src/index.ts"],
-      "@nexus/types/*": ["packages/types/src/*"],
-      "@nexus/database": ["packages/database/src/index.ts"],
-      "@nexus/database/*": ["packages/database/src/*"],
-      "@nexus/ui": ["packages/ui/src/index.ts"],
-      "@nexus/ui/*": ["packages/ui/src/*"]
+      "@paideon/types": ["packages/types/src/index.ts"],
+      "@paideon/types/*": ["packages/types/src/*"],
+      "@paideon/database": ["packages/database/src/index.ts"],
+      "@paideon/database/*": ["packages/database/src/*"],
+      "@paideon/ui": ["packages/ui/src/index.ts"],
+      "@paideon/ui/*": ["packages/ui/src/*"]
     }
   },
   "files": [],
