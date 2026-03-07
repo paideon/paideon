@@ -35,7 +35,7 @@ export function CountUp({
   const [started, setStarted] = useState(false);
 
   // Characters used during scramble phase
-  const SCRAMBLE_CHARS = '0123456789';
+  // const SCRAMBLE_CHARS = '0123456789';
 
   // Start counting only when element enters the viewport
   useEffect(() => {

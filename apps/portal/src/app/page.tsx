@@ -7,8 +7,6 @@ import { WhyNexusSection } from '@/components/sections/WhyNexusSection';
 import { CtaSection } from '@/components/sections/CtaSection';
 import { LIBRARY_STATS_FALLBACK, type LibraryStats } from '@paideon/types';
 
-const TOTAL = 6;
-
 async function getLibraryStats(): Promise<LibraryStats> {
   return LIBRARY_STATS_FALLBACK;
 }
