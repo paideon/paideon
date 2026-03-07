@@ -1,9 +1,9 @@
 {
-  "name": "@paideon/web",
+  "name": "@paideon/portal",
   "version": "0.0.1",
   "private": true,
   "nx": {
-    "name": "web"
+    "name": "portal"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
