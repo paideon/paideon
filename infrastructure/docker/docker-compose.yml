@@ -1,3 +1,4 @@
+name: paideon
 services:
   postgres:
     image: postgres:16
@@ -8,7 +9,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
     ports:
-      - '${DB_PORT}:5432'
+      - "${DB_PORT}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
@@ -17,7 +18,7 @@ services:
     container_name: paideon_redis
     restart: unless-stopped
     ports:
-      - '${REDIS_PORT}:6379'
+      - "${REDIS_PORT}:6379"
     volumes:
       - redis_data:/data
 
