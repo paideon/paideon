@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
-import { ReactLenis } from 'lenis/react';
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import { ReactLenis } from "lenis/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,32 +22,32 @@ export function ScrollProvider({ children }: { children: React.ReactNode }) {
     gsap.ticker.add(update);
     gsap.ticker.lagSmoothing(0);
 
-    lenisRef.current?.lenis?.on('scroll', ScrollTrigger.update);
+    lenisRef.current?.lenis?.on("scroll", ScrollTrigger.update);
 
     return () => {
       gsap.ticker.remove(update);
-      lenisRef.current?.lenis?.off('scroll', ScrollTrigger.update);
+      lenisRef.current?.lenis?.off("scroll", ScrollTrigger.update);
     };
   }, []);
 
   // ── Scroll-driven tilt + pin ───────────────────────────────────
   useGSAP(
     () => {
-      const sections = gsap.utils.toArray<HTMLElement>('section');
+      const sections = gsap.utils.toArray<HTMLElement>("section");
 
       sections.forEach((section, index) => {
         const container = section.querySelector<HTMLElement>(
-          '[data-scroll-container]'
+          "[data-scroll-container]",
         );
         if (!container) return;
 
         gsap.from(container, {
           rotation: 30,
-          ease: 'none',
+          ease: "none",
           scrollTrigger: {
             trigger: section,
-            start: 'top bottom',
-            end: 'top 20%',
+            start: "top bottom",
+            end: "top 20%",
             scrub: true,
           },
         });
@@ -56,8 +56,8 @@ export function ScrollProvider({ children }: { children: React.ReactNode }) {
 
         ScrollTrigger.create({
           trigger: section,
-          start: 'bottom bottom',
-          end: 'bottom top',
+          start: "bottom bottom",
+          end: "bottom top",
           pin: true,
           pinSpacing: false,
         });
@@ -66,7 +66,7 @@ export function ScrollProvider({ children }: { children: React.ReactNode }) {
       // Force ScrollTrigger to remeasure the page after setup
       ScrollTrigger.refresh();
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   return (

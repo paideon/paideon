@@ -1,38 +1,38 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
-import { RevealText } from '@/components/ui/RevealText';
-import { QuoteCard } from '@/components/ui/QuoteCard';
-import { CountUp } from '@/components/ui/CountUp';
-import type { LibraryStats } from '@paideon/types';
+import { RevealText } from "@/components/ui/RevealText";
+import { QuoteCard } from "@/components/ui/QuoteCard";
+import { CountUp } from "@/components/ui/CountUp";
+import type { LibraryStats } from "@paideon/types";
 
 // Quote data
 const QUOTES = [
   {
     text: '"A reader lives a thousand lives before he dies. The man who never reads lives only one."',
-    author: 'George R.R. Martin',
+    author: "George R.R. Martin",
   },
   {
     text: '"The world belongs to those who read."',
-    author: 'Rick Holland',
+    author: "Rick Holland",
   },
   {
     text: '"A book is a dream that you hold in your hands."',
-    author: 'Neil Gaiman',
+    author: "Neil Gaiman",
   },
 ];
 
 export function AboutSection({ stats }: { stats: LibraryStats }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-8% 0px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-8% 0px" });
 
   const STATS = [
-    { target: stats.students, label: 'Students' },
-    { target: stats.teachers, label: 'Teachers' },
-    { target: stats.staff, label: 'Staff' },
-    { target: stats.books, label: 'Books' },
+    { target: stats.students, label: "Students" },
+    { target: stats.teachers, label: "Teachers" },
+    { target: stats.staff, label: "Staff" },
+    { target: stats.books, label: "Books" },
   ];
 
   return (
@@ -53,7 +53,7 @@ export function AboutSection({ stats }: { stats: LibraryStats }) {
       <motion.span
         initial={{ opacity: 0, x: -16 }}
         animate={isInView ? { opacity: 1, x: 0 } : {}}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
         className="font-mono text-label tracking-[0.3em] text-subtle uppercase pl-6"
       >
         01 — About
@@ -77,18 +77,18 @@ export function AboutSection({ stats }: { stats: LibraryStats }) {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.3, duration: 0.9, ease: 'easeOut' }}
+        transition={{ delay: 0.3, duration: 0.9, ease: "easeOut" }}
         className="pl-6 max-w-xl"
       >
         <p className="text-[15px] font-light leading-[1.9] text-muted text-center">
-          paideon replaces a 2012-era spreadsheet system at C.W.W. Kannangara
+          Nexus replaces a 2012-era spreadsheet system at C.W.W. Kannangara
           Central College with a mobile-first, intelligent library platform
-          serving{' '}
-          <span className="text-foreground font-normal">{stats.students}</span>{' '}
-          students,{' '}
-          <span className="text-foreground font-normal">{stats.teachers}</span>{' '}
-          teachers, and{' '}
-          <span className="text-foreground font-normal">{stats.staff}</span>{' '}
+          serving{" "}
+          <span className="text-foreground font-normal">{stats.students}</span>{" "}
+          students,{" "}
+          <span className="text-foreground font-normal">{stats.teachers}</span>{" "}
+          teachers, and{" "}
+          <span className="text-foreground font-normal">{stats.staff}</span>{" "}
           staff. Every workflow automated. Every book discoverable. Every rupee
           justified with data.
         </p>
@@ -98,7 +98,7 @@ export function AboutSection({ stats }: { stats: LibraryStats }) {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.45, duration: 0.9, ease: 'easeOut' }}
+        transition={{ delay: 0.45, duration: 0.9, ease: "easeOut" }}
         className="pl-6 flex gap-12"
       >
         {STATS.map((stat) => (

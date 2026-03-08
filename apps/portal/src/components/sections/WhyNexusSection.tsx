@@ -1,47 +1,47 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
-import { FeatureCard } from '@/components/ui/FeatureCard';
+import { FeatureCard } from "@/components/ui/FeatureCard";
 
 // Card data
 const CARDS = [
   {
-    n: '01',
-    title: 'ISBN Auto-Fetch',
-    body: 'Scan any barcode and the catalog populates itself — title, author, cover, publisher. What took 5 minutes now takes 1.',
-    tag: 'Efficiency',
+    n: "01",
+    title: "ISBN Auto-Fetch",
+    body: "Scan any barcode and the catalog populates itself — title, author, cover, publisher. What took 5 minutes now takes 1.",
+    tag: "Efficiency",
   },
   {
-    n: '02',
-    title: 'Zero Manual Fines',
-    body: 'Overdue fines calculated instantly on return. Reminders sent automatically before due dates. No more phone calls. No more calendars.',
-    tag: 'Automation',
+    n: "02",
+    title: "Zero Manual Fines",
+    body: "Overdue fines calculated instantly on return. Reminders sent automatically before due dates. No more phone calls. No more calendars.",
+    tag: "Automation",
   },
   {
-    n: '03',
-    title: 'Dead Stock Intelligence',
-    body: '47% of the current collection has never been borrowed. paideon identifies it, values it, and recommends what to buy instead.',
-    tag: 'Analytics',
+    n: "03",
+    title: "Dead Stock Intelligence",
+    body: "47% of the current collection has never been borrowed. Nexus identifies it, values it, and recommends what to buy instead.",
+    tag: "Analytics",
   },
   {
-    n: '04',
-    title: 'Reading Gamification',
-    body: 'Streaks, badges, grade-level leaderboards. Reading becomes a habit when it feels like a game. Student engagement target: 28% → 80%.',
-    tag: 'Engagement',
+    n: "04",
+    title: "Reading Gamification",
+    body: "Streaks, badges, grade-level leaderboards. Reading becomes a habit when it feels like a game. Student engagement target: 28% → 80%.",
+    tag: "Engagement",
   },
   {
-    n: '05',
-    title: 'School-Owned Forever',
-    body: 'No vendor lock-in. No annual license. The school owns every line of code. Commercially comparable systems cost Rs. 200,000–500,000.',
-    tag: 'Ownership',
+    n: "05",
+    title: "School-Owned Forever",
+    body: "No vendor lock-in. No annual license. The school owns every line of code. Commercially comparable systems cost Rs. 200,000–500,000.",
+    tag: "Ownership",
   },
   {
-    n: '06',
-    title: 'Foundation for LMS',
-    body: 'Built to evolve. Year 2 adds e-books and parent portals. Year 3 adds assignments and grading. paideon grows with the school.',
-    tag: 'Future-Ready',
+    n: "06",
+    title: "Foundation for LMS",
+    body: "Built to evolve. Year 2 adds e-books and parent portals. Year 3 adds assignments and grading. Nexus grows with the school.",
+    tag: "Future-Ready",
   },
 ];
 
@@ -49,13 +49,13 @@ export function WhyNexusSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
-  const isInView = useInView(sectionRef, { once: true, margin: '-8% 0px' });
-  const isGridInView = useInView(gridRef, { once: true, margin: '-5% 0px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-8% 0px" });
+  const isGridInView = useInView(gridRef, { once: true, margin: "-5% 0px" });
 
   return (
     <section
       ref={sectionRef}
-      id="why-paideon"
+      id="why-Nexus"
       className="
         relative w-full min-h-screen
         flex flex-col items-center justify-center 
@@ -73,7 +73,7 @@ export function WhyNexusSection() {
         transition={{ duration: 0.7 }}
         className="font-mono text-label tracking-[0.3em] text-subtle uppercase"
       >
-        04 — Why paideon
+        04 — Why Nexus
       </motion.span>
 
       {/* Header row */}
@@ -86,12 +86,12 @@ export function WhyNexusSection() {
         {/* Heading */}
         <div className="overflow-hidden">
           <motion.h2
-            initial={{ y: '110%' }}
-            animate={isInView ? { y: '0%' } : {}}
+            initial={{ y: "110%" }}
+            animate={isInView ? { y: "0%" } : {}}
             transition={{ delay: 0.1, duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="font-display text-display-lg font-light text-foreground leading-none"
           >
-            Why <em className="italic text-muted">paideon</em>
+            Why <em className="italic text-muted">Nexus</em>
           </motion.h2>
         </div>
       </motion.div>

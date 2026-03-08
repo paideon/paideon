@@ -14,7 +14,7 @@ const LETTERS = [
 export function HeroSection() {
   return (
     <section className="relative w-full h-screen overflow-hidden bg-background">
-      {/* GIANT variable-height paideon — tops aligned, bottoms ragged  */}
+      {/* GIANT variable-height nexus — tops aligned, bottoms ragged  */}
       <div
         className="absolute inset-0 flex items-start justify-center pointer-events-none overflow-hidden mb-8"
         style={{ paddingTop: "0px" }}
@@ -66,7 +66,7 @@ export function HeroSection() {
         >
           <img
             src="/nexus_logo.svg"
-            alt="paideon logo"
+            alt="nexus logo"
             width={500}
             height={500}
             style={{ objectFit: "contain" }}

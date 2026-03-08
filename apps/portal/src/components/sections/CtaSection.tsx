@@ -60,7 +60,7 @@ export function CtaSection() {
         transition={{ delay: 0.45, duration: 0.9 }}
         className="text-[13px] font-light leading-[1.9] text-muted text-center max-w-md"
       >
-        paideon is live at C.W.W. Kannangara Central College, Mathugama. Sign in
+        Nexus is live at C.W.W. Kannangara Central College, Mathugama. Sign in
         with your school credentials, or explore the Digital Vault without an
         account.
       </motion.p>
@@ -73,7 +73,7 @@ export function CtaSection() {
         className="flex flex-col sm:flex-row gap-4 items-center"
       >
         <Button href="/login" variant="gold" breathe>
-          Sign In to paideon
+          Sign In to Nexus
         </Button>
 
         <Button href="/vault">Browse the Vault</Button>
@@ -89,7 +89,7 @@ export function CtaSection() {
         <div className="flex-1 h-px bg-border" />
         <img
           src="/nexus_logo.svg"
-          alt="paideon"
+          alt="Nexus"
           width={100}
           height={100}
           style={{ objectFit: "contain", opacity: 1 }}
