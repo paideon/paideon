@@ -1,42 +1,42 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
-import { Cormorant_Garamond, Inter, JetBrains_Mono } from 'next/font/google';
+import { Cormorant_Garamond, Inter, JetBrains_Mono } from "next/font/google";
 
-import './global.css';
+import "./global.css";
 
-import { CustomCursor } from '@/components/layout/CustomCursor';
-import { LoadingScreen } from '@/components/layout/LoadingScreen';
-import { ScrollProvider } from '@/components/layout/ScrollProvider';
+import { CustomCursor } from "@/components/layout/CustomCursor";
+import { LoadingScreen } from "@/components/layout/LoadingScreen";
+import { ScrollProvider } from "@/components/layout/ScrollProvider";
 
 // Font Setup
 
 const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['300', '400', '600'],
-  style: ['normal', 'italic'],
-  variable: '--font-display',
-  display: 'swap',
+  subsets: ["latin"],
+  weight: ["300", "400", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-display",
+  display: "swap",
 });
 const inter = Inter({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
-  variable: '--font-body',
-  display: 'swap',
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-body",
+  display: "swap",
 });
 
 const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  weight: ['300', '400', '500'],
-  variable: '--font-mono',
-  display: 'swap',
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  variable: "--font-mono",
+  display: "swap",
 });
 
 // Metadata
 
 export const metadata: Metadata = {
-  title: 'paideon - C.W.W. Kannangara Central College Library',
+  title: "NEXUS - C.W.W. Kannangara Central College Library",
   description:
-    'A modern library and learning management system for C.W.W. Kannangara Central College, Mathugama.',
+    "A modern library and learning management system for C.W.W. Kannangara Central College, Mathugama.",
 };
 
 // Root Layout

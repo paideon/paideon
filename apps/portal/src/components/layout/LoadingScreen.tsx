@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function LoadingScreen() {
   const [isVisible, setIsVisible] = useState(true);
@@ -45,74 +45,17 @@ export function LoadingScreen() {
             transition={{ delay: 0.2, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col items-center gap-6"
           >
-            {/* Replace this with your actual <Image> logo */}
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <rect
-                x="0.5"
-                y="0.5"
-                width="47"
-                height="47"
-                stroke="#3d4659"
-                strokeWidth="0.8"
-              />
-              <rect
-                x="8.5"
-                y="8.5"
-                width="31"
-                height="31"
-                stroke="#3d4659"
-                strokeWidth="0.5"
-                opacity="0.5"
-              />
-              <circle
-                cx="24"
-                cy="24"
-                r="7"
-                stroke="#4e7c6f"
-                strokeWidth="0.8"
-              />
-              <line
-                x1="24"
-                y1="0"
-                x2="24"
-                y2="17"
-                stroke="#3d4659"
-                strokeWidth="0.5"
-                opacity="0.5"
-              />
-              <line
-                x1="24"
-                y1="31"
-                x2="24"
-                y2="48"
-                stroke="#3d4659"
-                strokeWidth="0.5"
-                opacity="0.5"
-              />
-              <line
-                x1="0"
-                y1="24"
-                x2="17"
-                y2="24"
-                stroke="#3d4659"
-                strokeWidth="0.5"
-                opacity="0.5"
-              />
-              <line
-                x1="31"
-                y1="24"
-                x2="48"
-                y2="24"
-                stroke="#3d4659"
-                strokeWidth="0.5"
-                opacity="0.5"
-              />
-              <circle cx="24" cy="24" r="2" fill="#4e7c6f" />
-            </svg>
+            <img
+              src="/nexus_logo.svg"
+              alt="paideon logo"
+              width={500}
+              height={500}
+              style={{ objectFit: "contain" }}
+            />
 
-            {/* paideon letters staggered in */}
+            {/* nexus letters staggered in */}
             <div className="flex gap-[0.06em]">
-              {'paideon'.split('').map((char, i) => (
+              {"NEXUS".split("").map((char, i) => (
                 <motion.span
                   key={i}
                   initial={{ opacity: 0, y: 12 }}
@@ -123,7 +66,7 @@ export function LoadingScreen() {
                     ease: [0.22, 1, 0.36, 1],
                   }}
                   className="font-display text-4xl font-light tracking-[0.15em] text-transparent"
-                  style={{ WebkitTextStroke: '1px #3d4659' }}
+                  style={{ WebkitTextStroke: "1px #3d4659" }}
                 >
                   {char}
                 </motion.span>

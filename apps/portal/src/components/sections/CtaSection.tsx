@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
-import { RevealText } from '@/components/ui/RevealText';
-import { Button } from '@/components/ui/Button';
+import { RevealText } from "@/components/ui/RevealText";
+import { Button } from "@/components/ui/Button";
 
 export function CtaSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-8% 0px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-8% 0px" });
 
   return (
     <section
@@ -88,11 +88,11 @@ export function CtaSection() {
       >
         <div className="flex-1 h-px bg-border" />
         <img
-          src="/paideon_logo.svg"
+          src="/nexus_logo.svg"
           alt="paideon"
           width={100}
           height={100}
-          style={{ objectFit: 'contain', opacity: 1 }}
+          style={{ objectFit: "contain", opacity: 1 }}
         />
         <div className="flex-1 h-px bg-border" />
       </motion.div>
