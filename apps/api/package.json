@@ -93,6 +93,8 @@
     "@paideon/database": "workspace:*",
     "@prisma/client": "^5.22.0",
     "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "helmet": "^8.1.0",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.1.13",
@@ -102,6 +104,8 @@
   "devDependencies": {
     "@nestjs/testing": "^11.0.0",
     "@types/bcrypt": "^6.0.0",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/helmet": "^4.0.0",
     "@types/passport-jwt": "^4.0.1"
   }
 }
