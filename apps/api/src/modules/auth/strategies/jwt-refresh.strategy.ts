@@ -1,7 +1,7 @@
 // jwt-refresh.strategy.ts
-//
+
 // Teaches Passport how to validate a REFRESH TOKEN.
-//
+
 // Key differences from JwtStrategy:
 //   1. Extracts token from httpOnly COOKIE (not Authorization header)
 //      JavaScript cannot read httpOnly cookies — Passport reads it
@@ -10,7 +10,7 @@
 //   3. The raw token is passed to validate() so we can:
 //      → Hash it with SHA-256
 //      → Check it exists in the database (not revoked)
-//
+
 // This runs automatically on POST /auth/refresh and POST /auth/logout
 // via JwtRefreshGuard.
 
@@ -56,7 +56,7 @@ export class JwtRefreshStrategy extends PassportStrategy(
   // Called by Passport after the token signature is verified.
   // req      → the raw Express request (contains the cookie)
   // payload  → the decoded JWT payload
-  //
+
   // We return both the payload AND the raw token.
   // The raw token is needed in auth.service.ts to:
   //   → Hash it with SHA-256

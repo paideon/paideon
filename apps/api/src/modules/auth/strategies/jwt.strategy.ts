@@ -1,16 +1,16 @@
 // jwt.strategy.ts
-//
+
 // Teaches Passport how to validate an ACCESS TOKEN.
-//
+
 // When a request comes in with:
 //   Authorization: Bearer eyJhbGci...
-//
+
 // This strategy:
 //   1. Extracts the token from the Authorization header
 //   2. Verifies the signature using JWT_SECRET
 //   3. Checks the token has not expired
 //   4. Returns the payload — which becomes req.user
-//
+
 // This runs automatically on every route protected by JwtAuthGuard.
 // You never call this directly.
 
