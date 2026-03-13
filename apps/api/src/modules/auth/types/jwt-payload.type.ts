@@ -1,26 +1,24 @@
 // jwt-payload.type.ts
-//
-// Defines the shape of the data encoded inside every JWT access token.
-// This type is used in two places:
-//   1. When CREATING a token → auth.service.ts signs this payload
-//   2. When READING a token  → jwt.strategy.ts decodes and validates this
-//
-// Keep this minimal. A JWT payload is readable by anyone who has the token
-// (it is signed, not encrypted). Never include sensitive data here.
+
+// Defines the shape of the data encoded inside every JWT access token AND refresh token.
+
+// KEEP IT MINIMAL — JWT is not encrypted. Anyone who steals the token can read it.
 
 import { Role } from "@prisma/client";
 
 export type JwtPayload = {
-  // The user's CUID — used to look up the user in the database
+  // The user's primary key (CUID) — used everywhere to fetch the full user record
   sub: string;
 
-  // The school this user belongs to — used by SchoolGuard on every request
-  // to ensure the user can only access their own school's data
+  // Which school this user belongs to — used by SchoolGuard on EVERY request
   schoolId: string;
 
-  // The user's role — used by RolesGuard to check endpoint permissions
+  // Which library this user belongs to — used by LibraryGuard on EVERY request
+  libraryId: string;
+
+  // The user's role — used by RolesGuard + @Roles() decorator
   role: Role;
 
-  // The human-readable ID — used for display and audit log entries
+  // Human-readable ID for logging, audit trails, and display
   paideonId: string;
 };
