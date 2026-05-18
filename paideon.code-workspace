@@ -5,16 +5,24 @@
       "path": "apps/portal"
     },
     {
-      "name": "WEB",
-      "path": "apps/website"
-    },
-    {
       "name": "MOBILE",
       "path": "apps/mobile"
     },
     {
       "name": "API",
       "path": "apps/api"
+    },
+    {
+      "name": "DATABASE",
+      "path": "packages/database"
+    },
+    {
+      "name": "UI",
+      "path": "packages/ui"
+    },
+    {
+      "name": "TYPES",
+      "path": "packages/types"
     },
     {
       "name": "ROOT",
