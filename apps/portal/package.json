@@ -8,11 +8,19 @@
   "dependencies": {
     "@gsap/react": "^2.1.2",
     "@paideon/types": "workspace:*",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
+    "@react-three/rapier": "^2.2.0",
     "framer-motion": "^12.34.3",
     "gsap": "^3.14.2",
     "lenis": "^1.3.18",
+    "meshline": "^3.3.1",
     "next": "~16.0.1",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "three": "^0.183.2"
+  },
+  "devDependencies": {
+    "@types/three": "^0.183.1"
   }
 }
