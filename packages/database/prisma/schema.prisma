@@ -3,26 +3,6 @@
 // Version: 5.0
 // Database: PostgreSQL 16
 // Tables: 107
-// Source: docs/database/schema_design_v5.md
-//
-// Raw SQL blocks (partial indexes + CHECK constraints) live in:
-//   packages/database/prisma/sql/
-//   Each file is named after the migration it belongs to.
-//
-// FIXES vs first draft:
-//   - ThreadParticipant: removed stray `Thread` keyword on relation field
-//   - StudentHealth / StudentHealthCondition / StudentVaccination /
-//     BehavioralProfile / CounselingSession: removed dual-@relation on
-//     studentUserId (Prisma forbids two @relation on the same scalar)
-//   - StudentProfile: removed reverse relations that don't belong here
-//     (those models FK to User.id, not StudentProfile.id)
-//   - User: added missing reverses (familyBackgrounds, residenceHistory,
-//     electoralRecords, parentEducation, qualifications, studentHealths,
-//     healthConditions, vaccinations, behavioralProfiles, attendanceSummaries,
-//     examResults, nationalExamResults, driverRoutes)
-//   - School: added all missing reverse relations for prisma validate
-//   - User.studentProfile / qualifications: removed bogus TeacherProfile?
-//     relation aliases; studentProfile now correctly typed as StudentProfile?
 // =============================================================================
 
 generator client {
@@ -299,7 +279,6 @@ enum AnnouncementType {
 
 // =============================================================================
 // LAYER 0 — FOUNDATION
-// migration-01-foundation
 // =============================================================================
 
 model School {
@@ -566,7 +545,6 @@ model PaideonIdSequence {
 
 // =============================================================================
 // LAYER 1 — ADDRESSES
-// migration-01-foundation
 // =============================================================================
 
 model Address {
@@ -597,13 +575,13 @@ model Address {
 
 // =============================================================================
 // LAYER 2 — IDENTITY & AUTH
-// migration-01-foundation
 // Raw SQL: chk_user_role, chk_user_status
 // =============================================================================
 
 model User {
   id                String     @id @default(cuid())
   schoolId          String
+  libraryID         String
   paideonId         String     @unique
   email             String
   emailVerified     Boolean    @default(false)
@@ -627,6 +605,7 @@ model User {
   deletedAt         DateTime?
 
   school       School @relation(fields: [schoolId], references: [id])
+  library      Library @relation(field: [libraryID], references: [id])
   profileImage Media? @relation("UserProfileImage", fields: [profileImageId], references: [id])
 
   // Profiles (at most one per role)
