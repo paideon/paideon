@@ -23,5 +23,5 @@ export const CurrentUser = createParamDecorator(
     // Return whatever Passport put in req.user
     // (which is the object returned from validate() in jwt.strategy / jwt-refresh.strategy)
     return request.user;
-  },
+  }
 );

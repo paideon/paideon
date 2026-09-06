@@ -71,7 +71,7 @@ async function bootstrap() {
       whitelist: true,
       forbidNonWhitelisted: true,
       transform: true,
-    }),
+    })
   );
 
   const port = process.env.PORT || 3001;

@@ -46,7 +46,7 @@ export class AuthController {
   @Post("activate/confirm")
   async confirmActivation(
     @Body() dto: ActivateDto,
-    @Res({ passthrough: true }) res: Response,
+    @Res({ passthrough: true }) res: Response
   ) {
     const tokens = await this.authService.confirmActivation(dto);
     this.setRefreshCookie(res, tokens.refreshToken);
@@ -61,7 +61,7 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   async login(
     @Body() dto: LoginDto,
-    @Res({ passthrough: true }) res: Response,
+    @Res({ passthrough: true }) res: Response
   ) {
     const tokens = await this.authService.login(dto);
     this.setRefreshCookie(res, tokens.refreshToken);
@@ -80,11 +80,11 @@ export class AuthController {
   @UseGuards(JwtRefreshGuard)
   async refresh(
     @CurrentUser() user: JwtPayload & { refreshToken: string },
-    @Res({ passthrough: true }) res: Response,
+    @Res({ passthrough: true }) res: Response
   ) {
     const tokens = await this.authService.refreshTokens(
       user.sub,
-      user.refreshToken,
+      user.refreshToken
     );
     this.setRefreshCookie(res, tokens.refreshToken);
     return { accessToken: tokens.accessToken };
@@ -99,7 +99,7 @@ export class AuthController {
   @UseGuards(JwtRefreshGuard)
   async logout(
     @CurrentUser() user: JwtPayload & { refreshToken: string },
-    @Res({ passthrough: true }) res: Response,
+    @Res({ passthrough: true }) res: Response
   ) {
     await this.authService.logout(user.refreshToken);
     this.clearRefreshCookie(res);

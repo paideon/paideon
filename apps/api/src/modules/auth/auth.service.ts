@@ -20,7 +20,7 @@ export class AuthService {
   constructor(
     private prisma: PrismaService,
     private jwt: JwtService,
-    private config: ConfigService,
+    private config: ConfigService
   ) {}
 
   // ─────────────────────────────────────────────────────────────
@@ -49,7 +49,7 @@ export class AuthService {
 
     if (user.status === "SUSPENDED") {
       throw new ForbiddenException(
-        "Account suspended. Contact your administrator.",
+        "Account suspended. Contact your administrator."
       );
     }
 
@@ -128,7 +128,7 @@ export class AuthService {
         data: { revokedAt: new Date() },
       });
       throw new UnauthorizedException(
-        "Token reuse detected. All sessions revoked.",
+        "Token reuse detected. All sessions revoked."
       );
     }
 
@@ -212,13 +212,13 @@ export class AuthService {
 
     if (verificationToken.expiresAt < new Date()) {
       throw new BadRequestException(
-        "Activation link has expired. Request a new one.",
+        "Activation link has expired. Request a new one."
       );
     }
 
     if (verificationToken.verifiedAt) {
       throw new BadRequestException(
-        "This activation link has already been used.",
+        "This activation link has already been used."
       );
     }
 
@@ -304,7 +304,7 @@ export class AuthService {
 
     if (resetToken.expiresAt < new Date()) {
       throw new BadRequestException(
-        "Reset link has expired. Request a new one.",
+        "Reset link has expired. Request a new one."
       );
     }
 
