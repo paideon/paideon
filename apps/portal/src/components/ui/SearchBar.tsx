@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 // ── SearchBar ──────────────────────────────────────────────────────────────
 //
@@ -16,17 +16,17 @@
 //   isLoading    — shows spinner inside button while API responds
 //   disabled     — greys everything out
 
-import { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 // ── Filter options ─────────────────────────────────────────────────────────
 // Kept here so the search page can import and reuse the same list
 export const SEARCH_FILTERS = [
-  'All Books',
-  'Digital Vault',
-  'Fiction',
-  'Non-Fiction',
-  'Science',
+  "All Books",
+  "Digital Vault",
+  "Fiction",
+  "Non-Fiction",
+  "Science",
 ] as const;
 
 export type SearchFilter = (typeof SEARCH_FILTERS)[number];
@@ -54,12 +54,12 @@ export interface SearchBarProps {
 export function SearchBar({
   onSearch,
   bookCount,
-  initialQuery = '',
+  initialQuery = "",
   suggestions = [],
   isLoading = false,
 }: SearchBarProps) {
   const [query, setQuery] = useState(initialQuery);
-  const [filter, setFilter] = useState<SearchFilter>('All Books');
+  const [filter, setFilter] = useState<SearchFilter>("All Books");
   const [isFocused, setIsFocused] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -80,8 +80,8 @@ export function SearchBar({
         setShowSuggestions(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // Show suggestions dropdown when there are results and input is focused
@@ -97,8 +97,8 @@ export function SearchBar({
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') handleSubmit();
-    if (e.key === 'Escape') {
+    if (e.key === "Enter") handleSubmit();
+    if (e.key === "Escape") {
       setShowSuggestions(false);
       inputRef.current?.blur();
     }
@@ -117,17 +117,17 @@ export function SearchBar({
         className="relative"
         animate={{
           boxShadow: isFocused
-            ? '0 0 0 1px rgba(255,255,255,0.12)'
+            ? "0 0 0 1px rgba(255,255,255,0.12)"
             : [
-                '0 0 0 1px rgba(255,255,255,0.04)',
-                '0 0 0 1px rgba(255,255,255,0.09)',
-                '0 0 0 1px rgba(255,255,255,0.04)',
+                "0 0 0 1px rgba(255,255,255,0.04)",
+                "0 0 0 1px rgba(255,255,255,0.09)",
+                "0 0 0 1px rgba(255,255,255,0.04)",
               ],
         }}
         transition={
           isFocused
             ? { duration: 0.3 }
-            : { duration: 3, repeat: Infinity, ease: 'easeInOut' }
+            : { duration: 3, repeat: Infinity, ease: "easeInOut" }
         }
       >
         <div className="flex border border-border bg-card focus-within:border-border-strong transition-colors duration-300">
@@ -201,10 +201,10 @@ export function SearchBar({
               <motion.span
                 className="block w-3 h-3 border border-subtle rounded-full border-t-transparent"
                 animate={{ rotate: 360 }}
-                transition={{ duration: 0.8, repeat: Infinity, ease: 'linear' }}
+                transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
               />
             ) : (
-              'Search'
+              "Search"
             )}
           </motion.button>
         </div>
@@ -218,7 +218,7 @@ export function SearchBar({
               initial={{ opacity: 0, y: -4 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -4 }}
-              transition={{ duration: 0.15, ease: 'easeOut' }}
+              transition={{ duration: 0.15, ease: "easeOut" }}
               className="
                 absolute top-full left-0 right-0 z-50
                 bg-card border border-border border-t-0

@@ -37,7 +37,7 @@ export function ScrollProvider({ children }: { children: React.ReactNode }) {
 
       sections.forEach((section, index) => {
         const container = section.querySelector<HTMLElement>(
-          "[data-scroll-container]",
+          "[data-scroll-container]"
         );
         if (!container) return;
 
@@ -66,7 +66,7 @@ export function ScrollProvider({ children }: { children: React.ReactNode }) {
       // Force ScrollTrigger to remeasure the page after setup
       ScrollTrigger.refresh();
     },
-    { scope: containerRef },
+    { scope: containerRef }
   );
 
   return (

@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { useMousePosition } from '@/hooks/useMousePosition';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { useEffect } from "react";
+import { useMousePosition } from "@/hooks/useMousePosition";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export function CustomCursor() {
   const { x, y } = useMousePosition();
@@ -30,8 +30,8 @@ export function CustomCursor() {
         style={{
           x: ringX,
           y: ringY,
-          translateX: '-50%',
-          translateY: '-50%',
+          translateX: "-50%",
+          translateY: "-50%",
         }}
       >
         <div className="w-9 h-9 rounded-full border border-white/30" />
@@ -43,8 +43,8 @@ export function CustomCursor() {
         style={{
           x: dotX,
           y: dotY,
-          translateX: '-50%',
-          translateY: '-50%',
+          translateX: "-50%",
+          translateY: "-50%",
         }}
       >
         <div className="w-1.5 h-1.5 rounded-full bg-white" />

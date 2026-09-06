@@ -96,7 +96,7 @@ function roleLabel(r: Role) {
 function drawBadge(
   ctx: CanvasRenderingContext2D,
   user: BadgeUser,
-  photo: HTMLImageElement | null,
+  photo: HTMLImageElement | null
 ) {
   const W = 768,
     H = 960;
@@ -191,7 +191,7 @@ function drawBadge(
       ax - ar,
       ay - ar,
       ar * 2,
-      ar * 2,
+      ar * 2
     );
     // Subtle overlay so school/Paideon branding reads on top of photo
     const ov = ctx.createLinearGradient(ax, ay - ar, ax, ay + ar);
@@ -293,7 +293,7 @@ function drawBadge(
   ctx.fillText(
     "ISSUED BY KANNANGARA ICT SOCIETY  ·  NOT TRANSFERABLE",
     W / 2,
-    830,
+    830
   );
 
   // ── Gloss overlay (top-left sheen) ──
@@ -338,7 +338,7 @@ function useBadgeTexture(user: BadgeUser): THREE.CanvasTexture {
     () => () => {
       texture.dispose();
     },
-    [texture],
+    [texture]
   );
 
   return texture;
@@ -369,13 +369,13 @@ function Band({
 }) {
   const band = useRef<THREE.Mesh>(null);
   const fixed = useRef<RapierRigidBody>(
-    null,
+    null
   ) as React.RefObject<RapierRigidBody>;
   const j1 = useRef<RapierRigidBody>(null) as React.RefObject<RapierRigidBody>;
   const j2 = useRef<RapierRigidBody>(null) as React.RefObject<RapierRigidBody>;
   const j3 = useRef<RapierRigidBody>(null) as React.RefObject<RapierRigidBody>;
   const card = useRef<RapierRigidBody>(
-    null,
+    null
   ) as React.RefObject<RapierRigidBody>;
 
   const j1lerped = useRef<THREE.Vector3 | null>(null);
@@ -394,7 +394,7 @@ function Band({
         new THREE.Vector3(),
         new THREE.Vector3(),
         new THREE.Vector3(),
-      ]),
+      ])
   );
 
   const [dragged, drag] = useState<THREE.Vector3 | false>(false);
@@ -450,19 +450,19 @@ function Band({
       j2lerped.current = new THREE.Vector3().copy(j2.current.translation());
     const d1 = Math.max(
       0.1,
-      Math.min(1, j1lerped.current.distanceTo(j1.current.translation())),
+      Math.min(1, j1lerped.current.distanceTo(j1.current.translation()))
     );
     const d2 = Math.max(
       0.1,
-      Math.min(1, j2lerped.current.distanceTo(j2.current.translation())),
+      Math.min(1, j2lerped.current.distanceTo(j2.current.translation()))
     );
     j1lerped.current.lerp(
       j1.current.translation(),
-      delta * (minSpeed + d1 * (maxSpeed - minSpeed)),
+      delta * (minSpeed + d1 * (maxSpeed - minSpeed))
     );
     j2lerped.current.lerp(
       j2.current.translation(),
-      delta * (minSpeed + d2 * (maxSpeed - minSpeed)),
+      delta * (minSpeed + d2 * (maxSpeed - minSpeed))
     );
 
     // Update CatmullRom curve
@@ -516,7 +516,7 @@ function Band({
               drag(
                 new THREE.Vector3()
                   .copy(e.point)
-                  .sub(vec.copy(card.current.translation())),
+                  .sub(vec.copy(card.current.translation()))
               );
             }}
           >

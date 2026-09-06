@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 interface CardSectionProps {
   children: React.ReactNode;
@@ -11,7 +11,7 @@ export function CardSection({
   children,
   index,
   id,
-  className = '',
+  className = "",
 }: CardSectionProps) {
   if (index === 0) {
     return (
@@ -29,8 +29,8 @@ export function CardSection({
         data-scroll-container
         className="w-full"
         style={{
-          transformOrigin: 'bottom left',
-          willChange: 'transform',
+          transformOrigin: "bottom left",
+          willChange: "transform",
         }}
       >
         {children}

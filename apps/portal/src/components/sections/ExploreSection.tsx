@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { useRouter } from 'next/navigation';
-import { motion, useInView } from 'framer-motion';
-import { CountUp } from '@/components/ui/CountUp';
-import { SearchBar, type SearchFilter } from '@/components/ui/SearchBar';
-import type { LibraryStats } from '@paideon/types';
+import { useRef } from "react";
+import { useRouter } from "next/navigation";
+import { motion, useInView } from "framer-motion";
+import { CountUp } from "@/components/ui/CountUp";
+import { SearchBar, type SearchFilter } from "@/components/ui/SearchBar";
+import type { LibraryStats } from "@paideon/types";
 
 // StatCard
 function StatCard({
@@ -18,7 +18,7 @@ function StatCard({
   index: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-5% 0px' });
+  const isInView = useInView(ref, { once: true, margin: "-5% 0px" });
 
   return (
     <motion.div
@@ -56,19 +56,19 @@ function StatCard({
 //  ExploreSection
 export function ExploreSection({ stats }: { stats: LibraryStats }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-8% 0px' });
+  const isInView = useInView(sectionRef, { once: true, margin: "-8% 0px" });
   const router = useRouter();
 
   const STATS = [
-    { target: stats.books, label: 'Books in\nCatalog' },
-    { target: stats.students, label: 'Students\nServed' },
-    { target: '24/7', label: 'Digital\nAccess' },
-    { target: 0, label: 'Manual\nProcesses' },
+    { target: stats.books, label: "Books in\nCatalog" },
+    { target: stats.students, label: "Students\nServed" },
+    { target: "24/7", label: "Digital\nAccess" },
+    { target: 0, label: "Manual\nProcesses" },
   ];
 
   const handleSearch = (query: string, filter: SearchFilter) => {
     const params = new URLSearchParams({ q: query });
-    if (filter !== 'All Books') params.set('filter', filter);
+    if (filter !== "All Books") params.set("filter", filter);
     router.push(`/search?${params.toString()}`);
   };
 
@@ -90,7 +90,7 @@ export function ExploreSection({ stats }: { stats: LibraryStats }) {
       <motion.span
         initial={{ opacity: 0, x: -16 }}
         animate={isInView ? { opacity: 1, x: 0 } : {}}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
         className="font-mono text-label tracking-[0.3em] text-subtle uppercase"
       >
         03 — Explore the Catalog
@@ -99,8 +99,8 @@ export function ExploreSection({ stats }: { stats: LibraryStats }) {
       {/* Heading */}
       <div className="overflow-hidden">
         <motion.h2
-          initial={{ y: '110%' }}
-          animate={isInView ? { y: '0%' } : {}}
+          initial={{ y: "110%" }}
+          animate={isInView ? { y: "0%" } : {}}
           transition={{ delay: 0.1, duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="font-display text-display-lg font-light text-foreground leading-[1.1]"
         >
@@ -114,7 +114,7 @@ export function ExploreSection({ stats }: { stats: LibraryStats }) {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.25, duration: 0.9, ease: 'easeOut' }}
+        transition={{ delay: 0.25, duration: 0.9, ease: "easeOut" }}
         className="w-full flex flex-col items-center justify-center"
       >
         <SearchBar onSearch={handleSearch} bookCount={stats.books} />

@@ -13,9 +13,9 @@
 // // Without scramble if you prefer clean count
 // <CountUp target={8500} scramble={false} />
 
-'use client';
+"use client";
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from "react";
 
 interface CountUpProps {
   target: number | string;
@@ -26,12 +26,12 @@ interface CountUpProps {
 
 export function CountUp({
   target,
-  suffix = '',
+  suffix = "",
   duration = 1800,
   scramble = true,
 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const [display, setDisplay] = useState<string>('0');
+  const [display, setDisplay] = useState<string>("0");
   const [started, setStarted] = useState(false);
 
   // Characters used during scramble phase
@@ -54,7 +54,7 @@ export function CountUp({
 
   useEffect(() => {
     // If target is a string (like '24/7') just display it directly
-    if (typeof target === 'string') {
+    if (typeof target === "string") {
       setDisplay(target);
       return;
     }

@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState } from "react";
+import { motion } from "framer-motion";
 
 const WAVE_DELAYS = [0, 0.1, 0.2, 0.1, 0.2, 0.3];
 
@@ -86,7 +86,7 @@ export function FeatureCard({
         transition={{ duration: 0.3 }}
         style={{
           background:
-            'radial-gradient(ellipse 80% 60% at 20% 50%, rgba(201,168,76,0.03) 0%, transparent 70%)',
+            "radial-gradient(ellipse 80% 60% at 20% 50%, rgba(201,168,76,0.03) 0%, transparent 70%)",
         }}
       />
 

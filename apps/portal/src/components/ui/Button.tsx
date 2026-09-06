@@ -1,30 +1,30 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState } from "react";
+import { motion } from "framer-motion";
 
 export function Button({
   href,
   children,
-  variant = 'default',
-  size = 'md',
+  variant = "default",
+  size = "md",
   breathe = false,
 }: {
   href: string;
   children: React.ReactNode;
-  variant?: 'default' | 'gold';
-  size?: 'md' | 'lg';
+  variant?: "default" | "gold";
+  size?: "md" | "lg";
   breathe?: boolean;
 }) {
   const [isHovered, setIsHovered] = useState(false);
 
-  const isGold = variant === 'gold';
-  const isLg = size === 'lg';
+  const isGold = variant === "gold";
+  const isLg = size === "lg";
 
   // Fill color — gold variant floods solid gold (text flips to bg), default is a subtle white tint
   const fillBackground = isGold
-    ? 'rgba(201,168,76,1)'
-    : 'rgba(255,255,255,0.04)';
+    ? "rgba(201,168,76,1)"
+    : "rgba(255,255,255,0.04)";
 
   return (
     <motion.a
@@ -35,7 +35,7 @@ export function Button({
       animate={breathe && !isHovered ? { scale: [1, 1.015, 1] } : { scale: 1 }}
       transition={
         breathe && !isHovered
-          ? { duration: 2.8, repeat: Infinity, ease: 'easeInOut' }
+          ? { duration: 2.8, repeat: Infinity, ease: "easeInOut" }
           : { duration: 0.2 }
       }
       className={`
@@ -46,15 +46,15 @@ export function Button({
         group
         ${
           isLg
-            ? 'gap-4 px-12 py-5 tracking-[0.18em]'
-            : 'gap-3 px-9 py-4 tracking-[0.15em]'
+            ? "gap-4 px-12 py-5 tracking-[0.18em]"
+            : "gap-3 px-9 py-4 tracking-[0.15em]"
         }
         ${
           isGold
-            ? 'bg-gold-muted border border-gold/30 hover:border-gold text-gold hover:bg-gold hover:text-background'
-            : 'border border-border hover:border-border-strong text-muted hover:text-foreground'
+            ? "bg-gold-muted border border-gold/30 hover:border-gold text-gold hover:bg-gold hover:text-background"
+            : "border border-border hover:border-border-strong text-muted hover:text-foreground"
         }
-        ${!isGold && isLg ? 'bg-card' : ''}
+        ${!isGold && isLg ? "bg-card" : ""}
       `}
     >
       {/* Fill flood — floods from left edge on hover */}

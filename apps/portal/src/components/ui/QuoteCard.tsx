@@ -1,9 +1,9 @@
 // Quote cards — the dealing animation — each card starts slightly rotated and scaled down, then settles flat. The rotation alternates direction — card 0 tilts left, card 1 tilts right, card 2 tilts left. Like cards being placed on a table from a hand. They arrive with a 120ms stagger.
 
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
 export function QuoteCard({
   text,
@@ -15,7 +15,7 @@ export function QuoteCard({
   index: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-5% 0px' });
+  const isInView = useInView(ref, { once: true, margin: "-5% 0px" });
 
   const delay = index * 0.12;
 
@@ -57,7 +57,7 @@ export function QuoteCard({
 
       {/* Quote text */}
       <p className="font-display text-[17px] italic font-light leading-[1.6] text-subtle group-hover:text-muted transition-colors duration-300 flex-1">
-        {text.replace(/^"|"$/g, '')}
+        {text.replace(/^"|"$/g, "")}
       </p>
 
       {/* Divider */}

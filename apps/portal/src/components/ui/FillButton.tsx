@@ -1,22 +1,22 @@
 // `FillButton` — on hover, a background color floods in from the left edge using `scaleX` with `originX: 0`. The fill completes in 400ms with a premium ease curve. The arrow shifts 4px right simultaneously. Two variants — `default` for Sign In (white tint) and `gold` for Open Vault (gold tint).
 
-'use client';
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+"use client";
+import { useState } from "react";
+import { motion } from "framer-motion";
 
 export function FillButton({
   href,
   children,
-  variant = 'default',
+  variant = "default",
 }: {
   href: string;
   children: React.ReactNode;
-  variant?: 'default' | 'gold';
+  variant?: "default" | "gold";
 }) {
   const [isHovered, setIsHovered] = useState(false);
 
   const fillColor =
-    variant === 'gold' ? 'rgba(201,168,76,0.12)' : 'rgba(255,255,255,0.04)';
+    variant === "gold" ? "rgba(201,168,76,0.12)" : "rgba(255,255,255,0.04)";
 
   return (
     <a

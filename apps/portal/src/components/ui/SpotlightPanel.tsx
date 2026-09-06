@@ -1,13 +1,13 @@
 // `SpotlightPanel` — each panel tracks the mouse position independently. A large soft radial gradient follows the cursor with spring physics, creating the feeling of a torch illuminating the content. It fades in on hover and fades out when the mouse leaves. The gold tint is very subtle — `6% opacity` — enough to feel but not enough to see consciously.
 
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
-import { useSpring, useMotionValue, useTransform, motion } from 'framer-motion';
+import { useRef, useState } from "react";
+import { useSpring, useMotionValue, useTransform, motion } from "framer-motion";
 
 export function SpotlightPanel({
   children,
-  className = '',
+  className = "",
   delay = 0,
 }: {
   children: React.ReactNode;
@@ -42,14 +42,14 @@ export function SpotlightPanel({
       <motion.div
         className="absolute pointer-events-none z-0 transition-opacity duration-500"
         style={{
-          width: '60%',
-          paddingBottom: '60%',
-          borderRadius: '50%',
+          width: "60%",
+          paddingBottom: "60%",
+          borderRadius: "50%",
           background:
-            'radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%)',
+            "radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%)",
           top: useTransform(spotY, (v) => `${v}%`),
           left: useTransform(spotX, (v) => `${v}%`),
-          transform: 'translate(-50%, -50%)',
+          transform: "translate(-50%, -50%)",
           opacity: isHovered ? 1 : 0,
         }}
       />

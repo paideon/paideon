@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
-import { CountUp } from '@/components/ui/CountUp';
+import { CountUp } from "@/components/ui/CountUp";
 
 export function StatCard({
   target,
@@ -15,7 +15,7 @@ export function StatCard({
   index: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-5% 0px' });
+  const isInView = useInView(ref, { once: true, margin: "-5% 0px" });
 
   return (
     <motion.div
