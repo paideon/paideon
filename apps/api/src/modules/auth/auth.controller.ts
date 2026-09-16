@@ -16,6 +16,7 @@ import { ResetPasswordDto } from "./dto/reset-password.dto";
 import { JwtRefreshGuard } from "./guards/jwt-refresh.guard";
 import { CurrentUser } from "./decorators/current-user.decorator";
 import { JwtPayload } from "./types/jwt-payload.type";
+import { ResponseEnvelopeData, ErrorCodeEnum } from "@paideon/contracts";
 
 @Controller("auth")
 export class AuthController {
@@ -65,7 +66,13 @@ export class AuthController {
   ) {
     const tokens = await this.authService.login(dto);
     this.setRefreshCookie(res, tokens.refreshToken);
-    return { accessToken: tokens.accessToken };
+
+    const response: ResponseEnvelopeData<{ accessToken: string }> = {
+      success: true,
+      data: { accessToken: tokens.accessToken },
+    };
+
+    return response;
   }
 
   // ─────────────────────────────────────────────────────────────
