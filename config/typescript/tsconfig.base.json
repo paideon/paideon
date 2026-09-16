@@ -17,13 +17,22 @@
     "strict": true,
     "target": "es2022",
     "customConditions": ["@org/source"],
+    "baseUrl": ".",
+    "rewriteRelativeImportExtensions": true,
+    "allowImportingTsExtensions": true,
     "paths": {
       "@paideon/types": ["packages/types/src/index.ts"],
       "@paideon/types/*": ["packages/types/src/*"],
       "@paideon/database": ["packages/database/src/index.ts"],
       "@paideon/database/*": ["packages/database/src/*"],
       "@paideon/ui": ["packages/ui/src/index.ts"],
-      "@paideon/ui/*": ["packages/ui/src/*"]
+      "@paideon/ui/*": ["packages/ui/src/*"],
+      "@paideon/tokens": ["packages/tokens/src/index.ts"],
+      "@paideon/tokens/*": ["packages/tokens/src/*"],
+      "@paideon/transport": ["packages/transport/src/index.ts"],
+      "@paideon/transport/*": ["packages/transport/src/*"],
+      "@paideon/contracts": ["packages/contracts/src/index.ts"],
+      "@paideon/contracts/*": ["packages/contracts/src/*"]
     }
   }
 }

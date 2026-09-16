@@ -28,8 +28,11 @@
       "@paideon/database": ["../../packages/database/src/index.ts"],
       "@paideon/database/*": ["../../packages/database/src/*"],
       "@paideon/ui": ["../../packages/ui/src/index.ts"],
-      "@paideon/ui/*": ["../../packages/ui/src/*"]
+      "@paideon/ui/*": ["../../packages/ui/src/*"],
+      "@paideon/tokens": ["../../packages/tokens/src/index.ts"],
+      "@paideon/tokens/*": ["../../packages/tokens/src/*"]
     },
+    "baseUrl": ".",
     "types": ["node"],
     "outDir": "dist",
     "rootDir": "../..",

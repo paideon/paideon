@@ -6,12 +6,7 @@
     "composite": true,
     "declaration": true,
     "declarationMap": true,
-    "emitDeclarationOnly": false,
-    // Required for the `.ts` relative-import convention used throughout
-    // this package (mirrors Nexus's tokens package). NOT currently set in
-    // config/typescript/tsconfig.base.json — needs adding there (or here)
-    // before this package will build in the real repo. TS 5.7+.
-    "rewriteRelativeImportExtensions": true
+    "emitDeclarationOnly": false
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
