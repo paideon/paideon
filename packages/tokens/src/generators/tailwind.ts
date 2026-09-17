@@ -104,10 +104,12 @@ export const paideonTheme = {
   colors,
   fontFamily,
   fontSize: Object.fromEntries(
-    Object.entries(fontSize).map(([key, [size, meta]]) => [
-      key,
-      [size, { lineHeight: meta.lineHeight, fontWeight: meta.fontWeight }],
-    ])
+    Object.entries(fontSize).map(
+      ([key, [size, { lineHeight, fontWeight }]]) => [
+        key,
+        [size, { lineHeight, fontWeight }],
+      ]
+    )
   ),
   letterSpacing,
   spacing,
