@@ -30,7 +30,9 @@
       "@paideon/ui": ["../../packages/ui/src/index.ts"],
       "@paideon/ui/*": ["../../packages/ui/src/*"],
       "@paideon/tokens": ["../../packages/tokens/src/index.ts"],
-      "@paideon/tokens/*": ["../../packages/tokens/src/*"]
+      "@paideon/tokens/*": ["../../packages/tokens/src/*"],
+      "@paideon/auth-utils": ["../../packages/auth-utils/src/index.ts"],
+      "@paideon/auth-utils/*": ["../../packages/auth-utils/src/*"]
     },
     "baseUrl": ".",
     "types": ["node"],

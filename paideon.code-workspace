@@ -25,8 +25,28 @@
       "path": "packages/types"
     },
     {
+      "name": "AUTH-UTILS",
+      "path": "packages/auth-utils"
+    },
+    {
+      "name": "CONTRACTS",
+      "path": "packages/contracts"
+    },
+    {
+      "name": "TOKENS",
+      "path": "packages/tokens"
+    },
+    {
+      "name": "TRANSPORT",
+      "path": "packages/transport"
+    },
+    {
       "name": "ROOT",
       "path": "."
     }
-  ]
+  ],
+  "settings": {
+    "typescript.tsdk": "${workspaceFolder:ROOT}/node_modules/typescript/lib",
+    "typescript.enablePromptUseWorkspaceTsdk": true
+  }
 }
