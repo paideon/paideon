@@ -5,10 +5,6 @@
       "path": "apps/portal"
     },
     {
-      "name": "MOBILE",
-      "path": "apps/mobile"
-    },
-    {
       "name": "API",
       "path": "apps/api"
     },

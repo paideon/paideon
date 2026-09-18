@@ -53,8 +53,3 @@ packages/database/src/generated/
 # Next.js
 .next
 out
-
-# Obsidian
-.obsidian/
-Excalidraw/
-packages/tokens/tsconfig.tsbuildinfo
