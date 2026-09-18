@@ -1,25 +1,23 @@
 // packages/tokens/src/generators/cn.ts
 //
-// Pure function: returns the full source text for packages/ui/src/utilities/
-// cn.ts. Mirrors Nexus's generators/cn.ts in purpose (tailwind-merge needs
-// an explicit class-group config because our token names — bg-bg-primary,
-// bg-success-bg, etc — aren't Tailwind's defaults, so it can't infer which
-// classes conflict with which on its own). No filesystem access here;
-// scripts/generate-cn-groups.js calls this and writes the result.
-//
-// NOTE: color group names are intentionally double-prefixed in places
-// (e.g. `text-text-primary`, `bg-bg-primary`) because Tailwind flattens
-// nested color keys with dashes, and our semantic keys are already named
-// to match the brand doc's CSS var names 1:1 (--color-text-primary, etc).
-// This is slightly verbose as a utility class but keeps one name for the
-// same concept everywhere — CSS var, Tailwind class, and brand doc all say
-// "text-primary". Revisit if it proves awkward once real components exist.
+// Pure function: takes the token set and returns the full source text for
+// packages/ui/src/utilities/cn.tsx. No filesystem access here — mirrors
+// generators/css.ts. generate-cn-groups.js just calls generateCnUtility()
+// and writes the result to packages/ui; all the actual class-flattening
+// logic lives here so it can be unit tested and reused without touching disk.
 
 import { colors } from "./tailwind.ts";
-import { spacing } from "../primitives/spacing.ts";
+import { scale, blur, opacity, zIndex } from "../primitives/effects.ts";
 import { borderRadius } from "../primitives/radius.ts";
 import { boxShadow } from "../primitives/shadows.ts";
-import { fontSize } from "../primitives/typography.ts";
+import { sizing, borderWidth, maxWidth } from "../primitives/sizing.ts";
+import { spacing } from "../primitives/spacing.ts";
+import {
+  fontFamily,
+  fontSize,
+  letterSpacing,
+  lineHeight,
+} from "../primitives/typography.ts";
 
 function flattenKeys(obj: Record<string, unknown>, prefix = ""): string[] {
   const keys: string[] = [];
@@ -34,8 +32,13 @@ function flattenKeys(obj: Record<string, unknown>, prefix = ""): string[] {
   return keys;
 }
 
+// NOTE: `DEFAULT` keys (e.g. borderWidth.DEFAULT) map to the bare utility
+// class with no suffix (`border`, not `border-DEFAULT`) — that's how
+// Tailwind itself generates it, so tailwind-merge needs the same string.
 function toClassList(keys: string[], utilityPrefix: string): string[] {
-  return keys.map((k) => `${utilityPrefix}-${k}`);
+  return keys.map((k) =>
+    k === "DEFAULT" ? utilityPrefix : `${utilityPrefix}-${k}`
+  );
 }
 
 function renderList(name: string, items: string[]): string {
@@ -44,63 +47,187 @@ function renderList(name: string, items: string[]): string {
 }
 
 export function generateCnUtility(): string {
-  const colorKeys = flattenKeys(colors).filter(
-    (k) => k !== "transparent" && k !== "current"
+  const fontSizeClasses = toClassList(Object.keys(fontSize), "text");
+  const fontFamilyClasses = toClassList(Object.keys(fontFamily), "font");
+  const trackingClasses = toClassList(Object.keys(letterSpacing), "tracking");
+  const leadingClasses = toClassList(Object.keys(lineHeight), "leading");
+  const scaleClasses = toClassList(Object.keys(scale), "scale");
+
+  const sizingKeys = Object.keys(sizing);
+  const wClasses = toClassList(sizingKeys, "w");
+  const hClasses = toClassList(sizingKeys, "h");
+  const minWClasses = toClassList(sizingKeys, "min-w");
+  const maxWClasses = toClassList(
+    [...Object.keys(maxWidth), ...sizingKeys],
+    "max-w"
   );
+  const minHClasses = toClassList(sizingKeys, "min-h");
+  const maxHClasses = toClassList(sizingKeys, "max-h");
+
+  const spaceKeys = Object.keys(spacing);
+  const spaceGroups = {
+    p: toClassList(spaceKeys, "p"),
+    px: toClassList(spaceKeys, "px"),
+    py: toClassList(spaceKeys, "py"),
+    pt: toClassList(spaceKeys, "pt"),
+    pr: toClassList(spaceKeys, "pr"),
+    pb: toClassList(spaceKeys, "pb"),
+    pl: toClassList(spaceKeys, "pl"),
+    m: toClassList(spaceKeys, "m"),
+    mx: toClassList(spaceKeys, "mx"),
+    my: toClassList(spaceKeys, "my"),
+    mt: toClassList(spaceKeys, "mt"),
+    mr: toClassList(spaceKeys, "mr"),
+    mb: toClassList(spaceKeys, "mb"),
+    ml: toClassList(spaceKeys, "ml"),
+    gap: toClassList(spaceKeys, "gap"),
+    "gap-x": toClassList(spaceKeys, "gap-x"),
+    "gap-y": toClassList(spaceKeys, "gap-y"),
+    top: toClassList(spaceKeys, "top"),
+    right: toClassList(spaceKeys, "right"),
+    bottom: toClassList(spaceKeys, "bottom"),
+    left: toClassList(spaceKeys, "left"),
+  };
+
+  const borderWidthKeys = Object.keys(borderWidth);
+  const borderWClasses = toClassList(borderWidthKeys, "border");
+
+  const colorKeys = flattenKeys(colors);
+  const borderColorClasses = toClassList(colorKeys, "border");
   const bgColorClasses = toClassList(colorKeys, "bg");
   const textColorClasses = toClassList(colorKeys, "text");
-  const borderColorClasses = toClassList(colorKeys, "border");
 
-  const spacingKeys = Object.keys(spacing);
-  const pClasses = toClassList(spacingKeys, "p");
-  const pxClasses = toClassList(spacingKeys, "px");
-  const pyClasses = toClassList(spacingKeys, "py");
-  const mClasses = toClassList(spacingKeys, "m");
-  const mxClasses = toClassList(spacingKeys, "mx");
-  const myClasses = toClassList(spacingKeys, "my");
-  const gapClasses = toClassList(spacingKeys, "gap");
+  const radiusKeys = Object.keys(borderRadius);
+  const roundedClasses = toClassList(radiusKeys, "rounded");
 
-  const roundedClasses = toClassList(Object.keys(borderRadius), "rounded");
-  const shadowClasses = toClassList(Object.keys(boxShadow), "shadow");
-  const fontSizeClasses = toClassList(Object.keys(fontSize), "text");
+  const shadowKeys = Object.keys(boxShadow);
+  const shadowClasses = toClassList(shadowKeys, "shadow");
 
-  return `// packages/ui/src/utilities/cn.ts
-// AUTOGENERATED by @paideon/tokens generators/cn.ts — DO NOT EDIT MANUALLY.
-// Regenerate: pnpm --filter @paideon/tokens generate:cn
+  const zKeys = Object.keys(zIndex);
+  const zClasses = toClassList(zKeys, "z");
+
+  const opacityKeys = Object.keys(opacity);
+  const opacityClasses = toClassList(opacityKeys, "opacity");
+
+  const blurKeys = Object.keys(blur);
+  const blurClasses = toClassList(blurKeys, "blur");
+
+  return `/* AUTOGENERATED – DO NOT EDIT MANUALLY */
+/* Source: packages/tokens/src/generators/cn.ts */
+/* Run: node packages/tokens/scripts/generate-cn-groups.js */
 
 import { clsx, type ClassValue } from 'clsx';
 import { extendTailwindMerge } from 'tailwind-merge';
 
-${renderList("bgColorClasses", bgColorClasses)}
-${renderList("textColorClasses", textColorClasses)}
-${renderList("borderColorClasses", borderColorClasses)}
-${renderList("pClasses", pClasses)}
-${renderList("pxClasses", pxClasses)}
-${renderList("pyClasses", pyClasses)}
-${renderList("mClasses", mClasses)}
-${renderList("mxClasses", mxClasses)}
-${renderList("myClasses", myClasses)}
-${renderList("gapClasses", gapClasses)}
-${renderList("roundedClasses", roundedClasses)}
-${renderList("shadowClasses", shadowClasses)}
+// ─── Font Size ────────────────────────────────────────────────────────────────
 ${renderList("fontSizeClasses", fontSizeClasses)}
+// ─── Font Family ──────────────────────────────────────────────────────────────
+${renderList("fontFamilyClasses", fontFamilyClasses)}
+// ─── Text Color ───────────────────────────────────────────────────────────────
+${renderList("textColorClasses", textColorClasses)}
+// ─── Letter Spacing ───────────────────────────────────────────────────────────
+${renderList("trackingClasses", trackingClasses)}
+// ─── Line Height ──────────────────────────────────────────────────────────────
+${renderList("leadingClasses", leadingClasses)}
+// ─── Transform Scale ──────────────────────────────────────────────────────────
+${renderList("scaleClasses", scaleClasses)}
+// ─── Sizing: Width ────────────────────────────────────────────────────────────
+${renderList("wClasses", wClasses)}
+// ─── Sizing: Height ───────────────────────────────────────────────────────────
+${renderList("hClasses", hClasses)}
+// ─── Sizing: Min/Max Width ────────────────────────────────────────────────────
+${renderList("minWClasses", minWClasses)}
+${renderList("maxWClasses", maxWClasses)}
+// ─── Sizing: Min/Max Height ───────────────────────────────────────────────────
+${renderList("minHClasses", minHClasses)}
+${renderList("maxHClasses", maxHClasses)}
+// ─── Spacing: Padding ─────────────────────────────────────────────────────────
+${renderList("pClasses", spaceGroups.p)}
+${renderList("pxClasses", spaceGroups.px)}
+${renderList("pyClasses", spaceGroups.py)}
+${renderList("ptClasses", spaceGroups.pt)}
+${renderList("prClasses", spaceGroups.pr)}
+${renderList("pbClasses", spaceGroups.pb)}
+${renderList("plClasses", spaceGroups.pl)}
+// ─── Spacing: Margin ──────────────────────────────────────────────────────────
+${renderList("mClasses", spaceGroups.m)}
+${renderList("mxClasses", spaceGroups.mx)}
+${renderList("myClasses", spaceGroups.my)}
+${renderList("mtClasses", spaceGroups.mt)}
+${renderList("mrClasses", spaceGroups.mr)}
+${renderList("mbClasses", spaceGroups.mb)}
+${renderList("mlClasses", spaceGroups.ml)}
+// ─── Spacing: Gap ─────────────────────────────────────────────────────────────
+${renderList("gapClasses", spaceGroups.gap)}
+${renderList("gapXClasses", spaceGroups["gap-x"])}
+${renderList("gapYClasses", spaceGroups["gap-y"])}
+// ─── Spacing: Inset (top/right/bottom/left) ───────────────────────────────────
+${renderList("topClasses", spaceGroups.top)}
+${renderList("rightClasses", spaceGroups.right)}
+${renderList("bottomClasses", spaceGroups.bottom)}
+${renderList("leftClasses", spaceGroups.left)}
+// ─── Border Width ─────────────────────────────────────────────────────────────
+${renderList("borderWClasses", borderWClasses)}
+// ─── Border Color ─────────────────────────────────────────────────────────────
+${renderList("borderColorClasses", borderColorClasses)}
+// ─── Background Color ─────────────────────────────────────────────────────────
+${renderList("bgColorClasses", bgColorClasses)}
+// ─── Border Radius ────────────────────────────────────────────────────────────
+${renderList("roundedClasses", roundedClasses)}
+// ─── Box Shadow ───────────────────────────────────────────────────────────────
+${renderList("shadowClasses", shadowClasses)}
+// ─── Z-Index ──────────────────────────────────────────────────────────────────
+${renderList("zClasses", zClasses)}
+// ─── Opacity ──────────────────────────────────────────────────────────────────
+${renderList("opacityClasses", opacityClasses)}
+// ─── Blur ─────────────────────────────────────────────────────────────────────
+${renderList("blurClasses", blurClasses)}
+// ─── Merge config ─────────────────────────────────────────────────────────────
 
 const customTwMerge = extendTailwindMerge({
   extend: {
     classGroups: {
-      'bg-color':     bgColorClasses,
+      'font-size':    fontSizeClasses,
+      'font-family':  fontFamilyClasses,
       'text-color':   textColorClasses,
-      'border-color': borderColorClasses,
+      tracking:       trackingClasses,
+      leading:        leadingClasses,
+      scale:          scaleClasses,
+      w:              wClasses,
+      h:              hClasses,
+      'min-w':        minWClasses,
+      'max-w':        maxWClasses,
+      'min-h':        minHClasses,
+      'max-h':        maxHClasses,
       p:              pClasses,
       px:             pxClasses,
       py:             pyClasses,
+      pt:             ptClasses,
+      pr:             prClasses,
+      pb:             pbClasses,
+      pl:             plClasses,
       m:              mClasses,
       mx:             mxClasses,
       my:             myClasses,
+      mt:             mtClasses,
+      mr:             mrClasses,
+      mb:             mbClasses,
+      ml:             mlClasses,
       gap:            gapClasses,
+      'gap-x':        gapXClasses,
+      'gap-y':        gapYClasses,
+      top:            topClasses,
+      right:          rightClasses,
+      bottom:         bottomClasses,
+      left:           leftClasses,
+      'border-w':     borderWClasses,
+      'border-color': borderColorClasses,
+      'bg-color':     bgColorClasses,
       rounded:        roundedClasses,
       shadow:         shadowClasses,
-      'font-size':    fontSizeClasses,
+      z:              zClasses,
+      opacity:        opacityClasses,
+      blur:           blurClasses,
     },
   },
 });

@@ -1,154 +1,149 @@
 // packages/tokens/src/generators/css.ts
 //
-// Pure function: takes the token set and returns a CSS string with three
-// blocks — :root (static tokens + light theme), [data-theme="dark"], and
-// [data-theme="horizon"]. No filesystem access — scripts/generate-css-vars.js
-// calls this and writes the result to apps/portal.
-//
-// Variable names mirror brand/design-system-&-visual-identity.md exactly
-// (§2.2/§2.3) so anyone cross-referencing the brand doc against generated
-// CSS finds the same names in both places.
+// Pure function: takes the token set and returns a `:root { ... }` CSS
+// string. No filesystem access here — ported from the old
+// scripts/generate-css-vars.js, which did fs/path/writing directly. That
+// script now just calls generateCssVariables() and writes the result to
+// apps/web and apps/admin; all the actual token-flattening logic lives
+// here so it can be unit tested and reused without touching disk.
 
+import { colors } from "./tailwind.ts";
+import { scale } from "../primitives/effects.ts";
 import {
-  lightTheme,
-  darkTheme,
-  horizonThemeOverrides,
-} from "../semantic/index.ts";
-import { spacing } from "../primitives/spacing.ts";
-import { borderRadius } from "../primitives/radius.ts";
-import { boxShadow } from "../primitives/shadows.ts";
+  blur,
+  opacity,
+  aspectRatio,
+  zIndex,
+  backgroundImage,
+} from "../primitives/effects.ts";
 import {
   transitionDuration,
   transitionTimingFunction,
 } from "../primitives/motion.ts";
-import { zIndex, opacity } from "../primitives/effects.ts";
-import { fontFamily, fontSize } from "../primitives/typography.ts";
-import { iconSize, touchTarget, layout } from "../primitives/sizing.ts";
+import { borderRadius } from "../primitives/radius.ts";
+import { boxShadow } from "../primitives/shadows.ts";
+import { sizing } from "../primitives/sizing.ts";
+import { spacing } from "../primitives/spacing.ts";
+import {
+  fontFamily,
+  fontSize,
+  lineHeight,
+  letterSpacing,
+} from "../primitives/typography.ts";
 
-function themeColorBlock(theme: typeof lightTheme): string {
+function flattenObject(obj: Record<string, unknown>, prefix: string): string {
   let css = "";
-  const { bg, nav, text, border, status, achievement } = theme;
-
-  css += `  /* Backgrounds */\n`;
-  for (const [key, value] of Object.entries(bg))
-    css += `  --color-bg-${key}: ${value};\n`;
-
-  css += `\n  /* Navigation */\n`;
-  css += `  --color-nav-bg: ${nav.bg};\n`;
-  css += `  --color-nav-text: ${nav.text};\n`;
-  css += `  --color-nav-hover: ${nav.hover};\n`;
-  css += `  --color-nav-active: ${nav.active};\n`;
-
-  css += `\n  /* Text */\n`;
-  for (const [key, value] of Object.entries(text))
-    css += `  --color-text-${key}: ${value};\n`;
-
-  css += `\n  /* Borders */\n`;
-  for (const [key, value] of Object.entries(border))
-    css += `  --color-border-${key}: ${value};\n`;
-
-  css += `\n  /* Semantic states */\n`;
-  for (const [state, tokens] of Object.entries(status)) {
-    css += `  --color-${state}-bg: ${tokens.bg};\n`;
-    css += `  --color-${state}-text: ${tokens.text};\n`;
-    css += `  --color-${state}-border: ${tokens.border};\n`;
-  }
-
-  css += `\n  /* Achievement (Gold Reserve) */\n`;
-  css += `  --color-achievement-bg: ${achievement.bg};\n`;
-  css += `  --color-achievement-accent: ${achievement.accent};\n`;
-  css += `  --color-achievement-text: ${achievement.text};\n`;
-  css += `  --color-achievement-border: ${achievement.border};\n`;
-
-  return css;
-}
-
-function staticTokenBlock(): string {
-  let css = "";
-
-  css += `  /* Spacing (base-4 grid) */\n`;
-  for (const [key, value] of Object.entries(spacing)) {
-    const name = key === "0" ? "0" : key;
-    css += `  --${name}: ${value};\n`;
-  }
-
-  css += `\n  /* Radius */\n`;
-  for (const [key, value] of Object.entries(borderRadius))
-    css += `  --radius-${key}: ${value};\n`;
-
-  css += `\n  /* Shadows (light-mode elevation + focus rings, both themes) */\n`;
-  for (const [key, value] of Object.entries(boxShadow))
-    css += `  --shadow-${key}: ${value};\n`;
-
-  css += `\n  /* Motion */\n`;
-  for (const [key, value] of Object.entries(transitionDuration))
-    css += `  --duration-${key}: ${value};\n`;
-  for (const [key, value] of Object.entries(transitionTimingFunction))
-    css += `  --ease-${key}: ${value};\n`;
-
-  css += `\n  /* Z-index */\n`;
-  for (const [key, value] of Object.entries(zIndex))
-    css += `  --z-${key}: ${value};\n`;
-
-  css += `\n  /* Opacity */\n`;
-  for (const [key, value] of Object.entries(opacity))
-    css += `  --opacity-${key}: ${value};\n`;
-
-  css += `\n  /* Typography */\n`;
-  for (const [key, value] of Object.entries(fontFamily))
-    css += `  --font-family-${key}: ${value.join(", ")};\n`;
-  for (const [key, [size, meta]] of Object.entries(fontSize)) {
-    css += `  --text-${key}-size: ${size};\n`;
-    css += `  --text-${key}-line-height: ${meta.lineHeight};\n`;
-    css += `  --text-${key}-weight: ${meta.fontWeight};\n`;
-  }
-
-  css += `\n  /* Icon sizes */\n`;
-  for (const [key, value] of Object.entries(iconSize))
-    css += `  --icon-${key}: ${value};\n`;
-
-  css += `\n  /* Layout */\n`;
-  css += `  --touch-target-min: ${touchTarget.min};\n`;
-  for (const [key, value] of Object.entries(layout))
-    css += `  --${key}: ${value};\n`;
-
-  return css;
-}
-
-function elevationBlock(): string {
-  let css = `\n  /* Dark-mode elevation (border-based — shadows are invisible on Ink) */\n`;
-  for (const [level, tokens] of Object.entries(darkTheme.elevation)) {
-    css += `  --elevation-${level}-bg: ${tokens.bg};\n`;
-    css += `  --elevation-${level}-border: ${tokens.border ?? "none"};\n`;
+  for (const [key, value] of Object.entries(obj)) {
+    const varName = `${prefix}-${key}`;
+    if (value && typeof value === "object" && !Array.isArray(value)) {
+      css += flattenObject(value as Record<string, unknown>, varName);
+    } else {
+      css += `  --${varName}: ${value};\n`;
+    }
   }
   return css;
 }
 
 export function generateCssVariables(): string {
-  let css = `/* AUTOGENERATED – DO NOT EDIT MANUALLY */\n`;
-  css += `/* Source: packages/tokens/src/ */\n`;
-  css += `/* Regenerate: pnpm --filter @paideon/tokens generate:css */\n\n`;
+  let css = `/* AUTOGENERATED – DO NOT EDIT MANUALLY */\n/* Source: packages/tokens/src/ */\n:root {\n`;
 
-  css += `:root {\n`;
-  css += staticTokenBlock();
-  css += `\n  /* === LIGHT THEME (default) === */\n`;
-  css += themeColorBlock(lightTheme);
-  css += `}\n\n`;
+  const addComment = (comment: string) => {
+    css += `\n  /* ${comment} */\n`;
+  };
 
-  css += `[data-theme="dark"] {\n`;
-  css += themeColorBlock(darkTheme);
-  css += elevationBlock();
-  css += `}\n\n`;
+  addComment("Colors (semantic)");
+  css += flattenObject(colors, "color");
 
-  css += `/* Horizon — student-selectable skin, primary level only (deferred to a\n`;
-  css += `   future version; token layer ready ahead of the product decision). */\n`;
-  css += `[data-theme="horizon"] {\n`;
-  for (const [key, value] of Object.entries(horizonThemeOverrides.bg)) {
-    css += `  --color-bg-${key}: ${value};\n`;
+  addComment("Spacing (4px scale)");
+  for (const [key, value] of Object.entries(spacing)) {
+    css += `  --${key}: ${value};\n`;
   }
-  css += `  --color-nav-bg: ${horizonThemeOverrides.nav.bg};\n`;
-  css += `  --color-nav-active: ${horizonThemeOverrides.nav.active};\n`;
-  css += `}\n`;
 
+  addComment("Typography – base sizes & metrics");
+  for (const [key, [size, options]] of Object.entries(fontSize)) {
+    css += `  --font-size-${key}: ${size};\n`;
+    css += `  --line-height-${key}: ${options.lineHeight};\n`;
+    css += `  --letter-spacing-${key}: ${options.letterSpacing};\n`;
+    css += `  --font-weight-${key}: ${options.fontWeight};\n`;
+  }
+
+  const fontSizeKeys = new Set(Object.keys(fontSize));
+
+  addComment(
+    "Standalone letter spacing (utility scale, independent of font-size tokens)"
+  );
+  for (const [key, value] of Object.entries(letterSpacing)) {
+    if (fontSizeKeys.has(key)) continue;
+    css += `  --letter-spacing-${key}: ${value};\n`;
+  }
+
+  addComment(
+    "Standalone line height (utility scale, independent of font-size tokens)"
+  );
+  for (const [key, value] of Object.entries(lineHeight)) {
+    if (fontSizeKeys.has(key)) continue;
+    css += `  --line-height-${key}: ${value};\n`;
+  }
+
+  addComment("Motion – Durations");
+  for (const [key, value] of Object.entries(transitionDuration)) {
+    css += `  --duration-${key}: ${value};\n`;
+  }
+  addComment("Motion – Easing");
+  for (const [key, value] of Object.entries(transitionTimingFunction)) {
+    css += `  --ease-${key}: ${value};\n`;
+  }
+
+  addComment("Border radius");
+  for (const [key, value] of Object.entries(borderRadius)) {
+    css += `  --radius-${key}: ${value};\n`;
+  }
+
+  addComment("Elevation shadows");
+  for (const [key, value] of Object.entries(boxShadow)) {
+    css += `  --shadow-${key}: ${value};\n`;
+  }
+
+  addComment("Z-index tiers");
+  for (const [key, value] of Object.entries(zIndex)) {
+    css += `  --z-${key}: ${value};\n`;
+  }
+
+  addComment("Opacity scale");
+  for (const [key, value] of Object.entries(opacity)) {
+    css += `  --opacity-${key}: ${value};\n`;
+  }
+
+  addComment("Blur values");
+  for (const [key, value] of Object.entries(blur)) {
+    css += `  --blur-${key}: ${value};\n`;
+  }
+
+  addComment("Aspect ratios");
+  for (const [key, value] of Object.entries(aspectRatio)) {
+    css += `  --aspect-${key}: ${value};\n`;
+  }
+
+  addComment("Sizing (width/height)");
+  for (const [key, value] of Object.entries(sizing)) {
+    css += `  --${key}: ${value};\n`;
+  }
+
+  addComment("Whitelist gradients");
+  for (const [key, value] of Object.entries(backgroundImage)) {
+    css += `  --bg-${key}: ${value};\n`;
+  }
+
+  addComment("Font families");
+  for (const [key, value] of Object.entries(fontFamily)) {
+    css += `  --font-family-${key}: ${value.join(", ")};\n`;
+  }
+
+  addComment("Transform scales");
+  for (const [key, value] of Object.entries(scale)) {
+    css += `  --${key}: ${value};\n`;
+  }
+
+  css += `}\n`;
   return css;
 }
