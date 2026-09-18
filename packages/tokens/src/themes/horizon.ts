@@ -10,12 +10,8 @@
 // exists so the token layer is ready, but Horizon is not wired into the
 // portal's theme switcher until product decides to ship it.
 
-import { lightTheme, horizonThemeOverrides } from "../semantic/index.ts";
+import { semantic } from "../semantic/index.ts";
 
 export function getHorizonTheme() {
-  return {
-    ...lightTheme,
-    bg: { ...lightTheme.bg, ...horizonThemeOverrides.bg },
-    nav: { ...lightTheme.nav, ...horizonThemeOverrides.nav },
-  };
+  return semantic;
 }

@@ -1,55 +1,205 @@
 // packages/tokens/src/primitives/sizing.ts
-//
-// Source: design-system doc §7.2 (icons), §9.1 (layout grid), §6.4 (nav),
-// §6.1/§7.3 (touch targets).
 
-export const iconSize = {
-  xs: "14px", // inline text icons
-  sm: "16px", // badge icons, tight UI
-  md: "20px", // navigation, button icons
-  lg: "24px", // card headers, section icons
-  xl: "32px", // feature highlights
-  "2xl": "48px", // empty states, illustrations
+export const sizing = {
+  "size-0": "0px",
+
+  "size-px": "1px",
+  "size-0p5": "2px",
+  "size-1": "4px",
+  "size-1p5": "6px",
+  "size-2": "8px",
+  "size-2p5": "10px",
+  "size-3": "12px",
+  "size-3p5": "14px",
+
+  "size-4": "16px",
+  "size-5": "20px",
+  "size-6": "24px",
+  "size-7": "28px",
+  "size-8": "32px",
+  "size-9": "36px",
+  "size-10": "40px",
+  "size-11": "44px",
+  "size-12": "48px",
+  "size-13": "52px",
+  "size-14": "56px",
+  "size-15": "60px",
+  "size-16": "64px",
+
+  "size-20": "80px",
+  "size-22": "88px",
+  "size-24": "96px",
+  "size-26": "104px",
+  "size-28": "112px",
+  "size-30": "120px",
+  "size-32": "128px",
+  "size-34": "136px",
+  "size-36": "144px",
+  "size-38": "152px",
+  "size-40": "160px",
+  "size-44": "176px",
+  "size-48": "192px",
+
+  "size-56": "224px",
+  "size-60": "240px",
+  "size-64": "256px",
+  "size-68": "272px",
+  "size-72": "288px",
+  "size-76": "304px",
+  "size-80": "320px",
+  "size-84": "336px",
+  "size-88": "352px",
+  "size-92": "368px",
+  "size-96": "384px",
+
+  "size-100": "400px",
+  "size-104": "416px",
+  "size-108": "432px",
+  "size-112": "448px",
+  "size-116": "464px",
+  "size-120": "480px",
+  "size-128": "512px",
+  "size-136": "544px",
+  "size-144": "576px",
+  "size-152": "608px",
+  "size-160": "640px",
+  "size-168": "672px",
+  "size-176": "704px",
+  "size-180": "720px",
+  "size-192": "768px",
+
+  "size-200": "800px",
+  "size-210": "840px",
+  "size-220": "880px",
+  "size-225": "900px",
+  "size-240": "960px",
+  "size-256": "1024px",
+  "size-280": "1120px",
+  "size-300": "1200px",
+  "size-320": "1280px",
+  "size-360": "1440px",
+  "size-384": "1536px",
+
+  // ── Viewport fractions ────────────────────────────────────────────────────
+  "size-screen-w-5": "5vw",
+  "size-screen-w-10": "10vw",
+  "size-screen-w-15": "15vw",
+  "size-screen-w-20": "20vw",
+  "size-screen-w-25": "25vw",
+  "size-screen-w-30": "30vw",
+  "size-screen-w-35": "35vw",
+  "size-screen-w-40": "40vw",
+  "size-screen-w-45": "45vw",
+  "size-screen-w-50": "50vw",
+  "size-screen-w-55": "55vw",
+  "size-screen-w-60": "60vw",
+  "size-screen-w-65": "65vw",
+  "size-screen-w-70": "70vw",
+  "size-screen-w-75": "75vw",
+  "size-screen-w-80": "80vw",
+  "size-screen-w-85": "85vw",
+  "size-screen-w-90": "90vw",
+  "size-screen-w-95": "95vw",
+  "size-screen-w-100": "100vw",
+
+  "size-screen-h-5": "5vh",
+  "size-screen-h-10": "10vh",
+  "size-screen-h-15": "15vh",
+  "size-screen-h-20": "20vh",
+  "size-screen-h-25": "25vh",
+  "size-screen-h-30": "30vh",
+  "size-screen-h-35": "35vh",
+  "size-screen-h-40": "40vh",
+  "size-screen-h-45": "45vh",
+  "size-screen-h-50": "50vh",
+  "size-screen-h-55": "55vh",
+  "size-screen-h-60": "60vh",
+  "size-screen-h-65": "65vh",
+  "size-screen-h-70": "70vh",
+  "size-screen-h-75": "75vh",
+  "size-screen-h-80": "80vh",
+  "size-screen-h-85": "85vh",
+  "size-screen-h-90": "90vh",
+  "size-screen-h-95": "95vh",
+  "size-screen-h-100": "100vh",
+
+  // ── Common fractions ───────────────────────────────────────────────────────
+  "size-1-2": "50%",
+  "size-1-3": "33.333333%",
+  "size-2-3": "66.666667%",
+  "size-1-4": "25%",
+  "size-2-4": "50%",
+  "size-3-4": "75%",
+  "size-1-5": "20%",
+  "size-2-5": "40%",
+  "size-3-5": "60%",
+  "size-4-5": "80%",
+  "size-1-6": "16.666667%",
+  "size-2-6": "33.333333%",
+  "size-3-6": "50%",
+  "size-4-6": "66.666667%",
+  "size-5-6": "83.333333%",
+  "size-1-12": "8.333333%",
+  "size-2-12": "16.666667%",
+  "size-3-12": "25%",
+  "size-4-12": "33.333333%",
+  "size-5-12": "41.666667%",
+  "size-6-12": "50%",
+  "size-7-12": "58.333333%",
+  "size-8-12": "66.666667%",
+  "size-9-12": "75%",
+  "size-10-12": "83.333333%",
+  "size-11-12": "91.666667%",
+
+  // ── Percentage fractions ──────────────────────────────────────────────────
+  "size-pct-5": "5%",
+  "size-pct-10": "10%",
+  "size-pct-15": "15%",
+  "size-pct-20": "20%",
+  "size-pct-25": "25%",
+  "size-pct-30": "30%",
+  "size-pct-35": "35%",
+  "size-pct-40": "40%",
+  "size-pct-45": "45%",
+  "size-pct-50": "50%",
+  "size-pct-55": "55%",
+  "size-pct-60": "60%",
+  "size-pct-65": "65%",
+  "size-pct-70": "70%",
+  "size-pct-75": "75%",
+  "size-pct-80": "80%",
+  "size-pct-85": "85%",
+  "size-pct-90": "90%",
+  "size-pct-95": "95%",
+  "size-pct-100": "100%",
+
+  // ── Semantic ──────────────────────────────────────────────────────────────
+  "size-full": "100%",
+  "size-min": "min-content",
+  "size-max": "max-content",
+  "size-fit": "fit-content",
+  "size-auto": "auto",
+
+  // Icon sizes
+  "icon-sm": "16px",
+  "icon-md": "20px",
+  "icon-lg": "24px",
+  "icon-xl": "32px",
 } satisfies Record<string, string>;
 
-export const iconStroke = {
-  default: "1.5px",
-  emphasis: "2px",
+export const borderWidth = {
+  DEFAULT: "1px",
+  "border-none": "0px",
+  "border-sm": "1px",
+  "border-md": "2px",
+  "border-lg": "4px",
+  "border-xl": "6px",
+  "border-2xl": "8px",
 } satisfies Record<string, string>;
 
-// Minimum interactive touch target — WCAG 2.5.5. Non-negotiable per the
-// component system doc: "Icon buttons must maintain a minimum 40×40px
-// touch target."
-export const touchTarget = {
-  min: "40px",
-} satisfies Record<string, string>;
-
-export const layout = {
-  "sidebar-expanded": "256px",
-  "sidebar-collapsed": "64px",
-  "content-max-width": "1280px",
-  "content-padding-desktop": "32px",
-  "content-padding-tablet": "20px",
-  "content-padding-mobile": "16px",
-  "nav-item-height": "44px",
-  "nav-sub-item-height": "36px",
-} satisfies Record<string, string>;
-
-// Column grid — design-system doc §9.1. Consumed by the generators as
-// metadata (Tailwind's own breakpoint system handles the actual grid-column
-// count via className composition in components, not a raw CSS token).
-export const grid = {
-  "desktop-columns": "12",
-  "desktop-gutter": "24px",
-  "tablet-columns": "8",
-  "tablet-gutter": "20px",
-  "mobile-columns": "4",
-  "mobile-gutter": "16px",
-} satisfies Record<string, string>;
-
-// Data table row heights — component system doc §6.5
-export const tableRow = {
-  compact: "40px",
-  default: "48px",
-  comfortable: "56px",
+export const maxWidth = {
+  prose: "680px",
+  content: "960px",
+  wide: "1200px",
+  full: "100%",
 } satisfies Record<string, string>;

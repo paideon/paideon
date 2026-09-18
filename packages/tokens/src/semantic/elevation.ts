@@ -16,9 +16,9 @@
 import { primitives } from "../primitives/colors.ts";
 
 export const elevationDark = {
-  0: { bg: primitives.ink[950], border: null }, // page base, table rows
-  1: { bg: primitives.ink[900], border: primitives.ink[700] }, // inline cards, standard cards
-  2: { bg: primitives.ink[800], border: primitives.ink[700] }, // floating dropdowns
-  3: { bg: primitives.ink[800], border: primitives.ink[600] }, // modals, side drawers
-  4: { bg: primitives.ink[700], border: primitives.ink[600] }, // command palette, critical overlays
+  0: { bg: primitives.forest[900], border: null },
+  1: { bg: primitives.forest[800], border: primitives.forest[700] },
+  2: { bg: primitives.forest[700], border: primitives.forest[600] },
+  3: { bg: primitives.forest[700], border: primitives.forest[500] },
+  4: { bg: primitives.forest[600], border: primitives.forest[500] },
 } as const;

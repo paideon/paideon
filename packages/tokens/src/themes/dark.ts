@@ -1,7 +1,5 @@
 // packages/tokens/src/themes/dark.ts
 
-import { darkTheme } from "../semantic/index.ts";
-
-export function getDarkTheme() {
-  return darkTheme;
+export function getDarkTheme(): never {
+  throw new Error("Dark theme is not implemented yet ");
 }

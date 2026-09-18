@@ -1,7 +1,5 @@
 // packages/tokens/src/themes/light.ts
 
-import { lightTheme } from "../semantic/index.ts";
-
-export function getLightTheme() {
-  return lightTheme;
+export function getLightTheme(): never {
+  throw new Error("Light theme is not implemented yet ");
 }

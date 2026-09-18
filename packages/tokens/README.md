@@ -15,9 +15,8 @@ once here. If a value in a component doesn't trace back to a token in this
 package, it shouldn't be there (see design-system doc §14 anti-patterns:
 _"Using raw hex values in component code."_).
 
-Architecture mirrors `@nexus/tokens`' primitives → semantic → themes →
-generators structure, with one deliberate change — see
-[Deviation from Nexus](#deviation-from-nexus) below.
+Architecture uses a primitives → semantic → themes → generators structure,
+with runtime CSS-variable theme switching as the key implementation choice.
 
 ---
 
@@ -60,18 +59,10 @@ packages/tokens/
 
 ---
 
-## Deviation from Nexus
+## Runtime Theme Switching
 
-Nexus's `generators/tailwind.ts` spreads semantic color **values** (literal
-hex/rgba) directly into the Tailwind theme — which means a Tailwind class
-compiles one theme's color permanently into the output CSS. That's also why
-`@nexus/tokens`' `themes/dark.ts` is still `throw new Error('not implemented
-yet')`: flipping `[data-theme="dark"]` at runtime wouldn't change anything a
-Tailwind-generated class already baked in.
-
-Paideon's dark mode (and Horizon) are fully specified in the brand docs and
-need to actually switch at runtime. So here, `colors` in `generators/
-tailwind.ts` map to `var(--color-bg-base)` etc. — the **same variable names**
+The `colors` map in `generators/tailwind.ts` uses `var(...)` references — the
+same variable names
 `generators/css.ts` writes into `:root` / `[data-theme="dark"]` /
 `[data-theme="horizon"]`. One Tailwind class (`bg-bg-primary`) compiles once
 and resolves to whichever theme block is active on the page. This means
@@ -95,17 +86,8 @@ implementations, not stubs.
 
 ## Before this builds in the real repo
 
-`config/typescript/tsconfig.base.json` does not currently set
-`rewriteRelativeImportExtensions` (or `allowImportingTsExtensions`). This
-package's source uses explicit `.ts` extensions in relative imports (matching
-`@nexus/tokens`' convention, and required under `moduleResolution: "nodenext"`
-for source-level imports across a monorepo boundary). Added the flag locally
-in this package's `tsconfig.json` — consider promoting it to the shared base
-config if other packages adopt the same import style.
-
-`config/typescript/tsconfig.base.json`'s `paths` map also doesn't yet include
-`@paideon/tokens` — needs adding alongside the existing `@paideon/types` /
-`@paideon/database` / `@paideon/ui` entries.
+The package uses explicit `.ts` extensions in source imports and its shared
+TypeScript configuration supports rewriting those imports for emitted output.
 
 ---
 
