@@ -1,0 +1,10 @@
+.git
+.nx
+.env
+.env.*
+**/node_modules
+**/.next
+**/dist
+**/out-tsc
+backups
+coverage
