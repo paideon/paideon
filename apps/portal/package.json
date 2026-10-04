@@ -3,7 +3,16 @@
   "version": "0.0.1",
   "private": true,
   "nx": {
-    "name": "portal"
+    "name": "portal",
+    "targets": {
+      "typecheck": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "tsc --noEmit -p tsconfig.library.json",
+          "cwd": "apps/portal"
+        }
+      }
+    }
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

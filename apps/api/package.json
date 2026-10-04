@@ -8,18 +8,8 @@
       "build": {
         "executor": "nx:run-commands",
         "options": {
-          "command": "webpack-cli build",
-          "args": [
-            "--node-env=production"
-          ],
+          "command": "tsc -p tsconfig.build.json",
           "cwd": "apps/api"
-        },
-        "configurations": {
-          "development": {
-            "args": [
-              "--node-env=development"
-            ]
-          }
         }
       },
       "prune-lockfile": {
@@ -90,7 +80,7 @@
     "@nestjs/jwt": "^11.0.2",
     "@nestjs/passport": "^11.0.5",
     "@nestjs/platform-express": "^11.0.0",
-    "@paideon/contracts": "workspace:*",
+    "@nestjs/throttler": "^6.4.0",
     "@paideon/database": "workspace:*",
     "@prisma/client": "5.22.0",
     "bcryptjs": "^3.0.3",

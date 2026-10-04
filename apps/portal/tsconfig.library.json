@@ -1,0 +1,23 @@
+{
+  "extends": "../../config/typescript/tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "preserve",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "types": ["node"]
+  },
+  "include": [
+    "src/lib/api.ts",
+    "src/components/library/LogoutButton.tsx",
+    "src/app/(auth)/login/page.tsx",
+    "src/app/(student)/home/page.tsx",
+    "src/app/(student)/books/page.tsx",
+    "src/app/librarian/**/page.tsx"
+  ]
+}
