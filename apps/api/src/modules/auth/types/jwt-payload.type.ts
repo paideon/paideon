@@ -13,9 +13,6 @@ export type JwtPayload = {
   // Which school this user belongs to — used by SchoolGuard on EVERY request
   schoolId: string;
 
-  // Which library this user belongs to — used by LibraryGuard on EVERY request
-  libraryId: string;
-
   // The user's role — used by RolesGuard + @Roles() decorator
   role: Role;
 

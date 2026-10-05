@@ -30,12 +30,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   // validate() is called by Passport after the token is verified.
   // Whatever you return here becomes available as req.user in any route handler that uses JwtAuthGuard.
   async validate(payload: JwtPayload) {
-    if (
-      !payload.sub ||
-      !payload.schoolId ||
-      !payload.libraryId ||
-      !payload.role
-    ) {
+    if (!payload.sub || !payload.schoolId || !payload.role) {
       throw new UnauthorizedException('Invalid token payload');
     }
     return payload;

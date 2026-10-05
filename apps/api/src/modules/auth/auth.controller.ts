@@ -1,22 +1,26 @@
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
   Post,
+  Req,
   Res,
   UseGuards,
 } from '@nestjs/common';
-import type { Response } from 'express';
+import type { Request, Response } from 'express';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { ActivateDto } from './dto/activate.dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
+import { RequestActivationDto } from './dto/request-activation.dto';
 import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { ThrottlerGuard, Throttle } from '@nestjs/throttler';
 import { CurrentUser } from './decorators/current-user.decorator';
-import { JwtPayload } from './types/jwt-payload.type';
-import { ResponseEnvelopeData, ErrorCodeEnum } from '@paideon/contracts';
+import type { JwtPayload } from './types/jwt-payload.type';
 
 @Controller('auth')
 export class AuthController {
@@ -30,8 +34,8 @@ export class AuthController {
 
   @Post('activate')
   @HttpCode(HttpStatus.OK)
-  async requestActivation(@Body('email') email: string) {
-    await this.authService.requestActivation(email);
+  async requestActivation(@Body() dto: RequestActivationDto) {
+    await this.authService.requestActivation(dto.email);
     return {
       message:
         'If this email is registered, you will receive an activation link.',
@@ -47,7 +51,7 @@ export class AuthController {
   @Post('activate/confirm')
   async confirmActivation(
     @Body() dto: ActivateDto,
-    @Res({ passthrough: true }) res: Response
+    @Res({ passthrough: true }) res: Response,
   ) {
     const tokens = await this.authService.confirmActivation(dto);
     this.setRefreshCookie(res, tokens.refreshToken);
@@ -60,19 +64,31 @@ export class AuthController {
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
+  @UseGuards(ThrottlerGuard)
+  @Throttle({ default: { limit: 5, ttl: 60_000 } })
   async login(
     @Body() dto: LoginDto,
-    @Res({ passthrough: true }) res: Response
+    @Req() req: Request,
+    @Res({ passthrough: true }) res: Response,
   ) {
-    const tokens = await this.authService.login(dto);
+    const tokens = await this.authService.login(dto, {
+      ipAddress: req.ip ?? req.socket.remoteAddress ?? 'unknown',
+      userAgent: req.get('user-agent'),
+    });
     this.setRefreshCookie(res, tokens.refreshToken);
 
-    const response: ResponseEnvelopeData<{ accessToken: string }> = {
+    const response: { success: true; data: { accessToken: string } } = {
       success: true,
       data: { accessToken: tokens.accessToken },
     };
 
     return response;
+  }
+
+  @Get('me')
+  @UseGuards(JwtAuthGuard)
+  async me(@CurrentUser() user: JwtPayload) {
+    return this.authService.getCurrentUser(user.sub);
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -87,11 +103,11 @@ export class AuthController {
   @UseGuards(JwtRefreshGuard)
   async refresh(
     @CurrentUser() user: JwtPayload & { refreshToken: string },
-    @Res({ passthrough: true }) res: Response
+    @Res({ passthrough: true }) res: Response,
   ) {
     const tokens = await this.authService.refreshTokens(
       user.sub,
-      user.refreshToken
+      user.refreshToken,
     );
     this.setRefreshCookie(res, tokens.refreshToken);
     return { accessToken: tokens.accessToken };
@@ -106,7 +122,7 @@ export class AuthController {
   @UseGuards(JwtRefreshGuard)
   async logout(
     @CurrentUser() user: JwtPayload & { refreshToken: string },
-    @Res({ passthrough: true }) res: Response
+    @Res({ passthrough: true }) res: Response,
   ) {
     await this.authService.logout(user.refreshToken);
     this.clearRefreshCookie(res);
@@ -149,7 +165,7 @@ export class AuthController {
   private setRefreshCookie(res: Response, token: string) {
     res.cookie('refresh_token', token, {
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
       path: '/',
       maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -161,7 +177,7 @@ export class AuthController {
   private clearRefreshCookie(res: Response) {
     res.cookie('refresh_token', '', {
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
       path: '/',
       maxAge: 0,

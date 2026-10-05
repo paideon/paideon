@@ -21,7 +21,7 @@ import { JwtPayload } from '../types/jwt-payload.type';
 @Injectable()
 export class JwtRefreshStrategy extends PassportStrategy(
   Strategy,
-  'jwt-refresh'
+  'jwt-refresh',
 ) {
   constructor(config: ConfigService) {
     super({
@@ -59,12 +59,7 @@ export class JwtRefreshStrategy extends PassportStrategy(
       throw new UnauthorizedException('Refresh token not found');
     }
 
-    if (
-      !payload.sub ||
-      !payload.schoolId ||
-      !payload.libraryId ||
-      !payload.role
-    ) {
+    if (!payload.sub || !payload.schoolId || !payload.role) {
       throw new UnauthorizedException('Invalid token payload');
     }
 

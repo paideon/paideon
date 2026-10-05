@@ -20,14 +20,17 @@ export class AuthService {
   constructor(
     private prisma: PrismaService,
     private jwt: JwtService,
-    private config: ConfigService
+    private config: ConfigService,
   ) {}
 
   // ─────────────────────────────────────────────────────────────
   // LOGIN
   // ─────────────────────────────────────────────────────────────
 
-  async login(dto: LoginDto) {
+  async login(
+    dto: LoginDto,
+    context: { ipAddress: string; userAgent?: string },
+  ) {
     const isPaideonId = dto.identifier.includes('-');
 
     // FIX 1: email is not unique alone in our schema.
@@ -39,22 +42,28 @@ export class AuthService {
         : { email: dto.identifier },
     });
 
-    if (!user) {
-      throw new UnauthorizedException('Invalid credentials');
-    }
+    if (!user) return this.rejectLogin(dto.identifier, context);
 
     if (user.status === 'PENDING') {
-      throw new ForbiddenException('Account not activated. Check your email.');
+      return this.rejectLogin(
+        dto.identifier,
+        context,
+        new ForbiddenException('Account not activated. Check your email.'),
+      );
     }
 
     if (user.status === 'SUSPENDED') {
-      throw new ForbiddenException(
-        'Account suspended. Contact your administrator.'
+      return this.rejectLogin(
+        dto.identifier,
+        context,
+        new ForbiddenException(
+          'Account suspended. Contact your administrator.',
+        ),
       );
     }
 
     if (user.status === 'GRADUATED' || user.status === 'INACTIVE') {
-      throw new UnauthorizedException('Invalid credentials');
+      return this.rejectLogin(dto.identifier, context);
     }
 
     // FIX 2: user.password is string | null in the schema
@@ -62,14 +71,23 @@ export class AuthService {
     // We already blocked PENDING above, but TypeScript doesn't know that.
     // Explicit check makes it clear and satisfies the type system.
     if (!user.password) {
-      throw new UnauthorizedException('Invalid credentials');
+      return this.rejectLogin(dto.identifier, context);
     }
 
     const passwordValid = await bcrypt.compare(dto.password, user.password);
 
     if (!passwordValid) {
-      throw new UnauthorizedException('Invalid credentials');
+      return this.rejectLogin(dto.identifier, context);
     }
+
+    await this.prisma.loginAttempt.create({
+      data: {
+        email: dto.identifier,
+        ipAddress: context.ipAddress,
+        userAgent: context.userAgent,
+        success: true,
+      },
+    });
 
     await this.prisma.user.update({
       where: { id: user.id },
@@ -82,6 +100,30 @@ export class AuthService {
       role: user.role,
       paideonId: user.paideonId,
     });
+  }
+
+  async getCurrentUser(userId: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        schoolId: true,
+        paideonId: true,
+        email: true,
+        role: true,
+        status: true,
+        firstName: true,
+        lastName: true,
+        displayName: true,
+        cardNumber: true,
+      },
+    });
+
+    if (!user || user.status !== 'ACTIVE') {
+      throw new UnauthorizedException('Account is no longer active.');
+    }
+
+    return user;
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -128,7 +170,7 @@ export class AuthService {
         data: { revokedAt: new Date() },
       });
       throw new UnauthorizedException(
-        'Token reuse detected. All sessions revoked.'
+        'Token reuse detected. All sessions revoked.',
       );
     }
 
@@ -212,13 +254,13 @@ export class AuthService {
 
     if (verificationToken.expiresAt < new Date()) {
       throw new BadRequestException(
-        'Activation link has expired. Request a new one.'
+        'Activation link has expired. Request a new one.',
       );
     }
 
     if (verificationToken.verifiedAt) {
       throw new BadRequestException(
-        'This activation link has already been used.'
+        'This activation link has already been used.',
       );
     }
 
@@ -304,7 +346,7 @@ export class AuthService {
 
     if (resetToken.expiresAt < new Date()) {
       throw new BadRequestException(
-        'Reset link has expired. Request a new one.'
+        'Reset link has expired. Request a new one.',
       );
     }
 
@@ -366,6 +408,23 @@ export class AuthService {
     });
 
     return { accessToken, refreshToken: rawRefreshToken };
+  }
+
+  private async rejectLogin(
+    identifier: string,
+    context: { ipAddress: string; userAgent?: string },
+    exception = new UnauthorizedException('Invalid credentials'),
+  ): Promise<never> {
+    await this.prisma.loginAttempt.create({
+      data: {
+        email: identifier,
+        ipAddress: context.ipAddress,
+        userAgent: context.userAgent,
+        success: false,
+        failureReason: exception.message,
+      },
+    });
+    throw exception;
   }
 
   private hashToken(token: string): string {

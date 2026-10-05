@@ -13,6 +13,10 @@ import cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app
+    .getHttpAdapter()
+    .getInstance()
+    .set('trust proxy', process.env.TRUST_PROXY === 'true' ? 1 : false);
 
   // ── Security Headers ──────────────────────────────────────────
   // helmet sets HTTP security headers on every response.
@@ -71,7 +75,7 @@ async function bootstrap() {
       whitelist: true,
       forbidNonWhitelisted: true,
       transform: true,
-    })
+    }),
   );
 
   const port = process.env.PORT || 3001;
