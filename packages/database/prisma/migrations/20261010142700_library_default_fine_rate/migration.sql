@@ -1,0 +1,2 @@
+ALTER TABLE "LibraryConfig"
+ALTER COLUMN "overdueFinePerDayLKR" SET DEFAULT 2.00;

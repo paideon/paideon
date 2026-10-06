@@ -581,7 +581,6 @@ model Address {
 model User {
   id                String     @id @default(cuid())
   schoolId          String
-  libraryID         String
   paideonId         String     @unique
   email             String
   emailVerified     Boolean    @default(false)
@@ -605,7 +604,6 @@ model User {
   deletedAt         DateTime?
 
   school       School @relation(fields: [schoolId], references: [id])
-  library      Library @relation(field: [libraryID], references: [id])
   profileImage Media? @relation("UserProfileImage", fields: [profileImageId], references: [id])
 
   // Profiles (at most one per role)
@@ -2197,7 +2195,7 @@ model LibraryConfig {
   maxLoansTeacher       Int      @default(10)
   loanDurationDays      Int      @default(14)
   maxRenewals           Int      @default(2)
-  overdueFinePerDayLKR  Decimal  @default(5.00) @db.Decimal(10, 2)
+  overdueFinePerDayLKR  Decimal  @default(2.00) @db.Decimal(10, 2)
   maxFineLKR            Decimal  @default(500.00) @db.Decimal(10, 2)
   reservationClaimHours Int      @default(24)
   maxActiveReservations Int      @default(5)
