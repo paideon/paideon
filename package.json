@@ -18,7 +18,9 @@
     "dev:api": "nx serve api",
     "db:generate": "pnpm --filter @paideon/database generate",
     "db:migrate": "pnpm --filter @paideon/database migrate",
-    "db:studio": "pnpm --filter @paideon/database studio"
+    "db:seed": "pnpm --filter @paideon/database exec prisma db seed",
+    "db:studio": "pnpm --filter @paideon/database studio",
+    "smoke:library": "node scripts/library-smoke.mjs"
   },
   "prettier": "./config/prettier/.prettierrc",
   "devDependencies": {
