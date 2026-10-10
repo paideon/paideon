@@ -40,7 +40,7 @@ export function AcademicStreamCard({
           'shadow-elevation-1',
           'transition-[box-shadow,transform] duration-standard ease-out',
           'group-hover:shadow-elevation-3 group-hover:-translate-y-[2px]',
-          className
+          className,
         )}
       >
         {/* Green left accent bar — fades in on hover */}

@@ -13,7 +13,7 @@ export interface CursorPage<T> {
 /** Reads `cursor`/`limit` out of a loosely-typed query object, falling back to `defaultLimit`. */
 export function parseCursorParams(
   query: Record<string, unknown>,
-  defaultLimit = 20
+  defaultLimit = 20,
 ): CursorPageParams {
   const cursor = typeof query.cursor === 'string' ? query.cursor : undefined;
   const rawLimit = query.limit;
@@ -35,7 +35,7 @@ export function parseCursorParams(
 export function createCursorPage<T>(
   rows: T[],
   limit: number,
-  getCursor: (item: T) => string
+  getCursor: (item: T) => string,
 ): CursorPage<T> {
   const hasMore = rows.length > limit;
   const items = hasMore ? rows.slice(0, limit) : rows;

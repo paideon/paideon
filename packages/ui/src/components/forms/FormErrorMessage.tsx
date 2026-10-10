@@ -33,7 +33,7 @@ export function FormErrorMessage({
       className={cn(
         'font-body text-caption',
         variantStyles[variant],
-        className
+        className,
       )}
     >
       {children}

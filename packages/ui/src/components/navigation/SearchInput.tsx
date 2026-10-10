@@ -79,7 +79,7 @@ function searchReducer(state: SearchState, action: SearchAction): SearchState {
     case 'MOVE_ACTIVE': {
       const next = Math.max(
         -1,
-        Math.min(state.activeIdx + action.delta, state.results.length - 1)
+        Math.min(state.activeIdx + action.delta, state.results.length - 1),
       );
       return { ...state, activeIdx: next };
     }

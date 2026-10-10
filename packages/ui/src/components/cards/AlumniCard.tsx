@@ -25,7 +25,7 @@ export function AlumniCard({
         'bg-surface-elevated border border-border-light overflow-hidden',
         'shadow-elevation-1 transition-all duration-gentle',
         'hover:shadow-elevation-2 hover:-translate-y-0.5',
-        className
+        className,
       )}
     >
       <div className="flex items-start gap-space-4 p-space-5">

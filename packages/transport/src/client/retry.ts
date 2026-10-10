@@ -19,7 +19,7 @@ const defaultShouldRetry = (error: unknown): boolean => {
 /** Retries `fn` with exponential backoff + jitter. Re-throws the last error once retries are exhausted. */
 export async function retry<T>(
   fn: () => Promise<T>,
-  options: RetryOptions = {}
+  options: RetryOptions = {},
 ): Promise<T> {
   const {
     retries = 3,

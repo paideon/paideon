@@ -34,7 +34,7 @@ export function AchievementCard({
           'inline-flex items-center gap-space-3 px-space-5 py-space-2',
           'bg-surface-elevated border border-border-light',
           'whitespace-nowrap flex-shrink-0',
-          className
+          className,
         )}
       >
         <span className="font-body text-body-sm text-text-primary">
@@ -54,7 +54,7 @@ export function AchievementCard({
         'bg-surface-elevated border border-border-light overflow-hidden',
         'shadow-elevation-1 transition-all duration-gentle ease-out',
         'group-hover:shadow-elevation-3 group-hover:-translate-y-0.5',
-        className
+        className,
       )}
     >
       {imageSrc && (
@@ -77,7 +77,7 @@ export function AchievementCard({
         <h3
           className={cn(
             'font-display text-h3 font-medium text-text-primary mb-space-1',
-            'transition-colors duration-fast group-hover:text-gold-active'
+            'transition-colors duration-fast group-hover:text-gold-active',
           )}
         >
           {title}

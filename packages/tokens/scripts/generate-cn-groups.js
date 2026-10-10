@@ -15,7 +15,7 @@ import { generateCnUtility } from '../src/generators/cn.ts';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const outPath = path.resolve(
   __dirname,
-  '../../../packages/ui/src/utilities/cn.ts'
+  '../../../packages/ui/src/utilities/cn.ts',
 );
 
 fs.writeFileSync(outPath, generateCnUtility(), 'utf8');

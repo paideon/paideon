@@ -62,7 +62,7 @@ export function Avatar({
         className={cn(
           'relative rounded-full overflow-hidden flex-shrink-0',
           sizeMap[size],
-          className
+          className,
         )}
       >
         <Image
@@ -88,7 +88,7 @@ export function Avatar({
         'rounded-full flex items-center justify-center font-display font-medium flex-shrink-0',
         sizeMap[size],
         variantMap[variant],
-        className
+        className,
       )}
     >
       {getInitials(name)}

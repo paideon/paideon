@@ -2,11 +2,7 @@
 import { cn } from '../../../utilities/cn';
 
 type SchoolLogoVariant =
-  | 'crest-only'
-  | 'lockup'
-  | 'wordmark-only'
-  | 'horizontal'
-  | 'stacked';
+  'crest-only' | 'lockup' | 'wordmark-only' | 'horizontal' | 'stacked';
 type Locale = 'en' | 'si';
 type SchoolLogoColor = 'white' | 'black' | 'gold';
 
@@ -69,7 +65,7 @@ export function SchoolLogo({
           'text-text-primary my-space-4',
           isSinhala
             ? 'font-sinhala-display text-sinhala-h2'
-            : 'font-display text-h3'
+            : 'font-display text-h3',
         )}
       >
         {name}
@@ -79,7 +75,7 @@ export function SchoolLogo({
           ' uppercase tracking-caption text-text-muted mb-space-4',
           isSinhala
             ? 'font-sinhala-body text-sinhala-body'
-            : 'font-body text-caption '
+            : 'font-body text-caption ',
         )}
       >
         {location}

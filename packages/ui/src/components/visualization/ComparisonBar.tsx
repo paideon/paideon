@@ -31,7 +31,7 @@ export function ComparisonBar({
   className,
 }: ComparisonBarProps) {
   const [width, setWidth] = useState(
-    animate ? 0 : Math.min(100, Math.max(0, value))
+    animate ? 0 : Math.min(100, Math.max(0, value)),
   );
   const ref = useRef<HTMLDivElement>(null);
   const animated = useRef(false);
@@ -58,7 +58,7 @@ export function ComparisonBar({
           observer.disconnect();
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     if (ref.current) observer.observe(ref.current);
@@ -90,7 +90,7 @@ export function ComparisonBar({
       <div
         className={cn(
           'relative w-full bg-surface-deep rounded-full overflow-hidden',
-          heightMap[size]
+          heightMap[size],
         )}
       >
         <div

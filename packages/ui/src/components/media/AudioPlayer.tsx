@@ -210,7 +210,7 @@ export function AudioPlayer({
         const normalizedDistance = Math.abs(i - center) / center;
         const dataIndex = Math.min(
           binCount - 1,
-          Math.floor(normalizedDistance * (binCount - 1))
+          Math.floor(normalizedDistance * (binCount - 1)),
         );
 
         const value = dataArrayRef.current[dataIndex];
@@ -246,7 +246,7 @@ export function AudioPlayer({
     <Container
       className={cn(
         'bg-surface-base border border-border-light rounded-md overflow-hidden shadow-elevation-2',
-        className
+        className,
       )}
     >
       <audio

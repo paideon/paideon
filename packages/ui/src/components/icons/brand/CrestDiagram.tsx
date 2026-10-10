@@ -12,10 +12,7 @@ import { EyebrowLabel } from '../../typography/EyebrowLabel';
 import { Text } from '../../typography/Text';
 
 type HotspotPosition =
-  | 'top-right'
-  | 'bottom-right'
-  | 'top-left'
-  | 'bottom-left';
+  'top-right' | 'bottom-right' | 'top-left' | 'bottom-left';
 
 type DiagramVariant = 'ambient' | 'hold' | 'click';
 
@@ -133,10 +130,10 @@ export function CrestDiagram({
 
     symbols.forEach((symbol) => {
       const dot = containerRef.current?.querySelector(
-        `[data-dot="${symbol.id}"]`
+        `[data-dot="${symbol.id}"]`,
       );
       const label = containerRef.current?.querySelector(
-        `[data-label="${symbol.id}"]`
+        `[data-label="${symbol.id}"]`,
       );
       if (!dot || !label) return;
 
@@ -153,9 +150,8 @@ export function CrestDiagram({
       const labelY = labelRect.top - container.top + labelRect.height / 2;
       const midX = labelX + (dotX - labelX) / 2;
 
-      newLines[
-        symbol.id
-      ] = `${labelX},${labelY} ${midX},${labelY} ${midX},${dotY} ${dotX},${dotY}`;
+      newLines[symbol.id] =
+        `${labelX},${labelY} ${midX},${labelY} ${midX},${dotY} ${dotX},${dotY}`;
     });
     setLines(newLines);
   }, [symbols]);
@@ -185,7 +181,7 @@ export function CrestDiagram({
       className={cn(
         'relative select-none w-size-screen-w-80 aspect-[190/100]',
         'my-space-2 bg-surface-active rounded-md overflow-hidden',
-        className
+        className,
       )}
     >
       {/* ── SVG Connector Network ── */}
@@ -223,8 +219,8 @@ export function CrestDiagram({
                 isActive
                   ? 'stroke-gold-base'
                   : isHovered && variant !== 'ambient'
-                  ? 'stroke-gold-base/60'
-                  : 'stroke-border-strong/70'
+                    ? 'stroke-gold-base/60'
+                    : 'stroke-border-strong/70',
               )}
               strokeWidth={isActive ? 2.5 : 2}
               strokeDasharray={isActive && variant !== 'ambient' ? '0' : '4 4'}
@@ -251,7 +247,7 @@ export function CrestDiagram({
           'w-size-screen-w-20 aspect-[1/1.2]',
           'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-raised',
           'rounded-md bg-surface-elevated border-border-sm border-solid border-border-light shadow-elevation-3',
-          'flex items-center justify-center'
+          'flex items-center justify-center',
         )}
       >
         <SchoolLogo />
@@ -278,8 +274,8 @@ export function CrestDiagram({
                     ? 'bg-gold-base border-gold-base ring-4 ring-gold-base/30 scale-125 shadow-md'
                     : 'bg-gold-base border-gold-base ring-4 ring-gold-base/30 scale-110'
                   : isHovered && variant !== 'ambient'
-                  ? 'bg-surface-elevated border-gold-base scale-125 shadow-md'
-                  : 'bg-surface-base border-border-default hover:border-gold-base'
+                    ? 'bg-surface-elevated border-gold-base scale-125 shadow-md'
+                    : 'bg-surface-base border-border-default hover:border-gold-base',
               )}
             />
           );
@@ -314,13 +310,13 @@ export function CrestDiagram({
                 : 'border-border-light shadow-sm',
               LABEL_POSITIONS[
                 (symbol.position as HotspotPosition) || 'top-right'
-              ]
+              ],
             )}
           >
             <EyebrowLabel
               className={cn(
                 'transition-colors duration-fast block',
-                isHighlighted ? 'text-gold-base' : 'text-text-muted'
+                isHighlighted ? 'text-gold-base' : 'text-text-muted',
               )}
             >
               {symbol.name}

@@ -64,7 +64,7 @@ export const Heading = ({
         'font-display',
         colorClasses[color],
         levelSizeMap[level],
-        className
+        className,
       )}
       {...rest}
     >

@@ -37,7 +37,7 @@ export function Tag({ label, active = false, onClick, className }: TagProps) {
         isInteractive &&
           'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-[3px]',
         !isInteractive && 'cursor-default',
-        className
+        className,
       )}
     >
       {label}

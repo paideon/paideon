@@ -44,7 +44,7 @@ export function Drawer({
         className={clsx(
           'h-screen bg-surface-inverse text-text-inverse flex-shrink-0 overflow-y-auto',
           sizeMap[size],
-          className
+          className,
         )}
       >
         {children}
@@ -73,14 +73,14 @@ export function Drawer({
           isOpen
             ? 'translate-x-0'
             : position === 'left'
-            ? '-translate-x-full'
-            : 'translate-x-full',
-          className
+              ? '-translate-x-full'
+              : 'translate-x-full',
+          className,
         )}
       >
         {children}
       </div>
     </>,
-    document.body
+    document.body,
   );
 }

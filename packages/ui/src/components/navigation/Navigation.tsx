@@ -98,8 +98,8 @@ function NavItem({
   const textColor = isActive
     ? 'text-gold-base'
     : isSolid
-    ? 'text-text-primary'
-    : 'text-text-inverse';
+      ? 'text-text-primary'
+      : 'text-text-inverse';
 
   return (
     <div
@@ -117,7 +117,7 @@ function NavItem({
         spacing={3}
         className={cn(
           'px-space-8 font-body uppercase hover:text-gold-base',
-          textColor
+          textColor,
         )}
       >
         <NavLink
@@ -187,9 +187,9 @@ export function Navigation({
           isSolid
             ? cn(
                 'border-b border-border-light bg-surface-base',
-                scrolled && 'shadow-elevation-1'
+                scrolled && 'shadow-elevation-1',
               )
-            : 'border-b border-transparent bg-transparent'
+            : 'border-b border-transparent bg-transparent',
         )}
       >
         <div className="content-width flex h-[68px] items-center gap-space-10">
@@ -210,7 +210,7 @@ export function Navigation({
                 <p
                   className={cn(
                     'font-body text-label uppercase leading-none tracking-label',
-                    isSolid ? 'text-text-muted' : 'text-text-inverse/50'
+                    isSolid ? 'text-text-muted' : 'text-text-inverse/50',
                   )}
                 >
                   {schoolLocation}
@@ -264,7 +264,7 @@ export function Navigation({
                 key={i}
                 className={cn(
                   'block h-[1.5px] w-[22px]',
-                  isSolid ? 'bg-text-primary' : 'bg-text-inverse/85'
+                  isSolid ? 'bg-text-primary' : 'bg-text-inverse/85',
                 )}
               />
             ))}

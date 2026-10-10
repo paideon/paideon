@@ -72,7 +72,7 @@ export function ToolTip({
             'bg-surface-inverse text-text-inverse font-body text-caption rounded-sm',
             'pointer-events-none',
             positionStyles[position],
-            className
+            className,
           )}
         >
           {content}

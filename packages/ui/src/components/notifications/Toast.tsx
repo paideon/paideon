@@ -69,7 +69,7 @@ export function Toast({
         'transition-all duration-gentle ease-out',
         visible
           ? 'translate-y-0 opacity-100 pointer-events-auto'
-          : 'translate-y-6 opacity-0 pointer-events-none'
+          : 'translate-y-6 opacity-0 pointer-events-none',
       )}
     >
       <span
@@ -78,7 +78,7 @@ export function Toast({
           'w-5 h-5 rounded-full border-[1.5px] border-current',
           'flex items-center justify-center',
           s.text,
-          'text-xs font-bold flex-shrink-0'
+          'text-xs font-bold flex-shrink-0',
         )}
       >
         {s.icon}
@@ -91,7 +91,7 @@ export function Toast({
           'bg-transparent border-none cursor-pointer',
           s.text,
           'opacity-50 text-sm p-0.5 leading-none',
-          'transition-opacity duration-fast hover:opacity-100'
+          'transition-opacity duration-fast hover:opacity-100',
         )}
       >
         ✕

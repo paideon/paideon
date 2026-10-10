@@ -35,7 +35,7 @@ export function Radio({
       className={cn(
         'inline-flex items-center gap-space-3 cursor-pointer select-none',
         disabled && 'opacity-40 cursor-not-allowed',
-        className
+        className,
       )}
     >
       <input
@@ -53,7 +53,7 @@ export function Radio({
           'transition-all duration-fast ease-snap',
           'checked:border-green-base checked:bg-green-base',
           'checked:bg-[url(/icons/radio-dot.svg)] checked:bg-center checked:bg-no-repeat',
-          'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-[3px]'
+          'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-[3px]',
         )}
       />
       <span className="font-body text-body text-text-primary">{label}</span>

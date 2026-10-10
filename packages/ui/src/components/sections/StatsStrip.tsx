@@ -54,7 +54,7 @@ const TrendIndicator = ({ direction, value, label }: TrendProps) => {
     <span
       className={cn(
         'inline-flex items-center gap-space-1 px-space-2 py-space-0p5 rounded-full',
-        'bg-surface-deep border border-border-light text-caption'
+        'bg-surface-deep border border-border-light text-caption',
       )}
     >
       <span className={color} aria-hidden="true">
@@ -107,7 +107,7 @@ const StatCard = ({
         'bg-surface-elevated border border-border-light rounded-lg',
         'transition-all duration-gentle ease-out',
         'hover:shadow-elevation-3 hover:-translate-y-1',
-        isCompact ? 'p-space-5' : 'p-space-7'
+        isCompact ? 'p-space-5' : 'p-space-7',
       )}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -129,7 +129,7 @@ const StatCard = ({
         className={cn(
           'font-display font-medium text-gold-base',
           isCompact ? 'text-h3' : 'text-h2',
-          'whitespace-nowrap'
+          'whitespace-nowrap',
         )}
       >
         {formatted}

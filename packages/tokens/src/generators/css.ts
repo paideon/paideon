@@ -70,7 +70,7 @@ export function generateCssVariables(): string {
   const fontSizeKeys = new Set(Object.keys(fontSize));
 
   addComment(
-    'Standalone letter spacing (utility scale, independent of font-size tokens)'
+    'Standalone letter spacing (utility scale, independent of font-size tokens)',
   );
   for (const [key, value] of Object.entries(letterSpacing)) {
     if (fontSizeKeys.has(key)) continue;
@@ -78,7 +78,7 @@ export function generateCssVariables(): string {
   }
 
   addComment(
-    'Standalone line height (utility scale, independent of font-size tokens)'
+    'Standalone line height (utility scale, independent of font-size tokens)',
   );
   for (const [key, value] of Object.entries(lineHeight)) {
     if (fontSizeKeys.has(key)) continue;

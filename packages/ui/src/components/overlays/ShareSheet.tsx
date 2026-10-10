@@ -53,14 +53,14 @@ export function ShareSheet({
   const shareViaWhatsApp = () => {
     window.open(
       `https://wa.me/?text=${encodeURIComponent(`${shareBody}\n${url}`)}`,
-      '_blank'
+      '_blank',
     );
   };
 
   const shareViaFacebook = () => {
     window.open(
       `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
-      '_blank'
+      '_blank',
     );
   };
 
@@ -159,6 +159,6 @@ export function ShareSheet({
         }
       `}</style>
     </>,
-    document.body
+    document.body,
   );
 }

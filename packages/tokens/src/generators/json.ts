@@ -32,7 +32,7 @@ export interface TokenMetadata {
 function flatten(
   obj: Record<string, unknown>,
   category: string,
-  prefix = ''
+  prefix = '',
 ): TokenMetadata[] {
   const out: TokenMetadata[] = [];
   for (const [key, value] of Object.entries(obj)) {

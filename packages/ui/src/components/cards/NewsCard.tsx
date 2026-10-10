@@ -28,7 +28,7 @@ function NewsCardFeatured({
         className={cn(
           'bg-surface-elevated border border-border-light overflow-hidden',
           'shadow-elevation-1 transition-all duration-gentle',
-          'group-hover:shadow-elevation-3 group-hover:-translate-y-0.5'
+          'group-hover:shadow-elevation-3 group-hover:-translate-y-0.5',
         )}
       >
         <div className="relative aspect-[16/7] overflow-hidden bg-green-base">
@@ -54,7 +54,7 @@ function NewsCardFeatured({
           <h3
             className={cn(
               'font-display text-[clamp(1.5rem,2.5vw,2rem)] font-medium text-text-primary mb-space-3',
-              'transition-colors duration-fast group-hover:text-gold-active'
+              'transition-colors duration-fast group-hover:text-gold-active',
             )}
           >
             {title}
@@ -90,7 +90,7 @@ function NewsCardStandard({
         className={cn(
           'flex flex-col h-full bg-surface-elevated border border-border-light overflow-hidden',
           'shadow-elevation-1 transition-all duration-gentle',
-          'group-hover:shadow-elevation-3 group-hover:-translate-y-0.5'
+          'group-hover:shadow-elevation-3 group-hover:-translate-y-0.5',
         )}
       >
         <div className="relative aspect-[16/9] overflow-hidden bg-green-base flex-shrink-0">
@@ -115,7 +115,7 @@ function NewsCardStandard({
           <h3
             className={cn(
               'font-display text-h3 font-medium text-text-primary mb-space-2.5',
-              'transition-colors duration-fast group-hover:text-gold-active'
+              'transition-colors duration-fast group-hover:text-gold-active',
             )}
           >
             {title}
@@ -167,7 +167,7 @@ function NewsCardCompact({
           <h4
             className={cn(
               'font-body text-body-sm font-medium text-text-primary line-clamp-2',
-              'transition-colors duration-fast group-hover:text-gold-active'
+              'transition-colors duration-fast group-hover:text-gold-active',
             )}
           >
             {title}

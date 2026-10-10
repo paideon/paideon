@@ -91,7 +91,7 @@ function ChevronIcon({ className }: { className?: string }) {
 // ─── Type guard ───────────────────────────────────────────────────────────────
 
 function isSlidingVariant(
-  variant: SectionSliderVariant
+  variant: SectionSliderVariant,
 ): variant is 'full' | 'image' | 'text' {
   return ['full', 'image', 'text'].includes(variant);
 }
@@ -191,7 +191,7 @@ function SlidingSlider({
     variant === 'full' && 'w-full',
     variant === 'image' && 'max-w-wide mx-auto w-full',
     variant === 'text' && 'max-w-content mx-auto w-full',
-    className
+    className,
   );
 
   const canPrev = loop || active > 0;
@@ -200,8 +200,8 @@ function SlidingSlider({
   const motionVariants = reduced
     ? slideVariantsReduced
     : isVertical
-    ? slideVariantsVertical
-    : slideVariants;
+      ? slideVariantsVertical
+      : slideVariants;
 
   const motionTransition = reduced ? REDUCED_TRANSITION : SLIDE_TRANSITION;
 
@@ -251,7 +251,7 @@ function SlidingSlider({
       <div
         className={cn(
           'flex items-center gap-space-3 mt-space-6',
-          isVertical ? 'flex-col' : 'flex-row justify-center'
+          isVertical ? 'flex-col' : 'flex-row justify-center',
         )}
       >
         <Button
@@ -262,7 +262,7 @@ function SlidingSlider({
           aria-label={prevLabel}
           className={cn(
             'rounded-full',
-            isVertical ? 'rotate-90' : 'rotate-180'
+            isVertical ? 'rotate-90' : 'rotate-180',
           )}
         >
           <ChevronIcon />
@@ -274,7 +274,7 @@ function SlidingSlider({
           aria-label={slidesLabel}
           className={cn(
             'flex gap-space-2 items-center',
-            isVertical && 'flex-col'
+            isVertical && 'flex-col',
           )}
         >
           {Array.from({ length: count }).map((_, i) => (
@@ -297,7 +297,7 @@ function SlidingSlider({
                 'h-size-2 min-w-2 rounded-full cursor-pointer',
                 'focus-visible:outline-none focus-visible:ring-2',
                 'focus-visible:ring-gold-base focus-visible:ring-offset-2',
-                'hover:opacity-80'
+                'hover:opacity-80',
               )}
             />
           ))}
@@ -353,7 +353,7 @@ function StripSlider({
   const [showEnd, setShowEnd] = useState(true);
 
   const pointerStart = useRef<{ x: number; y: number; scroll: number } | null>(
-    null
+    null,
   );
   const isDragging = useRef(false);
 
@@ -378,7 +378,7 @@ function StripSlider({
       node.addEventListener('scroll', updateArrows, { passive: true });
       requestAnimationFrame(updateArrows);
     },
-    [updateArrows]
+    [updateArrows],
   );
 
   const scroll = useCallback(
@@ -392,7 +392,7 @@ function StripSlider({
         behavior: 'smooth',
       });
     },
-    [isVertical, scrollFraction]
+    [isVertical, scrollFraction],
   );
 
   // ── Keyboard — inline handler ────────────────────────────────────────────────
@@ -460,24 +460,24 @@ function StripSlider({
         ? 'top-2 left-1/2 -translate-x-1/2'
         : 'bottom-2 left-1/2 -translate-x-1/2'
       : isStart
-      ? 'left-2 top-1/2 -translate-y-1/2'
-      : 'right-2 top-1/2 -translate-y-1/2';
+        ? 'left-2 top-1/2 -translate-y-1/2'
+        : 'right-2 top-1/2 -translate-y-1/2';
 
     const rotateClass = isVertical
       ? isStart
         ? '-rotate-90'
         : 'rotate-90'
       : isStart
-      ? 'rotate-180'
-      : '';
+        ? 'rotate-180'
+        : '';
 
     const label = isVertical
       ? isStart
         ? 'Scroll up'
         : 'Scroll down'
       : isStart
-      ? 'Scroll left'
-      : 'Scroll right';
+        ? 'Scroll left'
+        : 'Scroll right';
 
     return (
       <AnimatePresence>
@@ -520,7 +520,7 @@ function StripSlider({
         className={cn(
           'flex scroll-smooth cursor-grab active:cursor-grabbing',
           '[scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
-          isVertical ? 'flex-col overflow-y-auto' : 'flex-row overflow-x-auto'
+          isVertical ? 'flex-col overflow-y-auto' : 'flex-row overflow-x-auto',
         )}
         style={maskStyle}
         onPointerDown={(e) => {

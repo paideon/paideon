@@ -18,7 +18,7 @@ export interface PaginationProps {
 function getPageRange(
   current: number,
   total: number,
-  siblings: number
+  siblings: number,
 ): (number | '…')[] {
   const totalButtons = siblings * 2 + 5; // siblings + current + first + last + 2 ellipsis
   if (total <= totalButtons)
@@ -74,7 +74,7 @@ export function Pagination({
               'border border-border-default bg-surface-elevated',
               isFirstPage
                 ? 'text-text-muted opacity-40 cursor-not-allowed'
-                : 'text-text-primary opacity-100 cursor-pointer'
+                : 'text-text-primary opacity-100 cursor-pointer',
             )}
           >
             ←
@@ -88,7 +88,7 @@ export function Pagination({
               <span
                 className={cn(
                   BTN_BASE,
-                  'border-none bg-transparent text-text-muted cursor-default'
+                  'border-none bg-transparent text-text-muted cursor-default',
                 )}
               >
                 …
@@ -105,13 +105,13 @@ export function Pagination({
                   'border',
                   currentPage === page
                     ? 'bg-green-base text-text-inverse border-green-base'
-                    : 'bg-surface-elevated text-text-primary border-border-default'
+                    : 'bg-surface-elevated text-text-primary border-border-default',
                 )}
               >
                 {page}
               </button>
             </li>
-          )
+          ),
         )}
 
         {/* Next */}
@@ -125,7 +125,7 @@ export function Pagination({
               'border border-border-default bg-surface-elevated',
               isLastPage
                 ? 'text-text-muted opacity-40 cursor-not-allowed'
-                : 'text-text-primary opacity-100 cursor-pointer'
+                : 'text-text-primary opacity-100 cursor-pointer',
             )}
           >
             →

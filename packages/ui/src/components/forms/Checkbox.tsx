@@ -42,7 +42,7 @@ export function Checkbox({
       className={cn(
         'group inline-flex items-start gap-space-3 cursor-pointer select-none',
         disabled && 'opacity-40 cursor-not-allowed',
-        className
+        className,
       )}
     >
       <input
@@ -64,7 +64,7 @@ export function Checkbox({
           'w-4 h-4 rounded-sm border border-border-default bg-surface-elevated',
           'transition-all duration-fast ease-snap',
           'peer-checked:bg-green-base peer-checked:border-green-base',
-          'peer-focus-visible:outline-2 peer-focus-visible:outline-gold-base peer-focus-visible:outline-offset-[3px]'
+          'peer-focus-visible:outline-2 peer-focus-visible:outline-gold-base peer-focus-visible:outline-offset-[3px]',
         )}
       >
         <svg
@@ -73,7 +73,7 @@ export function Checkbox({
           className={cn(
             'w-2.5 h-2 text-white',
             'scale-0 opacity-0 transition-all duration-fast ease-snap',
-            'peer-checked:scale-100 peer-checked:opacity-100'
+            'peer-checked:scale-100 peer-checked:opacity-100',
           )}
           aria-hidden="true"
         >

@@ -8,7 +8,7 @@ export type AuthScheme = 'Bearer' | 'Basic';
 export function createAuthHeaders(
   token: string,
   scheme: AuthScheme = 'Bearer',
-  extra?: HeadersInit
+  extra?: HeadersInit,
 ): Headers {
   const headers = new Headers(extra);
   headers.set('Authorization', `${scheme} ${token}`);

@@ -56,7 +56,7 @@ export function DataTable<T extends Record<string, unknown>>({
       setSortDirection(newDirection);
       onSort(key, newDirection);
     },
-    [sortKey, sortDirection, onSort]
+    [sortKey, sortDirection, onSort],
   );
 
   if (isLoading) {
@@ -79,7 +79,7 @@ export function DataTable<T extends Record<string, unknown>>({
                   'px-space-4 py-space-3 text-left font-body text-label uppercase tracking-wider text-text-muted',
                   col.sortable &&
                     'cursor-pointer hover:text-gold-base transition-colors',
-                  col.className
+                  col.className,
                 )}
                 onClick={() => col.sortable && handleSort(col.key)}
               >
@@ -112,7 +112,7 @@ export function DataTable<T extends Record<string, unknown>>({
                 onClick={() => onRowClick?.(row)}
                 className={cn(
                   'border-b border-border-light transition-colors',
-                  onRowClick && 'cursor-pointer hover:bg-surface-deep/50'
+                  onRowClick && 'cursor-pointer hover:bg-surface-deep/50',
                 )}
               >
                 {columns.map((col) => (
@@ -120,7 +120,7 @@ export function DataTable<T extends Record<string, unknown>>({
                     key={String(col.key)}
                     className={cn(
                       'px-space-4 py-space-3 font-body text-body-sm text-text-primary',
-                      col.className
+                      col.className,
                     )}
                   >
                     {col.render

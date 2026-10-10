@@ -60,7 +60,7 @@ export function AnnouncementBanner({
         'px-space-6 py-space-3',
         styles.bg,
         `border-b ${styles.border}`,
-        className
+        className,
       )}
     >
       <div className="flex items-center gap-space-3">
@@ -73,7 +73,7 @@ export function AnnouncementBanner({
         <p
           className={cn(
             'font-body text-[0.85rem] leading-relaxed m-0',
-            styles.text
+            styles.text,
           )}
         >
           {children}
@@ -90,7 +90,7 @@ export function AnnouncementBanner({
             styles.text,
             'opacity-60 hover:opacity-100',
             'transition-opacity duration-fast',
-            'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2'
+            'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2',
           )}
         >
           ✕

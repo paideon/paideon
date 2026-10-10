@@ -41,7 +41,7 @@ export const TiptapNodeSchema: z.ZodType<TiptapNode> = z.lazy(() =>
     content: z.array(TiptapNodeSchema).optional(),
     marks: z.array(TiptapMarkSchema).optional(),
     text: z.string().optional(),
-  })
+  }),
 );
 
 /**

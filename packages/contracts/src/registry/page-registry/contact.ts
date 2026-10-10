@@ -41,7 +41,7 @@ export const ContactFeedbackFormSchema = FeedbackFormSchema;
 export const ContactHoursSchema = z.object({
   officeHours: z.string(),
   emergencyContacts: z.array(
-    z.object({ label: z.string(), phone: z.string() })
+    z.object({ label: z.string(), phone: z.string() }),
   ),
   afterHoursProtocol: z.string().optional(),
 });

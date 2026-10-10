@@ -26,9 +26,4 @@ export const LIBRARY_STATS_FALLBACK: LibraryStats = {
 // (Prisma client belongs only in the API and database packages).
 
 export type Role =
-  | 'STUDENT'
-  | 'TEACHER'
-  | 'PARENT'
-  | 'STAFF'
-  | 'LIBRARIAN'
-  | 'ADMIN';
+  'STUDENT' | 'TEACHER' | 'PARENT' | 'STAFF' | 'LIBRARIAN' | 'ADMIN';

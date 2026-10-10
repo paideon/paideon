@@ -76,7 +76,7 @@ export function CountdownTimer({
     typeof targetDate === 'string' ? new Date(targetDate) : targetDate;
 
   const [timeLeft, setTimeLeft] = useState<TimeLeftProps>(() =>
-    calculateTimeLeft(target)
+    calculateTimeLeft(target),
   );
 
   const [isComplete, setIsComplete] = useState(false);
@@ -133,7 +133,7 @@ export function CountdownTimer({
             <span
               className={cn(
                 'tabular-nums font-body text-gold-base',
-                sizeMap[size]
+                sizeMap[size],
               )}
             >
               {unit.value.toString().padStart(2, '0')}

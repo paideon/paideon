@@ -94,7 +94,7 @@ export const STAFF_ROLE_LABELS: Record<StaffRoleEnumData, string> = {
  */
 export function toStaffCardData(
   staff: StaffData,
-  overrides: Partial<Pick<StaffCardData, 'href'>> = {}
+  overrides: Partial<Pick<StaffCardData, 'href'>> = {},
 ): StaffCardData {
   return {
     id: staff.id,

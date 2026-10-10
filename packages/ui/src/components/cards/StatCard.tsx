@@ -68,12 +68,12 @@ export function StatCard({
     typeof trend === 'object' && trend !== null
       ? trend
       : typeof trend === 'string'
-      ? {
-          direction: trend as TrendDirectionType,
-          value: trendValue,
-          label: trendLabel,
-        }
-      : undefined;
+        ? {
+            direction: trend as TrendDirectionType,
+            value: trendValue,
+            label: trendLabel,
+          }
+        : undefined;
 
   return (
     <div
@@ -81,7 +81,7 @@ export function StatCard({
       className={cn(
         'p-space-7 bg-surface-elevated border border-border-light',
         'shadow-elevation-1',
-        className
+        className,
       )}
     >
       <p className="font-body text-caption uppercase tracking-caption text-text-muted mb-space-3">
@@ -90,7 +90,7 @@ export function StatCard({
       <div
         className={cn(
           'flex items-baseline gap-space-1',
-          variant === 'with-trend' && trendObj && 'mb-space-3'
+          variant === 'with-trend' && trendObj && 'mb-space-3',
         )}
       >
         <span className="font-display text-[clamp(2rem,4vw,2.8rem)] font-medium text-gold-base leading-none">

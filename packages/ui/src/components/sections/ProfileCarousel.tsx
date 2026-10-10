@@ -77,7 +77,7 @@ export function ProfileCarousel({
 
   // Cast years to Number for accurate descending sorting
   const years = Array.from(new Set(profiles.map((a) => a.graduationYear))).sort(
-    (a, b) => Number(b) - Number(a)
+    (a, b) => Number(b) - Number(a),
   );
 
   const filteredProfiles =
@@ -103,7 +103,7 @@ export function ProfileCarousel({
   const prev = () => {
     setDirection(-1);
     setActiveIndex(
-      (i) => (i - 1 + filteredProfiles.length) % filteredProfiles.length
+      (i) => (i - 1 + filteredProfiles.length) % filteredProfiles.length,
     );
   };
 
@@ -141,7 +141,7 @@ export function ProfileCarousel({
             'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-base focus-visible:ring-offset-2',
             selectedYear === 'all'
               ? 'bg-green-base border-transparent text-text-inverse'
-              : 'bg-transparent border-border-default text-text-muted hover:border-gold-hover hover:text-gold-hover'
+              : 'bg-transparent border-border-default text-text-muted hover:border-gold-hover hover:text-gold-hover',
           )}
         >
           {allYearsLabel}
@@ -156,7 +156,7 @@ export function ProfileCarousel({
               'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-base focus-visible:ring-offset-2',
               selectedYear === year
                 ? 'bg-green-base border-transparent text-text-inverse'
-                : 'bg-transparent border-border-default text-text-muted hover:border-gold-hover hover:text-gold-hover'
+                : 'bg-transparent border-border-default text-text-muted hover:border-gold-hover hover:text-gold-hover',
             )}
           >
             {year}
@@ -203,7 +203,7 @@ export function ProfileCarousel({
                 'text-center',
                 currentProfile.portrait
                   ? 'md:col-span-3 md:text-left'
-                  : 'md:col-span-5'
+                  : 'md:col-span-5',
               )}
             >
               {currentProfile.quote && (
@@ -211,7 +211,7 @@ export function ProfileCarousel({
                   quote={currentProfile.quote}
                   className={cn(
                     'mx-auto mb-space-6',
-                    currentProfile.portrait && 'md:mx-0'
+                    currentProfile.portrait && 'md:mx-0',
                   )}
                 />
               )}
@@ -270,7 +270,7 @@ export function ProfileCarousel({
                   'h-size-2 rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-base focus-visible:ring-offset-2',
                   idx === activeIndex
                     ? 'w-size-6 bg-gold-base'
-                    : 'w-size-2 bg-border-default hover:bg-gold-pale'
+                    : 'w-size-2 bg-border-default hover:bg-gold-pale',
                 )}
                 aria-label={getSlideLabel(idx + 1)}
               />

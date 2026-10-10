@@ -64,7 +64,7 @@ export function VStack({
         alignMap[align],
         justifyMap[justify],
         wrap && 'flex-wrap',
-        className
+        className,
       )}
     >
       {children}
@@ -89,7 +89,7 @@ export function HStack({
         alignMap[align],
         justifyMap[justify],
         wrap && 'flex-wrap',
-        className
+        className,
       )}
     >
       {children}

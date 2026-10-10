@@ -104,7 +104,7 @@ export function Slider({
         ref={sliderRef}
         className={cn(
           'relative w-full h-2 rounded-full bg-surface-deep',
-          disabled ? 'cursor-not-allowed opacity-40' : 'cursor-pointer'
+          disabled ? 'cursor-not-allowed opacity-40' : 'cursor-pointer',
         )}
         onClick={(e) => {
           if (disabled) return;
@@ -131,7 +131,7 @@ export function Slider({
           className={cn(
             'absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white shadow-elevation-2',
             'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2',
-            disabled ? 'cursor-not-allowed' : 'cursor-pointer'
+            disabled ? 'cursor-not-allowed' : 'cursor-pointer',
           )}
           style={{ left: `calc(${percentage}% - 8px)` }}
         />

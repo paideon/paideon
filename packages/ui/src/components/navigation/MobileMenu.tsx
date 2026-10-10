@@ -64,7 +64,7 @@ function SubPanel({
           className={cn(
             'flex items-center gap-space-1.5 bg-none border-none cursor-pointer p-space-1',
             'font-body text-label uppercase tracking-label',
-            'text-text-inverse/60 transition-colors duration-fast hover:text-gold-base'
+            'text-text-inverse/60 transition-colors duration-fast hover:text-gold-base',
           )}
         >
           <svg
@@ -101,7 +101,7 @@ function SubPanel({
                     'font-body text-body no-underline border-l-2 transition-all duration-fast',
                     isActive
                       ? 'text-gold-base border-gold-base'
-                      : 'text-text-inverse/85 border-transparent hover:text-text-inverse hover:border-gold-base/40'
+                      : 'text-text-inverse/85 border-transparent hover:text-text-inverse hover:border-gold-base/40',
                   )}
                 >
                   {child.label}
@@ -144,7 +144,7 @@ export function MobileMenu({
   footer,
 }: MobileMenuProps) {
   const [activeSubmenu, setActiveSubmenu] = useState<MobileNavItem | null>(
-    null
+    null,
   );
   const drawerRef = useRef<HTMLDivElement>(null);
 
@@ -203,7 +203,7 @@ export function MobileMenu({
           'bg-green-base flex flex-col overflow-y-auto overflow-x-hidden transition-transform',
           isOpen
             ? 'translate-x-0 animate-[kcc-drawer-slide-in_0.28s_var(--ease-out,cubic-bezier(0,0,0.2,1))_both]'
-            : 'translate-x-full'
+            : 'translate-x-full',
         )}
       >
         {/* Header */}
@@ -219,7 +219,7 @@ export function MobileMenu({
               'flex items-center justify-center w-space-9 h-space-9',
               'bg-none border border-white/15 cursor-pointer',
               'text-text-inverse/70 transition-all duration-fast',
-              'hover:bg-white/[0.08] hover:text-text-inverse'
+              'hover:bg-white/[0.08] hover:text-text-inverse',
             )}
           >
             <svg
@@ -252,7 +252,7 @@ export function MobileMenu({
                         'flex items-center justify-between w-full py-space-4 px-space-6 text-left',
                         'bg-none border-none border-l-2 border-transparent cursor-pointer',
                         'font-display text-h4 font-medium text-text-inverse transition-all duration-fast',
-                        'hover:text-gold-base hover:border-gold-base'
+                        'hover:text-gold-base hover:border-gold-base',
                       )}
                     >
                       {item.label}
@@ -277,7 +277,7 @@ export function MobileMenu({
                         'font-display text-h4 font-medium',
                         isActive
                           ? 'text-gold-base border-gold-base'
-                          : 'text-text-inverse border-transparent hover:text-gold-base hover:border-gold-base/40'
+                          : 'text-text-inverse border-transparent hover:text-gold-base hover:border-gold-base/40',
                       )}
                     >
                       {item.label}

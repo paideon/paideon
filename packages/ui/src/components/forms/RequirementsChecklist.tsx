@@ -50,7 +50,7 @@ export function RequirementsChecklist({
     <div
       className={cn(
         'bg-surface-elevated border border-border-light rounded-lg p-space-6',
-        className
+        className,
       )}
     >
       <div className="mb-space-4 pb-space-4 border-b border-border-light">

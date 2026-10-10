@@ -19,7 +19,7 @@ export type ResponseEnvelopeData<T> = {
 };
 
 export const PaginatedResponseEnvelopeSchema = <T extends z.ZodType>(
-  itemSchema: T
+  itemSchema: T,
 ) =>
   z.object({
     success: z.boolean(),

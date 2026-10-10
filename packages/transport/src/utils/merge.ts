@@ -9,7 +9,7 @@ function isPlainObject(value: unknown): value is PlainObject {
 /** Recursively merges `source` over `target`; plain objects are merged key-by-key, everything else is overwritten. */
 export function mergeDeep<T extends PlainObject, U extends PlainObject>(
   target: T,
-  source: U
+  source: U,
 ): T & U {
   const result: PlainObject = { ...target };
 

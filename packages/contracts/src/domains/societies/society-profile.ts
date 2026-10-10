@@ -39,7 +39,7 @@ export type SocietyCategoryMeta = {
 };
 
 export const SOCIETY_CATEGORY_META: SocietyCategoryMeta[] = Object.entries(
-  SOCIETY_CATEGORIES
+  SOCIETY_CATEGORIES,
 ).map(([key, label]) => ({
   key: key as SocietyCategoryEnumData,
   label,

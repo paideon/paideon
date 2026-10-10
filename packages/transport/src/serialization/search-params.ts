@@ -2,7 +2,7 @@
 
 /** Converts a params object into URLSearchParams, repeating the key for array values and skipping null/undefined. */
 export function toSearchParams(
-  params: Record<string, unknown>
+  params: Record<string, unknown>,
 ): URLSearchParams {
   const search = new URLSearchParams();
 

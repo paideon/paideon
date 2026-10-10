@@ -58,7 +58,7 @@ export const SectionHeader = ({
       className={cn(
         isCenter ? 'text-center' : 'text-left',
         marginBottom,
-        className
+        className,
       )}
       {...rest}
     >

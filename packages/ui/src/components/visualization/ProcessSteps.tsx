@@ -20,7 +20,7 @@ export function ProcessSteps({ steps, className }: ProcessStepsProps) {
             key={step.id}
             className={clsx(
               'relative flex flex-col md:flex-row gap-6',
-              idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+              idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse',
             )}
           >
             {/* Step number circle */}

@@ -139,6 +139,6 @@ export function Lightbox({
         </div>
       )}
     </div>,
-    document.body
+    document.body,
   );
 }

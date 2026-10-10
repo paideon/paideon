@@ -5,21 +5,10 @@ import { ComponentProps, MouseEvent } from 'react';
 import { cn } from '../../utilities/cn';
 
 type ButtonVariant =
-  | 'primary'
-  | 'secondary'
-  | 'ghost'
-  | 'outline'
-  | 'destructive'
-  | 'link';
+  'primary' | 'secondary' | 'ghost' | 'outline' | 'destructive' | 'link';
 
 type ButtonSize =
-  | 'sm'
-  | 'md'
-  | 'lg'
-  | 'icon-sm'
-  | 'icon-md'
-  | 'icon-lg'
-  | 'icon-xl';
+  'sm' | 'md' | 'lg' | 'icon-sm' | 'icon-md' | 'icon-lg' | 'icon-xl';
 
 interface ButtonLinkProps extends ComponentProps<'a'> {
   href: string;
@@ -103,7 +92,7 @@ export function ButtonLink({
         fullWidth && 'w-full',
         disabled && 'opacity-40 cursor-not-allowed pointer-events-none',
         !disabled && 'cursor-pointer',
-        className
+        className,
       )}
       {...rest}
     >

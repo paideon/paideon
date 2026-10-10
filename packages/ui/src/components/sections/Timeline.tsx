@@ -130,7 +130,7 @@ export function Timeline({
                 'snap-start shrink-0 w-full md:w-[85%] lg:w-[70%] px-space-6 transition-all duration-slow ease-out',
                 isInView
                   ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-6'
+                  : 'opacity-0 translate-y-6',
               )}
               style={{ transitionDelay: `${idx * 0.08}s` }}
             >
@@ -139,7 +139,7 @@ export function Timeline({
                 <div
                   className={cn(
                     'transition-all duration-slow',
-                    eraImageClasses[era]
+                    eraImageClasses[era],
                   )}
                 >
                   {event.imageSrc ? (
@@ -188,7 +188,7 @@ export function Timeline({
               'transition-all duration-fast',
               canPrev
                 ? 'hover:border-gold-base hover:text-gold-base cursor-pointer'
-                : 'opacity-30 cursor-not-allowed'
+                : 'opacity-30 cursor-not-allowed',
             )}
           >
             ←
@@ -204,7 +204,7 @@ export function Timeline({
               'transition-all duration-fast',
               canNext
                 ? 'hover:border-gold-base hover:text-gold-base cursor-pointer'
-                : 'opacity-30 cursor-not-allowed'
+                : 'opacity-30 cursor-not-allowed',
             )}
           >
             →
@@ -228,7 +228,7 @@ export function Timeline({
                 'rounded-full transition-all duration-fast cursor-pointer',
                 idx === activeIndex
                   ? 'w-size-4 h-size-2 bg-gold-base'
-                  : 'w-size-2 h-size-2 bg-border-default hover:bg-gold-base/50'
+                  : 'w-size-2 h-size-2 bg-border-default hover:bg-gold-base/50',
               )}
             />
           ))}

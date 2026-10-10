@@ -13,12 +13,7 @@ const checkIsExternal = (href: string): boolean =>
   href.startsWith('tel:');
 
 export type AriaCurrentValue =
-  | 'page'
-  | 'step'
-  | 'location'
-  | 'date'
-  | 'time'
-  | true;
+  'page' | 'step' | 'location' | 'date' | 'time' | true;
 
 export interface NavLinkProps extends Omit<React.ComponentProps<'a'>, 'href'> {
   href: string;
@@ -81,7 +76,7 @@ export function NavLink({
       ? activeStyles[onDark ? 'dark' : 'light']
       : inactiveStyles[onDark ? 'dark' : 'light'],
     isActive && activeClassName,
-    className // consumer className applied last — always wins via twMerge
+    className, // consumer className applied last — always wins via twMerge
   );
 
   const commonProps = {

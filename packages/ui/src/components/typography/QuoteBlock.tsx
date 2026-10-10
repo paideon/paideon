@@ -28,7 +28,7 @@ export const QuoteBlock = ({
         ref={ref as React.LegacyRef<HTMLQuoteElement>}
         className={cn(
           'text-center py-space-6 px-space-10 mx-auto max-w-prose',
-          className
+          className,
         )}
       >
         <blockquote className="m-0">
@@ -55,7 +55,7 @@ export const QuoteBlock = ({
       cite={cite}
       className={cn(
         'm-0 py-space-1 pl-space-6 border-l-2 border-gold-base',
-        className
+        className,
       )}
     >
       <p className="font-display text-pullquote italic text-text-muted leading-relaxed tracking-wide">

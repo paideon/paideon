@@ -90,7 +90,7 @@ export function Calendar({
   const today = new Date();
   const [currentMonth, setCurrentMonth] = useState(
     month ??
-      `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}`
+      `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}`,
   );
 
   const changeMonth = useCallback(
@@ -99,12 +99,12 @@ export function Calendar({
       const d = new Date(y, m - 1 + delta, 1);
       const next = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(
         2,
-        '0'
+        '0',
       )}`;
       setCurrentMonth(next);
       onMonthChange?.(next);
     },
-    [currentMonth, onMonthChange]
+    [currentMonth, onMonthChange],
   );
 
   // ---------- Mini Strip ----------
@@ -114,7 +114,7 @@ export function Calendar({
       <div
         className={cn(
           'flex gap-space-3 overflow-x-auto scrollbar-none',
-          className
+          className,
         )}
       >
         {upcoming.map((evt) => {
@@ -130,7 +130,7 @@ export function Calendar({
                   'bg-surface-elevated border border-border-light overflow-hidden',
                   'transition-all duration-gentle ease-out',
                   'hover:translate-y-[-2px] hover:shadow-elevation-2',
-                  'motion-reduce:transition-none motion-reduce:hover:translate-y-0'
+                  'motion-reduce:transition-none motion-reduce:hover:translate-y-0',
                 )}
               >
                 <div className="bg-green-base text-center py-space-2">
@@ -147,7 +147,7 @@ export function Calendar({
                       'font-body text-[0.75rem] text-text-primary leading-tight',
                       'line-clamp-2',
                       'transition-colors duration-fast',
-                      'group-hover:text-gold-active'
+                      'group-hover:text-gold-active',
                     )}
                   >
                     {evt.title}
@@ -181,7 +181,7 @@ export function Calendar({
                   'flex gap-space-5 items-start p-space-5',
                   'bg-surface-elevated border border-border-light',
                   'transition-all duration-fast',
-                  'hover:border-gold-base'
+                  'hover:border-gold-base',
                 )}
               >
                 <div className="flex-shrink-0 text-center w-11">
@@ -211,7 +211,7 @@ export function Calendar({
                     className={cn(
                       'font-display text-[1.05rem] font-medium text-text-primary mb-space-1',
                       'transition-colors duration-fast',
-                      'group-hover:text-gold-active'
+                      'group-hover:text-gold-active',
                     )}
                   >
                     {evt.title}
@@ -263,7 +263,7 @@ export function Calendar({
             'text-text-muted text-sm',
             'transition-all duration-fast',
             'hover:border-gold-base hover:text-gold-base',
-            'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-[3px]'
+            'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-[3px]',
           )}
         >
           ←
@@ -280,7 +280,7 @@ export function Calendar({
             'text-text-muted text-sm',
             'transition-all duration-fast',
             'hover:border-gold-base hover:text-gold-base',
-            'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-[3px]'
+            'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-[3px]',
           )}
         >
           →
@@ -326,13 +326,13 @@ export function Calendar({
                 'min-h-[60px] p-space-1',
                 'bg-surface-elevated border',
                 isToday ? 'border-gold-base' : 'border-border-light',
-                isPast && 'opacity-50'
+                isPast && 'opacity-50',
               )}
             >
               <div
                 className={cn(
                   'font-body text-[0.75rem] mb-space-1',
-                  isToday ? 'text-gold-base font-semibold' : 'text-text-muted'
+                  isToday ? 'text-gold-base font-semibold' : 'text-text-muted',
                 )}
               >
                 {day}
@@ -350,7 +350,7 @@ export function Calendar({
                       'px-space-1 py-space-0p5 mb-space-0p5',
                       'overflow-hidden text-ellipsis whitespace-nowrap',
                       'no-underline',
-                      badge
+                      badge,
                     )}
                   >
                     {evt.title}

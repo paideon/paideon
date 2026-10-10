@@ -14,7 +14,7 @@ export function MapEmbed({ src, title, className, nearbyNote }: MapEmbedProps) {
     <div
       className={clsx(
         'bg-surface-elevated border border-border-light rounded-lg overflow-hidden',
-        className
+        className,
       )}
     >
       <iframe

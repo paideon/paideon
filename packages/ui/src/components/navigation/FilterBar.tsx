@@ -49,7 +49,7 @@ export function FilterBar({
                 'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-[3px]',
                 isActive
                   ? 'bg-green-base border-green-base text-text-inverse'
-                  : 'bg-transparent border-border-default text-text-muted hover:border-green-base hover:text-gold-base'
+                  : 'bg-transparent border-border-default text-text-muted hover:border-green-base hover:text-gold-base',
               )}
             >
               {opt.label}
@@ -65,7 +65,7 @@ export function FilterBar({
     <div
       className={cn(
         'flex border-b border-border-light overflow-x-auto scrollbar-none',
-        className
+        className,
       )}
     >
       {allOptions.map((opt) => {
@@ -84,7 +84,7 @@ export function FilterBar({
               'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-[3px]',
               isActive
                 ? 'border-green-base text-text-primary bg-surface-default'
-                : 'border-transparent text-text-muted bg-transparent hover:text-gold-base hover:border-gold-base/40'
+                : 'border-transparent text-text-muted bg-transparent hover:text-gold-base hover:border-gold-base/40',
             )}
           >
             {opt.label}
@@ -95,7 +95,7 @@ export function FilterBar({
                   'rounded-full text-[0.58rem] font-body leading-none',
                   isActive
                     ? 'bg-green-base text-text-inverse'
-                    : 'bg-surface-deep text-text-muted group-hover:bg-gold-pale group-hover:text-gold-base'
+                    : 'bg-surface-deep text-text-muted group-hover:bg-gold-pale group-hover:text-gold-base',
                 )}
               >
                 {opt.count}

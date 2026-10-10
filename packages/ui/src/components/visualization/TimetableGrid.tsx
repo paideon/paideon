@@ -59,7 +59,7 @@ export function TimetableGrid({
               key={entry.period}
               className={cn(
                 'border-b border-border-light',
-                idx % 2 === 0 && 'bg-surface-default/50'
+                idx % 2 === 0 && 'bg-surface-default/50',
               )}
             >
               <td className="p-space-3 font-body text-body-sm text-text-primary whitespace-nowrap">

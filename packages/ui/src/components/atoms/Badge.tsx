@@ -5,12 +5,7 @@ import { ElementType } from 'react';
 import { cn } from '../../utilities/cn';
 
 type BadgeStatus =
-  | 'draft'
-  | 'review'
-  | 'published'
-  | 'archived'
-  | 'unread'
-  | 'reviewed';
+  'draft' | 'review' | 'published' | 'archived' | 'unread' | 'reviewed';
 type BadgeVariant = 'category' | 'status' | 'achievement';
 
 // Discriminated union for better type safety

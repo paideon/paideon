@@ -141,8 +141,8 @@ export function StudentJourneyFlow({
                   isSelected
                     ? 'var(--color-gold-base)'
                     : isHighlightedNode
-                    ? 'var(--color-gold-pale)'
-                    : 'var(--border-light)'
+                      ? 'var(--color-gold-pale)'
+                      : 'var(--border-light)'
                 }
                 strokeWidth={isSelected ? 2 : 1}
                 className="transition-all duration-200"
@@ -153,7 +153,7 @@ export function StudentJourneyFlow({
                 textAnchor="middle"
                 className={cn(
                   'font-display text-sm fill-text-primary font-medium',
-                  isSelected && 'fill-gold-base'
+                  isSelected && 'fill-gold-base',
                 )}
               >
                 {node.label}

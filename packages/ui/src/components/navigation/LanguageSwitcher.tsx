@@ -54,7 +54,7 @@ export function LanguageSwitcher({
               <span
                 className={clsx(
                   'text-xs',
-                  onDark ? 'text-text-inverse/25' : 'text-border-default'
+                  onDark ? 'text-text-inverse/25' : 'text-border-default',
                 )}
               >
                 /
@@ -72,14 +72,14 @@ export function LanguageSwitcher({
                 isActive
                   ? clsx(
                       'text-gold-base border-b border-gold-base',
-                      variant === 'mobile' ? 'pb-0.5' : 'pb-0.5'
+                      variant === 'mobile' ? 'pb-0.5' : 'pb-0.5',
                     )
                   : clsx(
                       onDark
                         ? 'text-text-inverse/55 hover:text-gold-base'
                         : 'text-text-muted hover:text-gold-base',
-                      variant === 'mobile' ? 'pb-0.5' : 'pb-0.5'
-                    )
+                      variant === 'mobile' ? 'pb-0.5' : 'pb-0.5',
+                    ),
               )}
             >
               {lang.label}

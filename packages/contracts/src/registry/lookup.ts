@@ -93,14 +93,14 @@ export const GLOBAL_SECTIONS: PageSection[] = [
 // ─── Query functions ──────────────────────────────────────────────────────
 
 export function getPageDefinition(
-  pageKey: PageKeyEnumData
+  pageKey: PageKeyEnumData,
 ): PageRegistry | undefined {
   return PAGE_REGISTRY[pageKey];
 }
 
 export function getSectionDefinition(
   scope: string,
-  sectionKey: string
+  sectionKey: string,
 ): PageSection | undefined {
   if (scope === 'global' || scope.startsWith('global:')) {
     return getGlobalSection(sectionKey);
@@ -143,13 +143,13 @@ export function getGlobalSectionSchemas(): Record<string, z.ZodTypeAny> {
 }
 
 export function getContentSchema(
-  key: BlockTypeEnumData
+  key: BlockTypeEnumData,
 ): z.ZodTypeAny | undefined {
   return BLOCK_SCHEMA_MAP[key];
 }
 
 export function getContentTypesByCategory(
-  category: 'block' | 'editorial' | 'domain'
+  category: 'block' | 'editorial' | 'domain',
 ): readonly string[] {
   if (category === 'block') {
     return Object.keys(BLOCK_SCHEMA_MAP);

@@ -36,7 +36,7 @@ export function OfflineBanner({
       className={cn(
         'fixed left-0 right-0 top-[var(--nav-height,0px)] z-raised',
         'bg-surface-inverse text-text-inverse text-center',
-        'py-space-3 px-space-4'
+        'py-space-3 px-space-4',
       )}
     >
       <p className="font-body text-body-sm">{message}</p>

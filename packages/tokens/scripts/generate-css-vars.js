@@ -10,7 +10,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const portalPath = path.resolve(
   __dirname,
-  '../../../apps/portal/src/app/tokens.css'
+  '../../../apps/portal/src/app/tokens.css',
 );
 
 const css = generateCssVariables();

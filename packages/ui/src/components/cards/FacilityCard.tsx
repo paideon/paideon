@@ -31,7 +31,7 @@ export function FacilityCard({
         'bg-surface-elevated border border-border-light overflow-hidden',
         'shadow-elevation-1 transition-all duration-gentle',
         'group-hover:shadow-elevation-3 group-hover:-translate-y-0.5',
-        className
+        className,
       )}
     >
       <div className="relative aspect-[16/9] bg-green-base overflow-hidden">
@@ -50,7 +50,7 @@ export function FacilityCard({
         <h3
           className={cn(
             'font-display text-h3 font-medium text-text-primary mb-space-2',
-            'transition-colors duration-fast group-hover:text-gold-active'
+            'transition-colors duration-fast group-hover:text-gold-active',
           )}
         >
           {name}
@@ -80,7 +80,7 @@ export function FacilityCard({
                     key={`${slot.day}-${slot.time}`}
                     className={cn(
                       'border-b border-border-light',
-                      i % 2 === 0 ? 'bg-surface-base' : 'bg-surface-default'
+                      i % 2 === 0 ? 'bg-surface-base' : 'bg-surface-default',
                     )}
                   >
                     <td className="font-body text-caption text-gold-base font-semibold p-space-1.5 whitespace-nowrap">

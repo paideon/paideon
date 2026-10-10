@@ -55,7 +55,7 @@ export function BeatLoader({
         'inline-flex items-end',
         gap,
         variantConfig[variant],
-        className
+        className,
       )}
     >
       {[0, 1, 2].map((i) => (

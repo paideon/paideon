@@ -19,11 +19,7 @@ type ImageFrameColor =
 
 type ImageOverlay = 'light' | 'medium' | 'heavy' | false;
 type FrameWidth =
-  | 'border-sm'
-  | 'border-md'
-  | 'border-lg'
-  | 'border-xl'
-  | 'border-2xl';
+  'border-sm' | 'border-md' | 'border-lg' | 'border-xl' | 'border-2xl';
 
 type ImageFrameSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
@@ -130,14 +126,14 @@ export function ImageFrame({
           frameWidthMap[frameWidth],
           frameColor && frameColorMap[frameColor],
         ],
-        className
+        className,
       )}
     >
       {/* Image container — relative positioning context for all absolute children */}
       <div
         className={cn(
           'relative w-full overflow-hidden bg-surface-deep',
-          aspectRatioMap[aspectRatio]
+          aspectRatioMap[aspectRatio],
         )}
       >
         {/* z-base (0): image layer — the ground floor */}
@@ -148,7 +144,7 @@ export function ImageFrame({
             fill
             className={cn(
               'object-cover z-base',
-              'transition-transform duration-gentle group-hover:scale-[1.04]'
+              'transition-transform duration-gentle group-hover:scale-[1.04]',
             )}
             sizes={size}
             priority={priority}
@@ -162,7 +158,7 @@ export function ImageFrame({
               // inset via explicit top/right/bottom/left using space tokens
               // (inset-0 broken because spacing is fully overridden — see preset.ts)
               'top-space-0 right-space-0 bottom-space-0 left-space-0',
-              'flex items-center justify-center bg-surface-deep'
+              'flex items-center justify-center bg-surface-deep',
             )}
           >
             <span className="font-body text-caption text-text-muted">
@@ -177,7 +173,7 @@ export function ImageFrame({
             className={cn(
               'absolute z-raised pointer-events-none',
               'top-space-0 right-space-0 bottom-space-0 left-space-0',
-              overlayMap[overlay]
+              overlayMap[overlay],
             )}
           />
         )}

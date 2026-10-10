@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 export function useActiveSection(
   sectionIds: string[],
-  offset = 100
+  offset = 100,
 ): string | null {
   const [activeId, setActiveId] = useState<string | null>(null);
 

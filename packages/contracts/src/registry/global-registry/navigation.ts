@@ -18,7 +18,7 @@ export const NavLinkSchema: z.ZodType<NavLinkData> = z.lazy(() =>
     label: z.string(),
     href: z.string(),
     children: z.array(NavLinkSchema).optional(),
-  })
+  }),
 );
 
 export const NavigationContentSchema = z.object({

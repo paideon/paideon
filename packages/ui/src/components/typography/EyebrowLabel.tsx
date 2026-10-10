@@ -52,7 +52,7 @@ export const EyebrowLabel = ({
       variantClasses[variant],
       sizeClasses[size],
       truncate && 'truncate',
-      className
+      className,
     )}
     {...rest}
   >

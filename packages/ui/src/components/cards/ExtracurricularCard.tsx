@@ -8,8 +8,10 @@ import Link from 'next/link';
 import { cn } from '../../utilities/cn';
 import { Badge } from '../atoms/Badge';
 
-export interface ExtracurricularCardProps
-  extends Omit<ActivityData, 'variant'> {
+export interface ExtracurricularCardProps extends Omit<
+  ActivityData,
+  'variant'
+> {
   variant?: ExtracurricularVariantType;
   className?: string;
 }
@@ -43,7 +45,7 @@ export function ExtracurricularCard({
         'bg-surface-elevated border border-border-light overflow-hidden',
         'shadow-elevation-1 transition-all duration-gentle',
         'group-hover:shadow-elevation-3 group-hover:-translate-y-0.5',
-        className
+        className,
       )}
     >
       {imageSrc && (
@@ -67,13 +69,13 @@ export function ExtracurricularCard({
       <div
         className={cn(
           'p-space-5',
-          variant === 'performing-arts' && 'p-space-7'
+          variant === 'performing-arts' && 'p-space-7',
         )}
       >
         <h3
           className={cn(
             'font-display text-h3 font-medium text-text-primary mb-space-2',
-            'transition-colors duration-fast group-hover:text-gold-active'
+            'transition-colors duration-fast group-hover:text-gold-active',
           )}
         >
           {name}
@@ -89,7 +91,7 @@ export function ExtracurricularCard({
                 <span
                   className={cn(
                     'text-xs flex-shrink-0',
-                    accent.replace('bg-', 'text-')
+                    accent.replace('bg-', 'text-'),
                   )}
                 >
                   ●

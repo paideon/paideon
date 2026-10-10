@@ -76,7 +76,7 @@ function EventStatusBadge({
         'inline-flex items-center gap-space-1 px-space-2.5 py-space-1 rounded-full',
         'font-body text-caption uppercase tracking-caption',
         config.bg,
-        config.text
+        config.text,
       )}
     >
       {config.dot && (
@@ -106,13 +106,13 @@ function DateBlock({ date, isPast }: { date: string; isPast?: boolean }) {
     <div
       className={cn(
         'flex flex-col items-center justify-center min-w-[56px] px-space-3 py-space-2.5',
-        isPast ? 'bg-surface-deep' : 'bg-green-base'
+        isPast ? 'bg-surface-deep' : 'bg-green-base',
       )}
     >
       <span
         className={cn(
           'font-display text-[1.75rem] font-medium leading-none',
-          isPast ? 'text-text-muted' : 'text-gold-base'
+          isPast ? 'text-text-muted' : 'text-gold-base',
         )}
       >
         {day}
@@ -121,7 +121,7 @@ function DateBlock({ date, isPast }: { date: string; isPast?: boolean }) {
         <span
           className={cn(
             'font-body text-[0.55rem] uppercase tracking-[0.15em] mt-space-0.5',
-            isPast ? 'text-text-muted' : 'text-text-inverse/60'
+            isPast ? 'text-text-muted' : 'text-text-inverse/60',
           )}
         >
           {month}
@@ -154,7 +154,7 @@ function EventCardStandard({
           'bg-surface-elevated border border-border-light overflow-hidden',
           'shadow-elevation-1 transition-all duration-gentle',
           'group-hover:shadow-elevation-3 group-hover:-translate-y-0.5',
-          isPast && 'opacity-70'
+          isPast && 'opacity-70',
         )}
       >
         {imageSrc && (
@@ -165,7 +165,7 @@ function EventCardStandard({
               fill
               className={cn(
                 'object-cover transition-transform duration-gentle group-hover:scale-[1.03]',
-                isPast && 'grayscale-[0.4] saturate-[0.7]'
+                isPast && 'grayscale-[0.4] saturate-[0.7]',
               )}
             />
           </div>
@@ -180,7 +180,7 @@ function EventCardStandard({
             <h3
               className={cn(
                 'font-display text-h3 font-medium text-text-primary mb-space-2',
-                'transition-colors duration-fast group-hover:text-gold-active'
+                'transition-colors duration-fast group-hover:text-gold-active',
               )}
             >
               {title}
@@ -231,7 +231,7 @@ function EventCardCompact({
         <p
           className={cn(
             'font-body font-medium text-text-primary mb-space-1.5',
-            'transition-colors duration-fast group-hover:text-gold-active'
+            'transition-colors duration-fast group-hover:text-gold-active',
           )}
         >
           {title}
@@ -277,7 +277,7 @@ function EventCardFeatured({
             fill
             className={cn(
               'object-cover',
-              isPast && 'grayscale-[0.4] saturate-[0.7]'
+              isPast && 'grayscale-[0.4] saturate-[0.7]',
             )}
           />
         ) : (

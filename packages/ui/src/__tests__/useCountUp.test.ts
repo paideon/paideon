@@ -59,7 +59,7 @@ describe('useCountUp', () => {
   it('should call onComplete callback', async () => {
     const onComplete = jest.fn();
     const { result } = renderHook(() =>
-      useCountUp(100, { duration: 0.1, onComplete })
+      useCountUp(100, { duration: 0.1, onComplete }),
     );
     act(() => {
       result.current.start();
@@ -72,7 +72,7 @@ describe('useCountUp', () => {
 
   it('should respect delay option', () => {
     const { result } = renderHook(() =>
-      useCountUp(100, { delay: 0.5, duration: 0.1 })
+      useCountUp(100, { delay: 0.5, duration: 0.1 }),
     );
     act(() => {
       result.current.start();

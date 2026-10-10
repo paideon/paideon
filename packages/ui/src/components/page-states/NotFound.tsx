@@ -111,7 +111,7 @@ export function NotFoundPage({
                     'border border-white/15 rounded-sm',
                     'transition-colors duration-fast ease-snap',
                     'hover:text-gold-base hover:border-gold-base/40',
-                    'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2'
+                    'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2',
                   )}
                   activeClassName="text-gold-base border-gold-base"
                 >

@@ -37,7 +37,7 @@ export function useInView<T extends HTMLElement = HTMLElement>({
           observerRef.current.disconnect();
         }
       },
-      { rootMargin, threshold }
+      { rootMargin, threshold },
     );
 
     observerRef.current.observe(element);

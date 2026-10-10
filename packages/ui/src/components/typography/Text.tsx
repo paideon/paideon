@@ -66,7 +66,7 @@ export const Text = ({
         variantClasses[variant],
         colorClasses[color],
         align ? `text-${align}` : undefined,
-        className
+        className,
       )}
       {...rest}
     >

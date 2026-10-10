@@ -15,14 +15,14 @@ function readValue<T>(key: string, initialValue: T): T {
 
 export function useLocalStorage<T>(
   key: string,
-  initialValue: T
+  initialValue: T,
 ): [T, (value: T) => void] {
   // Lazy-initialize directly from storage instead of always starting from
   // `initialValue` and patching it in via an effect after mount — that
   // previous approach guaranteed a one-frame flash of the default value on
   // every mount, even when a stored value already existed.
   const [storedValue, setStoredValue] = useState<T>(() =>
-    readValue(key, initialValue)
+    readValue(key, initialValue),
   );
 
   const setValue = (value: T) => {

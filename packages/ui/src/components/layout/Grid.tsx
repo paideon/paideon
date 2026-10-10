@@ -10,28 +10,11 @@ type PlaceItems = 'start' | 'end' | 'center' | 'stretch';
 type JustifyItems = 'start' | 'end' | 'center' | 'stretch';
 type AlignItems = 'start' | 'end' | 'center' | 'stretch' | 'baseline';
 type PlaceContent =
-  | 'center'
-  | 'start'
-  | 'end'
-  | 'between'
-  | 'around'
-  | 'evenly'
-  | 'stretch';
+  'center' | 'start' | 'end' | 'between' | 'around' | 'evenly' | 'stretch';
 type JustifyContent =
-  | 'start'
-  | 'end'
-  | 'center'
-  | 'between'
-  | 'around'
-  | 'evenly';
+  'start' | 'end' | 'center' | 'between' | 'around' | 'evenly';
 type AlignContent =
-  | 'start'
-  | 'end'
-  | 'center'
-  | 'between'
-  | 'around'
-  | 'evenly'
-  | 'stretch';
+  'start' | 'end' | 'center' | 'between' | 'around' | 'evenly' | 'stretch';
 
 interface GridProps {
   children: React.ReactNode;
@@ -190,7 +173,7 @@ function getGridRowsClass(rows: GridRows): string {
 
 function getAutoClass(
   prefix: 'auto-cols' | 'auto-rows',
-  value: string
+  value: string,
 ): string {
   const map: Record<string, string> = {
     auto: `${prefix}-auto`,
@@ -237,7 +220,7 @@ export function Grid({
     placeContent && placeContentMap[placeContent],
     justifyContent && justifyContentMap[justifyContent],
     alignContent && alignContentMap[alignContent],
-    className
+    className,
   );
 
   return <Tag className={classes}>{children}</Tag>;
@@ -273,7 +256,7 @@ function getSpanClass(prefix: 'col' | 'row', value: number | string): string {
 function getStartEndClass(
   prefix: 'col' | 'row',
   side: 'start' | 'end',
-  value: number | string
+  value: number | string,
 ): string {
   if (typeof value === 'number') {
     return `${prefix}-${side}-${value}`;
@@ -329,7 +312,7 @@ export function GridItem({
     justifySelf && justifySelfMap[justifySelf],
     alignSelf && alignSelfMap[alignSelf],
     placeSelf && placeSelfMap[placeSelf],
-    className
+    className,
   );
 
   return <div className={classes}>{children}</div>;

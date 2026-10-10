@@ -21,7 +21,7 @@ export interface RequestConfig {
 /** Joins baseUrl + path and appends a query string built from `query`, if any. */
 export function buildUrl(
   path: string,
-  config?: Pick<RequestConfig, 'baseUrl' | 'query'>
+  config?: Pick<RequestConfig, 'baseUrl' | 'query'>,
 ): string {
   const url = config?.baseUrl ? joinUrl(config.baseUrl, path) : path;
   if (!config?.query) return url;
@@ -36,7 +36,7 @@ export function buildUrl(
 export function buildInit(
   method: string,
   body: unknown,
-  config?: RequestConfig
+  config?: RequestConfig,
 ): RequestInit {
   const init: RequestInit = { method, signal: config?.signal };
 

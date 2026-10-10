@@ -87,7 +87,7 @@ export function CategorizedPhotoStrip({
             'px-4 py-2 font-body text-label uppercase tracking-wide rounded-full transition-all',
             activeCategory === 'all'
               ? 'bg-green-base text-text-inverse'
-              : 'bg-surface-default text-text-muted hover:bg-surface-deep'
+              : 'bg-surface-default text-text-muted hover:bg-surface-deep',
           )}
         >
           {allLabel}
@@ -100,7 +100,7 @@ export function CategorizedPhotoStrip({
               'px-4 py-2 font-body text-label uppercase tracking-wide rounded-full transition-all',
               activeCategory === key
                 ? 'bg-green-base text-text-inverse'
-                : 'bg-surface-default text-text-muted hover:bg-surface-deep'
+                : 'bg-surface-default text-text-muted hover:bg-surface-deep',
             )}
           >
             {label}

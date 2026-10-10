@@ -35,7 +35,7 @@ export function MasonryGrid({
   // Distribute children into columns
   const columnArrays: React.ReactNode[][] = Array.from(
     { length: columns },
-    () => []
+    () => [],
   );
   children.forEach((child, idx) => {
     columnArrays[idx % columns].push(child);

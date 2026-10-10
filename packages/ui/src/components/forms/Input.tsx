@@ -98,7 +98,7 @@ export function Input({
           inputBase,
           hasError
             ? 'border-semantic-error-base focus-visible:border-semantic-error-base focus-visible:outline-semantic-error-base'
-            : 'border-border-default hover:border-border-default focus-visible:border-gold-base'
+            : 'border-border-default hover:border-border-default focus-visible:border-gold-base',
         )}
       />
       {hasError && (

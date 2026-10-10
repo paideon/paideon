@@ -37,7 +37,7 @@ function flattenKeys(obj: Record<string, unknown>, prefix = ''): string[] {
 // Tailwind itself generates it, so tailwind-merge needs the same string.
 function toClassList(keys: string[], utilityPrefix: string): string[] {
   return keys.map((k) =>
-    k === 'DEFAULT' ? utilityPrefix : `${utilityPrefix}-${k}`
+    k === 'DEFAULT' ? utilityPrefix : `${utilityPrefix}-${k}`,
   );
 }
 
@@ -59,7 +59,7 @@ export function generateCnUtility(): string {
   const minWClasses = toClassList(sizingKeys, 'min-w');
   const maxWClasses = toClassList(
     [...Object.keys(maxWidth), ...sizingKeys],
-    'max-w'
+    'max-w',
   );
   const minHClasses = toClassList(sizingKeys, 'min-h');
   const maxHClasses = toClassList(sizingKeys, 'max-h');

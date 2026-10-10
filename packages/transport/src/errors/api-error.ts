@@ -27,7 +27,7 @@ export class ApiError extends Error {
   constructor(params: ApiErrorParams) {
     super(
       params.message,
-      params.cause !== undefined ? { cause: params.cause } : undefined
+      params.cause !== undefined ? { cause: params.cause } : undefined,
     );
     this.name = 'ApiError';
     this.status = params.status;

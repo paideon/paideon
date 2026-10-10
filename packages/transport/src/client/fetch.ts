@@ -33,7 +33,7 @@ async function send<T>(
   method: string,
   path: string,
   body: unknown,
-  config: ApiClientConfig = {}
+  config: ApiClientConfig = {},
 ): Promise<T> {
   const {
     timeoutMs,
@@ -76,17 +76,17 @@ export const api = {
   post: <T = unknown>(
     path: string,
     body?: unknown,
-    config?: ApiClientConfig
+    config?: ApiClientConfig,
   ): Promise<T> => send<T>('POST', path, body, config),
   put: <T = unknown>(
     path: string,
     body?: unknown,
-    config?: ApiClientConfig
+    config?: ApiClientConfig,
   ): Promise<T> => send<T>('PUT', path, body, config),
   patch: <T = unknown>(
     path: string,
     body?: unknown,
-    config?: ApiClientConfig
+    config?: ApiClientConfig,
   ): Promise<T> => send<T>('PATCH', path, body, config),
   delete: <T = unknown>(path: string, config?: ApiClientConfig): Promise<T> =>
     send<T>('DELETE', path, undefined, config),

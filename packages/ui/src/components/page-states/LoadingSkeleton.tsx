@@ -50,7 +50,7 @@ function CardSkeleton() {
     <div
       className={cn(
         'bg-surface-elevated border border-border-light',
-        'overflow-hidden'
+        'overflow-hidden',
       )}
     >
       <SkeletonBase className="h-size-48" /> {/* 192px – closest to 200px */}
@@ -72,7 +72,7 @@ function TableRowSkeleton() {
     <div
       className={cn(
         'flex items-center gap-space-4 py-space-3p5',
-        'border-b border-border-light'
+        'border-b border-border-light',
       )}
     >
       <SkeletonBase className="h-size-4 w-size-pct-8 rounded-sm shrink-0" />{' '}

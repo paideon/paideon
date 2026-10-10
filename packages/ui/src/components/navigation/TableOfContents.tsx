@@ -41,7 +41,7 @@ export function TableOfContents({
                   'font-body text-[0.82rem] cursor-pointer transition-colors duration-fast',
                   isActive
                     ? 'border-gold-base text-gold-base'
-                    : 'border-border-light text-text-muted hover:text-text-primary'
+                    : 'border-border-light text-text-muted hover:text-text-primary',
                 )}
               >
                 {section.label}

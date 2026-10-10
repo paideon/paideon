@@ -13,7 +13,7 @@ export const StreamComparisonSchema = z.object({
       subject: z.string(),
       inStream1: z.boolean(),
       inStream2: z.boolean(),
-    })
+    }),
   ),
   recommendedFor: z.string().optional(),
 });

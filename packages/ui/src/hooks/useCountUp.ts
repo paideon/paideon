@@ -38,7 +38,7 @@ function deriveDuration(target: number, base: number): number {
 
 export function useCountUp(
   target: number,
-  options: UseCountUpOptions = {}
+  options: UseCountUpOptions = {},
 ): UseCountUpReturn {
   const {
     duration = 1.8,

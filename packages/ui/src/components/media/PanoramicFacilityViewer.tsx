@@ -116,7 +116,7 @@ export function PanoramicFacilityViewer({
               onClick={() => setCurrentIndex(idx)}
               className={cn(
                 'relative w-20 h-12 flex-shrink-0 rounded-md overflow-hidden transition-all',
-                idx === currentIndex && 'ring-2 ring-gold-base'
+                idx === currentIndex && 'ring-2 ring-gold-base',
               )}
             >
               <Image

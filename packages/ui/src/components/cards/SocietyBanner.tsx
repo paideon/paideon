@@ -22,7 +22,7 @@ export function SocietyBanner({
     <div
       className={cn(
         'relative h-48 md:h-64 lg:h-80 overflow-hidden rounded-lg',
-        className
+        className,
       )}
     >
       {coverImageSrc ? (

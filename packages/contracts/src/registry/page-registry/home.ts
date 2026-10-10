@@ -42,7 +42,7 @@ export const HomeLifeAtKCCSchema = z.object({
       src: z.string(),
       alt: z.string(),
       caption: z.string().optional(),
-    })
+    }),
   ),
 });
 export type HomeLifeAtKCCData = z.infer<typeof HomeLifeAtKCCSchema>;

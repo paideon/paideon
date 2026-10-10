@@ -294,7 +294,7 @@ const utilityLineHeight = {
 } satisfies Record<string, string>;
 
 const perTokenLineHeight = Object.fromEntries(
-  Object.entries(fontSize).map(([key, [, opts]]) => [key, opts.lineHeight])
+  Object.entries(fontSize).map(([key, [, opts]]) => [key, opts.lineHeight]),
 ) as Record<keyof typeof fontSize, string>;
 
 export const lineHeight = { ...utilityLineHeight, ...perTokenLineHeight };
@@ -323,7 +323,7 @@ const utilityLetterSpacing = {
 } satisfies Record<string, string>;
 
 const perTokenLetterSpacing = Object.fromEntries(
-  Object.entries(fontSize).map(([key, [, opts]]) => [key, opts.letterSpacing])
+  Object.entries(fontSize).map(([key, [, opts]]) => [key, opts.letterSpacing]),
 ) as Record<keyof typeof fontSize, string>;
 
 export const letterSpacing = {

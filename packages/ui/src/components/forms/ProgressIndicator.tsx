@@ -79,7 +79,7 @@ export function ProgressIndicator({
               aria-current={isActive ? 'step' : undefined}
               className={cn(
                 isLast ? 'flex-none' : 'flex-1',
-                'flex items-center'
+                'flex items-center',
               )}
             >
               <div className="flex flex-col items-center gap-space-2">
@@ -90,8 +90,8 @@ export function ProgressIndicator({
                     isCompleted
                       ? 'bg-green-base text-text-inverse border-2 border-green-base'
                       : isActive
-                      ? 'bg-transparent text-gold-base border-2 border-gold-base'
-                      : 'bg-transparent text-text-muted border-2 border-border-default'
+                        ? 'bg-transparent text-gold-base border-2 border-gold-base'
+                        : 'bg-transparent text-text-muted border-2 border-border-default',
                   )}
                 >
                   {isCompleted ? '✓' : idx + 1}
@@ -102,8 +102,8 @@ export function ProgressIndicator({
                     isCompleted
                       ? 'text-green-base'
                       : isActive
-                      ? 'text-gold-base'
-                      : 'text-text-muted'
+                        ? 'text-gold-base'
+                        : 'text-text-muted',
                   )}
                 >
                   {step.label}
@@ -114,7 +114,7 @@ export function ProgressIndicator({
                   aria-hidden="true"
                   className={cn(
                     'flex-1 h-0.5 mb-[26px] min-w-space-6 transition-colors duration-gentle',
-                    isCompleted ? 'bg-green-base' : 'bg-border-light'
+                    isCompleted ? 'bg-green-base' : 'bg-border-light',
                   )}
                 />
               )}

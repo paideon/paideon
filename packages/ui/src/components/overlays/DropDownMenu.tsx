@@ -123,7 +123,7 @@ export function DropdownMenu({
       'font-body text-label uppercase tracking-label',
       'text-text-muted',
       'hover:text-text-primary',
-    ]
+    ],
   );
 
   const menuClasses = cn(
@@ -131,7 +131,7 @@ export function DropdownMenu({
     'bg-surface-elevated border border-border-light',
     'shadow-elevation-2',
     align === 'right' ? 'right-0' : 'left-0',
-    'top-full mt-space-1'
+    'top-full mt-space-1',
   );
 
   return (
@@ -155,7 +155,7 @@ export function DropdownMenu({
           aria-hidden="true"
           className={cn(
             'transition-transform duration-fast',
-            open ? 'rotate-180' : 'rotate-0'
+            open ? 'rotate-180' : 'rotate-0',
           )}
         >
           ∨
@@ -184,7 +184,7 @@ export function DropdownMenu({
                     'focus:outline-none',
                     isActive
                       ? 'bg-surface-deep text-gold-base'
-                      : 'text-text-primary hover:bg-surface-default hover:text-gold-base'
+                      : 'text-text-primary hover:bg-surface-default hover:text-gold-base',
                   )}
                 >
                   {item.label}

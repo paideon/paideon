@@ -95,7 +95,7 @@ export function SvgDebugGrid({
                   {x},{y}
                 </text>
               );
-            })
+            }),
         )}
     </g>
   );

@@ -80,7 +80,7 @@ export function AmbientEmbers({ count = 20, className }: AmbientEmbersProps) {
         className={cn(
           'absolute inset-0 pointer-events-none',
           'bg-gradient-radial-gold opacity-15',
-          className
+          className,
         )}
       />
     );
@@ -91,7 +91,7 @@ export function AmbientEmbers({ count = 20, className }: AmbientEmbersProps) {
       aria-hidden="true"
       className={cn(
         'absolute inset-0 pointer-events-none overflow-hidden',
-        className
+        className,
       )}
     >
       {embers.map((ember) => (

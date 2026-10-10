@@ -59,7 +59,7 @@ export function Alert({
         'p-space-4 border-l-4 rounded-r-md',
         styles.bg,
         styles.border,
-        className
+        className,
       )}
     >
       <div className="flex items-start gap-space-3">
@@ -71,7 +71,7 @@ export function Alert({
             <h4
               className={cn(
                 'font-display font-semibold mb-space-1',
-                styles.text
+                styles.text,
               )}
             >
               {title}

@@ -61,7 +61,7 @@ export function Modal({
       if (e.key !== 'Tab' || !dialogRef.current) return;
 
       const nodes = Array.from(
-        dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
+        dialogRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),
       );
       if (nodes.length === 0) return;
       const first = nodes[0];
@@ -95,7 +95,7 @@ export function Modal({
           'transition-opacity duration-standard ease-out',
           open
             ? 'opacity-100 pointer-events-auto'
-            : 'opacity-0 pointer-events-none'
+            : 'opacity-0 pointer-events-none',
         )}
       />
       <div
@@ -109,13 +109,13 @@ export function Modal({
           'transition-all duration-standard ease-out',
           open
             ? 'opacity-100 scale-100 -translate-x-1/2 -translate-y-1/2'
-            : 'opacity-0 scale-97 -translate-x-1/2 -translate-y-[48%] pointer-events-none'
+            : 'opacity-0 scale-97 -translate-x-1/2 -translate-y-[48%] pointer-events-none',
         )}
       >
         <div
           className={cn(
             'h-1',
-            destructive ? 'bg-semantic-error-base' : 'bg-gold-base'
+            destructive ? 'bg-semantic-error-base' : 'bg-gold-base',
           )}
         />
         <div className="p-space-8 pb-space-9">
@@ -140,7 +140,7 @@ export function Modal({
                 'border border-border-default bg-transparent text-text-muted',
                 'transition-colors duration-fast',
                 'hover:border-text-muted hover:text-text-primary',
-                'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2'
+                'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2',
               )}
             >
               {resolvedCloseLabel}
@@ -156,7 +156,7 @@ export function Modal({
                   'font-body text-caption uppercase tracking-caption text-text-inverse',
                   'transition-opacity duration-fast',
                   destructive ? 'bg-semantic-error-base' : 'bg-green-base',
-                  'hover:opacity-85 focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2'
+                  'hover:opacity-85 focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2',
                 )}
               >
                 {confirmLabel}
@@ -166,6 +166,6 @@ export function Modal({
         </div>
       </div>
     </>,
-    document.body
+    document.body,
   );
 }

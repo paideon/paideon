@@ -16,7 +16,7 @@ export interface OffsetPage<T> {
 /** Reads `page`/`pageSize` out of a loosely-typed query object; both are clamped to at least 1. */
 export function parseOffsetParams(
   query: Record<string, unknown>,
-  defaultPageSize = 20
+  defaultPageSize = 20,
 ): OffsetPageParams {
   const page = Math.max(1, Number(query.page) || 1);
   const pageSize = Math.max(1, Number(query.pageSize) || defaultPageSize);
@@ -27,7 +27,7 @@ export function parseOffsetParams(
 export function createOffsetPage<T>(
   items: T[],
   total: number,
-  params: OffsetPageParams
+  params: OffsetPageParams,
 ): OffsetPage<T> {
   return {
     items,

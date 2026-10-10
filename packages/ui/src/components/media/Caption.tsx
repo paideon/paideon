@@ -22,7 +22,7 @@ export function Caption({
         variant === 'overlay' &&
           'absolute bottom-0 left-0 right-0 bg-overlay-medium text-text-inverse p-space-2 text-center',
         variant === 'inline' && 'mt-space-2 text-center',
-        className
+        className,
       )}
     >
       {children}

@@ -7,7 +7,7 @@
  */
 export function joinUrl(...parts: Array<string | undefined | null>): string {
   const segments = parts.filter((part): part is string =>
-    Boolean(part && part.length > 0)
+    Boolean(part && part.length > 0),
   );
 
   return segments

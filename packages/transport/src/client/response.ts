@@ -44,7 +44,7 @@ export function isBlobResponse(response: Response): boolean {
 
 /** One place that decides json vs text vs blob, instead of `await res.json()` everywhere. */
 export async function parseResponse<T = unknown>(
-  response: Response
+  response: Response,
 ): Promise<T> {
   if (response.status === 204) return undefined as T;
   if (isJsonResponse(response)) return (await response.json()) as T;

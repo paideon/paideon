@@ -41,7 +41,7 @@ describe('useInView', () => {
         threshold: 0.3,
         rootMargin: '20px',
         triggerOnce: false,
-      })
+      }),
     );
     expect(result.current.isInView).toBe(false);
     expect(result.current.ref).toBeDefined();

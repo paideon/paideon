@@ -31,7 +31,7 @@ export function ErrorState({
           ? 'items-center text-center py-space-16 px-space-6'
           : 'items-start text-left py-space-5 px-space-6',
         'bg-semantic-error-surface border border-semantic-error-base',
-        'gap-space-3'
+        'gap-space-3',
       )}
     >
       {isSection && (
@@ -42,7 +42,7 @@ export function ErrorState({
             'border border-semantic-error-base',
             'flex items-center justify-center',
             'text-semantic-error-base text-lg',
-            'opacity-70'
+            'opacity-70',
           )}
         >
           !
@@ -60,7 +60,7 @@ export function ErrorState({
           size="sm"
           className={cn(
             'border-semantic-error-base text-semantic-error-base',
-            'hover:bg-semantic-error-base hover:text-text-inverse'
+            'hover:bg-semantic-error-base hover:text-text-inverse',
           )}
         >
           {retryLabel}

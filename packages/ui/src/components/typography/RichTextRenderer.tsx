@@ -39,7 +39,7 @@ function extractPlainText(node: TiptapNode | undefined): string {
   if (!node?.content) return '';
   return node.content
     .map((child) =>
-      child.type === 'text' ? child.text ?? '' : extractPlainText(child)
+      child.type === 'text' ? (child.text ?? '') : extractPlainText(child),
     )
     .join('');
 }

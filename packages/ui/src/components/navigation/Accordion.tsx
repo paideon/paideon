@@ -44,7 +44,7 @@ function AccordionSingle({
           'bg-transparent border-none cursor-pointer text-left',
           'transition-colors duration-fast ease-snap',
           'hover:text-gold-base',
-          'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-[3px]'
+          'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-[3px]',
         )}
       >
         <span
@@ -58,7 +58,7 @@ function AccordionSingle({
             'text-gold-base text-body flex-shrink-0',
             'transition-transform duration-standard ease-out',
             isOpen ? 'rotate-180' : 'rotate-0',
-            'motion-reduce:transition-none motion-reduce:rotate-0'
+            'motion-reduce:transition-none motion-reduce:rotate-0',
           )}
         >
           ∨
@@ -76,7 +76,7 @@ function AccordionSingle({
         aria-labelledby={buttonId}
         className={cn(
           'grid transition-[grid-template-rows] duration-standard ease-out motion-reduce:transition-none',
-          isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+          isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
         )}
       >
         <div className="overflow-hidden">
@@ -85,7 +85,7 @@ function AccordionSingle({
               className={cn(
                 'font-body text-body-sm',
                 'text-text-muted',
-                'leading-relaxed'
+                'leading-relaxed',
               )}
             >
               {item.answer}

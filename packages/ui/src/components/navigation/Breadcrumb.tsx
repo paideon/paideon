@@ -31,7 +31,7 @@ export function Breadcrumb({
                   aria-hidden="true"
                   className={clsx(
                     'font-body text-xs',
-                    onDark ? 'text-text-inverse/30' : 'text-text-muted'
+                    onDark ? 'text-text-inverse/30' : 'text-text-muted',
                   )}
                 >
                   ›
@@ -47,8 +47,8 @@ export function Breadcrumb({
                         ? 'text-text-inverse/85'
                         : 'text-text-primary'
                       : onDark
-                      ? 'text-text-inverse/45'
-                      : 'text-text-muted'
+                        ? 'text-text-inverse/45'
+                        : 'text-text-muted',
                   )}
                 >
                   {item.label}

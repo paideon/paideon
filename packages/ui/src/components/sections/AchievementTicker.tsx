@@ -57,7 +57,7 @@ export function AchievementTicker({
         ref={trackRef}
         className={cn(
           'kcc-ticker-track flex items-center gap-0 w-max transition-opacity duration-200',
-          paused ? 'opacity-75' : 'opacity-100'
+          paused ? 'opacity-75' : 'opacity-100',
         )}
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}

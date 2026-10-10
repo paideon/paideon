@@ -33,7 +33,7 @@ export function Toggle({
       className={cn(
         'inline-flex items-center gap-space-3 cursor-pointer select-none',
         disabled && 'opacity-40 cursor-not-allowed',
-        className
+        className,
       )}
     >
       <input
@@ -53,14 +53,14 @@ export function Toggle({
           'relative w-10 h-6 rounded-full border border-border-default',
           'bg-surface-deep transition-all duration-fast ease-snap',
           'peer-checked:bg-green-base peer-checked:border-green-base',
-          'peer-focus-visible:outline-2 peer-focus-visible:outline-gold-base peer-focus-visible:outline-offset-[3px]'
+          'peer-focus-visible:outline-2 peer-focus-visible:outline-gold-base peer-focus-visible:outline-offset-[3px]',
         )}
       >
         <div
           className={cn(
             'absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow-sm',
             'transition-transform duration-fast ease-snap',
-            'peer-checked:translate-x-4'
+            'peer-checked:translate-x-4',
           )}
         />
       </div>

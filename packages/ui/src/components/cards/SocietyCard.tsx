@@ -36,7 +36,7 @@ function SocietyCardHub({
         className={cn(
           'h-full flex flex-col bg-surface-elevated border border-border-light overflow-hidden',
           'shadow-elevation-1 transition-all duration-gentle',
-          'group-hover:shadow-elevation-3 group-hover:-translate-y-0.5'
+          'group-hover:shadow-elevation-3 group-hover:-translate-y-0.5',
         )}
       >
         <div className="relative aspect-[4/3] bg-green-base overflow-hidden flex-shrink-0">
@@ -63,7 +63,7 @@ function SocietyCardHub({
           <h3
             className={cn(
               'font-display text-h3 font-medium text-text-primary mb-space-2',
-              'transition-colors duration-fast group-hover:text-gold-active'
+              'transition-colors duration-fast group-hover:text-gold-active',
             )}
           >
             {name}
@@ -112,7 +112,7 @@ function SocietyCardFeatured({
         className={cn(
           'grid grid-cols-1 md:grid-cols-2 bg-surface-elevated border-2 border-gold-base overflow-hidden',
           'shadow-[0_4px_20px_rgba(201,151,58,0.12)] transition-shadow duration-gentle',
-          'group-hover:shadow-[0_8px_40px_rgba(201,151,58,0.2)]'
+          'group-hover:shadow-[0_8px_40px_rgba(201,151,58,0.2)]',
         )}
       >
         <div className="relative min-h-[280px] bg-green-base overflow-hidden">

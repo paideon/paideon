@@ -29,7 +29,7 @@ const aspectRatioMap: Record<VideoFrameAspectRatio, string> = {
 
 function getYouTubeEmbedUrl(url: string): string {
   const videoId = url.match(
-    /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&?]+)/
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&?]+)/,
   )?.[1];
   return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
 }
@@ -72,7 +72,7 @@ export function VideoFrame({
         className={cn(
           'relative w-full overflow-hidden rounded-md',
           aspectRatioMap[aspectRatio],
-          className
+          className,
         )}
       >
         <iframe
@@ -91,7 +91,7 @@ export function VideoFrame({
       className={cn(
         'relative w-full overflow-hidden rounded-md bg-surface-deep',
         aspectRatioMap[aspectRatio],
-        className
+        className,
       )}
     >
       {!isPlaying ? (

@@ -19,7 +19,7 @@ export function FormSectionWrapper({
         <h3
           className={cn(
             'font-display text-h3 font-medium text-text-primary',
-            description ? 'mb-space-1.5' : 'mb-0'
+            description ? 'mb-space-1.5' : 'mb-0',
           )}
         >
           {title}

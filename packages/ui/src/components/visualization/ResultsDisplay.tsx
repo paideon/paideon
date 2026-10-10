@@ -40,7 +40,7 @@ export function ResultsDisplay({
     <div
       className={cn(
         'bg-surface-elevated border border-border-light rounded-lg p-space-6 shadow-elevation-0',
-        className
+        className,
       )}
     >
       <div className="flex justify-between items-start mb-space-6 pb-space-4 border-b border-border-light">

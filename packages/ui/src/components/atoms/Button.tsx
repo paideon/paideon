@@ -6,21 +6,10 @@ import { BeatLoader } from './Spinners/BeatLoader';
 import { cn } from '../../utilities/cn';
 
 type ButtonVariant =
-  | 'primary'
-  | 'secondary'
-  | 'ghost'
-  | 'outline'
-  | 'destructive'
-  | 'link';
+  'primary' | 'secondary' | 'ghost' | 'outline' | 'destructive' | 'link';
 
 type ButtonSize =
-  | 'sm'
-  | 'md'
-  | 'lg'
-  | 'icon-sm'
-  | 'icon-md'
-  | 'icon-lg'
-  | 'icon-xl';
+  'sm' | 'md' | 'lg' | 'icon-sm' | 'icon-md' | 'icon-lg' | 'icon-xl';
 
 interface ButtonProps extends ComponentProps<'button'> {
   variant?: ButtonVariant;
@@ -118,7 +107,7 @@ export function Button({
         fullWidth && 'w-full',
         isDisabled && 'opacity-40 cursor-not-allowed',
         !isDisabled && 'cursor-pointer',
-        className
+        className,
       )}
       {...rest}
     >
@@ -140,7 +129,7 @@ export function Button({
       <span
         className={cn(
           'inline-flex items-center gap-space-2',
-          loading && 'opacity-0'
+          loading && 'opacity-0',
         )}
       >
         {leftIcon && (

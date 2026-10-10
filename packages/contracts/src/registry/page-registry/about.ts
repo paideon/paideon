@@ -101,7 +101,7 @@ export const AboutLegacySchema = z.object({
           src: z.string(),
           alt: z.string(),
           year: z.string().optional(),
-        })
+        }),
       )
       .default([]),
   }),

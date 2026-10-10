@@ -21,7 +21,7 @@ export function FormValidationSummary({
         className={cn(
           'flex items-start gap-space-3 p-space-5',
           'bg-semantic-success-surface border border-semantic-success-base',
-          'border-l-[3px] border-l-semantic-success-base'
+          'border-l-[3px] border-l-semantic-success-base',
         )}
       >
         <span
@@ -46,7 +46,7 @@ export function FormValidationSummary({
       className={cn(
         'p-space-5',
         'bg-semantic-error-surface border border-semantic-error-base',
-        'border-l-[3px] border-l-semantic-error-base'
+        'border-l-[3px] border-l-semantic-error-base',
       )}
     >
       <p className="font-body text-caption uppercase tracking-caption text-semantic-error-base mb-space-2.5">

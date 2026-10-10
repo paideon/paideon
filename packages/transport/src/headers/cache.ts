@@ -12,7 +12,7 @@ export function createNoCacheHeaders(extra?: HeadersInit): Headers {
 /** Cache-Control: public, max-age=<seconds> — for cacheable GETs. */
 export function createCacheHeaders(
   maxAgeSeconds: number,
-  extra?: HeadersInit
+  extra?: HeadersInit,
 ): Headers {
   const headers = new Headers(extra);
   headers.set('Cache-Control', `public, max-age=${maxAgeSeconds}`);

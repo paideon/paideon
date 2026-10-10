@@ -35,7 +35,7 @@ export function MilestoneTimeline({
               key={date.id}
               className={clsx(
                 'relative flex',
-                isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
+                isLeft ? 'md:flex-row' : 'md:flex-row-reverse',
               )}
             >
               {/* Timeline dot */}
@@ -45,7 +45,9 @@ export function MilestoneTimeline({
                   'md:left-1/2 md:-translate-x-1/2',
                   date.isCompleted && 'border-green-base bg-green-base',
                   date.isActive && 'border-gold-base',
-                  !date.isCompleted && !date.isActive && 'border-border-default'
+                  !date.isCompleted &&
+                    !date.isActive &&
+                    'border-border-default',
                 )}
               >
                 {date.isCompleted ? (
@@ -54,7 +56,7 @@ export function MilestoneTimeline({
                   <span
                     className={clsx(
                       'text-xs font-semibold',
-                      date.isActive ? 'text-gold-base' : 'text-text-muted'
+                      date.isActive ? 'text-gold-base' : 'text-text-muted',
                     )}
                   >
                     {idx + 1}
@@ -66,7 +68,7 @@ export function MilestoneTimeline({
               <div
                 className={clsx(
                   'ml-12 md:ml-0 md:w-[calc(50%-2rem)]',
-                  isLeft ? 'md:pr-12 md:text-right' : 'md:pl-12 md:ml-auto'
+                  isLeft ? 'md:pr-12 md:text-right' : 'md:pl-12 md:ml-auto',
                 )}
               >
                 <div className="bg-surface-elevated border border-border-light rounded-lg p-5">
@@ -76,7 +78,7 @@ export function MilestoneTimeline({
                   <h4
                     className={clsx(
                       'font-display text-h3 mb-2',
-                      date.isActive && 'text-gold-base'
+                      date.isActive && 'text-gold-base',
                     )}
                   >
                     {date.title}

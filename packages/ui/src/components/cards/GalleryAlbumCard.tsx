@@ -31,7 +31,7 @@ export function GalleryAlbumCard({
           'relative overflow-hidden',
           'shadow-elevation-1 transition-all duration-gentle',
           'group-hover:shadow-elevation-3 group-hover:-translate-y-0.5',
-          className
+          className,
         )}
       >
         {/* Cover */}
@@ -50,7 +50,7 @@ export function GalleryAlbumCard({
           <div
             className={cn(
               'absolute inset-0 bg-overlay-medium flex items-center justify-center',
-              'opacity-0 transition-opacity duration-gentle group-hover:opacity-100'
+              'opacity-0 transition-opacity duration-gentle group-hover:opacity-100',
             )}
           >
             <span className="font-body text-caption uppercase tracking-caption text-text-inverse border border-text-inverse/60 px-space-5 py-space-2">
@@ -74,13 +74,13 @@ export function GalleryAlbumCard({
         <div
           className={cn(
             'p-space-3.5 bg-surface-elevated border border-border-light border-t-0',
-            'flex items-center justify-between gap-space-3'
+            'flex items-center justify-between gap-space-3',
           )}
         >
           <h3
             className={cn(
               'font-display text-body font-medium text-text-primary truncate',
-              'transition-colors duration-fast group-hover:text-gold-active'
+              'transition-colors duration-fast group-hover:text-gold-active',
             )}
           >
             {title}

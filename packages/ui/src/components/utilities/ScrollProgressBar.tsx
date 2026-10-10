@@ -31,7 +31,7 @@ export function ScrollProgressBar() {
       className={cn(
         'fixed top-0 left-0 right-0 z-[201]',
         'h-size-0p5 bg-gold-base/20',
-        'transition-all duration-fast ease-out motion-reduce:transition-none'
+        'transition-all duration-fast ease-out motion-reduce:transition-none',
       )}
     >
       <div

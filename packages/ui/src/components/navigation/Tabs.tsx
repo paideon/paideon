@@ -41,7 +41,7 @@ export function Tabs({
       <div
         className={clsx(
           'flex gap-1 border-b border-border-light',
-          variant === 'pills' && 'border-b-0 gap-2 flex-wrap'
+          variant === 'pills' && 'border-b-0 gap-2 flex-wrap',
         )}
       >
         {tabs.map((tab) => {
@@ -63,7 +63,7 @@ export function Tabs({
                   isActive
                     ? 'bg-green-base text-text-inverse'
                     : 'bg-surface-default text-text-muted hover:bg-surface-deep',
-                ]
+                ],
               )}
             >
               {tab.label}
@@ -73,7 +73,7 @@ export function Tabs({
                     'ml-2 text-xs px-1.5 py-0.5 rounded-full',
                     isActive && variant === 'line'
                       ? 'bg-gold-pale text-gold-active'
-                      : 'bg-surface-deep text-text-muted'
+                      : 'bg-surface-deep text-text-muted',
                   )}
                 >
                   {tab.badge}

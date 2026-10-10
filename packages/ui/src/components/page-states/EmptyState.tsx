@@ -16,7 +16,7 @@ export function EmptyState({ heading, description, action }: EmptyStateProps) {
     <div
       className={cn(
         'flex flex-col items-center justify-center',
-        'py-space-16 px-space-6 text-center'
+        'py-space-16 px-space-6 text-center',
       )}
     >
       {/* Crest motif */}
@@ -27,13 +27,13 @@ export function EmptyState({ heading, description, action }: EmptyStateProps) {
           'border border-border-light',
           'flex items-center justify-center',
           'mb-space-6',
-          'opacity-35'
+          'opacity-35',
         )}
       >
         <span
           className={cn(
             'font-display text-[1.5rem] font-medium italic',
-            'text-gold-base'
+            'text-gold-base',
           )}
         >
           K

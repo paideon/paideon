@@ -55,7 +55,7 @@ export function ScaleLoader({
         'inline-flex items-center',
         gap,
         variantConfig[variant],
-        className
+        className,
       )}
     >
       {[0, 1, 2, 3, 4].map((i) => (

@@ -5,7 +5,7 @@
 export type FetchInput = Parameters<typeof fetch>[0];
 export type Fetcher = (
   input: FetchInput,
-  init?: RequestInit
+  init?: RequestInit,
 ) => Promise<Response>;
 
 /**

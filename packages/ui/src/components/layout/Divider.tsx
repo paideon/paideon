@@ -45,7 +45,7 @@ export function Divider({
         axisHeight[axis],
         marginStyles[axis],
         colorStyles[accentVariant],
-        className
+        className,
       )}
       role="separator"
       aria-orientation={axis}

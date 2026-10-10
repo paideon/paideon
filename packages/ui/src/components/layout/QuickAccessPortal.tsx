@@ -58,7 +58,7 @@ export function QuickAccessPortal({
                 'flex flex-1 items-center justify-center gap-space-2 py-space-3 px-space-6',
                 'font-body text-label uppercase tracking-label text-text-muted no-underline',
                 'transition-colors duration-fast hover:text-gold-base',
-                i < links.length - 1 && 'border-r border-border-light'
+                i < links.length - 1 && 'border-r border-border-light',
               )}
             >
               {/* Icon */}
@@ -92,7 +92,7 @@ export function QuickAccessPortal({
                 'flex items-center gap-space-2 py-space-3.5 px-space-4',
                 'font-body text-label-sm uppercase tracking-label-sm text-text-muted no-underline',
                 i % 2 === 0 && 'border-r border-border-light',
-                i < links.length - 2 && 'border-b border-border-light'
+                i < links.length - 2 && 'border-b border-border-light',
               )}
             >
               {link.iconPath && (

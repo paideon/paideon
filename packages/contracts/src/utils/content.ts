@@ -5,7 +5,7 @@
 import { LocalizedTextSchema } from '../primitives/localized-text.ts';
 
 export function isLocalized(
-  value: unknown
+  value: unknown,
 ): value is { en: string; si: string; ta: string } {
   return LocalizedTextSchema.safeParse(value).success;
 }

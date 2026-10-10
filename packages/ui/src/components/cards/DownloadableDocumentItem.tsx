@@ -86,7 +86,7 @@ export function DownloadableDocumentItem({
     <div
       className={cn(
         'flex items-start gap-4 p-4 bg-surface-default border border-border-light rounded-md',
-        className
+        className,
       )}
     >
       <div className="text-gold-base shrink-0">{fileIconMap[fileType]}</div>

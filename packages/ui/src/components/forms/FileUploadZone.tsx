@@ -59,7 +59,7 @@ export function FileUploadZone({
         const oversized = arr.filter((f) => f.size > maxSizeMb * 1024 * 1024);
         if (oversized.length > 0) {
           setInternalError(
-            `${oversized[0].name} exceeds the ${maxSizeMb} MB limit.`
+            `${oversized[0].name} exceeds the ${maxSizeMb} MB limit.`,
           );
           return;
         }
@@ -69,7 +69,7 @@ export function FileUploadZone({
       setFiles(next);
       onChange?.(next);
     },
-    [files, maxSizeMb, multiple, onChange]
+    [files, maxSizeMb, multiple, onChange],
   );
 
   const removeFile = (idx: number) => {
@@ -115,11 +115,11 @@ export function FileUploadZone({
           error
             ? 'border-semantic-error-base bg-semantic-error-surface'
             : isDragging
-            ? 'border-gold-base bg-gold-pale'
-            : 'border-border-default bg-surface-elevated',
+              ? 'border-gold-base bg-gold-pale'
+              : 'border-border-default bg-surface-elevated',
           disabled && 'opacity-50 cursor-not-allowed',
           !disabled && 'cursor-pointer',
-          'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2'
+          'focus-visible:outline-2 focus-visible:outline-gold-base focus-visible:outline-offset-2',
         )}
       >
         <span

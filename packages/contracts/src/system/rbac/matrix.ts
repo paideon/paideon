@@ -181,17 +181,17 @@ const ROLE_PERMISSIONS: Record<
 export function hasPermission(
   role: RoleEnumData,
   resource: string,
-  action: Action
+  action: Action,
 ): boolean {
   return (ROLE_PERMISSIONS[role]?.[resource as Resource] ?? []).includes(
-    action
+    action,
   );
 }
 
 /** Convenience wrapper for callers already holding a parsed `PermissionData`. */
 export function checkPermission(
   role: RoleEnumData,
-  permission: PermissionData
+  permission: PermissionData,
 ): boolean {
   return hasPermission(role, permission.resource, permission.action);
 }

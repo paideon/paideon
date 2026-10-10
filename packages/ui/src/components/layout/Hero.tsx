@@ -111,7 +111,7 @@ const HeroBreadcrumb = ({
                   aria-current={isLast ? 'page' : undefined}
                   className={cn(
                     'font-body text-caption uppercase tracking-caption',
-                    isLast ? 'text-gold-base' : 'text-text-inverse/60'
+                    isLast ? 'text-gold-base' : 'text-text-inverse/60',
                   )}
                 >
                   {item.label}
@@ -161,7 +161,7 @@ export function Hero({
   // Parallax scroll effect (only if enabled and not reduced motion)
   const { scrollY } = useScroll();
   const yOffset = useTransform(scrollY, (value) =>
-    parallax && !prefersReduced ? value * 0.5 : 0
+    parallax && !prefersReduced ? value * 0.5 : 0,
   );
 
   // Variant-specific styles (using design tokens via Tailwind)
@@ -217,7 +217,7 @@ export function Hero({
       className={cn(
         'relative flex items-center overflow-hidden bg-green-base',
         heightClass,
-        className
+        className,
       )}
       aria-label={eyebrow || 'Hero section'}
     >
@@ -282,7 +282,7 @@ export function Hero({
           <div
             className={cn(
               'absolute inset-0',
-              OVERLAY_GRADIENT_CLASSES[variant]
+              OVERLAY_GRADIENT_CLASSES[variant],
             )}
           />
         )}
@@ -322,7 +322,7 @@ export function Hero({
                 'font-display font-medium leading-[1.05] tracking-[-0.01em]',
                 variant === 'homepage' && 'text-[clamp(2.8rem,6vw,5.5rem)]',
                 variant === 'subpage' && 'text-[clamp(2rem,4vw,3.5rem)]',
-                variant === 'minimal' && 'text-[clamp(1.6rem,3vw,2.5rem)]'
+                variant === 'minimal' && 'text-[clamp(1.6rem,3vw,2.5rem)]',
               )}
             >
               {heading}
@@ -337,7 +337,7 @@ export function Hero({
                 color="inverse"
                 className={cn(
                   'mt-space-5 text-[clamp(1rem,1.5vw,1.2rem)] text-text-inverse/75',
-                  variant === 'homepage' && 'mx-auto max-w-prose'
+                  variant === 'homepage' && 'mx-auto max-w-prose',
                 )}
               >
                 {subheading}
