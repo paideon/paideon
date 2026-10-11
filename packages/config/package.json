@@ -18,6 +18,12 @@
       "import": "./dist/tailwind/preset.js",
       "default": "./dist/tailwind/preset.js"
     },
+    "./postcss": {
+      "types": "./dist/postcss/index.d.ts",
+      "require": "./dist/postcss/index.js",
+      "import": "./dist/postcss/index.js",
+      "default": "./dist/postcss/index.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
