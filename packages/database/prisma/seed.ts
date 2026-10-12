@@ -1,4 +1,8 @@
-import { PrismaClient, Role, UserStatus } from '@prisma/client';
+import {
+  PrismaClient,
+  Role,
+  UserStatus,
+} from '@paideon/database/generated/client/client';
 import * as bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();

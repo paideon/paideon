@@ -1,1 +1,1 @@
-// @paideon/database
+export * from '../generated/client/client';

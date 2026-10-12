@@ -3,22 +3,27 @@
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./generated/client": "./generated/client/client.ts",
+    "./generated/client/client": "./generated/client/client.ts",
+    "./generated/client/*": "./generated/client/*.ts"
+  },
   "scripts": {
     "generate": "prisma generate",
     "migrate": "prisma migrate dev",
     "migrate:deploy": "prisma migrate deploy",
     "studio": "prisma studio"
   },
-  "prisma": {
-    "seed": "ts-node --project prisma/tsconfig.seed.json prisma/seed.ts"
-  },
   "dependencies": {
-    "@prisma/client": "5.22.0",
-    "bcryptjs": "^3.0.3"
+    "@prisma/adapter-pg": "7.10.0",
+    "@prisma/client": "7.10.0",
+    "bcryptjs": "^3.0.3",
+    "pg": "^8.16.0"
   },
   "devDependencies": {
-    "prisma": "5.22.0",
-    "ts-node": "10.9.2",
+    "prisma": "7.10.0",
+    "tsx": "^4.20.3",
     "typescript": "~6.0.3"
   }
 }
