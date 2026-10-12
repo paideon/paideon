@@ -26,13 +26,11 @@ jobs:
 
       # Setup pnpm first — must be before setup-node when using pnpm cache
       - uses: pnpm/action-setup@v4
-        with:
-          version: 9
 
       # Cache node_modules using pnpm
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: 'pnpm'
 
       - run: pnpm install --frozen-lockfile
