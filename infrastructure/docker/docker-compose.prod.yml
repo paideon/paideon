@@ -40,7 +40,11 @@ services:
     restart: "no"
     command:
       [
-        "./packages/database/node_modules/.bin/prisma",
+        "pnpm",
+        "--dir",
+        "/repo",
+        "exec",
+        "prisma",
         "migrate",
         "deploy",
         "--schema",

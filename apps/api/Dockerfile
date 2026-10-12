@@ -1,4 +1,4 @@
-FROM node:20-alpine AS build
+FROM node:24-alpine AS build
 RUN apk add --no-cache openssl
 RUN corepack enable
 WORKDIR /repo
@@ -7,7 +7,7 @@ RUN pnpm install --frozen-lockfile
 RUN pnpm db:generate
 RUN pnpm nx build api
 
-FROM node:20-alpine AS runtime
+FROM node:24-alpine AS runtime
 RUN apk add --no-cache openssl
 RUN corepack enable
 WORKDIR /app
@@ -16,6 +16,7 @@ COPY --from=build /repo/node_modules ./node_modules
 COPY --from=build /repo/apps/api/node_modules ./apps/api/node_modules
 COPY --from=build /repo/packages/database/node_modules ./packages/database/node_modules
 COPY --from=build /repo/packages/database/prisma ./packages/database/prisma
+COPY --from=build /repo/packages/database/generated ./packages/database/generated
 COPY --from=build /repo/package.json ./package.json
 COPY --from=build /repo/pnpm-workspace.yaml ./pnpm-workspace.yaml
 COPY --from=build /repo/apps/api/dist ./apps/api/dist

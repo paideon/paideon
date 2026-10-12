@@ -1,4 +1,4 @@
-FROM node:20-alpine AS build
+FROM node:24-alpine AS build
 RUN corepack enable
 WORKDIR /repo
 ARG NEXT_PUBLIC_API_URL=/api
@@ -7,7 +7,7 @@ COPY . .
 RUN pnpm install --frozen-lockfile
 RUN pnpm nx build portal
 
-FROM node:20-alpine AS runtime
+FROM node:24-alpine AS runtime
 RUN corepack enable
 WORKDIR /repo
 ENV NODE_ENV=production
