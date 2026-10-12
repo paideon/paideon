@@ -1,5 +1,8 @@
 {
   "extends": "./config/typescript/tsconfig.base.json",
   "files": [],
-  "references": []
+  "references": [],
+  "compilerOptions": {
+    "ignoreDeprecations": "6.0"
+  }
 }

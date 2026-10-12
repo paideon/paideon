@@ -36,6 +36,9 @@
       "@paideon/contracts/*": ["packages/contracts/src/*"],
       "@paideon/auth-utils": ["packages/auth-utils/src/index.ts"],
       "@paideon/auth-utils/*": ["packages/auth-utils/src/*"]
-    }
+    },
+    "noUncheckedSideEffectImports": false,
+    "types": ["*"],
+    "esModuleInterop": false
   }
 }

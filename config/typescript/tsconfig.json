@@ -10,7 +10,8 @@
       "@paideon/database/*": ["packages/database/src/*"],
       "@paideon/ui": ["packages/ui/src/index.ts"],
       "@paideon/ui/*": ["packages/ui/src/*"]
-    }
+    },
+    "ignoreDeprecations": "6.0"
   },
   "files": [],
   "references": [
