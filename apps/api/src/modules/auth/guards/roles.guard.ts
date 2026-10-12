@@ -17,7 +17,7 @@
 
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { Role } from '@prisma/client';
+import { Role } from '@paideon/database/generated/client/client';
 
 // The same key used in roles.decorator.ts to store the metadata.
 // Both files must use the exact same string — ideally import this

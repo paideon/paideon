@@ -9,7 +9,7 @@
 //   @Roles(Role.ADMIN, Role.LIBRARIAN) → admins OR librarians
 
 import { SetMetadata } from '@nestjs/common';
-import { Role } from '@prisma/client';
+import { Role } from '@paideon/database/generated/client/client';
 
 // "roles" is the key we use to store and later retrieve this metadata.
 // roles.guard.ts uses this exact same string "roles" to read it back.

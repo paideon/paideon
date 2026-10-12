@@ -13,7 +13,7 @@ import {
   Prisma,
   Role,
   UserStatus,
-} from '@prisma/client';
+} from '@paideon/database/generated/client/client';
 import { randomUUID } from 'crypto';
 import { PrismaService } from '../prisma/prisma.service';
 import { BooksQueryDto, CreateBookDto, UpdateBookDto } from './dto/library.dto';

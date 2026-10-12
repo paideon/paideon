@@ -4,7 +4,7 @@
 
 // KEEP IT MINIMAL — JWT is not encrypted. Anyone who steals the token can read it.
 
-import { Role } from '@prisma/client';
+import { Role } from '@paideon/database/generated/client/client';
 
 export type JwtPayload = {
   // The user's primary key (CUID) — used everywhere to fetch the full user record
