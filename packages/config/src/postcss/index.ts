@@ -1,10 +1,7 @@
-export function createPostcssConfig(tailwindConfigPath: string) {
+export function createPostcssConfig() {
   return {
     plugins: {
-      tailwindcss: {
-        config: tailwindConfigPath,
-      },
-      autoprefixer: {},
+      '@tailwindcss/postcss': {},
     },
   };
 }
