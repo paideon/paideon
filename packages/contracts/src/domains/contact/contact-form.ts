@@ -8,7 +8,7 @@ import { LocaleEnum } from '../../primitives/locale.ts';
 
 export const ContactFormSchema = z.object({
   name: z.string().min(2),
-  email: z.email(),
+  email: z.string().email(),
   phone: z.string().optional(),
   subject: z.string().min(5),
   locale: LocaleEnum,

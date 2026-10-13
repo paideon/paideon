@@ -13,7 +13,7 @@ export const SchoolSchema = z.object({
   established: z.string().min(1),
   address: AddressSchema,
   phone: z.string().min(1),
-  email: z.email(),
+  email: z.string().email(),
   mapEmbedUrl: z.string().url().optional(),
 });
 
