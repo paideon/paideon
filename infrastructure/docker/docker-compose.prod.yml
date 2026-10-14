@@ -9,7 +9,8 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
+      test:
+        ['CMD-SHELL', 'pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"']
       interval: 10s
       timeout: 5s
       retries: 10
@@ -27,7 +28,7 @@ services:
       JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET}
       JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:?Set JWT_REFRESH_SECRET}
       PORTAL_URL: https://${DOMAIN:?Set DOMAIN}
-      TRUST_PROXY: "true"
+      TRUST_PROXY: 'true'
     depends_on:
       migrate:
         condition: service_completed_successfully
@@ -37,18 +38,18 @@ services:
     build:
       context: ../..
       dockerfile: apps/api/Dockerfile
-    restart: "no"
+    restart: 'no'
     command:
       [
-        "pnpm",
-        "--dir",
-        "/repo",
-        "exec",
-        "prisma",
-        "migrate",
-        "deploy",
-        "--schema",
-        "packages/database/prisma/schema.prisma"
+        'pnpm',
+        '--dir',
+        '/repo',
+        'exec',
+        'prisma',
+        'migrate',
+        'deploy',
+        '--schema',
+        'packages/database/prisma/schema.prisma',
       ]
     environment:
       NODE_ENV: production
@@ -74,9 +75,9 @@ services:
     environment:
       DOMAIN: ${DOMAIN:?Set DOMAIN}
     ports:
-      - "80:80"
-      - "443:443"
-      - "443:443/udp"
+      - '80:80'
+      - '443:443'
+      - '443:443/udp'
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data
