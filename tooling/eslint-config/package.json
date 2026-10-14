@@ -1,0 +1,15 @@
+{
+  "name": "@paideon/eslint-config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./base": "./base.mjs"
+  },
+  "dependencies": {
+    "@nx/eslint-plugin": "23.3.0"
+  },
+  "peerDependencies": {
+    "eslint": "^10.0.0"
+  }
+}
