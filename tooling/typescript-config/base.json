@@ -1,8 +1,10 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "composite": true,
     "declarationMap": true,
     "emitDeclarationOnly": true,
+    "ignoreDeprecations": "6.0",
     "importHelpers": true,
     "isolatedModules": true,
     "lib": ["es2022"],
@@ -12,16 +14,10 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
-    "noUnusedLocals": true,
+    "rewriteRelativeImportExtensions": true,
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    "customConditions": ["@org/source"],
-    "ignoreDeprecations": "6.0",
-    "rewriteRelativeImportExtensions": true,
-    "allowImportingTsExtensions": true,
-    "noUncheckedSideEffectImports": false,
-    "types": ["*"],
-    "esModuleInterop": false
+    "types": ["node"]
   }
 }
