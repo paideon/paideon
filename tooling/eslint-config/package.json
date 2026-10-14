@@ -7,7 +7,8 @@
     "./base": "./base.mjs"
   },
   "dependencies": {
-    "@nx/eslint-plugin": "23.3.0"
+    "@nx/eslint-plugin": "23.3.0",
+    "typescript-eslint": "^8.71.2"
   },
   "peerDependencies": {
     "eslint": "^10.0.0"
