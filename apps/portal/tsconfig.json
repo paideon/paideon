@@ -24,22 +24,12 @@
     "paths": {
       "@/*": ["./src/*"],
       "@paideon/types": ["../../packages/types/src/index.ts"],
-      "@paideon/types/*": ["../../packages/types/src/*"],
-      "@paideon/database": ["../../packages/database/src/index.ts"],
-      "@paideon/database/*": ["../../packages/database/src/*"],
-      "@paideon/ui": ["../../packages/ui/src/index.ts"],
-      "@paideon/ui/*": ["../../packages/ui/src/*"],
-      "@paideon/tokens": ["../../packages/tokens/src/index.ts"],
-      "@paideon/tokens/*": ["../../packages/tokens/src/*"],
-      "@paideon/auth-utils": ["../../packages/auth-utils/src/index.ts"],
-      "@paideon/auth-utils/*": ["../../packages/auth-utils/src/*"]
+      "@paideon/types/*": ["../../packages/types/src/*"]
     },
     "baseUrl": ".",
-    "types": ["node"],
     "outDir": "dist",
     "rootDir": "../..",
-    "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo",
-    "ignoreDeprecations": "6.0"
+    "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo"
   },
   "include": [
     "src/**/*.ts",
@@ -47,20 +37,16 @@
     "src/**/*.js",
     "src/**/*.jsx",
     ".next/types/**/*.ts",
-    "../../dist/apps/web/.next/types/**/*.ts",
     "next-env.d.ts"
   ],
   "exclude": [
     "out-tsc",
     "dist",
     "node_modules",
-    "jest.config.ts",
-    "jest.config.cts",
-    "src/**/*.spec.ts",
-    "src/**/*.test.ts",
     ".next",
-    "eslint.config.js",
-    "eslint.config.cjs",
-    "eslint.config.mjs"
+    "src/**/*.spec.ts",
+    "src/**/*.spec.tsx",
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx"
   ]
 }
