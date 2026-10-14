@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "tailwindcss": "^4.3.0",
+    "@paideon/typescript-config": "workspace:*",
     "typescript": "~6.0.3"
   }
 }

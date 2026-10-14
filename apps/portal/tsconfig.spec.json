@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "@paideon/typescript-config/base.json",
   "compilerOptions": {
     "outDir": "./out-tsc/jest",
     "jsx": "preserve",
