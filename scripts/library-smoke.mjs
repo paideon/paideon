@@ -1,11 +1,14 @@
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
-const apiUrl = (process.env.API_URL ?? 'http://localhost:3001/api').replace(/\/+$/, '');
+const apiUrl = (process.env.API_URL ?? 'http://localhost:3001/api').replace(
+  /\/+$/,
+  '',
+);
 const composeFile =
   process.env.COMPOSE_FILE ??
   fileURLToPath(
-    new URL('../infrastructure/docker/docker-compose.yml', import.meta.url)
+    new URL('../infrastructure/docker/docker-compose.yml', import.meta.url),
   );
 
 async function request(path, options = {}) {
@@ -18,7 +21,9 @@ async function request(path, options = {}) {
     body = text;
   }
   if (!response.ok) {
-    throw new Error(`${options.method ?? 'GET'} ${path} failed (${response.status}): ${JSON.stringify(body)}`);
+    throw new Error(
+      `${options.method ?? 'GET'} ${path} failed (${response.status}): ${JSON.stringify(body)}`,
+    );
   }
   return body;
 }
@@ -38,7 +43,7 @@ function executeSql(sql) {
         '-c',
         'psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" "$POSTGRES_DB"',
       ],
-      { stdio: ['pipe', 'inherit', 'inherit'] }
+      { stdio: ['pipe', 'inherit', 'inherit'] },
     );
     child.on('error', reject);
     child.on('close', (code) => {
@@ -75,7 +80,9 @@ async function main() {
     body: upload,
   });
   if (imported.created !== 1 || imported.errors !== 0) {
-    throw new Error(`Unexpected CSV import result: ${JSON.stringify(imported)}`);
+    throw new Error(
+      `Unexpected CSV import result: ${JSON.stringify(imported)}`,
+    );
   }
 
   const checkout = await request('/library/circulation/checkout', {
@@ -91,7 +98,7 @@ async function main() {
     throw new Error('Checkout did not return a valid loan ID.');
   }
   await executeSql(
-    `UPDATE "Loan" SET "dueDate" = CURRENT_TIMESTAMP - INTERVAL '3 days' WHERE "id" = '${loanId}';`
+    `UPDATE "Loan" SET "dueDate" = CURRENT_TIMESTAMP - INTERVAL '3 days' WHERE "id" = '${loanId}';`,
   );
 
   const returned = await request('/library/circulation/return', {
@@ -100,16 +107,24 @@ async function main() {
     body: JSON.stringify({ copyBarcode: barcode }),
   });
   if (!returned.fine || returned.daysOverdue < 3) {
-    throw new Error(`Late return did not create an overdue fine: ${JSON.stringify(returned)}`);
+    throw new Error(
+      `Late return did not create an overdue fine: ${JSON.stringify(returned)}`,
+    );
   }
   const fines = await request(
     `/library/fines?memberId=${encodeURIComponent(checkout.member.id)}`,
-    { headers }
+    { headers },
   );
-  if (!fines.some((fine) => fine.loanId === loanId && fine.status === 'PENDING')) {
-    throw new Error('The late-return fine was not present in the unpaid fine list.');
+  if (
+    !fines.some((fine) => fine.loanId === loanId && fine.status === 'PENDING')
+  ) {
+    throw new Error(
+      'The late-return fine was not present in the unpaid fine list.',
+    );
   }
-  console.log('Library smoke passed: login, CSV import, checkout, late return, fine verified.');
+  console.log(
+    'Library smoke passed: login, CSV import, checkout, late return, fine verified.',
+  );
 }
 
 main().catch((error) => {

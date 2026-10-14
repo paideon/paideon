@@ -1,44 +1,37 @@
 {
   "folders": [
-    {
-      "name": "PORTAL",
-      "path": "apps/portal"
+    { "name": "ROOT", "path": "." },
+    { "name": "API", "path": "apps/api" },
+    { "name": "PORTAL", "path": "apps/portal" },
+    { "name": "DATABASE", "path": "packages/database" },
+    { "name": "UI", "path": "packages/ui" },
+    { "name": "TOKENS", "path": "packages/tokens" },
+    { "name": "CONFIG", "path": "packages/config" },
+    { "name": "CONTRACTS", "path": "packages/contracts" },
+    { "name": "TYPES", "path": "packages/types" },
+    { "name": "TOOLING", "path": "tooling" },
+  ],
+  "settings": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "eslint.useFlatConfig": true,
+    "eslint.workingDirectories": [{ "mode": "auto" }],
+    "js/ts.preferences.importModuleSpecifier": "non-relative",
+    "files.exclude": {
+      "apps": true,
+      "packages": true,
+      "tooling": true,
+      "**/node_modules": true,
+      "**/.next": true,
+      "**/dist": true,
+      "**/out-tsc": true,
+      "**/test-output": true,
+      "**/.nx": true,
     },
-    {
-      "name": "API",
-      "path": "apps/api"
+    "search.exclude": {
+      "**/generated": true,
+      "**/prisma/migrations": true,
+      "**/pnpm-lock.yaml": true,
     },
-    {
-      "name": "DATABASE",
-      "path": "packages/database"
-    },
-    {
-      "name": "UI",
-      "path": "packages/ui"
-    },
-    {
-      "name": "TYPES",
-      "path": "packages/types"
-    },
-    {
-      "name": "AUTH-UTILS",
-      "path": "packages/auth-utils"
-    },
-    {
-      "name": "CONTRACTS",
-      "path": "packages/contracts"
-    },
-    {
-      "name": "TOKENS",
-      "path": "packages/tokens"
-    },
-    {
-      "name": "TRANSPORT",
-      "path": "packages/transport"
-    },
-    {
-      "name": "ROOT",
-      "path": "."
-    }
-  ]
+  },
 }

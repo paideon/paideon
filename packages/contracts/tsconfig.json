@@ -1,13 +1,9 @@
 {
-  "extends": "../../config/typescript/tsconfig.base.json",
+  "extends": "@paideon/typescript-config/base.json",
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src",
-    "composite": true,
-    "declaration": true,
-    "declarationMap": true,
-    "emitDeclarationOnly": false,
-    "ignoreDeprecations": "6.0"
+    "emitDeclarationOnly": false
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]

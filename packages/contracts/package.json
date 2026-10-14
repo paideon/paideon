@@ -23,6 +23,7 @@
     "zod": "^3.25.0"
   },
   "devDependencies": {
+    "@paideon/typescript-config": "workspace:*",
     "typescript": "~6.0.3"
   }
 }

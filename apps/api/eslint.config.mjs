@@ -1,3 +1,3 @@
-import baseConfig from '../../eslint.config.mjs';
+import baseConfig from '@paideon/eslint-config/base';
 
 export default [...baseConfig];

@@ -1,8 +1,5 @@
 {
-  "extends": "./config/typescript/tsconfig.base.json",
+  "extends": "@paideon/typescript-config/base.json",
   "files": [],
-  "references": [],
-  "compilerOptions": {
-    "ignoreDeprecations": "6.0"
-  }
+  "references": []
 }

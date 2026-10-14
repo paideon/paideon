@@ -8,7 +8,7 @@
       "typecheck": {
         "executor": "nx:run-commands",
         "options": {
-          "command": "tsc --noEmit -p tsconfig.library.json",
+          "command": "tsc --noEmit -p tsconfig.json",
           "cwd": "apps/portal"
         }
       }
@@ -32,6 +32,8 @@
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^16.4.0",
+    "@paideon/eslint-config": "workspace:*",
+    "@paideon/typescript-config": "workspace:*",
     "@tailwindcss/postcss": "^4.3.0",
     "@testing-library/dom": "10.4.0",
     "@testing-library/react": "16.3.0",

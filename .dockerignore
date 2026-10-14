@@ -1,5 +1,7 @@
 .git
 .nx
+test-output
+packages/database/generated
 .env
 .env.*
 **/node_modules
