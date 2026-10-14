@@ -1,0 +1,11 @@
+node_modules
+dist
+out-tsc
+.next
+.nx
+.claude
+coverage
+test-output
+pnpm-lock.yaml
+packages/database/generated
+packages/database/prisma/migrations
