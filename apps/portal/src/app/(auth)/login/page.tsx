@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { LoginRequestSchema } from '@paideon/contracts';
 import { apiFetch, CurrentUser, setAccessToken } from '@/lib/api';
 
 type LoginResponse = {
@@ -44,12 +45,21 @@ export default function LoginPage() {
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError('');
+
+    // Same schema the API uses (packages/contracts). Catches typos before
+    // the request is sent, and `parsed.data` is already trimmed/normalised.
+    const parsed = LoginRequestSchema.safeParse({ identifier, password });
+    if (!parsed.success) {
+      setError(parsed.error.issues[0]?.message ?? 'Check your details.');
+      return;
+    }
+
     setLoading(true);
     try {
       const response = await apiFetch<LoginResponse>('/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ identifier, password }),
+        body: JSON.stringify(parsed.data),
       });
       const token = response.accessToken ?? response.data?.accessToken;
       if (!token) throw new Error('The server did not return an access token.');
