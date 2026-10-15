@@ -1,10 +1,10 @@
 'use client';
 
-import type { ProcessStepsData } from '@paideon/contracts';
+import type { ProcessStepData } from '@paideon/contracts';
 import { clsx } from 'clsx';
 
 export interface ProcessStepsProps {
-  steps: ProcessStepsData['steps'];
+  steps: ProcessStepData[];
   className?: string;
 }
 

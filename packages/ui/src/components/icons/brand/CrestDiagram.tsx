@@ -1,6 +1,6 @@
 'use client';
 
-import type { CrestSymbol } from '@paideon/contracts';
+import type { CrestSymbolData } from '@paideon/contracts';
 import { motion } from 'framer-motion';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
@@ -17,7 +17,7 @@ type HotspotPosition =
 type DiagramVariant = 'ambient' | 'hold' | 'click';
 
 export interface CrestDiagramProps {
-  symbols?: CrestSymbol[];
+  symbols?: CrestSymbolData[];
   variant?: DiagramVariant;
   debug?: boolean;
   className?: string;
@@ -37,7 +37,7 @@ const LABEL_POSITIONS: Record<HotspotPosition, string> = {
   'bottom-left': 'bottom-[8%] left-[6%]',
 };
 
-const DEFAULT_SYMBOLS: CrestSymbol[] = [
+const DEFAULT_SYMBOLS: CrestSymbolData[] = [
   {
     id: 'lamp',
     name: 'The Lamp of Knowledge',
