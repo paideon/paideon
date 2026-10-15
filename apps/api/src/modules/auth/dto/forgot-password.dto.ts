@@ -1,5 +1,5 @@
 // forgot-password.dto.ts
-//
+
 // Validates the body of POST /api/auth/forgot-password
 // User enters their school email to request a reset link.
 

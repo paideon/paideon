@@ -1,5 +1,5 @@
 // login.dto.ts
-//
+
 // Validates the body of POST /api/auth/login
 // The identifier can be either a paideonId (KCCM-STU-04198)
 // or a school email (john@cwwkcc.lk) — the service figures out which.

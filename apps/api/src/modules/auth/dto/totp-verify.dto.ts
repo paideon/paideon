@@ -1,5 +1,5 @@
 // totp-verify.dto.ts
-//
+
 // Validates the body of POST /api/auth/2fa/verify
 // The 6-digit code the user reads from their authenticator app.
 

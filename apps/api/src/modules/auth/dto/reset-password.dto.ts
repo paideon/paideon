@@ -1,5 +1,5 @@
 // reset-password.dto.ts
-//
+
 // Validates the body of POST /api/auth/reset-password
 // Submitted when the user sets a new password via the reset link.
 
