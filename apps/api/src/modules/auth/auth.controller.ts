@@ -1,5 +1,4 @@
 import {
-  Body,
   Controller,
   Get,
   HttpCode,
@@ -10,12 +9,22 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import type { Request, Response } from 'express';
+import {
+  ConfirmActivationSchema,
+  ForgotPasswordSchema,
+  LoginRequestSchema,
+  RequestActivationSchema,
+  ResetPasswordSchema,
+} from '@paideon/contracts';
+import type {
+  ConfirmActivationData,
+  ForgotPasswordData,
+  LoginRequestData,
+  RequestActivationData,
+  ResetPasswordData,
+} from '@paideon/contracts';
+import { ZodBody } from '../../common/pipes/zod-validation.pipe';
 import { AuthService } from './auth.service';
-import { LoginDto } from './dto/login.dto';
-import { ActivateDto } from './dto/activate.dto';
-import { ForgotPasswordDto } from './dto/forgot-password.dto';
-import { ResetPasswordDto } from './dto/reset-password.dto';
-import { RequestActivationDto } from './dto/request-activation.dto';
 import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { ThrottlerGuard, Throttle } from '@nestjs/throttler';
@@ -34,7 +43,9 @@ export class AuthController {
 
   @Post('activate')
   @HttpCode(HttpStatus.OK)
-  async requestActivation(@Body() dto: RequestActivationDto) {
+  async requestActivation(
+    @ZodBody(RequestActivationSchema) dto: RequestActivationData,
+  ) {
     await this.authService.requestActivation(dto.email);
     return {
       message:
@@ -50,7 +61,7 @@ export class AuthController {
 
   @Post('activate/confirm')
   async confirmActivation(
-    @Body() dto: ActivateDto,
+    @ZodBody(ConfirmActivationSchema) dto: ConfirmActivationData,
     @Res({ passthrough: true }) res: Response,
   ) {
     const tokens = await this.authService.confirmActivation(dto);
@@ -67,7 +78,7 @@ export class AuthController {
   @UseGuards(ThrottlerGuard)
   @Throttle({ default: { limit: 5, ttl: 60_000 } })
   async login(
-    @Body() dto: LoginDto,
+    @ZodBody(LoginRequestSchema) dto: LoginRequestData,
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
@@ -135,7 +146,7 @@ export class AuthController {
 
   @Post('forgot-password')
   @HttpCode(HttpStatus.OK)
-  async forgotPassword(@Body() dto: ForgotPasswordDto) {
+  async forgotPassword(@ZodBody(ForgotPasswordSchema) dto: ForgotPasswordData) {
     await this.authService.forgotPassword(dto);
     return {
       message: 'If this email is registered, you will receive a reset link.',
@@ -148,7 +159,7 @@ export class AuthController {
 
   @Post('reset-password')
   @HttpCode(HttpStatus.OK)
-  async resetPassword(@Body() dto: ResetPasswordDto) {
+  async resetPassword(@ZodBody(ResetPasswordSchema) dto: ResetPasswordData) {
     await this.authService.resetPassword(dto);
     return {
       message: 'Password updated. Please log in with your new password.',

@@ -8,12 +8,14 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { createHash, randomBytes } from 'crypto';
 import * as bcrypt from 'bcryptjs';
+import type {
+  ConfirmActivationData,
+  ForgotPasswordData,
+  LoginRequestData,
+  ResetPasswordData,
+} from '@paideon/contracts';
 import { PrismaService } from '../prisma/prisma.service';
 import { JwtPayload } from './types/jwt-payload.type';
-import { LoginDto } from './dto/login.dto';
-import { ActivateDto } from './dto/activate.dto';
-import { ForgotPasswordDto } from './dto/forgot-password.dto';
-import { ResetPasswordDto } from './dto/reset-password.dto';
 
 @Injectable()
 export class AuthService {
@@ -28,7 +30,7 @@ export class AuthService {
   // ─────────────────────────────────────────────────────────────
 
   async login(
-    dto: LoginDto,
+    dto: LoginRequestData,
     context: { ipAddress: string; userAgent?: string },
   ) {
     const isPaideonId = dto.identifier.includes('-');
@@ -235,11 +237,9 @@ export class AuthService {
   // CONFIRM ACTIVATION
   // ─────────────────────────────────────────────────────────────
 
-  async confirmActivation(dto: ActivateDto) {
-    if (dto.password !== dto.confirmPassword) {
-      throw new BadRequestException('Passwords do not match');
-    }
-
+  async confirmActivation(dto: ConfirmActivationData) {
+    // Password rules and "passwords match" are already enforced by
+    // ConfirmActivationSchema before this method is called.
     const tokenHash = this.hashToken(dto.token);
 
     const verificationToken =
@@ -299,7 +299,7 @@ export class AuthService {
   // FORGOT PASSWORD
   // ─────────────────────────────────────────────────────────────
 
-  async forgotPassword(dto: ForgotPasswordDto) {
+  async forgotPassword(dto: ForgotPasswordData) {
     // FIX 5: same as requestActivation — use findFirst.
     const user = await this.prisma.user.findFirst({
       where: { email: dto.email },
@@ -328,11 +328,9 @@ export class AuthService {
   // RESET PASSWORD
   // ─────────────────────────────────────────────────────────────
 
-  async resetPassword(dto: ResetPasswordDto) {
-    if (dto.newPassword !== dto.confirmPassword) {
-      throw new BadRequestException('Passwords do not match');
-    }
-
+  async resetPassword(dto: ResetPasswordData) {
+    // Password rules and "passwords match" are already enforced by
+    // ResetPasswordSchema before this method is called.
     const tokenHash = this.hashToken(dto.token);
 
     const resetToken = await this.prisma.passwordResetToken.findUnique({
