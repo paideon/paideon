@@ -1,5 +1,3 @@
-// packages/contracts/src/domains/academics/al-stream.ts
-
 // A/L academic stream definitions for KCC.
 
 import { z } from 'zod';

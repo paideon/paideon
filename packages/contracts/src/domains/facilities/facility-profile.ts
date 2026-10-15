@@ -1,5 +1,3 @@
-// packages/contracts/src/domains/facilities/facility-profile.ts
-
 import { z } from 'zod';
 
 import { ImageSchema } from '../../primitives/media/index.ts';

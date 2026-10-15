@@ -1,8 +1,3 @@
-// packages/contracts/src/content/filter-option.ts
-
-//   FilterOptionSchema    — value, label, count?
-//   FilterOptionData      — z.infer type
-
 import { z } from 'zod';
 
 export const FilterOptionSchema = z.object({

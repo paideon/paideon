@@ -1,15 +1,3 @@
-// packages/contracts/src/domains/extracurriculars/activity.ts
-//
-// F-179 (Extracurriculars Module, Task 7.17): the full, persisted
-// `ExtracurricularActivity`/`ExtracurricularAchievement` entities live as
-// Zod I/O schemas in packages/api/src/modules/extracurriculars/validators.ts
-// — the same layering modules/societies/validators.ts and
-// modules/gallery/validators.ts already established (see
-// domains/societies/society-profile.ts's header comment for the fullest
-// explanation of why). What survives here is only what @paideon/ui's
-// ExtracurricularCard actually renders directly: ActivitySchema and the
-// category taxonomy.
-
 import { z } from 'zod';
 
 import { ImageSchema } from '../../primitives/media/index.ts';
@@ -20,11 +8,7 @@ export const ExtracurricularCategoryEnum = z.enum([
   'leadership',
 ]);
 
-/** Label map for the admin category `<Select>` and the public F-161
- * listing page's category grouping — matching
- * domains/societies/society-profile.ts's SOCIETY_CATEGORIES/
- * SOCIETY_CATEGORY_META precedent exactly (this file previously had only
- * the bare enum, with no display-label source anywhere). */
+// Display labels for category selects and grouped listings.
 export const EXTRACURRICULAR_CATEGORIES = {
   sports: 'Sports',
   'performing-arts': 'Performing Arts',
@@ -43,13 +27,11 @@ export const EXTRACURRICULAR_CATEGORY_META: ExtracurricularCategoryMeta[] =
   }));
 
 /**
- * `ExtracurricularCard`'s own presentational variant — deliberately a
- * *different* string for the sports case ('sport', singular) than
- * `ExtracurricularCategoryEnum`'s 'sports' (plural, the stored taxonomy
- * value). Kept as a separate enum rather than reused directly: the card's
- * `variant` prop drives its visual treatment, while `category` drives
- * filtering/grouping — see CATEGORY_TO_CARD_VARIANT in
- * apps/web/src/lib/extracurricular-card.ts for the mapping between them.
+ * ExtracurricularCard's presentational variant. Deliberately a different
+ * string for the sports case ('sport', singular) than
+ * `ExtracurricularCategoryEnum`'s 'sports' (the stored taxonomy value): the
+ * variant drives the card's visual treatment, the category drives
+ * filtering and grouping.
  */
 export const ExtracurricularVariantEnum = z.enum([
   'sport',

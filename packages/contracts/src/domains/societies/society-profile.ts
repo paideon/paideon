@@ -1,15 +1,3 @@
-// packages/contracts/src/domains/societies/society-profile.ts
-//
-// F-167 (Societies Module, Task 7.6): the full, persisted `Society` entity
-// (name, slug, category, tagline, description, member count, founding
-// year, logo, banner, advisor) lives as Zod I/O schemas in
-// packages/api/src/modules/societies/validators.ts — the same layering
-// modules/news/validators.ts and modules/events/validators.ts already
-// established (see events/event.ts's header comment for the fullest
-// explanation of why). What survives here is only what @paideon/ui's
-// SocietyCard actually renders directly: SocietyCardSchema and the
-// category taxonomy.
-
 import { z } from 'zod';
 
 import { AvatarSchema } from '../../primitives/media/index.ts';
@@ -21,11 +9,7 @@ export const SocietyCategoryEnum = z.enum([
   'technology',
 ]);
 
-/** Label map for the admin category `<Select>` and public category-filter
- * UI — added alongside SocietyCategoryEnum, matching
- * editorial/events/category.ts's EVENT_CATEGORIES/EVENT_CATEGORY_META
- * precedent exactly (this file previously had only the bare enum, with no
- * display-label source anywhere). */
+// Display labels for category selects and public category filters.
 export const SOCIETY_CATEGORIES = {
   academic: 'Academic',
   sports: 'Sports',

@@ -1,11 +1,3 @@
-// packages/contracts/src/content/search.ts
-
-// Search result contract.
-//
-// Should contain:
-//   SearchResultSchema — id, label, meta?, href
-//   SearchResultData   — z.infer type
-
 import { z } from 'zod';
 
 export const SearchResultSchema = z.object({

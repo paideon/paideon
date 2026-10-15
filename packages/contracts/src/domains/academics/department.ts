@@ -1,5 +1,3 @@
-// packages/contracts/src/features/academics/department.ts
-
 // Academic department contracts.
 
 import { z } from 'zod';

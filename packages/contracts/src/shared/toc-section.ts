@@ -1,5 +1,3 @@
-// packages/contracts/src/content/toc-section.ts
-
 import { z } from 'zod';
 
 export const TocSectionSchema = z.object({

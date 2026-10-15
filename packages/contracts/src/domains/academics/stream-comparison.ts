@@ -1,5 +1,3 @@
-// packages/contracts/src/domains/academics/stream-comparison.ts
-
 // Comparison data between AL streams for academic guidance.
 
 import { z } from 'zod';

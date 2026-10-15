@@ -1,9 +1,3 @@
-// packages/contracts/src/shared/lightbox-image.ts
-
-// Should contain:
-//   LightboxImageSchema — src, alt, caption?
-//   LightboxImageData   — z.infer type
-
 import { z } from 'zod';
 
 import { ImageSchema } from '../primitives/index.ts';
