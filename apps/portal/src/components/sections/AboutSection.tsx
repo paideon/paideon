@@ -6,7 +6,7 @@ import { motion, useInView } from 'framer-motion';
 import { RevealText } from '@/components/ui/RevealText';
 import { QuoteCard } from '@/components/ui/QuoteCard';
 import { CountUp } from '@/components/ui/CountUp';
-import type { LibraryStats } from '@paideon/types';
+import type { LibraryStatsData } from '@paideon/contracts';
 
 // Quote data
 const QUOTES = [
@@ -24,7 +24,7 @@ const QUOTES = [
   },
 ];
 
-export function AboutSection({ stats }: { stats: LibraryStats }) {
+export function AboutSection({ stats }: { stats: LibraryStatsData }) {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-8% 0px' });
 

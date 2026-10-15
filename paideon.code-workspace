@@ -1,15 +1,37 @@
 {
   "folders": [
-    { "name": "ROOT", "path": "." },
-    { "name": "API", "path": "apps/api" },
-    { "name": "PORTAL", "path": "apps/portal" },
-    { "name": "DATABASE", "path": "packages/database" },
-    { "name": "UI", "path": "packages/ui" },
-    { "name": "TOKENS", "path": "packages/tokens" },
-    { "name": "CONFIG", "path": "packages/config" },
-    { "name": "CONTRACTS", "path": "packages/contracts" },
-    { "name": "TYPES", "path": "packages/types" },
-    { "name": "TOOLING", "path": "tooling" },
+    {
+      "name": "ROOT",
+      "path": ".",
+    },
+    {
+      "name": "API",
+      "path": "apps/api",
+    },
+    {
+      "name": "PORTAL",
+      "path": "apps/portal",
+    },
+    {
+      "name": "DATABASE",
+      "path": "packages/database",
+    },
+    {
+      "name": "UI",
+      "path": "packages/ui",
+    },
+    {
+      "name": "TOKENS",
+      "path": "packages/tokens",
+    },
+    {
+      "name": "CONFIG",
+      "path": "packages/config",
+    },
+    {
+      "name": "CONTRACTS",
+      "path": "packages/contracts",
+    },
   ],
   "settings": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -18,15 +40,17 @@
     "eslint.workingDirectories": [{ "mode": "auto" }],
     "js/ts.preferences.importModuleSpecifier": "non-relative",
     "files.exclude": {
-      "apps": true,
-      "packages": true,
-      "tooling": true,
+      "apps": false,
+      "packages": false,
+      "tooling": false,
       "**/node_modules": true,
       "**/.next": true,
       "**/dist": true,
       "**/out-tsc": true,
       "**/test-output": true,
       "**/.nx": true,
+      ".vscode": true,
+      ".github": true,
     },
     "search.exclude": {
       "**/generated": true,

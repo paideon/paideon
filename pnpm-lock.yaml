@@ -153,9 +153,9 @@ importers:
       '@paideon/config':
         specifier: workspace:*
         version: link:../../packages/config
-      '@paideon/types':
+      '@paideon/contracts':
         specifier: workspace:*
-        version: link:../../packages/types
+        version: link:../../packages/contracts
       '@react-three/drei':
         specifier: ^10.7.7
         version: 10.7.7(@react-three/fiber@9.5.0(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(three@0.186.1))(@types/react@19.3.0)(@types/three@0.186.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(three@0.186.1)
@@ -324,12 +324,6 @@ importers:
       '@paideon/typescript-config':
         specifier: workspace:*
         version: link:../../tooling/typescript-config
-      typescript:
-        specifier: ~6.0.3
-        version: 6.0.3
-
-  packages/types:
-    devDependencies:
       typescript:
         specifier: ~6.0.3
         version: 6.0.3
@@ -12781,6 +12775,7 @@ snapshots:
       typescript: 6.0.3
     transitivePeerDependencies:
       - supports-color
+
   '@typescript-eslint/utils@8.56.1(eslint@10.12.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)':
     dependencies:
       '@eslint-community/eslint-utils': 4.9.1(eslint@10.12.0(jiti@2.7.0)(supports-color@8.1.1))

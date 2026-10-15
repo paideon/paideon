@@ -14,7 +14,7 @@ import {
   useSphericalJoint,
 } from '@react-three/rapier';
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
-import type { Role } from '@paideon/types';
+import type { RoleEnumData } from '@paideon/contracts';
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 
@@ -41,7 +41,7 @@ export interface BadgeUser {
   currentGrade: number;
   admissionNumber: string;
   cardNumber: string;
-  role: Role;
+  role: RoleEnumData;
   initials?: string;
   /** Any image URL — renders as avatar photo. null = initials fallback. */
   photoUrl?: string | null;
@@ -74,7 +74,7 @@ function getInitials(u: BadgeUser) {
   return `${u.firstName[0] ?? ''}${u.lastName[0] ?? ''}`.toUpperCase();
 }
 
-function roleLabel(r: Role) {
+function roleLabel(r: RoleEnumData) {
   return (
     (
       {
@@ -84,7 +84,7 @@ function roleLabel(r: Role) {
         ADMIN: 'Admin',
         PARENT: 'Parent',
         STAFF: 'Staff',
-      } as Record<Role, string>
+      } as Record<RoleEnumData, string>
     )[r] ?? r
   );
 }

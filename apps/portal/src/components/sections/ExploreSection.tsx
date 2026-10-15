@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { motion, useInView } from 'framer-motion';
 import { CountUp } from '@/components/ui/CountUp';
 import { SearchBar, type SearchFilter } from '@/components/ui/SearchBar';
-import type { LibraryStats } from '@paideon/types';
+import type { LibraryStatsData } from '@paideon/contracts';
 
 // StatCard
 function StatCard({
@@ -54,7 +54,7 @@ function StatCard({
 }
 
 //  ExploreSection
-export function ExploreSection({ stats }: { stats: LibraryStats }) {
+export function ExploreSection({ stats }: { stats: LibraryStatsData }) {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: '-8% 0px' });
   const router = useRouter();
