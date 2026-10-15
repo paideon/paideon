@@ -1,5 +1,6 @@
 export * from './academics/index.ts';
 export * from './archive/index.ts';
+export * from './auth/index.ts';
 export * from './extracurriculars/index.ts';
 export * from './facilities/index.ts';
 export * from './library/index.ts';
