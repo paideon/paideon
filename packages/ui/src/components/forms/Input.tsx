@@ -27,7 +27,11 @@ type Props = {
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
   name?: string;
   autoComplete?: string;
+  autoFocus?: boolean;
+  maxLength?: number;
   inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode'];
+  /** Trailing slot inside the field, e.g. a show/hide password button. */
+  endAdornment?: React.ReactNode;
   className?: string;
   ref?: React.Ref<HTMLInputElement>;
 };
@@ -53,7 +57,10 @@ export function Input({
   onBlur,
   name,
   autoComplete,
+  autoFocus,
+  maxLength,
   inputMode,
+  endAdornment,
   className,
   ref,
 }: Props) {
@@ -78,29 +85,39 @@ export function Input({
           </span>
         )}
       </label>
-      <input
-        ref={ref}
-        id={id}
-        name={name}
-        type={type}
-        value={value}
-        defaultValue={defaultValue}
-        placeholder={placeholder}
-        disabled={disabled}
-        required={required}
-        autoComplete={autoComplete}
-        inputMode={inputMode}
-        onChange={onChange}
-        onBlur={onBlur}
-        aria-invalid={hasError}
-        aria-describedby={describedBy}
-        className={cn(
-          inputBase,
-          hasError
-            ? 'border-semantic-error-base focus-visible:border-semantic-error-base focus-visible:outline-semantic-error-base'
-            : 'border-border-default hover:border-border-default focus-visible:border-gold-base',
+      <div className="relative">
+        <input
+          ref={ref}
+          id={id}
+          name={name}
+          type={type}
+          value={value}
+          defaultValue={defaultValue}
+          placeholder={placeholder}
+          disabled={disabled}
+          required={required}
+          autoComplete={autoComplete}
+          autoFocus={autoFocus}
+          maxLength={maxLength}
+          inputMode={inputMode}
+          onChange={onChange}
+          onBlur={onBlur}
+          aria-invalid={hasError}
+          aria-describedby={describedBy}
+          className={cn(
+            inputBase,
+            endAdornment && 'pr-space-12',
+            hasError
+              ? 'border-semantic-error-base focus-visible:border-semantic-error-base focus-visible:outline-semantic-error-base'
+              : 'border-border-default hover:border-border-default focus-visible:border-gold-base',
+          )}
+        />
+        {endAdornment && (
+          <div className="absolute inset-y-0 right-space-2 flex items-center">
+            {endAdornment}
+          </div>
         )}
-      />
+      </div>
       {hasError && (
         <p
           id={errorId}

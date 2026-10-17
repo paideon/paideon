@@ -49,6 +49,8 @@ import {
   AlertCircle,
   XCircle,
   AlertTriangle,
+  Eye,
+  EyeOff,
 
   // Data & Achievements
   Award,
@@ -130,6 +132,8 @@ export const iconRegistry = {
   'alert-circle': AlertCircle,
   'x-circle': XCircle,
   'alert-triangle': AlertTriangle,
+  eye: Eye,
+  'eye-off': EyeOff,
 
   // Data & Achievements
   award: Award,

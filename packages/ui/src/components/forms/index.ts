@@ -33,3 +33,4 @@ export { Select } from './Select';
 export { Slider } from './Slider';
 export { Textarea } from './Textarea';
 export { Toggle } from './Toggle';
+export { PasswordInput } from './PasswordInput';
