@@ -50,7 +50,10 @@ export class AuthService {
       return this.rejectLogin(
         dto.identifier,
         context,
-        new ForbiddenException('Account not activated. Check your email.'),
+        new ForbiddenException({
+          message: 'Account not activated. Check your email.',
+          code: 'EMAIL_NOT_VERIFIED',
+        }),
       );
     }
 
@@ -58,9 +61,10 @@ export class AuthService {
       return this.rejectLogin(
         dto.identifier,
         context,
-        new ForbiddenException(
-          'Account suspended. Contact your administrator.',
-        ),
+        new ForbiddenException({
+          message: 'Account suspended. Contact your administrator.',
+          code: 'ACCOUNT_SUSPENDED',
+        }),
       );
     }
 

@@ -15,7 +15,7 @@
     "build": "nx run-many -t build",
     "typecheck": "nx run-many -t typecheck",
     "dev:portal": "nx dev portal",
-    "dev:api": "nx serve api",
+    "dev:api": "nx build api && node --env-file=.env apps/api/dist/main.js",
     "db:generate": "pnpm --filter @paideon/database generate",
     "db:migrate": "pnpm --filter @paideon/database migrate",
     "db:seed": "pnpm --filter @paideon/database exec prisma db seed",
