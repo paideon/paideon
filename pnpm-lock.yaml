@@ -162,6 +162,9 @@ importers:
       '@paideon/contracts':
         specifier: workspace:*
         version: link:../../packages/contracts
+      '@paideon/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       '@react-three/drei':
         specifier: ^10.7.7
         version: 10.7.7(@react-three/fiber@9.5.0(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(three@0.186.1))(@types/react@19.3.0)(@types/three@0.186.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(three@0.186.1)
@@ -302,6 +305,9 @@ importers:
         specifier: ^8.16.0
         version: 8.23.1
     devDependencies:
+      '@types/node':
+        specifier: ^24.19.2
+        version: 24.19.2
       prisma:
         specifier: 7.10.0
         version: 7.10.0(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)(typescript@6.0.3)
