@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { LogoutButton } from '@/components/library/LogoutButton';
+import { LogoutButton } from '@/components/auth/LogoutButton';
 import { apiFetch } from '@/lib/api';
 
 type Stats = {
