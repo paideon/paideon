@@ -17,7 +17,6 @@ export function AlumniCard({
   portrait,
   className,
   graduationYearLabel = 'Class of',
-  currentRoleLabel = '',
 }: AlumniCardProps) {
   return (
     <div
