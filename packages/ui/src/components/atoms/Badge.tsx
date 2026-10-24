@@ -1,3 +1,5 @@
+// packages/ui/src/components/atoms/Badge.tsx
+
 'use client';
 
 import { ElementType } from 'react';
@@ -54,25 +56,22 @@ uppercase tracking-caption leading-none select-none whitespace-nowrap`;
 export function Badge(props: BadgeProps) {
   const { variant, className, as: Tag = 'span', ref } = props;
 
-  let colorClass = '';
-  let label = '';
-  let ariaLabel: string | undefined;
+  const colorClass =
+    props.variant === 'status'
+      ? statusStyles[props.status]
+      : variantStyles[props.variant];
 
-  if (variant === 'status') {
-    colorClass = statusStyles[props.status];
-    label = statusLabels[props.status];
-    ariaLabel = `Status: ${label}`;
-  } else {
-    colorClass = variantStyles[variant];
-    label = props.label;
-  }
+  const label =
+    props.variant === 'status' ? statusLabels[props.status] : props.label;
+
+  const ariaLabel = props.variant === 'status' ? `Status: ${label}` : undefined;
 
   return (
     <Tag
       ref={ref}
       aria-label={ariaLabel}
       data-variant={variant}
-      data-status={variant === 'status' ? props.status : undefined}
+      data-status={props.variant === 'status' ? props.status : undefined}
       className={cn(base, colorClass, className)}
     >
       {label}
