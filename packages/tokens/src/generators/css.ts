@@ -1,5 +1,5 @@
 // packages/tokens/src/generators/css.ts
-//
+
 // Pure function: takes the token set and returns a `:root { ... }` CSS
 // string. No filesystem access here — ported from the old
 // scripts/generate-css-vars.js, which did fs/path/writing directly. That

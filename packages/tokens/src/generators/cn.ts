@@ -1,5 +1,5 @@
 // packages/tokens/src/generators/cn.ts
-//
+
 // Pure function: takes the token set and returns the full source text for
 // packages/ui/src/utilities/cn.tsx. No filesystem access here — mirrors
 // generators/css.ts. generate-cn-groups.js just calls generateCnUtility()
