@@ -4,7 +4,7 @@ import { cn } from '../../../utilities/cn';
 type SchoolLogoVariant =
   'crest-only' | 'lockup' | 'wordmark-only' | 'horizontal' | 'stacked';
 type Locale = 'en' | 'si';
-type SchoolLogoColor = 'white' | 'black' | 'gold';
+type SchoolLogoColor = 'white' | 'black' | 'gold' | 'brand-gold';
 
 interface SchoolLogoProps {
   variant?: SchoolLogoVariant;
@@ -16,6 +16,7 @@ interface SchoolLogoProps {
 
 const colorMap: Record<SchoolLogoColor, string> = {
   gold: 'fill-gold-base',
+  'brand-gold': 'fill-gold-on-brand',
   black: 'fill-text-inverse',
   white: 'fill-text-primary',
 };

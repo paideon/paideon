@@ -107,7 +107,7 @@ export function ShareSheet({
             {platforms.includes('facebook') && (
               <button
                 onClick={shareViaFacebook}
-                className="flex flex-col items-center gap-2 text-blue-700 hover:text-gold-base transition-colors"
+                className="flex flex-col items-center gap-2 text-semantic-info-base hover:text-gold-base transition-colors"
               >
                 <svg
                   width="32"

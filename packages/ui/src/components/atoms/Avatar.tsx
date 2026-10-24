@@ -30,7 +30,7 @@ const sizeMap = {
 
 const variantMap = {
   green: 'bg-green-base text-text-inverse',
-  gold: 'bg-gold-base text-green-base',
+  gold: 'bg-gold-base text-text-inverse',
   muted: 'bg-surface-deep text-text-muted',
 };
 

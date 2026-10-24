@@ -94,7 +94,7 @@ export function StudentJourneyFlow({
                 stroke={
                   isHighlightedEdge
                     ? 'var(--color-gold-base)'
-                    : 'var(--border-light)'
+                    : 'var(--color-border-light)'
                 }
                 strokeWidth={isHighlightedEdge ? 2 : 1.5}
                 strokeDasharray={isHighlightedEdge ? 'none' : '4'}
@@ -142,7 +142,7 @@ export function StudentJourneyFlow({
                     ? 'var(--color-gold-base)'
                     : isHighlightedNode
                       ? 'var(--color-gold-pale)'
-                      : 'var(--border-light)'
+                      : 'var(--color-border-light)'
                 }
                 strokeWidth={isSelected ? 2 : 1}
                 className="transition-all duration-200"

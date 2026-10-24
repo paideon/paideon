@@ -335,7 +335,7 @@ function EventCardFeatured({
           {registrationHref && status === 'registration-open' && (
             <Link
               href={registrationHref}
-              className="inline-block px-space-6 py-space-2.5 border border-gold-base text-gold-base font-body text-caption uppercase tracking-caption hover:bg-gold-base hover:text-green-base transition-colors"
+              className="inline-block px-space-6 py-space-2.5 border border-gold-base text-gold-base font-body text-caption uppercase tracking-caption hover:bg-gold-base hover:text-text-inverse transition-colors"
             >
               {registerLabel}
             </Link>

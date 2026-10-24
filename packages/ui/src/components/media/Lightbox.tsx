@@ -127,7 +127,7 @@ export function Lightbox({
           className="max-w-full max-h-[85vh] object-contain"
         />
         {currentImage.caption && (
-          <div className="absolute bottom-0 left-0 right-0 bg-overlay-medium text-text-inverse p-space-3 text-center">
+          <div className="absolute bottom-0 left-0 right-0 bg-overlay-medium text-text-on-overlay p-space-3 text-center">
             <p className="font-body text-body-sm">{currentImage.caption}</p>
           </div>
         )}

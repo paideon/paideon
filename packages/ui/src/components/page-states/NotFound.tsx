@@ -81,7 +81,7 @@ export function NotFoundPage({
         <ButtonLink
           href={ctaHref}
           variant="primary"
-          className="bg-gold-base text-green-base hover:bg-transparent hover:text-gold-base border-gold-base"
+          className="bg-gold-base text-text-inverse hover:bg-transparent hover:text-gold-base border-gold-base"
           leftIcon={<span aria-hidden="true">←</span>}
         >
           {ctaLabel}

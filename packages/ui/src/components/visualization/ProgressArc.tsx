@@ -17,8 +17,14 @@ export interface ProgressArcProps {
 }
 
 const variantColors = {
-  green: { stroke: 'var(--color-green-base)', track: 'var(--border-light)' },
-  gold: { stroke: 'var(--color-gold-base)', track: 'var(--border-light)' },
+  green: {
+    stroke: 'var(--color-green-base)',
+    track: 'var(--color-border-light)',
+  },
+  gold: {
+    stroke: 'var(--color-gold-base)',
+    track: 'var(--color-border-light)',
+  },
 };
 
 export function ProgressArc({
