@@ -22,12 +22,31 @@ import {
   lineHeight,
   letterSpacing,
 } from '../primitives/typography.ts';
-import { semantic } from '../semantic/index.ts';
+import { semantic, type Theme } from '../semantic/index.ts';
+
+// Colours are NOT literal values here. Each leaf becomes `var(--color-<path>)`,
+// the same variable names generators/css.ts writes into :root (light) and
+// [data-theme="dark"]. A class like `bg-surface-base` therefore compiles once
+// and resolves to whichever theme is active — that is what makes switching
+// themes a one-attribute change with no re-render and no `dark:` variants.
+type VarRefs<T> = T extends string ? string : { [K in keyof T]: VarRefs<T[K]> };
+
+function toVarRefs<T extends Theme>(obj: T, prefix = 'color'): VarRefs<T> {
+  const out: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(obj)) {
+    const name = `${prefix}-${key}`;
+    out[key] =
+      value && typeof value === 'object'
+        ? toVarRefs(value as unknown as Theme, name)
+        : `var(--${name})`;
+  }
+  return out as VarRefs<T>;
+}
 
 export const colors = {
   transparent: 'transparent',
   current: 'currentColor',
-  ...semantic,
+  ...toVarRefs(semantic as Theme),
 };
 
 export const screens = {

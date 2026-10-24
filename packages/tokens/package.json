@@ -19,7 +19,8 @@
     "build": "tsc && pnpm run generate",
     "generate:css": "node scripts/generate-css-vars.js",
     "generate:cn": "node scripts/generate-cn-groups.js",
-    "generate": "pnpm run generate:css && pnpm run generate:cn"
+    "generate": "pnpm run generate:css && pnpm run generate:cn",
+    "audit:contrast": "node scripts/audit-contrast.js"
   },
   "devDependencies": {
     "@paideon/typescript-config": "workspace:*",
