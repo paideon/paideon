@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { LogoutButton } from '@/components/auth/LogoutButton';
+import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import { apiFetch, CurrentUser } from '@/lib/api';
 import { tilesFor } from '@/lib/home-tiles';
 
@@ -50,7 +51,10 @@ export default function HomePage() {
             </p>
           )}
         </div>
-        <LogoutButton />
+        <div className="flex items-center gap-space-2">
+          <ThemeToggle />
+          <LogoutButton />
+        </div>
       </header>
 
       {user && (
@@ -71,7 +75,7 @@ export default function HomePage() {
       <section>
         <h2 className="mb-2 text-xl font-semibold">My current loans</h2>
         {error && (
-          <p role="alert" className="text-red-700">
+          <p role="alert" className="text-semantic-error-base">
             {error}
           </p>
         )}

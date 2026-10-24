@@ -1,5 +1,7 @@
 // packages/ui/src/components/icons/registry.ts
 import {
+  Sun,
+  Moon,
   // Navigation & Layout
   Menu,
   X,
@@ -163,6 +165,8 @@ export const iconRegistry = {
   image: ImageIcon,
   undo: Undo2,
   redo: Redo2,
+  sun: Sun,
+  moon: Moon,
 } as const;
 
 export type IconName = keyof typeof iconRegistry;
