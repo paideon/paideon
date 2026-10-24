@@ -1,24 +1,19 @@
 // packages/tokens/src/semantic/elevation.ts
 //
-// Source: design-system doc §5.2 "Elevation usage map", designer guide §2.2
-// (Ink) and §4.2 (Dark Mode Design Rules).
+// Dark-mode elevation: depth comes from lighter surface tones plus an explicit
+// border, never from shadows (shadows are invisible on dark surfaces).
+// There is no light-mode equivalent; light mode uses primitives/shadows.ts.
 //
-// This has no light-mode equivalent — light mode elevation is handled by
-// primitives/shadows.ts (boxShadow.sm/md/lg/xl) directly. Dark mode has NO
-// shadow-based elevation; shadows are invisible against dark surfaces. Depth
-// is created entirely through layered surface tones + explicit borders.
-// "Cards need an explicit border: 1px solid #3B4758. Without it they are
-// invisible." — designer guide §4.2
-//
-// Do not skip a level. Each step up = one lighter Ink tone + one lighter
-// border, never a shadow.
+// Do not skip a level. Each step up = one lighter surface + one lighter border.
 
-import { primitives } from '../primitives/colors.ts';
+import { primitives, withAlpha } from '../primitives/colors.ts';
+
+const { night, mist } = primitives;
 
 export const elevationDark = {
-  0: { bg: primitives.forest[900], border: null },
-  1: { bg: primitives.forest[800], border: primitives.forest[700] },
-  2: { bg: primitives.forest[700], border: primitives.forest[600] },
-  3: { bg: primitives.forest[700], border: primitives.forest[500] },
-  4: { bg: primitives.forest[600], border: primitives.forest[500] },
+  0: { bg: night[900], border: null },
+  1: { bg: night[850], border: withAlpha(mist[300], 0.14) },
+  2: { bg: night[800], border: withAlpha(mist[300], 0.24) },
+  3: { bg: night[750], border: withAlpha(mist[300], 0.34) },
+  4: { bg: night[700], border: withAlpha(mist[300], 0.42) },
 } as const;

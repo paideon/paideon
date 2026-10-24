@@ -1,26 +1,36 @@
 // packages/tokens/src/semantic/colors.ts
+// LIGHT theme brand + status colours.
 
-import { primitives } from '../primitives/colors.ts';
+import { primitives, withAlpha } from '../primitives/colors.ts';
+
+const { green, gold } = primitives;
 
 export const brandColors = {
   green: {
-    base: primitives.green[100], // #1A4A2E — base green for elements
-    light: primitives.forest[500], // #2E6B5A — lighter, for chips/badges
-    hover: primitives.forest[400], // #8EB69B — visibly lighter hover state
+    base: green[700], // primary fills; white-ish text on it is AAA
+    light: green[100], // chip / badge tint
+    hover: green[600], // hover fill (still carries inverse text)
   },
   gold: {
-    base: primitives.gold[100],
-    light: primitives.gold[80],
-    pale: primitives.gold[60],
-    hover: primitives.gold[40],
-    active: primitives.gold[20],
-    glow: primitives.gold.glow,
+    base: gold[600], // accent text / borders / focus ring (AA on light surfaces)
+    light: gold[400], // vivid, DECORATIVE only (never text)
+    pale: gold[50], // tint behind gold.active text
+    hover: gold[700],
+    active: gold[800],
+    // Vivid gold for crests/eyebrows/icons on surface.brand. Never on light surfaces.
+    'on-brand': gold[300],
+    glow: 'rgba(201, 151, 58, 0.32)',
   },
 } as const;
 
+const status = (hue: { 700: string }) => ({
+  base: hue[700],
+  surface: withAlpha(hue[700], 0.12),
+});
+
 export const statusColors = {
-  success: primitives.success,
-  error: primitives.error,
-  warning: primitives.warning,
-  info: primitives.info,
+  success: status(primitives.success),
+  error: status(primitives.error),
+  warning: status(primitives.warning),
+  info: status(primitives.info),
 } as const;

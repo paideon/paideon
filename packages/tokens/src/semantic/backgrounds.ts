@@ -1,22 +1,31 @@
 // packages/tokens/src/semantic/backgrounds.ts
+// LIGHT theme surfaces. The dark counterpart lives in themes/dark.ts and must
+// keep exactly the same keys (enforced by the Theme type).
 
-import { primitives } from '../primitives/colors.ts';
+import { primitives, withAlpha } from '../primitives/colors.ts';
+
+const f = primitives.forest;
 
 export const surface = {
-  base: primitives.forest[50], // #FBF9F2 — parchment page floor
-  default: primitives.forest[100], // #F5EFE0 — default card surface, faint cream tint
-  deep: primitives.forest[200], // #EDE6D0 — deep/recessed panel
-  elevated: '#FFFFFF', // pure white — raised surface (modals, popovers), pops off parchment
-  canopy: primitives.forest[300], // #DCEADE — pale leaf-mint accent surface ("forest glass")
-  glass: 'rgba(255,255,255,0.55)',
-  'glass-canopy': 'rgba(220,234,222,0.45)',
-  'glass-subtle': 'rgba(255,255,255,0.35)',
-  'glass-medium': 'rgba(255,255,255,0.55)',
-  'glass-card': 'rgba(255,255,255,0.70)',
-  inverse: primitives.forest[900], // #1C1A16 — dark surface for chips/badges on a light bg
-  hover: '#F0E9D8', // between default and deep — subtle tint lift on hover
-  active: primitives.forest[200], // #EDE6D0 — pressed/active, same as deep (mirrors old active=deep pattern)
-  disabled: primitives.forest[100], // #F5EFE0 — disabled = default surface
+  base: f[50], // page floor
+  default: f[100], // default tinted surface
+  deep: f[200], // recessed / deep panel
+  elevated: '#FFFFFF', // raised surfaces: cards, inputs, modals
+  canopy: f[300], // pale mint accent surface
+  glass: 'rgba(255, 255, 255, 0.55)',
+  'glass-canopy': withAlpha(f[300], 0.45),
+  'glass-subtle': 'rgba(255, 255, 255, 0.35)',
+  'glass-medium': 'rgba(255, 255, 255, 0.55)',
+  'glass-card': 'rgba(255, 255, 255, 0.7)',
+  brand: primitives.green[800], // solid brand panel: pair with text.on-brand + gold.on-brand
+  inverse: f[900], // dark surface for tooltips/banners (pair with text.inverse)
+  hover: '#E8EEEA',
+  active: f[200],
+  disabled: f[100],
 } as const;
 
-export const overlay = primitives.overlay;
+export const overlay = {
+  light: withAlpha(f[900], 0.2),
+  medium: withAlpha(f[900], 0.45), // modal backdrops, image captions
+  heavy: withAlpha(f[900], 0.72), // lightbox, full-screen takeovers
+} as const;
