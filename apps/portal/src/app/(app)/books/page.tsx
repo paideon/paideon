@@ -47,14 +47,14 @@ export default function StudentBooksPage() {
           onChange={(event) => setQuery(event.target.value)}
         />
         <button
-          className="rounded bg-slate-900 px-4 py-2 text-white"
+          className="rounded bg-green-base px-4 py-2 text-text-inverse"
           type="submit"
         >
           Search
         </button>
       </form>
       {error && (
-        <p role="alert" className="text-red-700">
+        <p role="alert" className="text-semantic-error-base">
           {error}
         </p>
       )}

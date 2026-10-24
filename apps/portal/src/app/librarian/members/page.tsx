@@ -96,12 +96,12 @@ export default function MembersPage() {
       </Link>
       <h1 className="text-2xl font-bold">Members and fines</h1>
       {error && (
-        <p role="alert" className="text-red-700">
+        <p role="alert" className="text-semantic-error-base">
           {error}
         </p>
       )}
       {message && (
-        <p role="status" className="text-green-700">
+        <p role="status" className="text-semantic-success-base">
           {message}
         </p>
       )}
@@ -113,7 +113,7 @@ export default function MembersPage() {
           onChange={(event) => setSearch(event.target.value)}
         />
         <button
-          className="rounded bg-slate-900 px-4 py-2 text-white"
+          className="rounded bg-green-base px-4 py-2 text-text-inverse"
           type="submit"
         >
           Search

@@ -64,7 +64,7 @@ export default function ReturnPage() {
           onChange={(event) => setBarcode(event.target.value)}
         />
         <button
-          className="rounded bg-slate-900 px-4 text-white"
+          className="rounded bg-green-base px-4 text-text-inverse"
           disabled={busy}
           type="submit"
         >
@@ -72,7 +72,12 @@ export default function ReturnPage() {
         </button>
       </form>
       {message && (
-        <p role="status" className={error ? 'text-red-700' : 'text-green-700'}>
+        <p
+          role="status"
+          className={
+            error ? 'text-semantic-error-base' : 'text-semantic-success-base'
+          }
+        >
           {message}
         </p>
       )}

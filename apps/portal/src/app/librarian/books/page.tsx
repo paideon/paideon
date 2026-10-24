@@ -118,12 +118,12 @@ export default function LibrarianBooksPage() {
       </Link>
       <h1 className="text-2xl font-bold">Books</h1>
       {error && (
-        <p role="alert" className="text-red-700">
+        <p role="alert" className="text-semantic-error-base">
           {error}
         </p>
       )}
       {notice && (
-        <p role="status" className="text-green-700">
+        <p role="status" className="text-semantic-success-base">
           {notice}
         </p>
       )}
@@ -158,7 +158,7 @@ export default function LibrarianBooksPage() {
             onChange={(e) => setCategory(e.target.value)}
           />
           <button
-            className="w-fit rounded bg-slate-900 px-4 py-2 text-white"
+            className="w-fit rounded bg-green-base px-4 py-2 text-text-inverse"
             type="submit"
           >
             Add book
@@ -175,7 +175,7 @@ export default function LibrarianBooksPage() {
         >
           <input name="file" type="file" accept=".csv,text/csv" required />
           <button
-            className="rounded bg-slate-900 px-4 py-2 text-white"
+            className="rounded bg-green-base px-4 py-2 text-text-inverse"
             type="submit"
           >
             Import

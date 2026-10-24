@@ -42,7 +42,7 @@ export default function LibrarianHomePage() {
         <LogoutButton />
       </header>
       {error && (
-        <p role="alert" className="text-red-700">
+        <p role="alert" className="text-semantic-error-base">
           {error}
         </p>
       )}

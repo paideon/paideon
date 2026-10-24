@@ -34,7 +34,7 @@ export default function OverduePage() {
       </Link>
       <h1 className="text-2xl font-bold">Overdue books</h1>
       {error && (
-        <p role="alert" className="text-red-700">
+        <p role="alert" className="text-semantic-error-base">
           {error}
         </p>
       )}

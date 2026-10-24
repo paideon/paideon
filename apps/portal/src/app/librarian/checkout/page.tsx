@@ -82,7 +82,7 @@ export default function CheckoutPage() {
           />
         </label>
         <button
-          className="rounded bg-slate-900 px-4 py-2 text-white disabled:opacity-50"
+          className="rounded bg-green-base px-4 py-2 text-text-inverse disabled:opacity-50"
           disabled={busy}
           type="submit"
         >
@@ -90,7 +90,12 @@ export default function CheckoutPage() {
         </button>
       </form>
       {message && (
-        <p role="status" className={error ? 'text-red-700' : 'text-green-700'}>
+        <p
+          role="status"
+          className={
+            error ? 'text-semantic-error-base' : 'text-semantic-success-base'
+          }
+        >
           {message}
         </p>
       )}
