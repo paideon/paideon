@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { LogoutButton } from '@/components/auth/LogoutButton';
-import { ThemeToggle } from '@/components/theme/ThemeToggle';
+// import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import { apiFetch, CurrentUser } from '@/lib/api';
 import { tilesFor } from '@/lib/home-tiles';
 
@@ -52,7 +52,7 @@ export default function HomePage() {
           )}
         </div>
         <div className="flex items-center gap-space-2">
-          <ThemeToggle />
+          {/* <ThemeToggle /> */}
           <LogoutButton />
         </div>
       </header>
