@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Button, Icon } from '@paideon/ui';
+import { Button } from '../atoms/Button';
+import { Icon } from '../icons/Icon';
 
 const STORAGE_KEY = 'paideon-theme';
 
