@@ -2,7 +2,7 @@
 // Paideon — schema.prisma
 // Version: 5.0
 // Database: PostgreSQL 16
-// Tables: 107
+// Tables: 32  (pruned from 107: kept what the code uses + people-data candidates)
 // =============================================================================
 
 generator client {
@@ -74,13 +74,6 @@ enum SchoolType {
   INTERNATIONAL
 }
 
-enum HomeOwnership {
-  OWNED
-  RENTED
-  GOVERNMENT_QUARTERS
-  OTHER
-}
-
 enum QualificationType {
   OL
   AL
@@ -91,39 +84,6 @@ enum QualificationType {
   PROFESSIONAL
   NCOE
   OTHER
-}
-
-enum LeaveType {
-  CASUAL
-  MEDICAL
-  STUDY
-  NOPAY
-  MATERNITY
-  SPECIAL
-}
-
-enum LeaveStatus {
-  PENDING
-  APPROVED
-  REJECTED
-}
-
-enum AttendanceStatus {
-  PRESENT
-  ABSENT
-  LATE
-  EXCUSED
-  HALF_DAY
-}
-
-enum ExamType {
-  TERM_1
-  TERM_2
-  TERM_3
-  ANNUAL
-  MOCK_OL
-  MOCK_AL
-  SPECIAL
 }
 
 enum MediaPurpose {
@@ -137,26 +97,6 @@ enum MediaPurpose {
   MEDICAL_DOCUMENT
   CLUB_PHOTO
   EVENT_PHOTO
-  OTHER
-}
-
-enum RoomType {
-  CLASSROOM
-  OFFICE
-  STAFF_ROOM
-  STOREROOM
-  STAFF_HOUSE
-  CANTEEN
-  OTHER
-}
-
-enum LabType {
-  BIOLOGY
-  CHEMISTRY
-  PHYSICS
-  ICT
-  HOME_ECONOMICS
-  AGRICULTURE
   OTHER
 }
 
@@ -196,14 +136,6 @@ enum LoanStatus {
   LOST
 }
 
-enum ReservationStatus {
-  PENDING
-  AVAILABLE
-  CLAIMED
-  EXPIRED
-  CANCELLED
-}
-
 enum FineType {
   OVERDUE
   DAMAGE
@@ -215,66 +147,6 @@ enum FineStatus {
   PAID
   WAIVED
   PARTIAL
-}
-
-enum DamageSeverity {
-  MINOR
-  MODERATE
-  SEVERE
-  TOTAL_LOSS
-}
-
-enum RequestStatus {
-  PENDING
-  APPROVED
-  REJECTED
-  ORDERED
-  RECEIVED
-}
-
-enum VaultResourceType {
-  TEXTBOOK
-  PAST_PAPER
-  STUDY_GUIDE
-  REFERENCE
-  OTHER
-}
-
-enum VaultSourceType {
-  MANUAL_UPLOAD
-  EXTERNAL_LINK
-}
-
-enum NotificationType {
-  DUE_REMINDER
-  OVERDUE_NOTICE
-  RESERVATION_READY
-  FINE_NOTICE
-  NEW_BOOK_ALERT
-  ACHIEVEMENT_UNLOCKED
-  ATTENDANCE_ALERT
-  ASSIGNMENT_POSTED
-  ASSIGNMENT_DUE
-  RESULT_PUBLISHED
-  ANNOUNCEMENT
-  SYSTEM_ALERT
-  MESSAGE_RECEIVED
-  FEE_DUE
-  DISCIPLINARY_NOTICE
-}
-
-enum NotificationChannel {
-  EMAIL
-  WHATSAPP
-  IN_APP
-}
-
-enum AnnouncementType {
-  GENERAL
-  MAINTENANCE
-  NEW_ARRIVALS
-  EVENT
-  POLICY_CHANGE
 }
 
 // =============================================================================
@@ -324,15 +196,10 @@ model School {
 
   // Layer 3
   studentProfiles   StudentProfile[]
-  familyBackgrounds FamilyBackground[]
-  residenceHistory  ResidenceHistory[]
-  electoralRecords  ElectoralRecord[]
-  parentEducation   ParentEducation[]
 
   // Layer 4
   teacherProfiles TeacherProfile[]
   teacherSubjects TeacherSubject[]
-  leaveRecords    LeaveRecord[]
 
   // Layer 5
   parentProfiles ParentProfile[]
@@ -344,25 +211,8 @@ model School {
   parentStudentLinks ParentStudentLink[]
   emergencyContacts  EmergencyContact[]
 
-  // Layer 8
-  studentHealths          StudentHealth[]
-  studentHealthConditions StudentHealthCondition[]
-  studentVaccinations     StudentVaccination[]
-
-  // Layer 9
-  behavioralProfiles BehavioralProfile[]
-  counselingSessions CounselingSession[]
-
   // Layer 11
   media Media[]
-
-  // Layer 12
-  buildings        SchoolBuilding[]
-  rooms            Room[]
-  laboratories     Laboratory[]
-  libraryFacility  LibraryFacility?
-  sportsFacilities SportsFacility[]
-  vehicles         SchoolVehicle[]
 
   // Layer 13
   subjects         Subject[]
@@ -371,101 +221,14 @@ model School {
   classTeachers    ClassTeacher[]
   classEnrollments ClassEnrollment[]
 
-  // Layer 14
-  timetablePeriods TimetablePeriod[]
-  timetableSlots   TimetableSlot[]
-
-  // Layer 15
-  attendance          Attendance[]
-  attendanceSummaries AttendanceSummary[]
-
-  // Layer 16
-  exams               Exam[]
-  examSubjects        ExamSubject[]
-  examResults         ExamResult[]
-  nationalExamResults NationalExamResult[]
-
-  // Layer 17
-  assignments           Assignment[]
-  assignmentAttachments AssignmentAttachment[]
-  submissions           Submission[]
-  submissionAttachments SubmissionAttachment[]
-  assignmentComments    AssignmentComment[]
-
   // Layer 18
   books              Book[]
   bookCopies         BookCopy[]
   loans              Loan[]
   fines              Fine[]
-  reservations       Reservation[]
-  damageReports      DamageReport[]
-  damageReportPhotos DamageReportPhoto[]
-  reviews            Review[]
-  readingHistory     ReadingHistory[]
-  bookRequests       BookRequest[]
-  bookSuggestions    BookSuggestion[]
-  announcements      Announcement[]
   libraryConfig      LibraryConfig?
 
-  // Layer 19
-  vaultResources       VaultResource[]
-  vaultReadingProgress VaultReadingProgress[]
-  vaultReadingSessions VaultReadingSession[]
-  vaultDownloadLogs    VaultDownloadLog[]
-  vaultSearchLogs      VaultSearchLog[]
-  vaultShelves         VaultShelf[]
-  vaultShelfItems      VaultShelfItem[]
-  vaultSearchAnalytics VaultSearchAnalytics[]
-
-  // Layer 20
-  clubs                    Club[]
-  clubMemberships          ClubMembership[]
-  clubMeetingRecords       ClubMeetingRecord[]
-  clubActivityLogs         ClubActivityLog[]
-  clubActivityParticipants ClubActivityParticipant[]
-  clubActivityPhotos       ClubActivityPhoto[]
-
-  // Layer 21
-  schoolEvents      SchoolEvent[]
-  eventParticipants EventParticipant[]
-  eventPhotos       EventPhoto[]
-
-  // Layer 22
-  disciplinaryRecords   DisciplinaryRecord[]
-  disciplinaryActions   DisciplinaryAction[]
-  disciplinaryWitnesses DisciplinaryWitness[]
-
-  // Layer 23
-  awards          Award[]
-  awardRecipients AwardRecipient[]
-
-  // Layer 24
-  transportRoutes      TransportRoute[]
-  transportStops       TransportStop[]
-  transportEnrollments TransportEnrollment[]
-
-  // Layer 25
-  feeCategories FeeCategory[]
-  feeStructures FeeStructure[]
-  feePayments   FeePayment[]
-
-  // Layer 26
-  messageThreads     MessageThread[]
-  threadParticipants ThreadParticipant[]
-  messages           Message[]
-  messageAttachments MessageAttachment[]
-
-  // Layer 27
-  userGamification UserGamification[]
-  badges           Badge[]
-  userBadges       UserBadge[]
-
-  // Layer 28
-  notifications           Notification[]
-  notificationPreferences NotificationPreference[]
-
   // Layer 29
-  dailyStatistics DailyStatistics[]
   qualification   Qualification[]
   serviceRecord   ServiceRecord[]
 }
@@ -508,25 +271,7 @@ model AcademicYear {
 
   classes              Class[]
   classEnrollments     ClassEnrollment[]
-  timetablePeriods     TimetablePeriod[]
-  timetableSlots       TimetableSlot[]
-  attendance           Attendance[]
-  attendanceSummaries  AttendanceSummary[]
-  exams                Exam[]
   teacherSubjects      TeacherSubject[]
-  leaveRecords         LeaveRecord[]
-  familyBackgrounds    FamilyBackground[]
-  studentHealths       StudentHealth[]
-  behavioralProfiles   BehavioralProfile[]
-  clubs                Club[]
-  clubMemberships      ClubMembership[]
-  clubActivityLogs     ClubActivityLog[]
-  disciplinaryRecords  DisciplinaryRecord[]
-  awardRecipients      AwardRecipient[]
-  transportEnrollments TransportEnrollment[]
-  feeStructures        FeeStructure[]
-  feePayments          FeePayment[]
-  schoolEvents         SchoolEvent[]
 
   @@unique([schoolId, year])
 }
@@ -570,7 +315,6 @@ model Address {
   parentProfilesWork ParentProfile[]    @relation("ParentWorkAddress")
   staffProfiles      StaffProfile[]
   emergencyContacts  EmergencyContact[]
-  transportStops     TransportStop[]
 }
 
 // =============================================================================
@@ -623,82 +367,21 @@ model User {
   studentLinks      ParentStudentLink[] @relation("StudentLinks")
   emergencyContacts EmergencyContact[]
 
-  // Layer 3 — student data (FK to User.id)
-  familyBackgrounds FamilyBackground[]
-  residenceHistory  ResidenceHistory[]
-  electoralRecords  ElectoralRecord[]
-  parentEducation   ParentEducation[]
-
   // Layer 4 — teacher data (FK to User.id)
   qualifications  Qualification[]
   teacherSubjects TeacherSubject[]
-  leaveRecords    LeaveRecord[]
-
-  // Layer 8
-  studentHealths   StudentHealth[]
-  healthConditions StudentHealthCondition[]
-  vaccinations     StudentVaccination[]
-
-  // Layer 9
-  behavioralProfiles          BehavioralProfile[]
-  counselingSessions          CounselingSession[] @relation("StudentCounselingSessions")
-  conductedCounselingSessions CounselingSession[] @relation("CounselorSessions")
 
   // Academic
   classTeacherAssignments ClassTeacher[]
   classEnrollments        ClassEnrollment[]
-  timetableSlots          TimetableSlot[]
-  attendance              Attendance[]
-  attendanceSummaries     AttendanceSummary[]
-  examResults             ExamResult[]
-  nationalExamResults     NationalExamResult[]
-  assignmentsCreated      Assignment[]
-  submissions             Submission[]
-  assignmentComments      AssignmentComment[]
 
   // Library
   loans           Loan[]
   fines           Fine[]
-  reservations    Reservation[]
-  reviews         Review[]
-  readingHistory  ReadingHistory[]
-  bookRequests    BookRequest[]
-  bookSuggestions BookSuggestion[]
-
-  // Vault
-  vaultReadingProgress VaultReadingProgress[]
-  vaultReadingSessions VaultReadingSession[]
-  vaultDownloadLogs    VaultDownloadLog[]
-  vaultSearchLogs      VaultSearchLog[]
-  vaultShelves         VaultShelf[]
-
-  // School life
-  clubMemberships      ClubMembership[]
-  clubsInCharge        Club[]
-  eventParticipations  EventParticipant[]
-  disciplinaryRecords  DisciplinaryRecord[]
-  disciplinaryWitness  DisciplinaryWitness[]
-  awardRecipients      AwardRecipient[]
-  transportEnrollments TransportEnrollment[]
-  vehiclesAssigned     SchoolVehicle[]
-  driverRoutes         TransportRoute[]
-  feePayments          FeePayment[]
-
-  // Messaging
-  messageThreadsCreated MessageThread[]
-  threadParticipations  ThreadParticipant[]
-  messagesSent          Message[]
-
-  // Engagement
-  gamification      UserGamification?
-  userBadges        UserBadge[]
-  notifications     Notification[]
-  notificationPrefs NotificationPreference[]
 
   // Media
   mediaUploaded           Media[]                   @relation("MediaUploadedBy")
   ServiceRecord           ServiceRecord[]
-  ClubActivityParticipant ClubActivityParticipant[]
 
   @@unique([email, schoolId])
   @@index([schoolId, role, status])
@@ -747,87 +430,7 @@ model StudentProfile {
   homeAddress Address? @relation(fields: [homeAddressId], references: [id])
   stream      Stream?  @relation(fields: [streamId], references: [id])
 
-  // Child models FK to User.id, not StudentProfile.id.
-  // Their reverse relations live on User, not here.
-
   @@unique([admissionNumber, schoolId])
-}
-
-model FamilyBackground {
-  id                        String         @id @default(cuid())
-  studentUserId             String
-  schoolId                  String
-  academicYearId            String
-  familySize                Int?
-  childPositionInFamily     Int?
-  totalSiblings             Int?
-  householdRooms            Int?
-  homeOwnership             HomeOwnership?
-  studyFacilitiesAtHome     String[]
-  languagesSpokenAtHome     String[]
-  householdMonthlyIncomeLKR Int?
-  fatherOccupation          String?
-  motherOccupation          String?
-  guardianOccupation        String?
-  receivesScholarship       Boolean        @default(false)
-  scholarshipType           String?
-  freeMealEligible          Boolean        @default(false)
-  createdAt                 DateTime       @default(now())
-  updatedAt                 DateTime       @updatedAt
-
-  student      User         @relation(fields: [studentUserId], references: [id])
-  school       School       @relation(fields: [schoolId], references: [id])
-  academicYear AcademicYear @relation(fields: [academicYearId], references: [id])
-
-  @@unique([studentUserId, academicYearId])
-}
-
-model ResidenceHistory {
-  id              String   @id @default(cuid())
-  studentUserId   String
-  schoolId        String
-  city            String
-  district        String?
-  yearFrom        Int
-  yearTo          Int?
-  reasonForMoving String?
-  createdAt       DateTime @default(now())
-
-  student User   @relation(fields: [studentUserId], references: [id])
-  school  School @relation(fields: [schoolId], references: [id])
-}
-
-model ElectoralRecord {
-  id                 String   @id @default(cuid())
-  studentUserId      String
-  schoolId           String
-  parentRelationship String
-  electoralYear      Int
-  electoralDistrict  String
-  pollingDivision    String
-  gnDivision         String
-  street             String
-  householdNumber    String
-  serialNumber       String
-  createdAt          DateTime @default(now())
-
-  student User   @relation(fields: [studentUserId], references: [id])
-  school  School @relation(fields: [schoolId], references: [id])
-}
-
-model ParentEducation {
-  id                   String   @id @default(cuid())
-  studentUserId        String
-  schoolId             String
-  parentRelationship   String
-  highestQualification String
-  fieldOfStudy         String?
-  institution          String?
-  yearCompleted        Int?
-  createdAt            DateTime @default(now())
-
-  student User   @relation(fields: [studentUserId], references: [id])
-  school  School @relation(fields: [schoolId], references: [id])
 }
 
 // =============================================================================
@@ -944,31 +547,6 @@ model TeacherSubject {
   @@unique([teacherUserId, subjectId, academicYearId, gradeLevel])
 }
 
-// Covers both TEACHER and STAFF leave. staffType discriminates ("TEACHER"|"STAFF").
-model LeaveRecord {
-  id                   String      @id @default(cuid())
-  userId               String
-  schoolId             String
-  academicYearId       String
-  staffType            String
-  type                 LeaveType
-  startDate            DateTime
-  endDate              DateTime
-  daysCount            Int
-  reason               String?
-  approvedBy           String?
-  approvedAt           DateTime?
-  status               LeaveStatus @default(PENDING)
-  medicalCertificateId String?
-  createdAt            DateTime    @default(now())
-  updatedAt            DateTime    @updatedAt
-
-  user               User         @relation(fields: [userId], references: [id])
-  school             School       @relation(fields: [schoolId], references: [id])
-  academicYear       AcademicYear @relation(fields: [academicYearId], references: [id])
-  medicalCertificate Media?       @relation(fields: [medicalCertificateId], references: [id])
-}
-
 // =============================================================================
 // LAYER 5 — PARENT DOMAIN
 // migration-02-profiles
@@ -1083,135 +661,11 @@ model EmergencyContact {
 // RESTRICTED: Only roles with HEALTH_DATA permission can read these tables.
 // =============================================================================
 
-model StudentHealth {
-  id                            String   @id @default(cuid())
-  studentUserId                 String
-  schoolId                      String
-  academicYearId                String
-  recordedAt                    DateTime
-  recordedBy                    String
-  heightCm                      Float?
-  weightKg                      Float?
-  bmi                           Float?
-  chestCm                       Float?
-  visionLeft                    String?
-  visionRight                   String?
-  hearingLeftStatus             String?
-  hearingRightStatus            String?
-  dentalStatus                  String?
-  entStatus                     String?
-  lungStatus                    String?
-  bloodGroup                    String?
-  physicalActivityMinutesPerDay Int?
-  sedentaryHoursPerDay          Float?
-  peClassesPerWeek              Int?
-  fruitVegServingsPerDay        Int?
-  sugarDrinksPerDay             Int?
-  smokingStatus                 Boolean?
-  alcoholStatus                 Boolean?
-  drugUseStatus                 Boolean?
-  cyberbullyingVictim           Boolean?
-  physicalFightsLastMonth       Int?
-  seriousInjuryLastYear         Boolean?
-  suicidalIdeation              Boolean?
-  generalHealthNotes            String?
-  createdAt                     DateTime @default(now())
-  updatedAt                     DateTime @updatedAt
-
-  student      User         @relation(fields: [studentUserId], references: [id])
-  school       School       @relation(fields: [schoolId], references: [id])
-  academicYear AcademicYear @relation(fields: [academicYearId], references: [id])
-
-  @@unique([studentUserId, academicYearId])
-}
-
-model StudentHealthCondition {
-  id                   String   @id @default(cuid())
-  studentUserId        String
-  schoolId             String
-  conditionType        String
-  name                 String
-  severity             String?
-  diagnosedYear        Int?
-  notes                String?
-  requiresSchoolAction Boolean  @default(false)
-  actionRequired       String?
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
-
-  student User   @relation(fields: [studentUserId], references: [id])
-  school  School @relation(fields: [schoolId], references: [id])
-}
-
-model StudentVaccination {
-  id               String    @id @default(cuid())
-  studentUserId    String
-  schoolId         String
-  vaccineName      String
-  doseNumber       Int?
-  dateAdministered DateTime
-  administeredBy   String?
-  batchNumber      String?
-  nextDoseDate     DateTime?
-  createdAt        DateTime  @default(now())
-
-  student User   @relation(fields: [studentUserId], references: [id])
-  school  School @relation(fields: [schoolId], references: [id])
-}
-
 // =============================================================================
 // LAYER 9 — BEHAVIORAL & COUNSELING
 // migration-02-profiles
 // RESTRICTED: Only counselors and admins.
 // =============================================================================
-
-model BehavioralProfile {
-  id                   String    @id @default(cuid())
-  studentUserId        String
-  schoolId             String
-  academicYearId       String
-  assessedBy           String
-  assessedAt           DateTime
-  personalityType      String?
-  behaviorWithParents  String?
-  behaviorWithPeers    String?
-  behaviorWithTeachers String?
-  selfConfidence       String?
-  industry             String?
-  homeworkCompletion   String?
-  neatness             String?
-  attendanceRegularity String?
-  counselorNotes       String?
-  actionPlan           String?
-  followUpDate         DateTime?
-  createdAt            DateTime  @default(now())
-  updatedAt            DateTime  @updatedAt
-
-  student      User         @relation(fields: [studentUserId], references: [id])
-  school       School       @relation(fields: [schoolId], references: [id])
-  academicYear AcademicYear @relation(fields: [academicYearId], references: [id])
-
-  @@unique([studentUserId, academicYearId])
-}
-
-model CounselingSession {
-  id               String    @id @default(cuid())
-  studentUserId    String
-  schoolId         String
-  counselorUserId  String
-  sessionDate      DateTime
-  sessionType      String
-  reason           String?
-  outcome          String?
-  followUpRequired Boolean   @default(false)
-  followUpDate     DateTime?
-  parentNotified   Boolean   @default(false)
-  createdAt        DateTime  @default(now())
-
-  student   User   @relation("StudentCounselingSessions", fields: [studentUserId], references: [id])
-  counselor User   @relation("CounselorSessions", fields: [counselorUserId], references: [id])
-  school    School @relation(fields: [schoolId], references: [id])
-}
 
 // =============================================================================
 // LAYER 10 — SECURITY
@@ -1339,20 +793,8 @@ model Media {
   schoolLogos           School[]               @relation("SchoolLogo")
   userProfileImages     User[]                 @relation("UserProfileImage")
   qualificationCerts    Qualification[]
-  leaveRecordCerts      LeaveRecord[]
   bookCovers            Book[]                 @relation("BookCover")
   bookThumbnails        Book[]                 @relation("BookThumbnail")
-  vaultFiles            VaultResource[]        @relation("VaultFile")
-  vaultCovers           VaultResource[]        @relation("VaultCover")
-  damageReportPhotos    DamageReportPhoto[]
-  assignmentAttachments AssignmentAttachment[]
-  submissionAttachments SubmissionAttachment[]
-  clubLogos             Club[]
-  clubActivityPhotos    ClubActivityPhoto[]
-  eventPhotos           EventPhoto[]
-  awardMedia            Award[]
-  badgeIcons            Badge[]
-  messageAttachments    MessageAttachment[]
 
   @@index([schoolId, purpose])
 }
@@ -1361,115 +803,6 @@ model Media {
 // LAYER 12 — SCHOOL INFRASTRUCTURE
 // migration-04-infrastructure-academic
 // =============================================================================
-
-model SchoolBuilding {
-  id               String   @id @default(cuid())
-  schoolId         String
-  name             String
-  type             String
-  constructionYear Int?
-  condition        String?
-  floorCount       Int?
-  notes            String?
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-
-  school School @relation(fields: [schoolId], references: [id])
-  rooms  Room[]
-}
-
-model Room {
-  id             String   @id @default(cuid())
-  schoolId       String
-  buildingId     String
-  roomNumber     String
-  type           RoomType
-  capacity       Int?
-  hasElectricity Boolean  @default(false)
-  hasFan         Boolean  @default(false)
-  hasProjector   Boolean  @default(false)
-  hasSmartBoard  Boolean  @default(false)
-  condition      String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  school   School         @relation(fields: [schoolId], references: [id])
-  building SchoolBuilding @relation(fields: [buildingId], references: [id])
-
-  laboratories    Laboratory[]
-  libraryFacility LibraryFacility?
-  classes         Class[]
-  timetableSlots  TimetableSlot[]
-  clubs           Club[]
-}
-
-model Laboratory {
-  id                String   @id @default(cuid())
-  schoolId          String
-  roomId            String?
-  type              LabType
-  isFullyEquipped   Boolean  @default(false)
-  computerCount     Int?
-  internetConnected Boolean?
-  capacity          Int?
-  notes             String?
-  createdAt         DateTime @default(now())
-
-  school School @relation(fields: [schoolId], references: [id])
-  room   Room?  @relation(fields: [roomId], references: [id])
-}
-
-model LibraryFacility {
-  id                    String   @id @default(cuid())
-  schoolId              String   @unique
-  roomId                String?  @unique
-  totalBookCount        Int      @default(0)
-  seatingCapacity       Int?
-  hasELibrary           Boolean  @default(false)
-  eLibraryComputerCount Int?
-  hasInternetAccess     Boolean  @default(false)
-  openingTime           String?
-  closingTime           String?
-  notes                 String?
-  updatedAt             DateTime @updatedAt
-
-  school School @relation(fields: [schoolId], references: [id])
-  room   Room?  @relation(fields: [roomId], references: [id])
-}
-
-model SportsFacility {
-  id        String   @id @default(cuid())
-  schoolId  String
-  name      String
-  type      String
-  sport     String?
-  condition String?
-  capacity  Int?
-  createdAt DateTime @default(now())
-
-  school School @relation(fields: [schoolId], references: [id])
-}
-
-model SchoolVehicle {
-  id                 String   @id @default(cuid())
-  schoolId           String
-  registrationNumber String
-  type               String
-  make               String?
-  model              String?
-  year               Int?
-  capacity           Int?
-  assignedDriverId   String?
-  isActive           Boolean  @default(true)
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
-
-  school          School           @relation(fields: [schoolId], references: [id])
-  assignedDriver  User?            @relation(fields: [assignedDriverId], references: [id])
-  transportRoutes TransportRoute[]
-
-  @@unique([registrationNumber, schoolId])
-}
 
 // =============================================================================
 // LAYER 13 — ACADEMIC STRUCTURE
@@ -1493,10 +826,6 @@ model Subject {
   school School @relation(fields: [schoolId], references: [id])
 
   teacherSubjects TeacherSubject[]
-  timetableSlots  TimetableSlot[]
-  examSubjects    ExamSubject[]
-  assignments     Assignment[]
-  vaultResources  VaultResource[]
 
   @@unique([schoolId, name, gradeRange])
 }
@@ -1526,20 +855,15 @@ model Class {
   section        String
   streamId       String?
   capacity       Int?
-  roomId         String?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
   school       School       @relation(fields: [schoolId], references: [id])
   academicYear AcademicYear @relation(fields: [academicYearId], references: [id])
   stream       Stream?      @relation(fields: [streamId], references: [id])
-  room         Room?        @relation(fields: [roomId], references: [id])
 
   classTeachers    ClassTeacher[]
   classEnrollments ClassEnrollment[]
-  timetableSlots   TimetableSlot[]
-  attendance       Attendance[]
-  assignments      Assignment[]
 
   @@unique([schoolId, academicYearId, grade, section])
 }
@@ -1582,102 +906,11 @@ model ClassEnrollment {
 // migration-04-infrastructure-academic
 // =============================================================================
 
-model TimetablePeriod {
-  id             String   @id @default(cuid())
-  schoolId       String
-  academicYearId String
-  name           String
-  startTime      String
-  endTime        String
-  isBreak        Boolean  @default(false)
-  order          Int
-  createdAt      DateTime @default(now())
-
-  school         School          @relation(fields: [schoolId], references: [id])
-  academicYear   AcademicYear    @relation(fields: [academicYearId], references: [id])
-  timetableSlots TimetableSlot[]
-
-  @@unique([schoolId, academicYearId, order])
-}
-
-model TimetableSlot {
-  id             String   @id @default(cuid())
-  schoolId       String
-  academicYearId String
-  classId        String
-  periodId       String
-  dayOfWeek      Int
-  subjectId      String?
-  teacherUserId  String?
-  roomId         String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  school       School          @relation(fields: [schoolId], references: [id])
-  academicYear AcademicYear    @relation(fields: [academicYearId], references: [id])
-  class        Class           @relation(fields: [classId], references: [id])
-  period       TimetablePeriod @relation(fields: [periodId], references: [id])
-  subject      Subject?        @relation(fields: [subjectId], references: [id])
-  teacher      User?           @relation(fields: [teacherUserId], references: [id])
-  room         Room?           @relation(fields: [roomId], references: [id])
-
-  @@unique([classId, periodId, dayOfWeek])
-}
-
 // =============================================================================
 // LAYER 15 — ATTENDANCE
 // migration-05-attendance-exams
 // Raw SQL: chk_attendance_pct
 // =============================================================================
-
-model Attendance {
-  id             String           @id @default(cuid())
-  schoolId       String
-  studentUserId  String
-  classId        String
-  academicYearId String
-  date           DateTime
-  status         AttendanceStatus
-  arrivalTime    String?
-  excuseReason   String?
-  markedBy       String?
-  markedAt       DateTime?
-  parentNotified Boolean          @default(false)
-  createdAt      DateTime         @default(now())
-  updatedAt      DateTime         @updatedAt
-
-  school       School       @relation(fields: [schoolId], references: [id])
-  student      User         @relation(fields: [studentUserId], references: [id])
-  class        Class        @relation(fields: [classId], references: [id])
-  academicYear AcademicYear @relation(fields: [academicYearId], references: [id])
-
-  @@unique([studentUserId, date])
-  @@index([schoolId, classId, date])
-  @@index([schoolId, status, date])
-}
-
-model AttendanceSummary {
-  id                   String   @id @default(cuid())
-  schoolId             String
-  studentUserId        String
-  academicYearId       String
-  month                Int
-  year                 Int
-  schoolDays           Int
-  presentDays          Int
-  absentDays           Int
-  lateDays             Int
-  excusedDays          Int
-  attendancePercentage Float
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
-
-  school       School       @relation(fields: [schoolId], references: [id])
-  student      User         @relation(fields: [studentUserId], references: [id])
-  academicYear AcademicYear @relation(fields: [academicYearId], references: [id])
-
-  @@unique([studentUserId, academicYearId, month, year])
-}
 
 // =============================================================================
 // LAYER 16 — EXAMINATIONS & RESULTS
@@ -1685,196 +918,10 @@ model AttendanceSummary {
 // Raw SQL: chk_exam_marks
 // =============================================================================
 
-model Exam {
-  id             String   @id @default(cuid())
-  schoolId       String
-  academicYearId String
-  name           String
-  type           ExamType
-  grade          Int?
-  startDate      DateTime
-  endDate        DateTime
-  createdBy      String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  school       School       @relation(fields: [schoolId], references: [id])
-  academicYear AcademicYear @relation(fields: [academicYearId], references: [id])
-
-  examSubjects ExamSubject[]
-  examResults  ExamResult[]
-}
-
-model ExamSubject {
-  id           String    @id @default(cuid())
-  examId       String
-  subjectId    String
-  schoolId     String
-  maxMarks     Float
-  passingMarks Float
-  examDate     DateTime?
-  examTime     String?
-  duration     Int?
-  paperSetBy   String?
-  createdAt    DateTime  @default(now())
-
-  exam    Exam    @relation(fields: [examId], references: [id])
-  subject Subject @relation(fields: [subjectId], references: [id])
-  school  School  @relation(fields: [schoolId], references: [id])
-
-  examResults ExamResult[]
-
-  @@unique([examId, subjectId])
-}
-
-model ExamResult {
-  id            String    @id @default(cuid())
-  schoolId      String
-  examId        String
-  examSubjectId String
-  studentUserId String
-  marksObtained Float?
-  grade         String?
-  isPassed      Boolean?
-  rank          Int?
-  isAbsent      Boolean   @default(false)
-  enteredBy     String?
-  enteredAt     DateTime?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-
-  school      School      @relation(fields: [schoolId], references: [id])
-  exam        Exam        @relation(fields: [examId], references: [id])
-  examSubject ExamSubject @relation(fields: [examSubjectId], references: [id])
-  student     User        @relation(fields: [studentUserId], references: [id])
-
-  @@unique([examSubjectId, studentUserId])
-}
-
-model NationalExamResult {
-  id            String   @id @default(cuid())
-  studentUserId String
-  schoolId      String
-  examType      String
-  year          Int
-  indexNumber   String
-  centerNumber  String?
-  subject       String?
-  result        String?
-  marks         Float?
-  zScore        Float?
-  islandRank    Int?
-  districtRank  Int?
-  verified      Boolean  @default(false)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  student User   @relation(fields: [studentUserId], references: [id])
-  school  School @relation(fields: [schoolId], references: [id])
-}
-
 // =============================================================================
 // LAYER 17 — LMS
 // migration-06-lms-library
 // =============================================================================
-
-model Assignment {
-  id                  String    @id @default(cuid())
-  schoolId            String
-  classId             String
-  subjectId           String
-  createdBy           String
-  title               String
-  description         String?
-  instructions        String?
-  type                String
-  maxScore            Float?
-  weightage           Float?
-  dueDate             DateTime?
-  isPublished         Boolean   @default(false)
-  allowLateSubmission Boolean   @default(false)
-  latePenaltyPercent  Float?
-  createdAt           DateTime  @default(now())
-  updatedAt           DateTime  @updatedAt
-
-  school  School  @relation(fields: [schoolId], references: [id])
-  class   Class   @relation(fields: [classId], references: [id])
-  subject Subject @relation(fields: [subjectId], references: [id])
-  creator User    @relation(fields: [createdBy], references: [id])
-
-  attachments AssignmentAttachment[]
-  submissions Submission[]
-  comments    AssignmentComment[]
-}
-
-model AssignmentAttachment {
-  id           String   @id @default(cuid())
-  assignmentId String
-  schoolId     String
-  mediaId      String
-  displayName  String?
-  createdAt    DateTime @default(now())
-
-  assignment Assignment @relation(fields: [assignmentId], references: [id])
-  school     School     @relation(fields: [schoolId], references: [id])
-  media      Media      @relation(fields: [mediaId], references: [id])
-}
-
-model Submission {
-  id            String    @id @default(cuid())
-  assignmentId  String
-  studentUserId String
-  schoolId      String
-  textContent   String?
-  submittedAt   DateTime?
-  isLate        Boolean   @default(false)
-  score         Float?
-  grade         String?
-  feedback      String?
-  gradedBy      String?
-  gradedAt      DateTime?
-  status        String    @default("DRAFT")
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-
-  assignment Assignment @relation(fields: [assignmentId], references: [id])
-  student    User       @relation(fields: [studentUserId], references: [id])
-  school     School     @relation(fields: [schoolId], references: [id])
-
-  attachments SubmissionAttachment[]
-  comments    AssignmentComment[]
-
-  @@unique([assignmentId, studentUserId])
-}
-
-model SubmissionAttachment {
-  id           String   @id @default(cuid())
-  submissionId String
-  schoolId     String
-  mediaId      String
-  createdAt    DateTime @default(now())
-
-  submission Submission @relation(fields: [submissionId], references: [id])
-  school     School     @relation(fields: [schoolId], references: [id])
-  media      Media      @relation(fields: [mediaId], references: [id])
-}
-
-model AssignmentComment {
-  id           String    @id @default(cuid())
-  assignmentId String
-  submissionId String?
-  authorUserId String
-  schoolId     String
-  content      String
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  deletedAt    DateTime?
-
-  assignment Assignment  @relation(fields: [assignmentId], references: [id])
-  submission Submission? @relation(fields: [submissionId], references: [id])
-  author     User        @relation(fields: [authorUserId], references: [id])
-  school     School      @relation(fields: [schoolId], references: [id])
-}
 
 // =============================================================================
 // LAYER 18 — LIBRARY (NEXUS)
@@ -1929,10 +976,6 @@ model Book {
   thumbnail Media? @relation("BookThumbnail", fields: [thumbnailMediaId], references: [id])
 
   copies          BookCopy[]
-  reservations    Reservation[]
-  reviews         Review[]
-  bookRequests    BookRequest[]
-  bookSuggestions BookSuggestion[]
 
   @@unique([catalogNumber, schoolId])
   @@unique([isbn13, schoolId])
@@ -1954,7 +997,6 @@ model BookCopy {
   school School @relation(fields: [schoolId], references: [id])
 
   loans         Loan[]
-  damageReports DamageReport[]
 
   @@unique([code, schoolId])
   @@index([bookId, status])
@@ -1986,8 +1028,6 @@ model Loan {
   copy   BookCopy @relation(fields: [copyId], references: [id])
 
   fines          Fine[]
-  damageReports  DamageReport[]
-  readingHistory ReadingHistory[]
 
   @@index([schoolId, userId])
   @@index([schoolId, status])
@@ -2025,169 +1065,6 @@ model Fine {
   @@index([schoolId, status, createdAt])
 }
 
-model Reservation {
-  id               String            @id @default(cuid())
-  schoolId         String
-  userId           String
-  bookId           String
-  requestedAt      DateTime          @default(now())
-  availableAt      DateTime?
-  expiresAt        DateTime?
-  claimedAt        DateTime?
-  status           ReservationStatus @default(PENDING)
-  queuePosition    Int
-  notificationSent Boolean           @default(false)
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @updatedAt
-
-  school School @relation(fields: [schoolId], references: [id])
-  user   User   @relation(fields: [userId], references: [id])
-  book   Book   @relation(fields: [bookId], references: [id])
-
-  // Partial unique index via raw SQL (migration-06):
-  // CREATE UNIQUE INDEX reservation_unique_active
-  //   ON "Reservation" ("userId", "bookId")
-  //   WHERE status IN ('PENDING', 'AVAILABLE');
-}
-
-model DamageReport {
-  id            String         @id @default(cuid())
-  schoolId      String
-  copyId        String
-  loanId        String?
-  reportedBy    String
-  severity      DamageSeverity
-  description   String
-  repairCostLKR Decimal?       @db.Decimal(10, 2)
-  repairedAt    DateTime?
-  withdrawn     Boolean        @default(false)
-  reportedAt    DateTime       @default(now())
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-
-  school School   @relation(fields: [schoolId], references: [id])
-  copy   BookCopy @relation(fields: [copyId], references: [id])
-  loan   Loan?    @relation(fields: [loanId], references: [id])
-
-  photos DamageReportPhoto[]
-}
-
-model DamageReportPhoto {
-  id        String   @id @default(cuid())
-  reportId  String
-  mediaId   String
-  schoolId  String
-  caption   String?
-  order     Int
-  createdAt DateTime @default(now())
-
-  report DamageReport @relation(fields: [reportId], references: [id])
-  media  Media        @relation(fields: [mediaId], references: [id])
-  school School       @relation(fields: [schoolId], references: [id])
-
-  @@unique([reportId, mediaId])
-}
-
-model Review {
-  id          String    @id @default(cuid())
-  schoolId    String
-  userId      String
-  bookId      String
-  rating      Int
-  comment     String?
-  approved    Boolean   @default(false)
-  moderatedBy String?
-  moderatedAt DateTime?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-
-  school School @relation(fields: [schoolId], references: [id])
-  user   User   @relation(fields: [userId], references: [id])
-  book   Book   @relation(fields: [bookId], references: [id])
-
-  @@unique([userId, bookId])
-}
-
-model ReadingHistory {
-  id             String    @id @default(cuid())
-  schoolId       String
-  userId         String
-  loanId         String?
-  bookId         String
-  bookTitle      String
-  bookAuthors    String[]
-  bookCategories String[]
-  borrowDate     DateTime
-  returnDate     DateTime?
-  createdAt      DateTime  @default(now())
-
-  school School @relation(fields: [schoolId], references: [id])
-  user   User   @relation(fields: [userId], references: [id])
-  loan   Loan?  @relation(fields: [loanId], references: [id])
-}
-
-model BookRequest {
-  id          String        @id @default(cuid())
-  schoolId    String
-  userId      String
-  title       String
-  author      String?
-  isbn        String?
-  reason      String
-  priority    Int           @default(1)
-  status      RequestStatus @default(PENDING)
-  reviewedBy  String?
-  reviewedAt  DateTime?
-  reviewNotes String?
-  orderedAt   DateTime?
-  receivedAt  DateTime?
-  bookId      String?
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-
-  school School @relation(fields: [schoolId], references: [id])
-  user   User   @relation(fields: [userId], references: [id])
-  book   Book?  @relation(fields: [bookId], references: [id])
-}
-
-model BookSuggestion {
-  id        String   @id @default(cuid())
-  schoolId  String
-  userId    String
-  bookId    String
-  reason    String
-  score     Float
-  basedOn   String[]
-  shown     Boolean  @default(false)
-  clicked   Boolean  @default(false)
-  borrowed  Boolean  @default(false)
-  expiresAt DateTime
-  createdAt DateTime @default(now())
-
-  school School @relation(fields: [schoolId], references: [id])
-  user   User   @relation(fields: [userId], references: [id])
-  book   Book   @relation(fields: [bookId], references: [id])
-}
-
-// Library-scoped read-only notice board.
-// Distinct from MessageThread type=ANNOUNCEMENT (interactive, can reply).
-model Announcement {
-  id           String           @id @default(cuid())
-  schoolId     String
-  title        String
-  message      String
-  type         AnnouncementType @default(GENERAL)
-  targetRoles  String[]
-  targetGrades Int[]
-  isPinned     Boolean          @default(false)
-  showUntil    DateTime?
-  createdBy    String
-  createdAt    DateTime         @default(now())
-  updatedAt    DateTime         @updatedAt
-
-  school School @relation(fields: [schoolId], references: [id])
-}
-
 model LibraryConfig {
   id                    String   @id @default(cuid())
   schoolId              String   @unique
@@ -2216,551 +1093,35 @@ model LibraryConfig {
 // Script:  backfill default shelves for existing users after migration-07 runs
 // =============================================================================
 
-model VaultResource {
-  id              String               @id @default(cuid())
-  schoolId        String
-  title           String
-  description     String?
-  type            VaultResourceType
-  grade           Int?
-  subjectId       String?
-  year            Int?
-  medium          MediumOfInstruction?
-  fileMediaId     String
-  coverMediaId    String?
-  isPublic        Boolean              @default(true)
-  sourceType      VaultSourceType      @default(MANUAL_UPLOAD)
-  sourceUrl       String?
-  downloadCount   Int                  @default(0)
-  viewCount       Int                  @default(0)
-  readerOpenCount Int                  @default(0)
-  uploadedBy      String?
-  createdAt       DateTime             @default(now())
-  updatedAt       DateTime             @updatedAt
-  deletedAt       DateTime?
-
-  school  School   @relation(fields: [schoolId], references: [id])
-  subject Subject? @relation(fields: [subjectId], references: [id])
-  file    Media    @relation("VaultFile", fields: [fileMediaId], references: [id])
-  cover   Media?   @relation("VaultCover", fields: [coverMediaId], references: [id])
-
-  readingProgress VaultReadingProgress[]
-  readingSessions VaultReadingSession[]
-  downloadLogs    VaultDownloadLog[]
-  searchLogs      VaultSearchLog[]
-  shelfItems      VaultShelfItem[]
-}
-
-model VaultReadingProgress {
-  id              String   @id @default(cuid())
-  schoolId        String
-  userId          String
-  resourceId      String
-  progressType    String
-  cfiPosition     String?
-  pageNumber      Int?
-  totalPages      Int?
-  percentComplete Float?
-  lastOpenedAt    DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-
-  school   School        @relation(fields: [schoolId], references: [id])
-  user     User          @relation(fields: [userId], references: [id])
-  resource VaultResource @relation(fields: [resourceId], references: [id])
-
-  @@unique([userId, resourceId])
-}
-
-model VaultReadingSession {
-  id              String    @id @default(cuid())
-  schoolId        String
-  userId          String
-  resourceId      String
-  sessionDate     DateTime
-  startedAt       DateTime  @default(now())
-  endedAt         DateTime?
-  durationSeconds Int?
-  createdAt       DateTime  @default(now())
-
-  school   School        @relation(fields: [schoolId], references: [id])
-  user     User          @relation(fields: [userId], references: [id])
-  resource VaultResource @relation(fields: [resourceId], references: [id])
-}
-
-model VaultDownloadLog {
-  id           String   @id @default(cuid())
-  schoolId     String
-  userId       String
-  resourceId   String
-  downloadedAt DateTime @default(now())
-  ipAddress    String?
-
-  school   School        @relation(fields: [schoolId], references: [id])
-  user     User          @relation(fields: [userId], references: [id])
-  resource VaultResource @relation(fields: [resourceId], references: [id])
-
-  @@index([resourceId, userId, downloadedAt])
-  @@index([schoolId, downloadedAt])
-}
-
-model VaultSearchLog {
-  id                    String   @id @default(cuid())
-  schoolId              String
-  userId                String?
-  query                 String
-  resultCount           Int
-  clickedResourceId     String?
-  downloadedAfterSearch Boolean  @default(false)
-  searchedAt            DateTime @default(now())
-
-  school          School         @relation(fields: [schoolId], references: [id])
-  user            User?          @relation(fields: [userId], references: [id])
-  clickedResource VaultResource? @relation(fields: [clickedResourceId], references: [id])
-}
-
-// Default shelves seeded per user after migration-07:
-//   "Want to Read" (isDefault: true), "Currently Reading", "Completed"
-// Partial unique index (at most one isDefault=true per user) via raw SQL:
-//   CREATE UNIQUE INDEX vault_shelf_one_default
-//     ON "VaultShelf" ("userId") WHERE "isDefault" = true;
-model VaultShelf {
-  id        String   @id @default(cuid())
-  schoolId  String
-  userId    String
-  name      String
-  isDefault Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  school School           @relation(fields: [schoolId], references: [id])
-  user   User             @relation(fields: [userId], references: [id])
-  items  VaultShelfItem[]
-}
-
-model VaultShelfItem {
-  id         String   @id @default(cuid())
-  shelfId    String
-  resourceId String
-  schoolId   String
-  addedAt    DateTime @default(now())
-  note       String?
-
-  shelf    VaultShelf    @relation(fields: [shelfId], references: [id])
-  resource VaultResource @relation(fields: [resourceId], references: [id])
-  school   School        @relation(fields: [schoolId], references: [id])
-
-  @@unique([shelfId, resourceId])
-}
-
-model VaultSearchAnalytics {
-  id              String   @id @default(cuid())
-  schoolId        String
-  query           String
-  searchCount     Int      @default(0)
-  zeroResultCount Int      @default(0)
-  lastSearchedAt  DateTime
-  updatedAt       DateTime @updatedAt
-
-  school School @relation(fields: [schoolId], references: [id])
-
-  @@unique([schoolId, query])
-}
-
 // =============================================================================
 // LAYER 20 — CLUBS & ACTIVITIES
 // migration-08-school-life
 // =============================================================================
-
-model Club {
-  id                String   @id @default(cuid())
-  schoolId          String
-  academicYearId    String
-  name              String
-  description       String?
-  category          String?
-  teacherInChargeId String?
-  meetingDay        String?
-  meetingTime       String?
-  roomId            String?
-  maxMembers        Int?
-  logoMediaId       String?
-  isActive          Boolean  @default(true)
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
-
-  school          School       @relation(fields: [schoolId], references: [id])
-  academicYear    AcademicYear @relation(fields: [academicYearId], references: [id])
-  teacherInCharge User?        @relation(fields: [teacherInChargeId], references: [id])
-  room            Room?        @relation(fields: [roomId], references: [id])
-  logo            Media?       @relation(fields: [logoMediaId], references: [id])
-
-  memberships    ClubMembership[]
-  meetingRecords ClubMeetingRecord[]
-  activityLogs   ClubActivityLog[]
-}
-
-model ClubMembership {
-  id             String    @id @default(cuid())
-  clubId         String
-  studentUserId  String
-  schoolId       String
-  academicYearId String
-  role           String    @default("MEMBER")
-  joinedAt       DateTime  @default(now())
-  leftAt         DateTime?
-  status         String    @default("ACTIVE")
-  createdAt      DateTime  @default(now())
-
-  club         Club         @relation(fields: [clubId], references: [id])
-  student      User         @relation(fields: [studentUserId], references: [id])
-  school       School       @relation(fields: [schoolId], references: [id])
-  academicYear AcademicYear @relation(fields: [academicYearId], references: [id])
-
-  @@unique([clubId, studentUserId, academicYearId])
-}
-
-model ClubMeetingRecord {
-  id            String   @id @default(cuid())
-  clubId        String
-  schoolId      String
-  meetingDate   DateTime
-  agenda        String?
-  minutes       String?
-  attendeeCount Int?
-  recordedBy    String?
-  createdAt     DateTime @default(now())
-
-  club   Club   @relation(fields: [clubId], references: [id])
-  school School @relation(fields: [schoolId], references: [id])
-}
-
-model ClubActivityLog {
-  id             String   @id @default(cuid())
-  clubId         String
-  schoolId       String
-  academicYearId String
-  title          String
-  date           DateTime
-  venue          String?
-  result         String?
-  notes          String?
-  createdAt      DateTime @default(now())
-
-  club         Club         @relation(fields: [clubId], references: [id])
-  school       School       @relation(fields: [schoolId], references: [id])
-  academicYear AcademicYear @relation(fields: [academicYearId], references: [id])
-
-  participants ClubActivityParticipant[]
-  photos       ClubActivityPhoto[]
-}
-
-model ClubActivityParticipant {
-  id            String   @id @default(cuid())
-  activityLogId String
-  studentUserId String
-  schoolId      String
-  result        String?
-  createdAt     DateTime @default(now())
-
-  activityLog ClubActivityLog @relation(fields: [activityLogId], references: [id])
-  student     User            @relation(fields: [studentUserId], references: [id])
-  school      School          @relation(fields: [schoolId], references: [id])
-
-  @@unique([activityLogId, studentUserId])
-}
-
-model ClubActivityPhoto {
-  id            String   @id @default(cuid())
-  activityLogId String
-  mediaId       String
-  schoolId      String
-  caption       String?
-  order         Int
-  createdAt     DateTime @default(now())
-
-  activityLog ClubActivityLog @relation(fields: [activityLogId], references: [id])
-  media       Media           @relation(fields: [mediaId], references: [id])
-  school      School          @relation(fields: [schoolId], references: [id])
-}
 
 // =============================================================================
 // LAYER 21 — EVENTS
 // migration-08-school-life
 // =============================================================================
 
-model SchoolEvent {
-  id             String   @id @default(cuid())
-  schoolId       String
-  academicYearId String
-  title          String
-  description    String?
-  type           String
-  startDate      DateTime
-  endDate        DateTime
-  venue          String?
-  targetRoles    String[]
-  targetGrades   Int[]
-  organizedBy    String?
-  isPublic       Boolean  @default(false)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  school       School       @relation(fields: [schoolId], references: [id])
-  academicYear AcademicYear @relation(fields: [academicYearId], references: [id])
-
-  participants EventParticipant[]
-  photos       EventPhoto[]
-}
-
-model EventParticipant {
-  id           String   @id @default(cuid())
-  eventId      String
-  userId       String
-  schoolId     String
-  role         String?
-  result       String?
-  attended     Boolean  @default(false)
-  registeredAt DateTime @default(now())
-
-  event  SchoolEvent @relation(fields: [eventId], references: [id])
-  user   User        @relation(fields: [userId], references: [id])
-  school School      @relation(fields: [schoolId], references: [id])
-
-  @@unique([eventId, userId])
-}
-
-model EventPhoto {
-  id        String   @id @default(cuid())
-  eventId   String
-  mediaId   String
-  schoolId  String
-  caption   String?
-  order     Int
-  createdAt DateTime @default(now())
-
-  event  SchoolEvent @relation(fields: [eventId], references: [id])
-  media  Media       @relation(fields: [mediaId], references: [id])
-  school School      @relation(fields: [schoolId], references: [id])
-}
-
 // =============================================================================
 // LAYER 22 — DISCIPLINARY
 // migration-08-school-life
 // =============================================================================
-
-model DisciplinaryRecord {
-  id               String    @id @default(cuid())
-  studentUserId    String
-  schoolId         String
-  academicYearId   String
-  reportedBy       String
-  incidentDate     DateTime
-  type             String
-  description      String
-  severity         String
-  parentNotified   Boolean   @default(false)
-  parentNotifiedAt DateTime?
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
-
-  student      User         @relation(fields: [studentUserId], references: [id])
-  school       School       @relation(fields: [schoolId], references: [id])
-  academicYear AcademicYear @relation(fields: [academicYearId], references: [id])
-
-  actions   DisciplinaryAction[]
-  witnesses DisciplinaryWitness[]
-}
-
-model DisciplinaryAction {
-  id            String    @id @default(cuid())
-  recordId      String
-  schoolId      String
-  actionType    String
-  issuedBy      String
-  issuedAt      DateTime  @default(now())
-  effectiveFrom DateTime?
-  effectiveTo   DateTime?
-  notes         String?
-  createdAt     DateTime  @default(now())
-
-  record DisciplinaryRecord @relation(fields: [recordId], references: [id])
-  school School             @relation(fields: [schoolId], references: [id])
-}
-
-model DisciplinaryWitness {
-  id            String   @id @default(cuid())
-  recordId      String
-  witnessUserId String
-  schoolId      String
-  statement     String?
-  createdAt     DateTime @default(now())
-
-  record  DisciplinaryRecord @relation(fields: [recordId], references: [id])
-  witness User               @relation(fields: [witnessUserId], references: [id])
-  school  School             @relation(fields: [schoolId], references: [id])
-
-  @@unique([recordId, witnessUserId])
-}
 
 // =============================================================================
 // LAYER 23 — AWARDS & ACHIEVEMENTS
 // migration-08-school-life
 // =============================================================================
 
-model Award {
-  id          String   @id @default(cuid())
-  schoolId    String
-  name        String
-  description String?
-  category    String?
-  mediaId     String?
-  createdAt   DateTime @default(now())
-
-  school     School           @relation(fields: [schoolId], references: [id])
-  awardMedia Media?           @relation(fields: [mediaId], references: [id])
-  recipients AwardRecipient[]
-}
-
-model AwardRecipient {
-  id             String   @id @default(cuid())
-  awardId        String
-  userId         String
-  schoolId       String
-  academicYearId String
-  awardedAt      DateTime
-  awardedBy      String?
-  ceremony       String?
-  notes          String?
-  createdAt      DateTime @default(now())
-
-  award        Award        @relation(fields: [awardId], references: [id])
-  user         User         @relation(fields: [userId], references: [id])
-  school       School       @relation(fields: [schoolId], references: [id])
-  academicYear AcademicYear @relation(fields: [academicYearId], references: [id])
-}
-
 // =============================================================================
 // LAYER 24 — TRANSPORT
 // migration-08-school-life
 // =============================================================================
 
-model TransportRoute {
-  id                     String   @id @default(cuid())
-  schoolId               String
-  name                   String
-  description            String?
-  vehicleId              String?
-  driverUserId           String?
-  morningDepartureTime   String?
-  afternoonDepartureTime String?
-  isActive               Boolean  @default(true)
-  createdAt              DateTime @default(now())
-  updatedAt              DateTime @updatedAt
-
-  school  School         @relation(fields: [schoolId], references: [id])
-  vehicle SchoolVehicle? @relation(fields: [vehicleId], references: [id])
-  driver  User?          @relation(fields: [driverUserId], references: [id])
-
-  stops       TransportStop[]
-  enrollments TransportEnrollment[]
-}
-
-model TransportStop {
-  id            String   @id @default(cuid())
-  routeId       String
-  schoolId      String
-  name          String
-  addressId     String?
-  stopOrder     Int
-  morningTime   String?
-  afternoonTime String?
-  createdAt     DateTime @default(now())
-
-  route   TransportRoute @relation(fields: [routeId], references: [id])
-  school  School         @relation(fields: [schoolId], references: [id])
-  address Address?       @relation(fields: [addressId], references: [id])
-
-  enrollments TransportEnrollment[]
-}
-
-model TransportEnrollment {
-  id             String   @id @default(cuid())
-  routeId        String
-  stopId         String
-  studentUserId  String
-  schoolId       String
-  academicYearId String
-  enrolledAt     DateTime @default(now())
-  status         String   @default("ACTIVE")
-  createdAt      DateTime @default(now())
-
-  route        TransportRoute @relation(fields: [routeId], references: [id])
-  stop         TransportStop  @relation(fields: [stopId], references: [id])
-  student      User           @relation(fields: [studentUserId], references: [id])
-  school       School         @relation(fields: [schoolId], references: [id])
-  academicYear AcademicYear   @relation(fields: [academicYearId], references: [id])
-
-  @@unique([studentUserId, academicYearId])
-}
-
 // =============================================================================
 // LAYER 25 — FEE MANAGEMENT
 // migration-08-school-life
 // =============================================================================
-
-model FeeCategory {
-  id          String   @id @default(cuid())
-  schoolId    String
-  name        String
-  description String?
-  isRecurring Boolean  @default(false)
-  frequency   String?
-  createdAt   DateTime @default(now())
-
-  school        School         @relation(fields: [schoolId], references: [id])
-  feeStructures FeeStructure[]
-}
-
-model FeeStructure {
-  id             String    @id @default(cuid())
-  feeCategoryId  String
-  schoolId       String
-  academicYearId String
-  grade          Int?
-  role           Role?
-  amountLKR      Decimal   @db.Decimal(10, 2)
-  dueDateFirst   DateTime?
-  dueDateSecond  DateTime?
-  createdAt      DateTime  @default(now())
-
-  feeCategory  FeeCategory  @relation(fields: [feeCategoryId], references: [id])
-  school       School       @relation(fields: [schoolId], references: [id])
-  academicYear AcademicYear @relation(fields: [academicYearId], references: [id])
-
-  payments FeePayment[]
-}
-
-model FeePayment {
-  id             String   @id @default(cuid())
-  feeStructureId String
-  userId         String
-  schoolId       String
-  academicYearId String
-  amountPaidLKR  Decimal  @db.Decimal(10, 2)
-  paidAt         DateTime
-  paymentMethod  String
-  receiptNumber  String
-  collectedBy    String?
-  notes          String?
-  createdAt      DateTime @default(now())
-
-  feeStructure FeeStructure @relation(fields: [feeStructureId], references: [id])
-  user         User         @relation(fields: [userId], references: [id])
-  school       School       @relation(fields: [schoolId], references: [id])
-  academicYear AcademicYear @relation(fields: [academicYearId], references: [id])
-
-  @@unique([receiptNumber, schoolId])
-}
 
 // =============================================================================
 // LAYER 26 — INTERNAL MESSAGING
@@ -2768,68 +1129,6 @@ model FeePayment {
 // Note: type=ANNOUNCEMENT = interactive admin broadcast (users can reply).
 // Distinct from the library Announcement table (read-only notice board).
 // =============================================================================
-
-model MessageThread {
-  id            String    @id @default(cuid())
-  schoolId      String
-  subject       String?
-  type          String    @default("DIRECT")
-  createdBy     String
-  lastMessageAt DateTime?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-
-  school  School @relation(fields: [schoolId], references: [id])
-  creator User   @relation(fields: [createdBy], references: [id])
-
-  participants ThreadParticipant[]
-  messages     Message[]
-}
-
-model ThreadParticipant {
-  id         String    @id @default(cuid())
-  threadId   String
-  userId     String
-  schoolId   String
-  lastReadAt DateTime?
-  joinedAt   DateTime  @default(now())
-  isAdmin    Boolean   @default(false)
-
-  thread MessageThread @relation(fields: [threadId], references: [id])
-  user   User          @relation(fields: [userId], references: [id])
-  school School        @relation(fields: [schoolId], references: [id])
-
-  @@unique([threadId, userId])
-}
-
-model Message {
-  id           String    @id @default(cuid())
-  threadId     String
-  senderUserId String
-  schoolId     String
-  content      String
-  sentAt       DateTime  @default(now())
-  editedAt     DateTime?
-  deletedAt    DateTime?
-
-  thread MessageThread @relation(fields: [threadId], references: [id])
-  sender User          @relation(fields: [senderUserId], references: [id])
-  school School        @relation(fields: [schoolId], references: [id])
-
-  attachments MessageAttachment[]
-}
-
-model MessageAttachment {
-  id        String   @id @default(cuid())
-  messageId String
-  mediaId   String
-  schoolId  String
-  createdAt DateTime @default(now())
-
-  message Message @relation(fields: [messageId], references: [id])
-  media   Media   @relation(fields: [mediaId], references: [id])
-  school  School  @relation(fields: [schoolId], references: [id])
-}
 
 // =============================================================================
 // LAYER 27 — ENGAGEMENT & GAMIFICATION
@@ -2846,133 +1145,13 @@ model MessageAttachment {
 // type:manual = awarded by librarian/admin only. Evaluation job skips these.
 // =============================================================================
 
-model UserGamification {
-  id                    String    @id @default(cuid())
-  userId                String    @unique
-  schoolId              String
-  currentStreak         Int       @default(0)
-  longestStreak         Int       @default(0)
-  streakFreezeAvailable Boolean   @default(true)
-  lastActivityDate      DateTime?
-  totalBooksRead        Int       @default(0)
-  totalVaultDownloads   Int       @default(0)
-  totalVaultReadMinutes Int       @default(0)
-  totalGenresExplored   Int       @default(0)
-  totalReviews          Int       @default(0)
-  points                Int       @default(0)
-  level                 Int       @default(1)
-  gradeRank             Int?
-  schoolRank            Int?
-  optedInLeaderboard    Boolean   @default(true)
-  updatedAt             DateTime  @updatedAt
-
-  user   User   @relation(fields: [userId], references: [id])
-  school School @relation(fields: [schoolId], references: [id])
-
-  @@index([schoolId, points])
-}
-
-model Badge {
-  id          String   @id @default(cuid())
-  schoolId    String?
-  code        String   @unique
-  name        String
-  description String
-  tier        Int
-  iconMediaId String?
-  criteria    Json
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-
-  school     School?     @relation(fields: [schoolId], references: [id])
-  iconMedia  Media?      @relation(fields: [iconMediaId], references: [id])
-  userBadges UserBadge[]
-}
-
-model UserBadge {
-  id          String   @id @default(cuid())
-  userId      String
-  badgeId     String
-  schoolId    String
-  earnedAt    DateTime @default(now())
-  triggerData Json?
-
-  user   User   @relation(fields: [userId], references: [id])
-  badge  Badge  @relation(fields: [badgeId], references: [id])
-  school School @relation(fields: [schoolId], references: [id])
-
-  @@unique([userId, badgeId])
-}
-
 // =============================================================================
 // LAYER 28 — NOTIFICATIONS
 // migration-09-engagement-analytics
 // =============================================================================
-
-model Notification {
-  id            String              @id @default(cuid())
-  schoolId      String
-  userId        String
-  type          NotificationType
-  channel       NotificationChannel
-  title         String
-  message       String
-  actionUrl     String?
-  sent          Boolean             @default(false)
-  sentAt        DateTime?
-  read          Boolean             @default(false)
-  readAt        DateTime?
-  retryCount    Int                 @default(0)
-  lastRetryAt   DateTime?
-  failureReason String?
-  createdAt     DateTime            @default(now())
-
-  school School @relation(fields: [schoolId], references: [id])
-  user   User   @relation(fields: [userId], references: [id])
-
-  @@index([userId, read])
-  @@index([schoolId, sent])
-  @@index([schoolId, type, createdAt])
-}
-
-model NotificationPreference {
-  id              String           @id @default(cuid())
-  userId          String
-  schoolId        String
-  type            NotificationType
-  emailEnabled    Boolean          @default(true)
-  whatsappEnabled Boolean          @default(true)
-  inAppEnabled    Boolean          @default(true)
-  updatedAt       DateTime         @updatedAt
-
-  user   User   @relation(fields: [userId], references: [id])
-  school School @relation(fields: [schoolId], references: [id])
-
-  @@unique([userId, type])
-}
 
 // =============================================================================
 // LAYER 29 — ANALYTICS & CONFIGURATION
 // migration-09-engagement-analytics
 // =============================================================================
 
-model DailyStatistics {
-  id                String   @id @default(cuid())
-  schoolId          String
-  date              DateTime
-  totalCheckouts    Int      @default(0)
-  totalReturns      Int      @default(0)
-  newReservations   Int      @default(0)
-  finesIssuedLKR    Decimal  @default(0) @db.Decimal(10, 2)
-  finesCollectedLKR Decimal  @default(0) @db.Decimal(10, 2)
-  activeUsers       Int      @default(0)
-  newUsers          Int      @default(0)
-  vaultDownloads    Int      @default(0)
-  vaultViews        Int      @default(0)
-  vaultUniqueUsers  Int      @default(0)
-  createdAt         DateTime @default(now())
-
-  school School @relation(fields: [schoolId], references: [id])
-
-  @@unique([schoolId, date])
-}
