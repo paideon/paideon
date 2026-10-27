@@ -1,1 +1,0 @@
-export { AmbientEmbers } from './AmbientEmbers';
