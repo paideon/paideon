@@ -1,7 +1,6 @@
 export * from './atoms';
 export * from './cards';
 export * from './dev';
-export * from './effects';
 export * from './forms';
 export * from './icons';
 export * from './layout';
@@ -12,5 +11,4 @@ export * from './overlays';
 export * from './page-states';
 export * from './sections';
 export * from './typography';
-export * from './utilities';
 export * from './visualization';
