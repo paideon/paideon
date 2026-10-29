@@ -33,15 +33,12 @@ export class AuthService {
     dto: LoginRequestData,
     context: { ipAddress: string; userAgent?: string },
   ) {
-    const isPaideonId = dto.identifier.includes('-');
+    const isEmail = dto.identifier.includes('@');
 
-    // FIX 1: email is not unique alone in our schema.
-    // It is part of a compound unique (email + schoolId).
-    // So we use findFirst instead of findUnique.
     const user = await this.prisma.user.findFirst({
-      where: isPaideonId
-        ? { paideonId: dto.identifier }
-        : { email: dto.identifier },
+      where: isEmail
+        ? { email: dto.identifier }
+        : { paideonId: dto.identifier },
     });
 
     if (!user) return this.rejectLogin(dto.identifier, context);
