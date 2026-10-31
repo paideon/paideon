@@ -8,8 +8,8 @@ import { Button, FormErrorMessage, Input, PasswordInput } from '@paideon/ui';
 import {
   ApiError,
   apiFetch,
+  fetchCurrentUser,
   setAccessToken,
-  type CurrentUser,
 } from '@/lib/api';
 import { fieldErrors } from '@/lib/form-errors';
 import { postLoginPath } from '@/lib/routes';
@@ -22,9 +22,11 @@ type LoginResponse = {
 type Props = {
   /** Called when the account exists but has not been activated yet. */
   onNeedsActivation: (email: string) => void;
+  /** Page the person was heading to before being sent to sign in (from ?next=). */
+  next?: string | null;
 };
 
-export function LoginForm({ onNeedsActivation }: Props) {
+export function LoginForm({ onNeedsActivation, next }: Props) {
   const router = useRouter();
   const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
@@ -55,8 +57,9 @@ export function LoginForm({ onNeedsActivation }: Props) {
       if (!token) throw new Error('The server did not return an access token.');
       setAccessToken(token);
 
-      const user = await apiFetch<CurrentUser>('/auth/me');
-      router.replace(postLoginPath(user)); // stay in the loading state while navigating
+      const user = await fetchCurrentUser();
+      // Back to the page they came from (checked by safeNext), else /home.
+      router.replace(postLoginPath(user, next)); // stay in the loading state while navigating
     } catch (cause) {
       setLoading(false);
       if (cause instanceof ApiError && cause.code === 'EMAIL_NOT_VERIFIED') {
