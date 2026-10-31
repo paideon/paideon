@@ -4,12 +4,14 @@ import {
   HttpCode,
   HttpStatus,
   Post,
+  Param,
   Req,
   Res,
   UseGuards,
 } from '@nestjs/common';
 import type { Request, Response } from 'express';
 import {
+  capabilitiesForRole,
   ConfirmActivationSchema,
   ForgotPasswordSchema,
   LoginRequestSchema,
@@ -25,6 +27,7 @@ import type {
 } from '@paideon/contracts';
 import { ZodBody } from '../../common/pipes/zod-validation.pipe';
 import { AuthService } from './auth.service';
+import { ActivationLookupService } from './activation-lookup.service';
 import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { ThrottlerGuard, Throttle } from '@nestjs/throttler';
@@ -33,7 +36,10 @@ import type { JwtPayload } from './types/jwt-payload.type';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private activationLookup: ActivationLookupService,
+  ) {}
 
   // ─────────────────────────────────────────────────────────────
   // POST /api/auth/activate
@@ -51,6 +57,19 @@ export class AuthController {
       message:
         'If this email is registered, you will receive an activation link.',
     };
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // GET /api/auth/activate/:token
+  // ─────────────────────────────────────────────────────────────
+  // The activation page asks who the link belongs to. Does NOT consume
+  // the token. Throttled because it is a public token oracle.
+
+  @Get('activate/:token')
+  @UseGuards(ThrottlerGuard)
+  @Throttle({ default: { limit: 20, ttl: 60_000 } })
+  async describeActivation(@Param('token') token: string) {
+    return this.activationLookup.describe(token);
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -99,7 +118,14 @@ export class AuthController {
   @Get('me')
   @UseGuards(JwtAuthGuard)
   async me(@CurrentUser() user: JwtPayload) {
-    return this.authService.getCurrentUser(user.sub);
+    const me = await this.authService.getCurrentUser(user.sub);
+    // photoUrl: no photo storage yet. capabilities: derived from the role
+    // until the database stores grants (see capability-presets.ts).
+    return {
+      ...me,
+      photoUrl: null,
+      capabilities: capabilitiesForRole(me.role),
+    };
   }
 
   // ─────────────────────────────────────────────────────────────

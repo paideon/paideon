@@ -17,6 +17,13 @@ import type {
 import { PrismaService } from '../prisma/prisma.service';
 import { JwtPayload } from './types/jwt-payload.type';
 
+// Lockout: after this many failed sign-ins for one identifier inside the
+// window (counted since its last successful sign-in), further attempts are
+// refused for the rest of the window, even with the right password.
+const LOCKOUT_MAX_FAILURES = 5;
+const LOCKOUT_WINDOW_MS = 15 * 60 * 1000;
+const LOCKED_REASON = 'Account temporarily locked';
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -34,6 +41,17 @@ export class AuthService {
     context: { ipAddress: string; userAgent?: string },
   ) {
     const isEmail = dto.identifier.includes('@');
+
+    // Same "Invalid credentials" response as a wrong password, so the
+    // lockout does not reveal whether the account exists.
+    if (await this.isLockedOut(dto.identifier)) {
+      return this.rejectLogin(
+        dto.identifier,
+        context,
+        new UnauthorizedException('Invalid credentials'),
+        LOCKED_REASON,
+      );
+    }
 
     const user = await this.prisma.user.findFirst({
       where: isEmail
@@ -409,10 +427,33 @@ export class AuthService {
     return { accessToken, refreshToken: rawRefreshToken };
   }
 
+  private async isLockedOut(identifier: string): Promise<boolean> {
+    const since = new Date(Date.now() - LOCKOUT_WINDOW_MS);
+
+    const lastSuccess = await this.prisma.loginAttempt.findFirst({
+      where: { email: identifier, success: true, attemptedAt: { gte: since } },
+      orderBy: { attemptedAt: 'desc' },
+      select: { attemptedAt: true },
+    });
+
+    const failures = await this.prisma.loginAttempt.count({
+      where: {
+        email: identifier,
+        success: false,
+        // Refused-while-locked attempts do not extend the lockout.
+        failureReason: { not: LOCKED_REASON },
+        attemptedAt: { gte: lastSuccess?.attemptedAt ?? since },
+      },
+    });
+
+    return failures >= LOCKOUT_MAX_FAILURES;
+  }
+
   private async rejectLogin(
     identifier: string,
     context: { ipAddress: string; userAgent?: string },
     exception = new UnauthorizedException('Invalid credentials'),
+    failureReason = exception.message,
   ): Promise<never> {
     await this.prisma.loginAttempt.create({
       data: {
@@ -420,7 +461,7 @@ export class AuthService {
         ipAddress: context.ipAddress,
         userAgent: context.userAgent,
         success: false,
-        failureReason: exception.message,
+        failureReason,
       },
     });
     throw exception;
