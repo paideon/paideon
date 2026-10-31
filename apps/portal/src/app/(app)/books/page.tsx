@@ -33,7 +33,7 @@ export default function StudentBooksPage() {
   }
 
   return (
-    <main className="mx-auto max-w-5xl space-y-5 p-6">
+    <div className="space-y-5">
       <Link className="underline" href="/home">
         Back to my loans
       </Link>
@@ -85,6 +85,6 @@ export default function StudentBooksPage() {
           </tbody>
         </table>
       </div>
-    </main>
+    </div>
   );
 }
