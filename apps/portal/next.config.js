@@ -8,6 +8,9 @@ const { composePlugins, withNx } = require('@nx/next');
  **/
 const nextConfig = {
   transpilePackages: ['@paideon/ui'],
+  experimental: {
+    agentUpgrade: 'security',
+  },
   nx: {},
 };
 
