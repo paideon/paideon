@@ -144,14 +144,26 @@ export class LibraryController {
   }
 }
 
+// A person's own library record: loans and fines. It only ever reads the
+// rows of the person in the access token, so every role may call it.
 @Controller('library/me')
 @UseGuards(JwtAuthGuard, RolesGuard)
-@Roles(Role.STUDENT)
-export class StudentLibraryController {
+@Roles(...Object.values(Role))
+export class MyLibraryController {
   constructor(private readonly library: LibraryService) {}
 
+  // ?scope=current (default) lists books still out; ?scope=history lists
+  // books already returned (or lost).
   @Get('loans')
-  myLoans(@CurrentUser() user: JwtPayload) {
-    return this.library.myLoans(user.schoolId, user.sub);
+  myLoans(@CurrentUser() user: JwtPayload, @Query('scope') scope?: string) {
+    if (scope !== undefined && scope !== 'current' && scope !== 'history') {
+      throw new BadRequestException('scope must be "current" or "history".');
+    }
+    return this.library.myLoans(user.schoolId, user.sub, scope ?? 'current');
+  }
+
+  @Get('fines')
+  myFines(@CurrentUser() user: JwtPayload) {
+    return this.library.myFines(user.schoolId, user.sub);
   }
 }

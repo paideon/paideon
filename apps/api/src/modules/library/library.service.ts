@@ -662,7 +662,7 @@ export class LibraryService {
   async stats(schoolId: string) {
     const startOfDay = new Date();
     startOfDay.setHours(0, 0, 0, 0);
-    const [books, copies, activeLoans, overdueCount, loansToday] =
+    const [books, copies, activeLoans, overdueCount, loansToday, returnsToday] =
       await Promise.all([
         this.prisma.book.count({ where: { schoolId, deletedAt: null } }),
         this.prisma.bookCopy.count({ where: { schoolId } }),
@@ -682,20 +682,82 @@ export class LibraryService {
         this.prisma.loan.count({
           where: { schoolId, checkoutDate: { gte: startOfDay } },
         }),
+        this.prisma.loan.count({
+          where: { schoolId, returnDate: { gte: startOfDay } },
+        }),
       ]);
-    return { books, copies, activeLoans, overdueCount, loansToday };
+    return {
+      books,
+      copies,
+      activeLoans,
+      overdueCount,
+      loansToday,
+      returnsToday,
+    };
   }
 
-  myLoans(schoolId: string, userId: string) {
-    return this.prisma.loan.findMany({
-      where: {
-        schoolId,
-        userId,
-        status: { in: [LoanStatus.ACTIVE, LoanStatus.OVERDUE] },
+  async myLoans(
+    schoolId: string,
+    userId: string,
+    scope: 'current' | 'history' = 'current',
+  ) {
+    const open = [LoanStatus.ACTIVE, LoanStatus.OVERDUE, LoanStatus.RENEWED];
+    const loans = await this.prisma.loan.findMany({
+      where:
+        scope === 'current'
+          ? { schoolId, userId, status: { in: open } }
+          : { schoolId, userId, status: { notIn: open } },
+      select: {
+        id: true,
+        checkoutDate: true,
+        dueDate: true,
+        returnDate: true,
+        status: true,
+        renewalCount: true,
+        copy: {
+          select: {
+            code: true,
+            book: { select: { id: true, title: true, authors: true } },
+          },
+        },
       },
-      include: { copy: { include: { book: true } } },
-      orderBy: { dueDate: 'asc' },
+      orderBy:
+        scope === 'current' ? { dueDate: 'asc' } : { checkoutDate: 'desc' },
+      take: scope === 'history' ? 200 : undefined,
     });
+    return loans;
+  }
+
+  async myFines(schoolId: string, userId: string) {
+    const fines = await this.prisma.fine.findMany({
+      where: { schoolId, userId },
+      select: {
+        id: true,
+        type: true,
+        status: true,
+        amountLKR: true,
+        amountPaidLKR: true,
+        daysOverdue: true,
+        createdAt: true,
+        paidAt: true,
+        loan: {
+          select: { copy: { select: { book: { select: { title: true } } } } },
+        },
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+    // Decimal columns become plain numbers for the JSON response.
+    return fines.map((fine) => ({
+      id: fine.id,
+      type: fine.type,
+      status: fine.status,
+      amountLKR: Number(fine.amountLKR),
+      amountPaidLKR: Number(fine.amountPaidLKR),
+      daysOverdue: fine.daysOverdue,
+      createdAt: fine.createdAt,
+      paidAt: fine.paidAt,
+      bookTitle: fine.loan.copy.book.title,
+    }));
   }
 }
 
