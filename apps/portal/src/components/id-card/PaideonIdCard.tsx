@@ -45,6 +45,11 @@ export interface IdCardUser {
   initials?: string;
   /** Any image URL — renders as avatar photo. null = initials fallback. */
   photoUrl?: string | null;
+  /** Caption and value of the first info line. Default: GRADE / "Grade {currentGrade}". */
+  detailLabel?: string;
+  detailValue?: string;
+  /** Caption of the number line. Default: ADMISSION NO. (value: admissionNumber). */
+  numberLabel?: string;
 }
 
 export interface PaideonIdCardProps {
@@ -257,9 +262,9 @@ function drawIdCard(
     ctx.font = `500 20px ${mono ? '"Courier New",monospace' : 'system-ui'}`;
     ctx.fillText(t, x, y);
   };
-  lbl('GRADE', 72, 590);
-  val(`Grade ${user.currentGrade}`, 72, 614);
-  lbl('ADMISSION NO.', 380, 590);
+  lbl(user.detailLabel ?? 'GRADE', 72, 590);
+  val(user.detailValue ?? `Grade ${user.currentGrade}`, 72, 614);
+  lbl(user.numberLabel ?? 'ADMISSION NO.', 380, 590);
   val(user.admissionNumber, 380, 614, true);
 
   // ── Paideon ID box ──
