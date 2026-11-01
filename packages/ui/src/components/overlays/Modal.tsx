@@ -17,6 +17,13 @@ export interface ModalProps {
   /** Label for the dismiss button (used for both variants — was previously a hardcoded Close/Cancel split) */
   closeLabel?: string;
   onConfirm?: () => void;
+  /** Greys out the confirm button (waiting for a typed phrase, saving...). */
+  confirmDisabled?: boolean;
+  /**
+   * Close the dialog right after Confirm is clicked (default). Turn off when
+   * the caller needs to wait for the result first, as ConfirmDialog does.
+   */
+  closeOnConfirm?: boolean;
   destructive?: boolean;
   children?: React.ReactNode;
 }
@@ -33,6 +40,8 @@ export function Modal({
   confirmLabel = 'Confirm',
   closeLabel,
   onConfirm,
+  confirmDisabled = false,
+  closeOnConfirm = true,
   destructive = false,
   children,
 }: ModalProps) {
@@ -147,11 +156,13 @@ export function Modal({
             </button>
             {variant === 'confirmation' && (
               <button
+                disabled={confirmDisabled}
                 onClick={() => {
                   onConfirm?.();
-                  onClose();
+                  if (closeOnConfirm) onClose();
                 }}
                 className={cn(
+                  'disabled:cursor-not-allowed disabled:opacity-50',
                   'px-space-6 py-space-2.5',
                   'font-body text-caption uppercase tracking-caption text-text-inverse',
                   'transition-opacity duration-fast',
