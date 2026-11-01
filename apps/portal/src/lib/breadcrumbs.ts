@@ -12,7 +12,9 @@ const LABELS: Record<string, string> = {
   return: 'Return',
   members: 'Members and fines',
   overdue: 'Overdue',
-  profile: 'My profile',
+  account: 'My account',
+  badge: 'ID badge',
+  security: 'Security',
   '403': 'No access',
 };
 
@@ -20,6 +22,7 @@ const LABELS: Record<string, string> = {
 // student search, so the label depends on the whole path.
 const PATH_LABELS: Record<string, string> = {
   '/librarian/books': 'Books',
+  '/account/library': 'My library',
 };
 
 /** Home > section > page, built from the URL. The last crumb has no link. */

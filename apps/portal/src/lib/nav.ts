@@ -26,6 +26,7 @@ type NavEntry = {
 export const NAV_GROUPS: { id: string; label: string }[] = [
   { id: 'home', label: 'Home' },
   { id: 'library', label: 'Library' },
+  { id: 'account', label: 'My account' },
   { id: 'help', label: 'Help' },
 ];
 
@@ -87,6 +88,36 @@ const NAV_ENTRIES: NavEntry[] = [
     href: '/librarian/overdue',
     icon: 'clock',
     needs: 'library.reports',
+  },
+  {
+    id: 'my-library',
+    group: 'account',
+    label: 'My library',
+    href: ROUTES.accountLibrary,
+    icon: 'book-open',
+    tile: 'Books you have borrowed, fines and your history.',
+  },
+  {
+    id: 'badge',
+    group: 'account',
+    label: 'ID badge',
+    href: ROUTES.accountBadge,
+    icon: 'award',
+    tile: 'Show or print your school ID and library card.',
+  },
+  {
+    id: 'profile',
+    group: 'account',
+    label: 'My profile',
+    href: ROUTES.account,
+    icon: 'user',
+  },
+  {
+    id: 'security',
+    group: 'account',
+    label: 'Security',
+    href: ROUTES.accountSecurity,
+    icon: 'eye-off',
   },
   {
     id: 'privacy',

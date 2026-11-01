@@ -11,7 +11,10 @@ export const ROUTES = {
   forbidden: '/403',
   home: '/home',
   books: '/books',
-  profile: '/profile',
+  account: '/account',
+  accountBadge: '/account/badge',
+  accountLibrary: '/account/library',
+  accountSecurity: '/account/security',
   libraryDesk: '/librarian',
 } as const;
 

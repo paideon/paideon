@@ -1,8 +1,16 @@
 import {
   ActivationInfoSchema,
   CapabilityGrantSchema,
+  ChangePasswordSchema,
   ConfirmActivationSchema,
   CurrentUserSchema,
+  MyFinesSchema,
+  MyLoansSchema,
+  SessionsSchema,
+  UpdateMyContactSchema,
+  fineBalance,
+  isLoanOverdue,
+  type LoanSummaryData,
   PASSWORD_RULES,
   ResetPasswordSchema,
   capabilitiesForRole,
@@ -124,5 +132,183 @@ describe('ConfirmActivationSchema', () => {
       confirmPassword: 'Valid-pass2',
     });
     expect(result.success).toBe(false);
+  });
+});
+
+describe('isLoanOverdue', () => {
+  const now = new Date('2026-11-01T12:00:00Z');
+  const loan = (over: Partial<LoanSummaryData>) =>
+    ({
+      status: 'ACTIVE',
+      dueDate: '2026-10-30T00:00:00Z',
+      returnDate: null,
+      ...over,
+    }) as LoanSummaryData;
+
+  it('is overdue when still out and past due, even if status still says ACTIVE', () => {
+    expect(isLoanOverdue(loan({}), now)).toBe(true);
+  });
+  it('is not overdue before the due date', () => {
+    expect(isLoanOverdue(loan({ dueDate: '2026-11-05T00:00:00Z' }), now)).toBe(
+      false,
+    );
+  });
+  it('is never overdue once returned or lost', () => {
+    expect(
+      isLoanOverdue(
+        loan({ status: 'RETURNED', returnDate: '2026-10-31T00:00:00Z' }),
+        now,
+      ),
+    ).toBe(false);
+    expect(isLoanOverdue(loan({ status: 'LOST' }), now)).toBe(false);
+  });
+});
+
+describe('fineBalance', () => {
+  it('is what is left to pay', () => {
+    expect(
+      fineBalance({ status: 'PENDING', amountLKR: 40, amountPaidLKR: 0 }),
+    ).toBe(40);
+    expect(
+      fineBalance({ status: 'PARTIAL', amountLKR: 40, amountPaidLKR: 15.5 }),
+    ).toBe(24.5);
+  });
+  it('is zero when paid or waived', () => {
+    expect(
+      fineBalance({ status: 'PAID', amountLKR: 40, amountPaidLKR: 40 }),
+    ).toBe(0);
+    expect(
+      fineBalance({ status: 'WAIVED', amountLKR: 40, amountPaidLKR: 0 }),
+    ).toBe(0);
+  });
+  it('never goes below zero', () => {
+    expect(
+      fineBalance({ status: 'PARTIAL', amountLKR: 10, amountPaidLKR: 12 }),
+    ).toBe(0);
+  });
+});
+
+describe('UpdateMyContactSchema', () => {
+  const ok = (v: unknown) => UpdateMyContactSchema.safeParse(v);
+
+  it('accepts usual Sri Lankan phone formats', () => {
+    for (const phone of [
+      '0771234567',
+      '077 123 4567',
+      '+94 77 123 4567',
+      '(011) 234-5678',
+    ]) {
+      expect(ok({ phone, address: '12 Temple Road' }).success).toBe(true);
+    }
+  });
+  it('turns empty text into null (clearing a field)', () => {
+    const r = ok({ phone: '  ', address: '' });
+    expect(r.success).toBe(true);
+    expect(r.success && r.data).toEqual({ phone: null, address: null });
+  });
+  it('rejects letters and too-short numbers', () => {
+    expect(ok({ phone: 'call me', address: '' }).success).toBe(false);
+    expect(ok({ phone: '12345', address: '' }).success).toBe(false);
+  });
+  it('rejects overlong address and unknown fields', () => {
+    expect(ok({ phone: '', address: 'x'.repeat(301) }).success).toBe(false);
+    expect(ok({ phone: '', address: '', role: 'ADMIN' }).success).toBe(false);
+  });
+});
+
+describe('ChangePasswordSchema', () => {
+  const base = {
+    currentPassword: 'Old-pass1',
+    newPassword: 'New-pass1',
+    confirmPassword: 'New-pass1',
+  };
+  it('accepts a valid change', () => {
+    expect(ChangePasswordSchema.safeParse(base).success).toBe(true);
+  });
+  it('needs the current password', () => {
+    expect(
+      ChangePasswordSchema.safeParse({ ...base, currentPassword: '' }).success,
+    ).toBe(false);
+  });
+  it('applies the same rules as activation to the new password', () => {
+    expect(
+      ChangePasswordSchema.safeParse({
+        ...base,
+        newPassword: 'weak',
+        confirmPassword: 'weak',
+      }).success,
+    ).toBe(false);
+  });
+  it('rejects a mismatch and an unchanged password', () => {
+    expect(
+      ChangePasswordSchema.safeParse({
+        ...base,
+        confirmPassword: 'Other-pass1',
+      }).success,
+    ).toBe(false);
+    expect(
+      ChangePasswordSchema.safeParse({ ...base, currentPassword: 'New-pass1' })
+        .success,
+    ).toBe(false);
+  });
+});
+
+describe('MyProfileSchema, LoanSummarySchema, FineSchema, SessionSchema', () => {
+  it('accept what the API sends', () => {
+    expect(
+      MyLoansSchema.safeParse([
+        {
+          id: 'l1',
+          checkoutDate: '2026-10-20T00:00:00.000Z',
+          dueDate: '2026-11-03T00:00:00.000Z',
+          returnDate: null,
+          status: 'ACTIVE',
+          renewalCount: 0,
+          copy: { code: 'B-1', book: { id: 'b1', title: 'T', authors: ['A'] } },
+        },
+      ]).success,
+    ).toBe(true);
+    expect(
+      MyFinesSchema.safeParse([
+        {
+          id: 'f1',
+          type: 'OVERDUE',
+          status: 'PENDING',
+          amountLKR: 40,
+          amountPaidLKR: 0,
+          daysOverdue: 20,
+          createdAt: '2026-10-30T00:00:00.000Z',
+          paidAt: null,
+          bookTitle: 'T',
+        },
+      ]).success,
+    ).toBe(true);
+    expect(
+      SessionsSchema.safeParse([
+        {
+          id: 's1',
+          lastActiveAt: '2026-11-01T00:00:00.000Z',
+          expiresAt: '2026-12-01T00:00:00.000Z',
+          ipAddress: null,
+          userAgent: null,
+          current: true,
+        },
+      ]).success,
+    ).toBe(true);
+  });
+  it('reject a loan with an unknown status', () => {
+    expect(
+      MyLoansSchema.safeParse([
+        {
+          id: 'l1',
+          checkoutDate: '',
+          dueDate: '',
+          returnDate: null,
+          status: 'LOANED',
+          renewalCount: 0,
+          copy: { code: '', book: { id: '', title: '', authors: [] } },
+        },
+      ]).success,
+    ).toBe(false);
   });
 });

@@ -39,7 +39,7 @@ export function UserMenu() {
           </>
         }
         items={[
-          { id: 'profile', label: 'My profile', href: ROUTES.profile },
+          { id: 'account', label: 'My account', href: ROUTES.account },
           { id: 'sign-out', label: 'Sign out', onClick: () => void signOut() },
         ]}
       />

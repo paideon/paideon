@@ -24,4 +24,20 @@ describe('breadcrumbsFor', () => {
       'Search books',
     ]);
   });
+
+  it('names the account pages', () => {
+    expect(breadcrumbsFor('/account/badge').map((c) => c.label)).toEqual([
+      'Home',
+      'My account',
+      'ID badge',
+    ]);
+    expect(breadcrumbsFor('/account/library').map((c) => c.label)).toEqual([
+      'Home',
+      'My account',
+      'My library',
+    ]);
+    expect(breadcrumbsFor('/account/security').at(-1)).toEqual({
+      label: 'Security',
+    });
+  });
 });

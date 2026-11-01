@@ -10,11 +10,32 @@ const hrefs = (user: ReturnType<typeof as>) =>
   navFor(user as never).groups.flatMap((g) => g.items.map((i) => i.href));
 
 describe('navFor', () => {
-  it('shows a student Home, book search and help only', () => {
+  const ACCOUNT = [
+    '/account/library',
+    '/account/badge',
+    '/account',
+    '/account/security',
+  ];
+
+  it('shows a student Home, book search, their account and help only', () => {
     const nav = navFor(as('STUDENT') as never);
-    expect(nav.groups.map((g) => g.id)).toEqual(['home', 'library', 'help']);
-    expect(hrefs(as('STUDENT'))).toEqual(['/home', '/books', '/privacy']);
-    expect(nav.tiles.map((t) => t.href)).toEqual(['/books']);
+    expect(nav.groups.map((g) => g.id)).toEqual([
+      'home',
+      'library',
+      'account',
+      'help',
+    ]);
+    expect(hrefs(as('STUDENT'))).toEqual([
+      '/home',
+      '/books',
+      ...ACCOUNT,
+      '/privacy',
+    ]);
+    expect(nav.tiles.map((t) => t.href)).toEqual([
+      '/books',
+      '/account/library',
+      '/account/badge',
+    ]);
   });
 
   it('shows a librarian the whole library desk', () => {
@@ -27,11 +48,14 @@ describe('navFor', () => {
       '/librarian/books',
       '/librarian/members',
       '/librarian/overdue',
+      ...ACCOUNT,
       '/privacy',
     ]);
     expect(navFor(as('LIBRARIAN') as never).tiles.map((t) => t.href)).toEqual([
       '/books',
       '/librarian',
+      '/account/library',
+      '/account/badge',
     ]);
   });
 
@@ -51,7 +75,7 @@ describe('navFor', () => {
     const groups = navFor({ capabilities: [] } as never).groups.map(
       (g) => g.id,
     );
-    expect(groups).toEqual(['home', 'library', 'help']);
+    expect(groups).toEqual(['home', 'library', 'account', 'help']);
     expect(groups).not.toContain('people');
   });
 });
