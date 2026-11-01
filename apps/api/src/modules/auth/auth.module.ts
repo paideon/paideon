@@ -3,6 +3,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
+import { AccountSecurityService } from './account-security.service';
 import { ActivationLookupService } from './activation-lookup.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { JwtRefreshStrategy } from './strategies/jwt-refresh.strategy';
@@ -18,6 +19,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
   providers: [
     AuthService,
     ActivationLookupService,
+    AccountSecurityService,
     JwtStrategy,
     JwtRefreshStrategy,
   ],

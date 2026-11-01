@@ -1,5 +1,6 @@
 import {
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
@@ -12,6 +13,7 @@ import {
 import type { Request, Response } from 'express';
 import {
   capabilitiesForRole,
+  ChangePasswordSchema,
   ConfirmActivationSchema,
   ForgotPasswordSchema,
   LoginRequestSchema,
@@ -19,6 +21,7 @@ import {
   ResetPasswordSchema,
 } from '@paideon/contracts';
 import type {
+  ChangePasswordData,
   ConfirmActivationData,
   ForgotPasswordData,
   LoginRequestData,
@@ -27,6 +30,7 @@ import type {
 } from '@paideon/contracts';
 import { ZodBody } from '../../common/pipes/zod-validation.pipe';
 import { AuthService } from './auth.service';
+import { AccountSecurityService } from './account-security.service';
 import { ActivationLookupService } from './activation-lookup.service';
 import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
@@ -39,6 +43,7 @@ export class AuthController {
   constructor(
     private authService: AuthService,
     private activationLookup: ActivationLookupService,
+    private accountSecurity: AccountSecurityService,
   ) {}
 
   // ─────────────────────────────────────────────────────────────
@@ -81,9 +86,13 @@ export class AuthController {
   @Post('activate/confirm')
   async confirmActivation(
     @ZodBody(ConfirmActivationSchema) dto: ConfirmActivationData,
+    @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const tokens = await this.authService.confirmActivation(dto);
+    const tokens = await this.authService.confirmActivation(dto, {
+      ipAddress: req.ip ?? req.socket.remoteAddress,
+      userAgent: req.get('user-agent'),
+    });
     this.setRefreshCookie(res, tokens.refreshToken);
     return { accessToken: tokens.accessToken };
   }
@@ -126,6 +135,53 @@ export class AuthController {
       photoUrl: null,
       capabilities: capabilitiesForRole(me.role),
     };
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // POST /api/auth/change-password
+  // ─────────────────────────────────────────────────────────────
+  // Signed-in person changes their own password. Other sessions end;
+  // this browser stays signed in.
+
+  @Post('change-password')
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(JwtAuthGuard, ThrottlerGuard)
+  @Throttle({ default: { limit: 5, ttl: 60_000 } })
+  async changePassword(
+    @CurrentUser() user: JwtPayload,
+    @ZodBody(ChangePasswordSchema) dto: ChangePasswordData,
+    @Req() req: Request,
+  ) {
+    await this.accountSecurity.changePassword(user, dto, this.context(req));
+    return { message: 'Password updated.' };
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  // GET /api/auth/sessions   DELETE /api/auth/sessions
+  // ─────────────────────────────────────────────────────────────
+
+  @Get('sessions')
+  @UseGuards(JwtAuthGuard)
+  sessions(@CurrentUser() user: JwtPayload, @Req() req: Request) {
+    return this.accountSecurity.listSessions(user, this.context(req));
+  }
+
+  // "Sign out everywhere": ends every session including this one. Access
+  // tokens already issued keep working until they expire (at most 15 minutes).
+  @Delete('sessions')
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(JwtAuthGuard)
+  async signOutEverywhere(
+    @CurrentUser() user: JwtPayload,
+    @Req() req: Request,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const ended = await this.accountSecurity.signOutEverywhere(
+      user,
+      this.context(req),
+    );
+    this.clearRefreshCookie(res);
+    return { message: 'Signed out everywhere.', sessionsEnded: ended };
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -195,6 +251,14 @@ export class AuthController {
   // ─────────────────────────────────────────────────────────────
   // PRIVATE HELPERS
   // ─────────────────────────────────────────────────────────────
+
+  private context(req: Request) {
+    return {
+      refreshToken: req.cookies?.['refresh_token'] as string | undefined,
+      ipAddress: req.ip ?? req.socket.remoteAddress,
+      userAgent: req.get('user-agent'),
+    };
+  }
 
   // Sets the refresh token as an httpOnly cookie on the response.
   // The cookie attributes match our security policy exactly.

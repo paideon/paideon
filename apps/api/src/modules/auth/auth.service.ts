@@ -115,12 +115,15 @@ export class AuthService {
       data: { lastLoginAt: new Date() },
     });
 
-    return this.generateTokens({
-      sub: user.id,
-      schoolId: user.schoolId,
-      role: user.role,
-      paideonId: user.paideonId,
-    });
+    return this.generateTokens(
+      {
+        sub: user.id,
+        schoolId: user.schoolId,
+        role: user.role,
+        paideonId: user.paideonId,
+      },
+      context,
+    );
   }
 
   async getCurrentUser(userId: string) {
@@ -212,12 +215,19 @@ export class AuthService {
       throw new UnauthorizedException('Account is no longer active.');
     }
 
-    return this.generateTokens({
-      sub: user.id,
-      schoolId: user.schoolId,
-      role: user.role,
-      paideonId: user.paideonId,
-    });
+    return this.generateTokens(
+      {
+        sub: user.id,
+        schoolId: user.schoolId,
+        role: user.role,
+        paideonId: user.paideonId,
+      },
+      {
+        // The session keeps the place it was started from.
+        ipAddress: storedToken.ipAddress ?? undefined,
+        userAgent: storedToken.userAgent ?? undefined,
+      },
+    );
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -256,7 +266,10 @@ export class AuthService {
   // CONFIRM ACTIVATION
   // ─────────────────────────────────────────────────────────────
 
-  async confirmActivation(dto: ConfirmActivationData) {
+  async confirmActivation(
+    dto: ConfirmActivationData,
+    context?: { ipAddress?: string; userAgent?: string },
+  ) {
     // Password rules and "passwords match" are already enforced by
     // ConfirmActivationSchema before this method is called.
     const tokenHash = this.hashToken(dto.token);
@@ -306,12 +319,15 @@ export class AuthService {
       }),
     ]);
 
-    return this.generateTokens({
-      sub: user.id,
-      schoolId: user.schoolId,
-      role: user.role,
-      paideonId: user.paideonId,
-    });
+    return this.generateTokens(
+      {
+        sub: user.id,
+        schoolId: user.schoolId,
+        role: user.role,
+        paideonId: user.paideonId,
+      },
+      context,
+    );
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -396,7 +412,10 @@ export class AuthService {
   // PRIVATE UTILITIES
   // ─────────────────────────────────────────────────────────────
 
-  private async generateTokens(payload: JwtPayload) {
+  private async generateTokens(
+    payload: JwtPayload,
+    device?: { ipAddress?: string; userAgent?: string },
+  ) {
     const accessToken = await this.jwt.signAsync(payload, {
       secret: this.config.get<string>('JWT_SECRET')!,
       expiresIn: '15m',
@@ -421,6 +440,9 @@ export class AuthService {
         userId: payload.sub,
         tokenHash,
         expiresAt,
+        // Shown on the "where you are signed in" list.
+        ipAddress: device?.ipAddress,
+        userAgent: device?.userAgent?.slice(0, 300),
       },
     });
 
