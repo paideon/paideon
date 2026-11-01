@@ -157,6 +157,32 @@ export const ResetPasswordSchema = z
 export type ResetPasswordData = z.infer<typeof ResetPasswordSchema>;
 
 // ─────────────────────────────────────────────────────────────
+// POST /api/auth/change-password
+// ─────────────────────────────────────────────────────────────
+// A signed-in person changes their own password. The CURRENT password is
+// checked by the service, so here it only has to be present.
+
+export const ChangePasswordSchema = z
+  .object({
+    currentPassword: requiredString('Enter your current password.')
+      .min(1, 'Enter your current password.')
+      .max(LOGIN_PASSWORD_MAX_LENGTH, 'Password is too long.'),
+    newPassword: newPasswordField,
+    confirmPassword: requiredString('Confirm your new password.'),
+  })
+  .strict()
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    path: ['confirmPassword'],
+    message: 'Passwords do not match.',
+  })
+  .refine((data) => data.newPassword !== data.currentPassword, {
+    path: ['newPassword'],
+    message: 'Your new password must be different from your current one.',
+  });
+
+export type ChangePasswordData = z.infer<typeof ChangePasswordSchema>;
+
+// ─────────────────────────────────────────────────────────────
 // POST /api/auth/2fa/verify  (endpoint not built yet)
 // ─────────────────────────────────────────────────────────────
 // The 6-digit code from the authenticator app. Backup codes have a
