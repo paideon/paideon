@@ -6,8 +6,8 @@ export type Crumb = { label: string; href?: string };
 // token) is skipped rather than shown raw.
 const LABELS: Record<string, string> = {
   home: 'Home',
-  books: 'Search books',
-  librarian: 'Library desk',
+  library: 'Library',
+  catalog: 'Search books',
   checkout: 'Checkout',
   return: 'Return',
   members: 'Members and fines',
@@ -18,11 +18,10 @@ const LABELS: Record<string, string> = {
   '403': 'No access',
 };
 
-// "/librarian/books" is "Books" in the sidebar, but "books" alone is the
-// student search, so the label depends on the whole path.
+// Where a segment can mean different things, the label depends on the whole
+// path. "/library/books" is where a librarian manages books.
 const PATH_LABELS: Record<string, string> = {
-  '/librarian/books': 'Books',
-  '/account/library': 'My library',
+  '/library/books': 'Books',
 };
 
 /** Home > section > page, built from the URL. The last crumb has no link. */
