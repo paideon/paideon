@@ -112,8 +112,8 @@ export default function LibrarianBooksPage() {
   }
 
   return (
-    <main className="mx-auto max-w-6xl space-y-6 p-6">
-      <Link className="underline" href="/librarian">
+    <div className="mx-auto max-w-6xl space-y-6 p-6">
+      <Link className="underline" href="/library">
         Back to library
       </Link>
       <h1 className="text-2xl font-bold">Books</h1>
@@ -259,6 +259,6 @@ export default function LibrarianBooksPage() {
           </table>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

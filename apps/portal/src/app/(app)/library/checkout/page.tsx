@@ -53,8 +53,8 @@ export default function CheckoutPage() {
   }
 
   return (
-    <main className="mx-auto max-w-xl space-y-5 p-6">
-      <Link className="underline" href="/librarian">
+    <div className="mx-auto max-w-xl space-y-5 p-6">
+      <Link className="underline" href="/library">
         Back to library
       </Link>
       <h1 className="text-2xl font-bold">Check out a book</h1>
@@ -99,6 +99,6 @@ export default function CheckoutPage() {
           {message}
         </p>
       )}
-    </main>
+    </div>
   );
 }

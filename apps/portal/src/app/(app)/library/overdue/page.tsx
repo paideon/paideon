@@ -28,8 +28,8 @@ export default function OverduePage() {
   }, []);
 
   return (
-    <main className="mx-auto max-w-6xl space-y-5 p-6">
-      <Link className="underline" href="/librarian">
+    <div className="mx-auto max-w-6xl space-y-5 p-6">
+      <Link className="underline" href="/library">
         Back to library
       </Link>
       <h1 className="text-2xl font-bold">Overdue books</h1>
@@ -65,6 +65,6 @@ export default function OverduePage() {
           </tbody>
         </table>
       </div>
-    </main>
+    </div>
   );
 }
