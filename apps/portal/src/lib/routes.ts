@@ -10,12 +10,18 @@ export const ROUTES = {
   maintenance: '/maintenance',
   forbidden: '/403',
   home: '/home',
-  books: '/books',
   account: '/account',
   accountBadge: '/account/badge',
-  accountLibrary: '/account/library',
   accountSecurity: '/account/security',
-  libraryDesk: '/librarian',
+  // The library: one page for everyone at /library. What else appears on it,
+  // and which of these pages open, follows the person's capabilities.
+  library: '/library',
+  libraryCatalog: '/library/catalog',
+  libraryCheckout: '/library/checkout',
+  libraryReturn: '/library/return',
+  libraryBooks: '/library/books',
+  libraryMembers: '/library/members',
+  libraryOverdue: '/library/overdue',
 } as const;
 
 /** Link target for an activation or reset token from an email. */
