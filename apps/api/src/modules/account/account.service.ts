@@ -14,7 +14,7 @@ const addressSelect = { select: { id: true, line1: true } } as const;
 // Everything on a person's own record is read through here, and only ever
 // for the person in the access token: there is no id parameter to tamper with.
 @Injectable()
-export class MeService {
+export class AccountService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly audit: AuditService,
