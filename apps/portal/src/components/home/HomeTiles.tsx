@@ -2,10 +2,17 @@ import Link from 'next/link';
 
 import type { HomeTile } from '@/lib/nav';
 
-// The shortcut cards on /home. What appears comes from navFor(user).tiles.
-export function HomeTiles({ tiles }: { tiles: HomeTile[] }) {
+// Shortcut cards. On /home they come from navFor(user).tiles; /library uses
+// them for the librarian's tools. `label` names the group for screen readers.
+export function HomeTiles({
+  tiles,
+  label = 'Your tools',
+}: {
+  tiles: HomeTile[];
+  label?: string;
+}) {
   return (
-    <nav aria-label="Your tools">
+    <nav aria-label={label}>
       <ul className="m-space-0 grid list-none gap-space-3 p-space-0 sm:grid-cols-2">
         {tiles.map((tile) => (
           <li key={tile.href}>
