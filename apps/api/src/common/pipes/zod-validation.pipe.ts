@@ -17,7 +17,12 @@
 //   3. If it is fine → the handler receives the CLEANED data
 //      (trimmed, lowercased, ...), not the raw body.
 
-import { BadRequestException, Body, PipeTransform } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  PipeTransform,
+  Query,
+} from '@nestjs/common';
 import type { ZodType, ZodTypeDef } from 'zod';
 
 export class ZodValidationPipe<TOutput> implements PipeTransform<
@@ -33,9 +38,19 @@ export class ZodValidationPipe<TOutput> implements PipeTransform<
     const result = this.schema.safeParse(value ?? {});
 
     if (!result.success) {
-      throw new BadRequestException(
-        result.error.issues.map((issue) => issue.message),
-      );
+      // `fieldErrors` names the first problem of each field, so a form can
+      // show it under the right input (see ApiErrorSchema in contracts).
+      const fieldErrors: Record<string, string> = {};
+      for (const issue of result.error.issues) {
+        const key = issue.path.length > 0 ? String(issue.path[0]) : '_form';
+        fieldErrors[key] ??= issue.message;
+      }
+      throw new BadRequestException({
+        statusCode: 400,
+        error: 'Bad Request',
+        message: result.error.issues.map((issue) => issue.message),
+        fieldErrors,
+      });
     }
 
     return result.data;
@@ -46,3 +61,8 @@ export class ZodValidationPipe<TOutput> implements PipeTransform<
 export const ZodBody = <TOutput>(
   schema: ZodType<TOutput, ZodTypeDef, unknown>,
 ) => Body(new ZodValidationPipe(schema));
+
+// The same for the query string: @ZodQuery(StudentListQuerySchema) query.
+export const ZodQuery = <TOutput>(
+  schema: ZodType<TOutput, ZodTypeDef, unknown>,
+) => Query(new ZodValidationPipe(schema));
