@@ -28,7 +28,8 @@ import type {
   ResetPasswordData,
 } from '@paideon/contracts';
 import { ZodBody } from '../../common/pipes/zod-validation.pipe';
-import { AccessService } from '../access/access.service';
+import { CapabilityService } from '../access/capability.service';
+import { MediaUrlService } from '../storage/media-url.service';
 import { AuthService } from './auth.service';
 import { AccountSecurityService } from './account-security.service';
 import { ActivationLookupService } from './activation-lookup.service';
@@ -44,7 +45,8 @@ export class AuthController {
     private authService: AuthService,
     private activationLookup: ActivationLookupService,
     private accountSecurity: AccountSecurityService,
-    private access: AccessService,
+    private capabilities: CapabilityService,
+    private media: MediaUrlService,
   ) {}
 
   // ─────────────────────────────────────────────────────────────
@@ -128,17 +130,14 @@ export class AuthController {
   @Get('me')
   @UseGuards(JwtAuthGuard)
   async me(@CurrentUser() user: JwtPayload) {
-    const me = await this.authService.getCurrentUser(user.sub);
-    // photoUrl: no photo storage yet. capabilities: what the person's roles
-    // and grants add up to (see AccessService).
+    const { profileImageId, ...me } = await this.authService.getCurrentUser(
+      user.sub,
+    );
+    const capabilities = await this.capabilities.grantsFor(me.id);
     return {
       ...me,
-      photoUrl: null,
-      capabilities: await this.access.capabilitiesFor({
-        sub: user.sub,
-        schoolId: user.schoolId,
-        role: me.role,
-      }),
+      photoUrl: this.media.profilePhotoUrl(profileImageId, 'small'),
+      capabilities,
     };
   }
 

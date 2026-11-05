@@ -8,12 +8,15 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { createHash, randomBytes } from 'crypto';
 import * as bcrypt from 'bcryptjs';
+import type { PersonKind } from '@paideon/database/generated/client/client';
 import type {
+  CapabilityEnumData,
   ConfirmActivationData,
   ForgotPasswordData,
   LoginRequestData,
   ResetPasswordData,
 } from '@paideon/contracts';
+import { CapabilityService } from '../access/capability.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { JwtPayload } from './types/jwt-payload.type';
 
@@ -24,12 +27,22 @@ const LOCKOUT_MAX_FAILURES = 5;
 const LOCKOUT_WINDOW_MS = 15 * 60 * 1000;
 const LOCKED_REASON = 'Account temporarily locked';
 
+// Holding any of these shortens the sign-in to 8 hours.
+const SHORT_SESSION_CAPABILITIES: CapabilityEnumData[] = [
+  'access.manage',
+  'accounts.manage',
+  'settings.manage',
+  'school.manage',
+  'people.write',
+];
+
 @Injectable()
 export class AuthService {
   constructor(
     private prisma: PrismaService,
     private jwt: JwtService,
     private config: ConfigService,
+    private capabilities: CapabilityService,
   ) {}
 
   // ─────────────────────────────────────────────────────────────
@@ -119,7 +132,7 @@ export class AuthService {
       {
         sub: user.id,
         schoolId: user.schoolId,
-        role: user.role,
+        kind: user.kind,
         paideonId: user.paideonId,
       },
       context,
@@ -134,7 +147,8 @@ export class AuthService {
         schoolId: true,
         paideonId: true,
         email: true,
-        role: true,
+        kind: true,
+        profileImageId: true,
         status: true,
         firstName: true,
         lastName: true,
@@ -219,7 +233,7 @@ export class AuthService {
       {
         sub: user.id,
         schoolId: user.schoolId,
-        role: user.role,
+        kind: user.kind,
         paideonId: user.paideonId,
       },
       {
@@ -323,7 +337,7 @@ export class AuthService {
       {
         sub: user.id,
         schoolId: user.schoolId,
-        role: user.role,
+        kind: user.kind,
         paideonId: user.paideonId,
       },
       context,
@@ -421,19 +435,16 @@ export class AuthService {
       expiresIn: '15m',
     });
 
-    // FIX 6: expiresIn type mismatch.
-    // getRefreshExpiry returns a plain string like '8h' or '30d'.
-    // The JWT library expects its own StringValue type.
-    // Casting with 'as any' bypasses the type check safely here —
-    // the values are valid JWT duration strings, TypeScript just
-    // doesn't know that.
+    // Sign-ins that can change other people's records end sooner than a
+    // student's phone does. The lifetime is set in seconds.
+    const lifetimeMs = await this.sessionLifetimeMs(payload.sub, payload.kind);
     const rawRefreshToken = await this.jwt.signAsync(payload, {
       secret: this.config.get<string>('JWT_REFRESH_SECRET')!,
-      expiresIn: this.getRefreshExpiry(payload.role) as any,
+      expiresIn: Math.floor(lifetimeMs / 1000),
     });
 
     const tokenHash = this.hashToken(rawRefreshToken);
-    const expiresAt = this.getRefreshExpiryDate(payload.role);
+    const expiresAt = new Date(Date.now() + lifetimeMs);
 
     await this.prisma.refreshToken.create({
       data: {
@@ -493,27 +504,20 @@ export class AuthService {
     return createHash('sha256').update(token).digest('hex');
   }
 
-  private getRefreshExpiry(role: string): string {
-    const expiries: Record<string, string> = {
-      ADMIN: '8h',
-      LIBRARIAN: '12h',
-      STAFF: '12h',
-      TEACHER: '30d',
-      STUDENT: '30d',
-      PARENT: '30d',
-    };
-    return expiries[role] ?? '30d';
-  }
-
-  private getRefreshExpiryDate(role: string): Date {
-    const ms: Record<string, number> = {
-      ADMIN: 8 * 60 * 60 * 1000,
-      LIBRARIAN: 12 * 60 * 60 * 1000,
-      STAFF: 12 * 60 * 60 * 1000,
-      TEACHER: 30 * 24 * 60 * 60 * 1000,
-      STUDENT: 30 * 24 * 60 * 60 * 1000,
-      PARENT: 30 * 24 * 60 * 60 * 1000,
-    };
-    return new Date(Date.now() + (ms[role] ?? ms['STUDENT']));
+  // How long a sign-in lasts before the person must enter their password.
+  // Decided by what the person may do, not by what kind of person they are.
+  private async sessionLifetimeMs(
+    userId: string,
+    kind: PersonKind,
+  ): Promise<number> {
+    const hour = 60 * 60 * 1000;
+    const grants = await this.capabilities.grantsFor(userId);
+    const held = new Set(grants.map((grant) => grant.capability));
+    const changesRecords = SHORT_SESSION_CAPABILITIES.some((capability) =>
+      held.has(capability),
+    );
+    if (changesRecords) return 8 * hour;
+    if (held.has('library.desk') || kind === 'STAFF') return 12 * hour;
+    return 30 * 24 * hour;
   }
 }

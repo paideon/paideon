@@ -59,7 +59,7 @@ export class JwtRefreshStrategy extends PassportStrategy(
       throw new UnauthorizedException('Refresh token not found');
     }
 
-    if (!payload.sub || !payload.schoolId || !payload.role) {
+    if (!payload.sub || !payload.schoolId || !payload.kind) {
       throw new UnauthorizedException('Invalid token payload');
     }
 

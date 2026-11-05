@@ -72,7 +72,7 @@ export class AccountSecurityService {
         {
           schoolId: actor.schoolId,
           actorUserId: actor.sub,
-          actorRole: actor.role,
+          actorRole: actor.kind,
           actorPaideonId: actor.paideonId,
           action: 'auth.password.change',
           entityType: 'User',
@@ -136,7 +136,7 @@ export class AccountSecurityService {
         {
           schoolId: actor.schoolId,
           actorUserId: actor.sub,
-          actorRole: actor.role,
+          actorRole: actor.kind,
           actorPaideonId: actor.paideonId,
           action: 'auth.sessions.revoke_all',
           entityType: 'User',
