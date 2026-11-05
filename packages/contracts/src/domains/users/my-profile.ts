@@ -1,14 +1,14 @@
 // GET /api/me/profile and PATCH /api/me/contact: a person's own record.
 
 import { z } from 'zod';
-import { RoleEnum } from './role.ts';
+import { PersonKindEnum } from './person-kind.ts';
 
 export const MyProfileSchema = z.object({
   id: z.string(),
   paideonId: z.string(),
   /** Library card number (printed as the barcode on the ID badge). */
   cardNumber: z.string(),
-  role: RoleEnum,
+  kind: PersonKindEnum,
   firstName: z.string(),
   lastName: z.string(),
   displayName: z.string().nullable(),
@@ -21,7 +21,7 @@ export const MyProfileSchema = z.object({
   /** False for accounts with no profile row to keep an address on (admin, librarian). */
   addressEditable: z.boolean(),
 
-  // Read-only school data. Which of these are filled depends on the role.
+  // Read-only school data. Which of these are filled depends on the kind of person.
   grade: z.number().int().nullable(),
   section: z.string().nullable(),
   admissionNumber: z.string().nullable(),

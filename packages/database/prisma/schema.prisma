@@ -18,13 +18,30 @@ datasource db {
 // ENUMERATIONS
 // =============================================================================
 
-enum Role {
+// What KIND of person this is. Descriptive only: it picks the profile table,
+// the ID prefix and the library loan limit. It grants NOTHING. What a person
+// may do comes only from CapabilityGrant rows (see below).
+enum PersonKind {
   STUDENT
   TEACHER
   PARENT
   STAFF
-  LIBRARIAN
-  ADMIN
+}
+
+// Where a student stands with the school. Separate from the account's
+// UserStatus: setting a student to anything but ACTIVE also deactivates the
+// account (TRANSFERRED_OUT and LEFT become INACTIVE, GRADUATED stays GRADUATED).
+enum StudentStatus {
+  ACTIVE
+  TRANSFERRED_OUT
+  LEFT
+  GRADUATED
+}
+
+// Language of a student's local-script name.
+enum LocalNameLanguage {
+  SINHALA
+  TAMIL
 }
 
 enum UserStatus {
@@ -228,14 +245,13 @@ model School {
   fines              Fine[]
   libraryConfig      LibraryConfig?
 
-  // Access (roles and grants)
-  accessRoles  AccessRole[]
-  memberRoles  MemberRole[]
-  memberGrants MemberGrant[]
-
   // Layer 29
   qualification   Qualification[]
   serviceRecord   ServiceRecord[]
+
+  // People
+  capabilityGrants     CapabilityGrant[]
+  studentStatusChanges StudentStatusChange[]
 }
 
 model SchoolSettings {
@@ -284,13 +300,13 @@ model AcademicYear {
 model PaideonIdSequence {
   id         String   @id @default(cuid())
   schoolId   String
-  role       Role
+  kind       PersonKind
   lastNumber Int      @default(0)
   updatedAt  DateTime @updatedAt
 
   school School @relation(fields: [schoolId], references: [id])
 
-  @@unique([schoolId, role])
+  @@unique([schoolId, kind])
 }
 
 // =============================================================================
@@ -324,7 +340,7 @@ model Address {
 
 // =============================================================================
 // LAYER 2 — IDENTITY & AUTH
-// Raw SQL: chk_user_role, chk_user_status
+// Raw SQL: chk_user_status. (chk_user_role belongs to the old `role` column: drop it in the migration.)
 // =============================================================================
 
 model User {
@@ -334,7 +350,7 @@ model User {
   email             String
   emailVerified     Boolean    @default(false)
   password          String?
-  role              Role
+  kind              PersonKind
   status            UserStatus @default(PENDING)
   firstName         String
   lastName          String
@@ -355,11 +371,15 @@ model User {
   school       School @relation(fields: [schoolId], references: [id])
   profileImage Media? @relation("UserProfileImage", fields: [profileImageId], references: [id])
 
-  // Profiles (at most one per role)
+  // Profiles (at most one per kind)
   studentProfile StudentProfile?
   teacherProfile TeacherProfile?
   parentProfile  ParentProfile?
   staffProfile   StaffProfile?
+
+  // What this person may do (see CapabilityGrant)
+  capabilityGrants     CapabilityGrant[]
+  studentStatusChanges StudentStatusChange[] @relation("StudentStatusChanges")
 
   // Security
   refreshTokens           RefreshToken[]
@@ -384,17 +404,12 @@ model User {
   loans           Loan[]
   fines           Fine[]
 
-  // Access: what this person may do comes from roles and grants, not from
-  // the `role` column (which only says what kind of person they are).
-  memberRoles  MemberRole[]
-  memberGrants MemberGrant[]
-
   // Media
   mediaUploaded           Media[]                   @relation("MediaUploadedBy")
   ServiceRecord           ServiceRecord[]
 
   @@unique([email, schoolId])
-  @@index([schoolId, role, status])
+  @@index([schoolId, kind, status])
   @@index([schoolId, deletedAt])
 }
 
@@ -409,10 +424,18 @@ model StudentProfile {
   userId                  String              @unique
   schoolId                String
   admissionNumber         String
+  // Local-script name (Sinhala or Tamil) next to the English one on User, and
+  // the English name with initials ("K. A. S. Perera") used on printed lists.
+  nameLocal               String?
+  nameLocalLanguage       LocalNameLanguage?
+  nameWithInitials        String?
+  enrollmentStatus        StudentStatus       @default(ACTIVE)
   dateOfBirth             DateTime
   gender                  Gender
   nationality             String              @default("Sri Lankan")
   nicNumber               String?
+  // Optional. 'Prefer not to say' is stored as the text PREFER_NOT_TO_SAY
+  // (see PREFER_NOT_TO_SAY in @paideon/contracts); null means "not recorded".
   religion                String?
   ethnicity               String?
   medium                  MediumOfInstruction
@@ -441,6 +464,49 @@ model StudentProfile {
   stream      Stream?  @relation(fields: [streamId], references: [id])
 
   @@unique([admissionNumber, schoolId])
+}
+
+// A change of a student's standing (transferred out, left, graduated, came
+// back), kept as history. The current value lives in StudentProfile.
+model StudentStatusChange {
+  id            String        @id @default(cuid())
+  schoolId      String
+  studentUserId String
+  fromStatus    StudentStatus
+  toStatus      StudentStatus
+  effectiveDate DateTime
+  reason        String?
+  changedBy     String
+  createdAt     DateTime      @default(now())
+
+  school  School @relation(fields: [schoolId], references: [id])
+  student User   @relation("StudentStatusChanges", fields: [studentUserId], references: [id])
+
+  @@index([studentUserId, createdAt])
+}
+
+// ONE thing a person may do, and where. This table is the only source of
+// authority in the app (the old single `role` column is gone). Roles are just
+// presets used to create several grants at once (CAPABILITY_PRESETS in
+// @paideon/contracts).
+//
+//   capability  e.g. 'people.read' (CAPABILITY_VALUES in @paideon/contracts)
+//   scope       'SCHOOL', 'GRADE:7' or 'CLASS:<classId>'
+model CapabilityGrant {
+  id         String   @id @default(cuid())
+  schoolId   String
+  userId     String
+  capability String
+  scope      String   @default("SCHOOL")
+  grantedBy  String?
+  grantedAt  DateTime @default(now())
+
+  school School @relation(fields: [schoolId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@unique([userId, capability, scope])
+  @@index([userId])
+  @@index([schoolId, capability])
 }
 
 // =============================================================================
@@ -770,86 +836,6 @@ model AuditLog {
   @@index([actorUserId])
   @@index([entityType, entityId])
   @@index([createdAt])
-}
-
-// =============================================================================
-// ACCESS — roles, assignments, and direct grants
-// Capabilities are defined in code (packages/contracts). The database stores
-// only which ones a role holds and who holds which role, so adding a
-// capability never needs a migration. Capability and scope are plain strings
-// validated by the contracts; scope is 'SCHOOL', 'GRADE:n' or 'CLASS:id'.
-// Every change here must write an AuditLog entry.
-// =============================================================================
-
-// A named bundle of capabilities, per school.
-model AccessRole {
-  id           String   @id @default(cuid())
-  schoolId     String
-  key          String // stable handle, e.g. 'librarian'
-  name         String
-  description  String?
-  isSystem     Boolean  @default(false) // created by the system: cannot be deleted
-  locked       Boolean  @default(false) // cannot be edited (the super admin)
-  // Kinds of person (User.role values) who hold this role without being given it.
-  defaultForKinds String[]
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-
-  school       School           @relation(fields: [schoolId], references: [id])
-  capabilities RoleCapability[]
-  members      MemberRole[]
-
-  @@unique([schoolId, key])
-  @@index([schoolId])
-}
-
-model RoleCapability {
-  roleId     String
-  capability String
-
-  role AccessRole @relation(fields: [roleId], references: [id], onDelete: Cascade)
-
-  @@id([roleId, capability])
-}
-
-// A person holding a role (optionally for one grade or class).
-model MemberRole {
-  id         String   @id @default(cuid())
-  schoolId   String
-  userId     String
-  roleId     String
-  scope      String   @default("SCHOOL")
-  assignedBy String
-  createdAt  DateTime @default(now())
-
-  school School     @relation(fields: [schoolId], references: [id])
-  user   User       @relation(fields: [userId], references: [id])
-  role   AccessRole @relation(fields: [roleId], references: [id], onDelete: Cascade)
-
-  @@unique([userId, roleId, scope])
-  @@index([schoolId, userId])
-  @@index([roleId])
-}
-
-// One extra capability given straight to a person, with a reason and an
-// optional end date. For exceptions; most access should come from roles.
-model MemberGrant {
-  id         String    @id @default(cuid())
-  schoolId   String
-  userId     String
-  capability String
-  scope      String    @default("SCHOOL")
-  reason     String
-  expiresAt  DateTime?
-  grantedBy  String
-  createdAt  DateTime  @default(now())
-
-  school School @relation(fields: [schoolId], references: [id])
-  user   User   @relation(fields: [userId], references: [id])
-
-  @@unique([userId, capability, scope])
-  @@index([schoolId, userId])
-  @@index([expiresAt])
 }
 
 // =============================================================================
@@ -1244,4 +1230,3 @@ model LibraryConfig {
 // LAYER 29 — ANALYTICS & CONFIGURATION
 // migration-09-engagement-analytics
 // =============================================================================
-
