@@ -72,12 +72,20 @@ async function send(path: string, init: RequestInit) {
 export class ApiError extends Error {
   readonly status: number;
   readonly code?: string;
+  /** Field name to message, when the server says which field is wrong. */
+  readonly fieldErrors?: Record<string, string>;
 
-  constructor(message: string, status: number, code?: string) {
+  constructor(
+    message: string,
+    status: number,
+    code?: string,
+    fieldErrors?: Record<string, string>,
+  ) {
     super(message);
     this.name = 'ApiError';
     this.status = status;
     this.code = code;
+    this.fieldErrors = fieldErrors;
   }
 }
 
@@ -85,11 +93,12 @@ async function readError(response: Response): Promise<ApiError> {
   const body = (await response.json().catch(() => null)) as {
     message?: string | string[];
     code?: string;
+    fieldErrors?: Record<string, string>;
   } | null;
   const message = Array.isArray(body?.message)
     ? body.message.join(', ')
     : (body?.message ?? `Request failed (${response.status})`);
-  return new ApiError(message, response.status, body?.code);
+  return new ApiError(message, response.status, body?.code, body?.fieldErrors);
 }
 
 export type ApiFetchOptions = {
@@ -131,6 +140,31 @@ export async function apiFetch<T>(
 
   if (response.status === 204) return undefined as T;
   return (await response.json()) as T;
+}
+
+/**
+ * Downloads a file the API builds (a CSV, say) and offers it to the person as
+ * a save. The sign-in token cannot ride on a plain link, so the file is
+ * fetched here and handed to the browser as a blob.
+ */
+export async function apiDownload(
+  path: string,
+  filename: string,
+): Promise<void> {
+  let response = await send(path, {});
+  if (response.status === 401 && (await refreshAccessToken())) {
+    response = await send(path, {});
+  }
+  if (!response.ok) throw await readError(response);
+
+  const url = URL.createObjectURL(await response.blob());
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.append(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
 }
 
 /** GET /auth/me, checked against the shared contract. */

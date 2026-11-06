@@ -6,24 +6,23 @@ describe('breadcrumbsFor', () => {
   });
 
   it('builds Home > section > page and leaves the last unlinked', () => {
-    expect(breadcrumbsFor('/library/checkout')).toEqual([
+    expect(breadcrumbsFor('/librarian/checkout')).toEqual([
       { label: 'Home', href: '/home' },
-      { label: 'Library', href: '/library' },
+      { label: 'Library desk', href: '/librarian' },
       { label: 'Checkout' },
     ]);
   });
 
-  it('labels /library/books (manage) differently from /library/catalog (search)', () => {
-    expect(breadcrumbsFor('/library/books').at(-1)?.label).toBe('Books');
-    expect(breadcrumbsFor('/library/catalog').at(-1)?.label).toBe(
-      'Search books',
-    );
+  it('labels /librarian/books differently from /books', () => {
+    expect(breadcrumbsFor('/librarian/books').at(-1)?.label).toBe('Books');
+    expect(breadcrumbsFor('/books').at(-1)?.label).toBe('Search books');
   });
 
   it('skips segments it has no name for (ids, tokens)', () => {
-    expect(
-      breadcrumbsFor('/library/catalog/9f3a2c').map((c) => c.label),
-    ).toEqual(['Home', 'Library', 'Search books']);
+    expect(breadcrumbsFor('/books/9f3a2c').map((c) => c.label)).toEqual([
+      'Home',
+      'Search books',
+    ]);
   });
 
   it('names the account pages', () => {
@@ -32,8 +31,25 @@ describe('breadcrumbsFor', () => {
       'My account',
       'ID badge',
     ]);
+    expect(breadcrumbsFor('/account/library').map((c) => c.label)).toEqual([
+      'Home',
+      'My account',
+      'My library',
+    ]);
     expect(breadcrumbsFor('/account/security').at(-1)).toEqual({
       label: 'Security',
     });
+  });
+
+  it('skips an id in the path and labels the student pages', () => {
+    expect(breadcrumbsFor('/people/students/abc123/edit')).toEqual([
+      { label: 'Home', href: '/home' },
+      { label: 'People', href: '/people' },
+      { label: 'Students', href: '/people/students' },
+      { label: 'Edit' },
+    ]);
+    expect(breadcrumbsFor('/people/students/new').at(-1)?.label).toBe(
+      'Add student',
+    );
   });
 });

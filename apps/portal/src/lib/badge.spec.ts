@@ -1,12 +1,12 @@
 import type { MyProfileData } from '@paideon/contracts';
 
-import { badgeDetails, initialsOf } from './badge';
+import { badgeDetails, initialsOf, studentBadgeDetails } from './badge';
 
 const base: MyProfileData = {
   id: 'u1',
   paideonId: 'PAI-STU-0001',
   cardNumber: 'KCCM-LIB-00001',
-  role: 'STUDENT',
+  kind: 'STUDENT',
   firstName: 'Nimal',
   lastName: 'Perera',
   displayName: null,
@@ -30,7 +30,7 @@ describe('badgeDetails', () => {
     expect(d.numberLabel).toBe('ADMISSION NO.');
     expect(d.numberValue).toBe('4521');
     expect(d.fullName).toBe('Nimal Perera');
-    expect(d.roleLabel).toBe('Student');
+    expect(d.kindLabel).toBe('Student');
   });
 
   it('leaves out an empty section', () => {
@@ -45,7 +45,7 @@ describe('badgeDetails', () => {
   it('shows post and staff number for staff', () => {
     const d = badgeDetails({
       ...base,
-      role: 'TEACHER',
+      kind: 'TEACHER',
       grade: null,
       section: null,
       admissionNumber: null,
@@ -58,15 +58,15 @@ describe('badgeDetails', () => {
     expect(d.numberValue).toBe('T-102');
   });
 
-  it('falls back to the role name and a dash when the record has nothing', () => {
+  it('falls back to the kind of person and a dash when the record has nothing', () => {
     const d = badgeDetails({
       ...base,
-      role: 'LIBRARIAN',
+      kind: 'STAFF',
       grade: null,
       section: null,
       admissionNumber: null,
     });
-    expect(d.detailValue).toBe('Librarian');
+    expect(d.detailValue).toBe('Staff');
     expect(d.numberValue).toBe('—');
   });
 });
@@ -76,5 +76,27 @@ describe('initialsOf', () => {
     expect(initialsOf('nimal', 'perera')).toBe('NP');
     expect(initialsOf('Nimal', '')).toBe('N');
     expect(initialsOf('', '')).toBe('?');
+  });
+});
+
+describe('studentBadgeDetails', () => {
+  it('shows grade, class and admission number', () => {
+    const d = studentBadgeDetails({
+      id: 's1',
+      paideonId: 'KCCM-STU-00007',
+      cardNumber: 'KCCM-LIB-S00007',
+      admissionNumber: '4521',
+      firstName: 'Nimal',
+      lastName: 'Perera',
+      displayName: null,
+      photoUrl: null,
+      grade: 10,
+      section: 'A',
+      status: 'ACTIVE',
+    });
+    expect(d.detailValue).toBe('Grade 10 A');
+    expect(d.numberValue).toBe('4521');
+    expect(d.kindLabel).toBe('Student');
+    expect(d.initials).toBe('NP');
   });
 });

@@ -1,97 +1,93 @@
-import { grantsForSystemRoles } from '@paideon/contracts';
+import { grantsForPreset, type PresetName } from '@paideon/contracts';
 
-import { navFor, staffLibraryTiles } from './nav';
+import { navFor } from './nav';
 
-// People are described by the roles they hold; the menu follows the
-// capabilities those roles add up to.
-const holding = (...roleKeys: string[]) => ({
-  capabilities: grantsForSystemRoles(roleKeys),
+// A signed-in person with no grants, or with the grants of one preset.
+const as = (preset: PresetName | 'NONE') => ({
+  capabilities: preset === 'NONE' ? [] : grantsForPreset(preset),
 });
 
-const hrefs = (user: ReturnType<typeof holding>) =>
+const hrefs = (user: ReturnType<typeof as>) =>
   navFor(user as never).groups.flatMap((g) => g.items.map((i) => i.href));
 
 describe('navFor', () => {
-  const ACCOUNT = ['/account/badge', '/account', '/account/security'];
+  const ACCOUNT = [
+    '/account/library',
+    '/account/badge',
+    '/account',
+    '/account/security',
+  ];
 
-  it('shows a reader Home, the library, their account and help only', () => {
-    const reader = holding('reader');
-    const nav = navFor(reader as never);
+  it('shows a student Home, book search, their account and help only', () => {
+    const nav = navFor(as('NONE') as never);
     expect(nav.groups.map((g) => g.id)).toEqual([
       'home',
       'library',
       'account',
       'help',
     ]);
-    expect(hrefs(reader)).toEqual([
+    expect(hrefs(as('NONE'))).toEqual([
       '/home',
-      '/library',
-      '/library/catalog',
+      '/books',
       ...ACCOUNT,
       '/privacy',
     ]);
     expect(nav.tiles.map((t) => t.href)).toEqual([
-      '/library',
+      '/books',
+      '/account/library',
       '/account/badge',
     ]);
   });
 
-  it('shows a librarian, who is also a reader, the whole library desk', () => {
-    const librarian = holding('reader', 'librarian');
-    expect(hrefs(librarian)).toEqual([
+  it('shows a librarian the whole library desk', () => {
+    expect(hrefs(as('LIBRARIAN'))).toEqual([
       '/home',
-      '/library',
-      '/library/catalog',
-      '/library/checkout',
-      '/library/return',
-      '/library/books',
-      '/library/members',
-      '/library/overdue',
+      '/books',
+      '/librarian',
+      '/librarian/checkout',
+      '/librarian/return',
+      '/librarian/books',
+      '/librarian/members',
+      '/librarian/overdue',
       ...ACCOUNT,
       '/privacy',
     ]);
-    expect(navFor(librarian as never).tiles.map((t) => t.href)).toEqual([
-      '/library',
+    expect(navFor(as('LIBRARIAN') as never).tiles.map((t) => t.href)).toEqual([
+      '/books',
+      '/librarian',
+      '/account/library',
       '/account/badge',
     ]);
   });
 
-  it('shows a super admin everything a librarian sees, for now', () => {
-    expect(hrefs(holding('super-admin'))).toEqual(
-      hrefs(holding('reader', 'librarian')),
-    );
+  it('shows an admin the library desk and the People pages', () => {
+    const admin = hrefs(as('ADMIN'));
+    for (const href of hrefs(as('LIBRARIAN'))) expect(admin).toContain(href);
+    expect(admin).toContain('/people');
+    expect(admin).toContain('/people/students');
+  });
+
+  it('shows People to a class teacher but not the library desk', () => {
+    const teacher = {
+      capabilities: grantsForPreset('CLASS_TEACHER', 'CLASS:abc'),
+    };
+    expect(hrefs(teacher as never)).toContain('/people/students');
+    expect(hrefs(teacher as never)).not.toContain('/librarian');
   });
 
   it('follows capabilities, not roles', () => {
-    const onlyMembers = {
+    const onlyFines = {
       capabilities: [{ capability: 'library.members.read', scope: 'SCHOOL' }],
     };
-    expect(hrefs(onlyMembers as never)).toContain('/library');
-    expect(hrefs(onlyMembers as never)).toContain('/library/members');
-    expect(hrefs(onlyMembers as never)).not.toContain('/library/checkout');
+    expect(hrefs(onlyFines as never)).toContain('/librarian/members');
+    expect(hrefs(onlyFines as never)).not.toContain('/librarian/checkout');
   });
 
-  it('hides the library from someone who holds no library capability', () => {
+  it('drops a group that has nothing to show', () => {
     const groups = navFor({ capabilities: [] } as never).groups.map(
       (g) => g.id,
     );
-    expect(groups).toEqual(['home', 'account', 'help']);
-  });
-});
-
-describe('staffLibraryTiles', () => {
-  it('is empty for a reader', () => {
-    expect(staffLibraryTiles(holding('reader') as never)).toEqual([]);
-  });
-
-  it("lists the librarian's tools for someone holding the desk capabilities", () => {
-    const tiles = staffLibraryTiles(holding('reader', 'librarian') as never);
-    expect(tiles.map((t) => t.href)).toEqual([
-      '/library/checkout',
-      '/library/return',
-      '/library/books',
-      '/library/members',
-      '/library/overdue',
-    ]);
+    expect(groups).toEqual(['home', 'library', 'account', 'help']);
+    expect(groups).not.toContain('people');
   });
 });

@@ -10,19 +10,23 @@ export const ROUTES = {
   maintenance: '/maintenance',
   forbidden: '/403',
   home: '/home',
+  books: '/books',
   account: '/account',
   accountBadge: '/account/badge',
+  accountLibrary: '/account/library',
   accountSecurity: '/account/security',
-  // The library: one page for everyone at /library. What else appears on it,
-  // and which of these pages open, follows the person's capabilities.
-  library: '/library',
-  libraryCatalog: '/library/catalog',
-  libraryCheckout: '/library/checkout',
-  libraryReturn: '/library/return',
-  libraryBooks: '/library/books',
-  libraryMembers: '/library/members',
-  libraryOverdue: '/library/overdue',
+  libraryDesk: '/librarian',
+  people: '/people',
+  students: '/people/students',
+  studentNew: '/people/students/new',
+  studentBadges: '/people/students/badges',
 } as const;
+
+export const studentRoute = (id: string) =>
+  `${ROUTES.students}/${encodeURIComponent(id)}`;
+export const studentEditRoute = (id: string) => `${studentRoute(id)}/edit`;
+export const studentPhotoRoute = (id: string) => `${studentRoute(id)}/photo`;
+export const studentBadgeRoute = (id: string) => `${studentRoute(id)}/badge`;
 
 /** Link target for an activation or reset token from an email. */
 export const activateRoute = (token: string) =>

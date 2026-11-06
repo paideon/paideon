@@ -1,10 +1,10 @@
-import type { MyProfileData } from '@paideon/contracts';
+import type { MyProfileData, StudentBadgeData } from '@paideon/contracts';
 
-import { ROLE_LABELS } from './roles';
+import { KIND_LABELS } from './kinds';
 
 export type BadgeDetails = {
   fullName: string;
-  roleLabel: string;
+  kindLabel: string;
   /** Caption and value of the "class" line: "GRADE / Grade 10 A", "POST / Librarian". */
   detailLabel: string;
   detailValue: string;
@@ -26,14 +26,14 @@ export function initialsOf(firstName: string, lastName: string): string {
 }
 
 /**
- * What goes on the ID badge (flat and 3D), chosen by what the person IS:
+ * What goes on the ID badge (flat and 3D), chosen by the kind of person:
  * students show grade and admission number, staff show post and employee number.
  */
 export function badgeDetails(profile: MyProfileData): BadgeDetails {
-  const roleLabel = ROLE_LABELS[profile.role];
+  const kindLabel = KIND_LABELS[profile.kind];
 
   let detailLabel = 'POST';
-  let detailValue = clean(profile.designation) || roleLabel;
+  let detailValue = clean(profile.designation) || kindLabel;
   if (profile.grade !== null) {
     detailLabel = 'GRADE';
     detailValue = `Grade ${profile.grade}${
@@ -50,7 +50,7 @@ export function badgeDetails(profile: MyProfileData): BadgeDetails {
 
   return {
     fullName: `${clean(profile.firstName)} ${clean(profile.lastName)}`.trim(),
-    roleLabel,
+    kindLabel,
     detailLabel,
     detailValue,
     numberLabel,
@@ -58,5 +58,20 @@ export function badgeDetails(profile: MyProfileData): BadgeDetails {
     paideonId: profile.paideonId,
     cardNumber: profile.cardNumber,
     initials: initialsOf(profile.firstName, profile.lastName),
+  };
+}
+
+/** The same badge for a student, from the smaller record the People pages load. */
+export function studentBadgeDetails(badge: StudentBadgeData): BadgeDetails {
+  return {
+    fullName: `${clean(badge.firstName)} ${clean(badge.lastName)}`.trim(),
+    kindLabel: KIND_LABELS.STUDENT,
+    detailLabel: 'GRADE',
+    detailValue: `Grade ${badge.grade}${clean(badge.section) ? ` ${clean(badge.section)}` : ''}`,
+    numberLabel: 'ADMISSION NO.',
+    numberValue: clean(badge.admissionNumber) || '—',
+    paideonId: badge.paideonId,
+    cardNumber: badge.cardNumber,
+    initials: initialsOf(badge.firstName, badge.lastName),
   };
 }
