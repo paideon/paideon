@@ -12,6 +12,10 @@ export interface PageHeaderProps {
   back?: { href: string; label: string };
   /** Buttons on the right (Add, Export, ...). */
   actions?: ReactNode;
+  /** A picture beside the title, e.g. a person's Avatar. */
+  media?: ReactNode;
+  /** A row under the title for badges and short facts (class, status). */
+  meta?: ReactNode;
 }
 
 export function PageHeader({
@@ -19,6 +23,8 @@ export function PageHeader({
   description,
   back,
   actions,
+  media,
+  meta,
 }: PageHeaderProps) {
   return (
     <header className="mb-space-6 flex flex-col gap-space-3">
@@ -32,11 +38,19 @@ export function PageHeader({
         </Link>
       )}
       <div className="flex flex-col gap-space-4 sm:flex-row sm:items-start sm:justify-between">
-        <div className="flex min-w-0 flex-col gap-space-1">
-          <Heading as="h1" level="h2">
-            {title}
-          </Heading>
-          {description && <Text color="muted">{description}</Text>}
+        <div className="flex min-w-0 items-center gap-space-4">
+          {media}
+          <div className="flex min-w-0 flex-col gap-space-1">
+            <Heading as="h1" level="h2">
+              {title}
+            </Heading>
+            {description && <Text color="muted">{description}</Text>}
+            {meta && (
+              <div className="mt-space-1 flex flex-wrap items-center gap-space-2">
+                {meta}
+              </div>
+            )}
+          </div>
         </div>
         {actions && (
           <div className="flex shrink-0 flex-wrap items-center gap-space-2">

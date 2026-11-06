@@ -13,3 +13,9 @@ export { Slider } from './Slider';
 export { Textarea } from './Textarea';
 export { Toggle } from './Toggle';
 export { PasswordInput } from './PasswordInput';
+export { Combobox, type ComboboxOption, type ComboboxProps } from './Combobox';
+export {
+  FormStickyFooter,
+  type FormStickyFooterProps,
+} from './FormStickyFooter';
+export { PhotoCapture, type PhotoCaptureProps } from './PhotoCapture';

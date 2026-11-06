@@ -69,6 +69,9 @@ export function Avatar({
           src={src}
           alt={name}
           fill
+          // Photo links are signed and short-lived; do not route them through
+          // the image optimiser (it would also need the API host configured).
+          unoptimized
           className="object-cover"
           onError={() => {
             setHasError(true);

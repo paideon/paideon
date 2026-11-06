@@ -5,3 +5,4 @@ export { NavLink } from './NavLink';
 export { Pagination } from './Pagination';
 export { SearchInput } from './SearchInput';
 export { Tabs } from './Tabs';
+export { FilterPanel, type FilterPanelProps } from './FilterPanel';
