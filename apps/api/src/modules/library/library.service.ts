@@ -11,7 +11,7 @@ import {
   FineType,
   LoanStatus,
   Prisma,
-  Role,
+  PersonKind,
   UserStatus,
 } from '@paideon/database/generated/client/client';
 import { randomUUID } from 'crypto';
@@ -302,7 +302,7 @@ export class LibraryService {
         firstName: true,
         lastName: true,
         cardNumber: true,
-        role: true,
+        kind: true,
         status: true,
       },
       take: 50,
@@ -324,7 +324,7 @@ export class LibraryService {
         firstName: true,
         lastName: true,
         email: true,
-        role: true,
+        kind: true,
         status: true,
         cardNumber: true,
         loans: {
@@ -359,7 +359,7 @@ export class LibraryService {
 
       const config = await tx.libraryConfig.findUnique({ where: { schoolId } });
       const maximum =
-        member.role === Role.STUDENT
+        member.kind === PersonKind.STUDENT
           ? (config?.maxLoansStudent ?? 3)
           : (config?.maxLoansTeacher ?? 10);
       const activeCount = await tx.loan.count({
