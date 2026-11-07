@@ -54,7 +54,7 @@ export function MyProfile() {
         <div className="min-w-0 flex-1">
           <PageHeader
             title={name}
-            description={`${details.roleLabel} · ${profile.paideonId}`}
+            description={`${details.kindLabel} · ${profile.paideonId}`}
           />
         </div>
       </div>

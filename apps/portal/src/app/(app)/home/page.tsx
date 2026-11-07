@@ -16,10 +16,10 @@ export default function HomePage() {
   const { tiles } = navFor(user);
   const name = user.displayName || user.firstName;
 
-  // Extras follow what the person can do, not their role.
+  // Extras follow what the person can do, not who they are.
   const atTheDesk = can(user, 'library.desk');
-  // Anyone who may see their own library record may have books out.
-  const mayBorrow = can(user, 'library.own.read');
+  // Parents have no library membership. Everyone else may have books out.
+  const mayBorrow = user.kind !== 'PARENT';
 
   return (
     <div className="grid gap-space-8 lg:grid-cols-[1fr_20rem]">

@@ -58,10 +58,13 @@ const bookColumn = {
 export function MyLoansTable({
   loans,
   mode,
+  emptyMessage,
 }: {
   loans: LoanSummaryData[];
   /** "current": books still out, with due dates. "history": returned books. */
   mode: 'current' | 'history';
+  /** Replaces the "You have..." text when the list is about someone else. */
+  emptyMessage?: string;
 }) {
   const now = new Date();
   const rows = loans.map((loan) => toRow(loan, now));
@@ -71,7 +74,7 @@ export function MyLoansTable({
       <DataTable<Row>
         getRowKey={(row) => row.id}
         data={rows}
-        emptyMessage="You have not returned any books yet."
+        emptyMessage={emptyMessage ?? 'You have not returned any books yet.'}
         columns={[
           bookColumn,
           { key: 'borrowed', header: 'Borrowed' },
@@ -86,7 +89,7 @@ export function MyLoansTable({
     <DataTable<Row>
       getRowKey={(row) => row.id}
       data={rows}
-      emptyMessage="You have no books out right now."
+      emptyMessage={emptyMessage ?? 'You have no books out right now.'}
       columns={[
         bookColumn,
         { key: 'code', header: 'Barcode' },

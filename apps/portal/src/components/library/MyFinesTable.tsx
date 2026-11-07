@@ -29,7 +29,15 @@ const STATUS: Record<FineData['status'], string> = {
   WAIVED: 'Waived',
 };
 
-export function MyFinesTable({ fines }: { fines: FineData[] }) {
+export function MyFinesTable({
+  fines,
+  about = 'me',
+}: {
+  fines: FineData[];
+  /** "me" words the page for the person themself, "student" for a staff member looking at one. */
+  about?: 'me' | 'student';
+}) {
+  const mine = about === 'me';
   const totalOwed = fines.reduce((sum, fine) => sum + fineBalance(fine), 0);
 
   const rows: Row[] = fines.map((fine) => ({
@@ -49,16 +57,23 @@ export function MyFinesTable({ fines }: { fines: FineData[] }) {
   return (
     <div className="flex flex-col gap-space-4">
       {totalOwed > 0 ? (
-        <Alert variant="warning" title={`You owe ${formatLKR(totalOwed)}`}>
+        <Alert
+          variant="warning"
+          title={`${mine ? 'You owe' : 'This student owes'} ${formatLKR(totalOwed)}`}
+        >
           Fines are paid at the library desk.
         </Alert>
       ) : (
-        fines.length > 0 && <Text color="muted">You have no fines to pay.</Text>
+        fines.length > 0 && (
+          <Text color="muted">
+            {mine ? 'You have no fines to pay.' : 'No fines to pay.'}
+          </Text>
+        )
       )}
       <DataTable<Row>
         getRowKey={(row) => row.id}
         data={rows}
-        emptyMessage="You have no fines."
+        emptyMessage={mine ? 'You have no fines.' : 'No fines.'}
         columns={[
           { key: 'date', header: 'Date' },
           { key: 'book', header: 'Book' },

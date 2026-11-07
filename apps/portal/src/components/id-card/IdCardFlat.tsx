@@ -150,7 +150,7 @@ export function IdCardFlat({ details, photoUrl, width = '85.6mm' }: Props) {
             margin: '0.8cqw 0 2.2cqw',
           }}
         >
-          {details.roleLabel.toUpperCase()}
+          {details.kindLabel.toUpperCase()}
         </div>
         <Field label={details.detailLabel} value={details.detailValue} />
         <Field label={details.numberLabel} value={details.numberValue} mono />

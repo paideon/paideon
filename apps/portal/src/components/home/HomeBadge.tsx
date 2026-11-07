@@ -32,7 +32,7 @@ export function HomeBadge() {
           lastName: data.lastName,
           paideonId: data.paideonId,
           cardNumber: data.cardNumber,
-          role: data.role,
+          kind: data.kind,
           currentGrade: data.grade ?? 0,
           admissionNumber: details.numberValue,
           photoUrl: data.photoUrl,

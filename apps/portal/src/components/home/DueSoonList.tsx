@@ -70,7 +70,7 @@ export function DueSoonList() {
 
       {data && data.length > SHOWN && (
         <Text variant="body-sm">
-          <Link href={ROUTES.library} className="underline">
+          <Link href={ROUTES.accountLibrary} className="underline">
             See all {data.length} books
           </Link>
         </Text>

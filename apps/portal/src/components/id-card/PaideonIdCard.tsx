@@ -14,7 +14,7 @@ import {
   useSphericalJoint,
 } from '@react-three/rapier';
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
-import type { RoleEnumData } from '@paideon/contracts';
+import type { PersonKindEnumData } from '@paideon/contracts';
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 
@@ -41,7 +41,7 @@ export interface IdCardUser {
   currentGrade: number;
   admissionNumber: string;
   cardNumber: string;
-  role: RoleEnumData;
+  kind: PersonKindEnumData;
   initials?: string;
   /** Any image URL — renders as avatar photo. null = initials fallback. */
   photoUrl?: string | null;
@@ -79,17 +79,15 @@ function getInitials(u: IdCardUser) {
   return `${u.firstName[0] ?? ''}${u.lastName[0] ?? ''}`.toUpperCase();
 }
 
-function roleLabel(r: RoleEnumData) {
+function kindLabel(r: PersonKindEnumData) {
   return (
     (
       {
         STUDENT: 'Student',
         TEACHER: 'Teacher',
-        LIBRARIAN: 'Librarian',
-        ADMIN: 'Admin',
         PARENT: 'Parent',
         STAFF: 'Staff',
-      } as Record<RoleEnumData, string>
+      } as Record<PersonKindEnumData, string>
     )[r] ?? r
   );
 }
@@ -225,8 +223,8 @@ function drawIdCard(
   ctx.textAlign = 'center';
   ctx.fillText(`${user.firstName} ${user.lastName}`.trim(), W / 2, 480);
 
-  // ── Role tag ──
-  const rl = roleLabel(user.role).toUpperCase();
+  // ── Kind tag ──
+  const rl = kindLabel(user.kind).toUpperCase();
   const rw = 182,
     rh = 40,
     rx = (W - rw) / 2,
@@ -571,7 +569,7 @@ const DEFAULT_USER: IdCardUser = {
   currentGrade: 12,
   admissionNumber: '00000',
   cardNumber: 'KCCM-LIB-00000',
-  role: 'STUDENT',
+  kind: 'STUDENT',
 };
 
 // ─── Export ───────────────────────────────────────────────────────────────────
